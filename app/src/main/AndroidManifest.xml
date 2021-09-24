@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Owere">
-        <activity android:name=".activity.loginActivity.LoginActivity_temp"></activity>
+        <activity android:name=".activity.home.HomeActivity"></activity>
+        <activity android:name=".activity.loginActivity.LoginActivity_temp" />
         <activity android:name=".activity.loginActivity.LoginActivity_choice" />
         <activity android:name=".activity.signUpActivity.SignUpActivity1_choice" />
         <activity android:name=".activity.MainActivity">

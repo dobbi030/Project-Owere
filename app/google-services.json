@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "260202805759",
+    "firebase_url": "https://o-were-default-rtdb.firebaseio.com",
+    "project_id": "o-were",
+    "storage_bucket": "o-were.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:260202805759:android:bcc5ae6110ddd341994fca",
+        "android_client_info": {
+          "package_name": "com.example.owere"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "260202805759-p5ff8qashfb05ab9p13ui7f329326h6b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfP5em5xzxHDD2nMPekIN9EE2JpWztQMg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "260202805759-p5ff8qashfb05ab9p13ui7f329326h6b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">O\'were</string>
+    <string name="underLineTermsOfUse"><u>이용약관</u></string>
+    <string name="ask_Email">이메일 주소를 입력해주세요</string>
+</resources>

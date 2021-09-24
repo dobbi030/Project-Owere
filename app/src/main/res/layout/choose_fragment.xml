@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="고객, 디자이너를"
+        android:textSize="25dp"
+        android:textColor="@color/black"
+        android:layout_margin="8dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="선택해주세요"
+        android:textSize="25dp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="8dp"/>
+
+    <LinearLayout
+        android:padding="5dp"
+        android:id="@+id/chooseContainer"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/item_bg_outline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/method1TV"
+        android:layout_marginLeft="8dp"
+        >
+
+        <TextView
+
+            android:layout_weight="1"
+            android:id="@+id/userButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="고객"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="14dp"
+            android:paddingTop="5dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="5dp"
+            android:background="@drawable/item_bg_on"
+            tools:ignore="RtlSymmetry"
+            android:paddingLeft="15dp" android:paddingRight="10dp"/>
+
+        <TextView
+
+            android:layout_weight="1"
+            android:id="@+id/designerButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="디자이너"
+            android:gravity="center"
+            android:textSize="14dp"
+            android:paddingStart="15dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/black"
+            android:paddingLeft="10dp"
+            android:paddingRight="15dp"/>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/choose_keepButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginVertical="5dp"
+        android:background="@drawable/round_black_background"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:text="계속하기"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        />
+
+
+</LinearLayout>

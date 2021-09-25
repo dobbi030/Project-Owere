@@ -19,7 +19,7 @@ import com.google.firebase.ktx.Firebase
 class LoginActivity_temp : AppCompatActivity() {
 
 
-    private lateinit var auth : FirebaseAuth
+    private lateinit var auth : FirebaseAuth    //파이어베이스 인증 사용
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,9 +30,9 @@ class LoginActivity_temp : AppCompatActivity() {
 
 
 
-        initLoginButton()
-        initSignUpButton()
-        initEmailAndPasswordEditText()
+        initLoginButton()   //로그인버튼 설정
+        initSignUpButton()  //회원가입 버튼 설정
+        initEmailAndPasswordEditText()  //이메일 패스워드 텍스트 설정
 
 
     }

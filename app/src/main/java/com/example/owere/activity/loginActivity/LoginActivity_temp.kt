@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import com.example.owere.R
+import com.example.owere.activity.UserMain.UserMainActivity
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -108,8 +109,9 @@ class LoginActivity_temp : AppCompatActivity() {
 
 
 
+    //로그인 한 후
     private fun handleSuccessLogin(){
-        if(auth.currentUser == null){   //currentUser는 null이 가능함
+        if(auth.currentUser == null){   //currentUser는 null이 가능하므로 그럴경우 실패
             Toast.makeText(this, "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show()
             return
         }
@@ -122,6 +124,8 @@ class LoginActivity_temp : AppCompatActivity() {
         currentUserDB.updateChildren(user)      //제일 상위에 DB 안에Users라는 List가 생기고 그안에
         // userId라는 항목으로 오브젝트가 생기고 그안에 user가 저장 유저는 userId를 가지고잇음
         //Users라는 키도 따로 빼둠.
+        val intent = Intent(this, UserMainActivity::class.java) //유저 메인페이지로 이동.
+        startActivity(intent)
         finish()
 
     }

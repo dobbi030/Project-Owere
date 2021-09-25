@@ -33,9 +33,7 @@ class SignUpActivity1_choice : AppCompatActivity() {
     }
 
 
-    private val keep_Button : TextView by lazy {
-        findViewById(R.id.keepButton)
-    }
+
 
 
 

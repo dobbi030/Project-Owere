@@ -4,4 +4,5 @@ import androidx.fragment.app.Fragment
 import com.example.owere.R
 
 class BrowseFragment : Fragment(R.layout.layout_browse_fragment) {
+
 }

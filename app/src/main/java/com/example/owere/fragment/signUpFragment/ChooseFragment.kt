@@ -1,10 +1,10 @@
 package com.example.owere.fragment.signUpFragment
 
 import android.os.Bundle
-import android.text.TextUtils.replace
-import android.util.Log
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import com.example.owere.R
 import com.example.owere.databinding.ChooseFragmentBinding
 
@@ -13,7 +13,7 @@ class ChooseFragment : Fragment(R.layout.choose_fragment) {
 
     private var binding : ChooseFragmentBinding? = null
 
-    private var isUser : Boolean = true //스위치 고객 눌림
+    private var customerOrDesigner : String = "Customer" //스위치 고객 눌림
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,7 +29,7 @@ class ChooseFragment : Fragment(R.layout.choose_fragment) {
             binding?.userButton?.setBackgroundResource(R.drawable.item_bg_on)
             binding?.designerButton?.setTextColor(resources.getColor(R.color.black))
             binding?.designerButton?.setBackgroundResource(R.drawable.item_bg_off)
-            isUser = true
+            customerOrDesigner = "Customer"
         }
         //디자이너 선택
         binding?.designerButton?.setOnClickListener {
@@ -37,16 +37,17 @@ class ChooseFragment : Fragment(R.layout.choose_fragment) {
             binding?.userButton?.setBackgroundResource(R.drawable.item_bg_off)
             binding?.designerButton?.setTextColor(resources.getColor(R.color.white))
             binding?.designerButton?.setBackgroundResource(R.drawable.item_bg_on)
-            isUser = false
+            customerOrDesigner = "Designer"
         }
 
         binding?.chooseKeepButton?.setOnClickListener {
-            var nextFragment = EmailInputFragment()
-            var bundle = Bundle()
-            bundle.putBoolean("isUser",isUser)
 
-            nextFragment.arguments = bundle //fragment의 arguments에 데이터를 담은 bundle을 넘겨줌
-            Log.d("isUser", isUser.toString())
+
+           val bundle = bundleOf("customerOrDesigner" to "${customerOrDesigner}") //어떤 키에 어떤 값으로 번들을 담겠다
+           setFragmentResult("customerOrDesigner", bundle) //request값을 가진 리스너에게 전송
+
+
+            var nextFragment = EmailInputFragment()
 
             activity?.supportFragmentManager!!.beginTransaction()//트랜잭션을 연다. (작업을 시작한다고 알려주는 기능->commit까지 작업진행)
                 .apply {

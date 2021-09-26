@@ -67,4 +67,8 @@ dependencies {
     def fragment_version = "1.3.1"
 
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
+
+
+    //카카오 맵 api시작 
+    implementation files('libs/libDaumMapAndroid.jar')
 }

@@ -9,12 +9,14 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.example.owere.R
 import com.example.owere.databinding.MynameInputFramentBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
 class MyNameInputFragment : Fragment(R.layout.myname_input_frament) {
 
 
+    private val auth : FirebaseAuth = FirebaseAuth.getInstance()
     private var binding : MynameInputFramentBinding? = null
 
     private var myName : String? = null
@@ -50,11 +52,13 @@ class MyNameInputFragment : Fragment(R.layout.myname_input_frament) {
 //            }
 
             val myName = myName.toString()
+            val userId = auth.currentUser?.uid.orEmpty()
 //            DB 사용
             //reference에서 Users라는 child를 선택
-            val currentUserDB = Firebase.database.reference.child("Users").child(myName)
+            val currentUserDB = Firebase.database.reference.child("Users").child(userId)
             val user = mutableMapOf<String, Any>()
             user["myName"] = myName
+            user["userId"] = userId
             currentUserDB.updateChildren(user)      //제일 상위에 DB 안에Users라는 List가 생기고 그안에
             // userId라는 항목으로 오브젝트가 생기고 그안에 user가 저장 유저는 userId를 가지고잇음
             //Users라는 키도 따로 빼둠.

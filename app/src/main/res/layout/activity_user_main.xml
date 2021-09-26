@@ -7,7 +7,7 @@
     tools:context=".activity.UserMain.UserMainActivity">
 
     <FrameLayout
-        android:id="@+id/fragmentContainer"
+        android:id="@+id/userFragmentContainer"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

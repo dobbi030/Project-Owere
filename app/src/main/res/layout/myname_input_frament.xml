@@ -21,11 +21,27 @@
         android:layout_marginTop="30dp"
         android:id="@+id/myName_EditText"
         android:layout_width="300dp"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:hint="이름"
         android:textSize="20dp"
-        android:inputType="number"
+        android:inputType="textPersonName"
         />
+
+    <TextView
+        android:id="@+id/myname_keepButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginVertical="5dp"
+        android:background="@drawable/round_black_background"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:text="계속하기"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        />
+
+
 
 
 

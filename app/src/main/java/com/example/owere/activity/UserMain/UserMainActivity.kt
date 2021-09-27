@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.owere.R
 import com.example.owere.fragment.userMainFragment.browseFragment.BrowseFragment
+import com.example.owere.fragment.userMainFragment.chattingFragment.chattingFragmet
 import com.example.owere.fragment.userMainFragment.homeFragment.UserHomeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -15,6 +16,7 @@ class UserMainActivity : AppCompatActivity() {
 
         val homeFragment = UserHomeFragment()
         val browseFragment = BrowseFragment()
+        val chattingFragment = chattingFragmet()
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         replaceFragment(homeFragment)   // HomeFragment에서 시작한다
@@ -24,7 +26,7 @@ class UserMainActivity : AppCompatActivity() {
             when (it.itemId){
                 R.id.home -> replaceFragment(homeFragment)
                 R.id.browse -> replaceFragment(browseFragment)
-                R.id.chatting -> {}
+                R.id.chatting -> replaceFragment(chattingFragment)
                 R.id.reservation -> {}
                 else -> {}
             }

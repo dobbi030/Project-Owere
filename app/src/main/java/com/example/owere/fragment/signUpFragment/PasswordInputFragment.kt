@@ -125,6 +125,7 @@ class PasswordInputFragment : Fragment(R.layout.password_input_fragment) {
         //userid가져오기 //null일경우를 대비해서 orEmpty
         val userId = auth.currentUser?.uid.orEmpty()
 
+
         //DB사용
 
         //reference에서 Users라는 child를 선택

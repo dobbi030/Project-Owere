@@ -11,12 +11,16 @@ import android.os.Bundle
 import android.util.Base64
 import android.util.Log
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.owere.R
 import com.example.owere.activity.MainActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
 import java.security.MessageDigest
@@ -25,55 +29,37 @@ import java.util.jar.Manifest
 class SetPositionActivity : AppCompatActivity(), MapView.CurrentLocationEventListener {
 
 
-    lateinit var mapView : MapView
+    private val auth : FirebaseAuth = FirebaseAuth.getInstance()
+    private lateinit var mapView : MapView
+
+    private val myposition_keepButton : TextView by lazy {
+        findViewById(R.id.myposition_searchButton)
+    }
 
     var REQUIRED_PERMISSIONS = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION)
+//    mapPointGeo?.latitude, mapPointGeo?.longitude
+    var latitude : Double = 0.0   //위도
+    var longitude : Double = 0.0  //경도
 
-    companion object{
-        val PERMISSION_REQUEST_CODE = 100
-        val GPS_ENABLE_REQUEST_CODE = 2001
 
-        val LOG_TAG = "MainActivity"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_position)
-        fun getAppKeyHash() {
-            try {
-                val info = packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNATURES)
-                for(i in info.signatures) {
-                    val md: MessageDigest = MessageDigest.getInstance("SHA")
-                    md.update(i.toByteArray())
 
-                    val something = String(Base64.encode(md.digest(), 0)!!)
-                    Log.e("Debug key", something)
-                }
-            } catch(e: Exception) {
-                Log.e("Not found", e.toString())
-            }
-        }
 
-        getAppKeyHash()
+        //맵뷰 호출
+        initMapView()
+
+
+        initPositionSetButton() //내 위치로 설정
 
 
 
-        //Activity 의 content-view 에 삽입하면 지도화면을 손쉽게 구현
-        val mapViewContainer : ViewGroup = findViewById(R.id.map_view)
 
-        //맵 사용
-        mapView = MapView(this) //net.daum.mf.map.api.MapView 객체를 생성
-        mapView.setCurrentLocationEventListener(this)
-        mapView.setDaumMapApiKey("API_KEY");
 
-        mapViewContainer.addView(mapView)
-        
-        if(!checkLocationServicesStatus()){
-            showDialogForLocationServiceSetting()
-            
-        }else{
-            checkRunTimePermission()
-        }
+
+
 
 
     }
@@ -84,6 +70,50 @@ class SetPositionActivity : AppCompatActivity(), MapView.CurrentLocationEventLis
         mapView.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOff
         mapView.setShowCurrentLocationMarker(false)
         //MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading
+
+    }
+
+    private fun initPositionSetButton(){
+        val userId = auth.currentUser?.uid.orEmpty()
+        myposition_keepButton.setOnClickListener {
+            var userLatitude = latitude
+            var userLongitue = longitude
+
+            val currentUserDB1 = Firebase.database.reference.child("Users").child(userId).child("위도")
+            val currentUserDB2 = Firebase.database.reference.child("Users").child(userId).child("경도")
+
+            currentUserDB1.setValue(userLatitude)
+            currentUserDB2.setValue(userLongitue)
+            // 내 위치 정하기 프래그먼트로 콜백전송 -> 주소를 정했어! 하는 신호
+            setResult(100)
+            //액티비티 종료
+            finish()
+        }
+    }
+
+    //맵뷰 설정
+    fun initMapView(){
+        //Activity 의 content-view 에 삽입하면 지도화면을 손쉽게 구현
+        val mapViewContainer : ViewGroup = findViewById(R.id.map_view)
+
+        //맵 사용
+        mapView = MapView(this) //net.daum.mf.map.api.MapView 객체를 생성
+        mapView.setCurrentLocationEventListener(this)
+        mapView.setDaumMapApiKey("API_KEY");
+
+        mapViewContainer.addView(mapView)
+
+        if(!checkLocationServicesStatus()){
+            showDialogForLocationServiceSetting()
+
+        }else{
+            checkRunTimePermission()
+        }
+
+        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(latitude, longitude), true)
+        mapView.setZoomLevel(2,true)    //작을수록 가까움
+        mapView.zoomIn(true)
+        mapView.zoomOut(true)
 
     }
 
@@ -180,6 +210,9 @@ class SetPositionActivity : AppCompatActivity(), MapView.CurrentLocationEventLis
         var mapPointGeo : MapPoint.GeoCoordinate? = p1?.mapPointGeoCoord
         Log.d(LOG_TAG, String.format("MapView onCurrentLocationUpdate (%f,%f) accuracy (%f)"
             , mapPointGeo?.latitude, mapPointGeo?.longitude, p2))
+
+        latitude = mapPointGeo!!.latitude //위도 값 업데이트
+        longitude = mapPointGeo!!.longitude  //경도 값 업데이트
     }
 
     override fun onCurrentLocationDeviceHeadingUpdate(p0: MapView?, p1: Float) {
@@ -240,4 +273,29 @@ class SetPositionActivity : AppCompatActivity(), MapView.CurrentLocationEventLis
 
 
     }
+
+    companion object{
+        val PERMISSION_REQUEST_CODE = 100
+        val GPS_ENABLE_REQUEST_CODE = 2001
+
+        val LOG_TAG = "MainActivity"
+    }
 }
+
+//디버깅 해시키 받을 때 사용
+//        fun getAppKeyHash() {
+//            try {
+//                val info = packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNATURES)
+//                for(i in info.signatures) {
+//                    val md: MessageDigest = MessageDigest.getInstance("SHA")
+//                    md.update(i.toByteArray())
+//
+//                    val something = String(Base64.encode(md.digest(), 0)!!)
+//                    Log.e("Debug key", something)
+//                }
+//            } catch(e: Exception) {
+//                Log.e("Not found", e.toString())
+//            }
+//        }
+//
+//        getAppKeyHash()

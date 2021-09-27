@@ -38,7 +38,7 @@
 
     <TextView
 
-        android:id="@+id/myposition_keepButton"
+        android:id="@+id/myposition_searchButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="50dp"
@@ -46,7 +46,7 @@
         android:background="@drawable/round_black_background"
         android:gravity="center_horizontal"
         android:padding="10dp"
-        android:text="현재 위치로 찾기"
+        android:text="현재 위치로 설정"
         android:textColor="@color/black"
         android:textSize="20sp" />
 

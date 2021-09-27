@@ -55,13 +55,17 @@ class MyNameInputFragment : Fragment(R.layout.myname_input_frament) {
             val userId = auth.currentUser?.uid.orEmpty()
 //            DB 사용
             //reference에서 Users라는 child를 선택
-            val currentUserDB1 = Firebase.database.reference.child("Users").child(userId)
-            val currentUserDB2 = Firebase.database.reference.child("Users").child(myName)
+            val currentUserDB1 = Firebase.database.reference.child("Users").child(userId).child("userId")
+            val currentUserDB2 = Firebase.database.reference.child("Users").child(userId).child("myName")
             val user = mutableMapOf<String, Any>()
-            user["myName"] = myName
-            user["userId"] = userId
-            currentUserDB1.updateChildren(user)
-            currentUserDB2.updateChildren(user)//제일 상위에 DB 안에Users라는 List가 생기고 그안에
+
+            currentUserDB1.setValue(userId)
+            currentUserDB2.setValue(myName)
+//            val user = mutableMapOf<String, Any>()
+//            user["myName"] = myName
+//            user["userId"] = userId
+//            currentUserDB1.updateChildren(user)
+//            currentUserDB2.updateChildren(user)//제일 상위에 DB 안에Users라는 List가 생기고 그안에
             // userId라는 항목으로 오브젝트가 생기고 그안에 user가 저장 유저는 userId를 가지고잇음
             //Users라는 키도 따로 빼둠.
 

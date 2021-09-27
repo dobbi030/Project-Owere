@@ -15,17 +15,17 @@
         android:theme="@style/Theme.Owere"
         android:usesCleartextTraffic="true">
         <activity android:name=".activity.signUpActivity.SetPositionActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".activity.UserMain.UserMainActivity" />
         <activity android:name=".activity.loginActivity.LoginActivity_temp" />
         <activity android:name=".activity.loginActivity.LoginActivity_choice" />
         <activity android:name=".activity.signUpActivity.SignUpActivity1_choice" />
         <activity android:name=".activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
 
@@ -34,6 +34,7 @@
             android:value="1c731ef6b27d4335e6ebc47fa74f09b9"/>
 
     </application>
+
 
 
 </manifest>

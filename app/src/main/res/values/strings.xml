@@ -19,4 +19,12 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="restore_handle">계정 복구</string>
+    <string name="announce_send_email">계정 복구 링크가 담긴 이메일을 곧 보내드리겠습니다.</string>
+    <string name="send_email">이메일 보내기</string>
+    <string name="explain_back_to_login_arrow">로그인 화면으로 돌아가는 화살표 모양의 버튼</string>
+    <string name="announce_write_correct_email">올바른 이메일 주소를 입력하세요.</string>
+    <string name="icon_of_kakaotalk">Icon of kakaotalk</string>
+    <string name="icon_of_facebook">Icon of facebook</string>
+    <string name="icon_of_email">Icon of email</string>
 </resources>

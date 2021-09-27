@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".activity.loginActivity.LoginActivityRestore">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/restore_handle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="110dp"
+                android:text="@string/restore_handle"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                app:layout_constraintStart_toStartOf="@id/input_email"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="30dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_baseline_arrow_back_24"
+                app:layout_constraintBottom_toTopOf="@id/restore_handle"
+                app:layout_constraintStart_toStartOf="@id/restore_handle"
+                app:tint="@color/black"
+                android:contentDescription="@string/explain_back_to_login_arrow" />
+
+            <!--이메일 주소를 입력해 주세요-->
+            <EditText
+                android:id="@+id/input_email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="60dp"
+                android:hint="이메일 주소"
+                android:textSize="20sp"
+                android:textColor="#ff0000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/restore_handle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="100dp"
+                android:text="@string/announce_write_correct_email"
+                android:textColor="#ff0000"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@id/input_email"
+                app:layout_constraintTop_toBottomOf="@id/input_email"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+<!--  이메일 버튼 배경 용(미정)  -->
+<!--
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="@id/continue_Button"
+        app:layout_constraintBottom_toBottomOf="@id/continue_Button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+-->
+
+    <!-- 키보드 올라갈때 버튼 잘 올라가는지 확인 -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/continue_Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/round_black_fill_white_background"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:text="@string/send_email"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

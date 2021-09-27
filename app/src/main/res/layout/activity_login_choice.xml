@@ -4,6 +4,134 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.loginActivity.LoginActivity_choice">
+    android:background="@color/black"
+    tools:context=".activity.loginActivity.LoginActivityChoice">
+
+    <TextView
+        android:id="@+id/nothing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="100dp"
+        android:text="@string/explain_owere_1"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/nothing2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/explain_owere_2"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="@id/nothing"
+        app:layout_constraintTop_toBottomOf="@id/nothing" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/owere"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        app:layout_constraintStart_toStartOf="@id/nothing"
+        app:layout_constraintTop_toBottomOf="@id/nothing2" />
+
+    <TextView
+        android:id="@+id/cantLogin_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:text="@string/cannot_login"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/kakaotalk_Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/round_white_background"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:text="@string/login_kakao"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/facebook_Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:src="@drawable/ic_iconmonstr_speech_bubble_2"
+        app:layout_constraintBottom_toBottomOf="@id/kakaotalk_Button"
+        app:layout_constraintLeft_toLeftOf="@id/kakaotalk_Button"
+        app:layout_constraintTop_toTopOf="@id/kakaotalk_Button"
+        app:tint="@color/white"
+        android:contentDescription="@string/icon_of_kakaotalk" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/facebook_Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/round_white_background"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:text="@string/login_facebook"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/email_Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:src="@drawable/ic_iconmonstr_facebook_4"
+        app:layout_constraintBottom_toBottomOf="@id/facebook_Button"
+        app:layout_constraintLeft_toLeftOf="@id/facebook_Button"
+        app:layout_constraintTop_toTopOf="@id/facebook_Button"
+        app:tint="@color/white"
+        android:contentDescription="@string/icon_of_facebook" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/email_Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginVertical="5dp"
+        android:background="@drawable/round_white_background"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:text="@string/login_email"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/cantLogin_Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:src="@drawable/ic_iconmonstr_email_2"
+        app:layout_constraintBottom_toBottomOf="@id/email_Button"
+        app:layout_constraintLeft_toLeftOf="@id/email_Button"
+        app:layout_constraintTop_toTopOf="@id/email_Button"
+        app:tint="@color/white"
+        android:contentDescription="@string/icon_of_email" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

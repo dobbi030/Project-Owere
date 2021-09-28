@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".activity.loginActivity.LoginActivityChoice">
+    tools:context=".activity.loginActivity.LoginActivityEmail">
 
     <TextView
         android:id="@+id/nothing"
@@ -53,61 +53,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/kakaotalk_Button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="50dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/round_white_background"
-        android:gravity="center_horizontal"
-        android:padding="10dp"
-        android:text="@string/login_kakao"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/facebook_Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:src="@drawable/ic_iconmonstr_speech_bubble_2"
-        app:layout_constraintBottom_toBottomOf="@id/kakaotalk_Button"
-        app:layout_constraintLeft_toLeftOf="@id/kakaotalk_Button"
-        app:layout_constraintTop_toTopOf="@id/kakaotalk_Button"
-        app:tint="@color/white"
-        android:contentDescription="@string/icon_of_kakaotalk" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/facebook_Button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="50dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/round_white_background"
-        android:gravity="center_horizontal"
-        android:padding="10dp"
-        android:text="@string/login_facebook"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/email_Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:src="@drawable/ic_iconmonstr_facebook_4"
-        app:layout_constraintBottom_toBottomOf="@id/facebook_Button"
-        app:layout_constraintLeft_toLeftOf="@id/facebook_Button"
-        app:layout_constraintTop_toTopOf="@id/facebook_Button"
-        app:tint="@color/white"
-        android:contentDescription="@string/icon_of_facebook" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/email_Button"
+        android:id="@+id/continue_Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="50dp"
@@ -115,23 +61,25 @@
         android:background="@drawable/round_white_background"
         android:gravity="center_horizontal"
         android:padding="10dp"
-        android:text="@string/login_email"
+        android:text="@string/login_continue"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/cantLogin_Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:layout_width="wrap_content"
+    <EditText
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:src="@drawable/ic_iconmonstr_email_2"
-        app:layout_constraintBottom_toBottomOf="@id/email_Button"
-        app:layout_constraintLeft_toLeftOf="@id/email_Button"
-        app:layout_constraintTop_toTopOf="@id/email_Button"
-        app:tint="@color/white"
-        android:contentDescription="@string/icon_of_email" />
-
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/rounded_square_background"
+        android:hint="@string/ask_Email"
+        android:padding="10dp"
+        android:textColorHint="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/continue_Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

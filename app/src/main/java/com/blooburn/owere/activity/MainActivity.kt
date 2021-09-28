@@ -1,12 +1,13 @@
-package com.blooburn.owere.activity
+package com.example.owere.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
-import com.blooburn.owere.R
-import com.blooburn.owere.activity.loginActivity.LoginActivity_temp
-import com.blooburn.owere.activity.signUpActivity.SignUpActivity1_choice
+import com.example.owere.R
+import com.example.owere.activity.loginActivity.LoginActivity_choice
+import com.example.owere.activity.loginActivity.LoginActivity_temp
+import com.example.owere.activity.signUpActivity.SignUpActivity1_choice
 
 //회원가입 로그인 선택 화면
 class MainActivity : AppCompatActivity() {

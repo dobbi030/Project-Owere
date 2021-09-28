@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="16dp">
+
+
+    <ImageView
+        android:id="@+id/favoriteDesignerImageView"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/favoriteDesignerNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="김철수 디자이너"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintBottom_toTopOf="@id/favoriteDesignerReviewTextView"
+        app:layout_constraintStart_toEndOf="@id/favoriteDesignerImageView"
+        app:layout_constraintTop_toTopOf="@id/favoriteDesignerImageView" />
+
+    <TextView
+        android:id="@+id/favoriteDesignerReviewTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="리뷰(50+)"
+        app:layout_constraintBottom_toTopOf="@id/favoriteDesignerMatchingTextView"
+        app:layout_constraintStart_toStartOf="@id/favoriteDesignerNameTextView"
+        app:layout_constraintTop_toBottomOf="@id/favoriteDesignerNameTextView" />
+
+    <View
+        android:id="@+id/favoriteDesignerDivider"
+        android:layout_width="1.5dp"
+        android:layout_height="12dp"
+        android:layout_marginStart="8dp"
+        android:background="@color/gray_cc"
+        app:layout_constraintBottom_toBottomOf="@id/favoriteDesignerReviewTextView"
+        app:layout_constraintStart_toEndOf="@id/favoriteDesignerReviewTextView"
+        app:layout_constraintTop_toTopOf="@id/favoriteDesignerReviewTextView" />
+
+    <TextView
+        android:id="@+id/favoriteDesignerAddressTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="서울시 송파구 가락동"
+        app:layout_constraintBottom_toBottomOf="@+id/favoriteDesignerReviewTextView"
+        app:layout_constraintStart_toEndOf="@id/favoriteDesignerDivider"
+        app:layout_constraintTop_toTopOf="@+id/favoriteDesignerReviewTextView" />
+
+    <TextView
+        android:id="@+id/favoriteDesignerMatchingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:background="@color/gray_cc"
+        android:padding="2dp"
+        android:text="매칭률 98%"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/favoriteDesignerImageView"
+        app:layout_constraintStart_toStartOf="@id/favoriteDesignerNameTextView"
+        app:layout_constraintTop_toBottomOf="@id/favoriteDesignerReviewTextView" />
+
+    <TextView
+        android:id="@+id/favoriteDesignerRatingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="★★★★☆"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/favoriteDesignerMatchingTextView"
+        app:layout_constraintTop_toTopOf="@id/favoriteDesignerMatchingTextView" />
+</androidx.constraintlayout.widget.ConstraintLayout>

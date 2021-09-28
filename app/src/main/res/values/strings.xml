@@ -2,4 +2,11 @@
     <string name="app_name">O\'were</string>
     <string name="underLineTermsOfUse"><u>이용약관</u></string>
     <string name="ask_Email">이메일 주소를 입력해주세요</string>
+
+    <!-- user_home_designer_fragment -->
+    <string name="favorite_designer">즐겨찾는 디자이너</string>
+    <string name="available_now_designer">지금 가능한 디자이너</string>
+
+    <!-- user_home_salon_fragment -->
+    <string name="favorite_salon">즐겨찾는 미용실</string>
 </resources>

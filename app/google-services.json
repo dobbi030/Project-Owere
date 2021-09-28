@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:260202805759:android:bcc5ae6110ddd341994fca",
+        "mobilesdk_app_id": "1:260202805759:android:d8bc6373c72b1b41994fca",
         "android_client_info": {
-          "package_name": "com.example.owere"
+          "package_name": "com.blooburn.owere"
         }
       },
       "oauth_client": [

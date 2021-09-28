@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.owere">
+    package="com.blooburn.owere">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -15,18 +15,18 @@
         android:theme="@style/Theme.Owere"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".activity.loginActivity.LoginActivityRestore"
+            android:name="com.blooburn.owere.activity.loginActivity.LoginActivityRestore"
             android:windowSoftInputMode="adjustResize|stateHidden"
             android:exported="true" />
         <activity
-            android:name=".activity.loginActivity.LoginActivityEmail"
+            android:name="com.blooburn.owere.activity.loginActivity.LoginActivityEmail"
             android:exported="true" />
-        <activity android:name=".activity.signUpActivity.SetPositionActivity" />
-        <activity android:name=".activity.UserMain.UserMainActivity" />
-        <activity android:name=".activity.loginActivity.LoginActivity_temp" />
-        <activity android:name=".activity.loginActivity.LoginActivityChoice" />
-        <activity android:name=".activity.signUpActivity.SignUpActivity1_choice" />
-        <activity android:name=".activity.MainActivity">
+        <activity android:name="com.blooburn.owere.activity.signUpActivity.SetPositionActivity" />
+        <activity android:name="com.blooburn.owere.activity.UserMain.UserMainActivity" />
+        <activity android:name="com.blooburn.owere.activity.loginActivity.LoginActivity_temp" />
+        <activity android:name="com.blooburn.owere.activity.loginActivity.LoginActivityChoice" />
+        <activity android:name="com.blooburn.owere.activity.signUpActivity.SignUpActivity1_choice" />
+        <activity android:name="com.blooburn.owere.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

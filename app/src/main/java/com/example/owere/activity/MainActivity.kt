@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import com.example.owere.R
-import com.example.owere.activity.loginActivity.LoginActivity_choice
+import com.example.owere.activity.loginActivity.LoginActivityRestore
 import com.example.owere.activity.loginActivity.LoginActivity_temp
 import com.example.owere.activity.signUpActivity.SignUpActivity1_choice
 
@@ -41,12 +41,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
-
-
-
-
-
-
+        // 임시로 화면 띄워볼게여 ^^
+        val intent = Intent(this, LoginActivityRestore::class.java)
+        startActivity(intent);
     }
 }

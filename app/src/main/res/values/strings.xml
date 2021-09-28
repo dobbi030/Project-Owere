@@ -34,4 +34,5 @@
 
     <!-- user_home_salon_fragment -->
     <string name="favorite_salon">즐겨찾는 미용실</string>
+    <string name="login">로그인</string>
 </resources>

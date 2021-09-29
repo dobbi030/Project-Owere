@@ -5,6 +5,7 @@ import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import com.blooburn.owere.R
@@ -147,8 +148,7 @@ class PasswordInputFragment : Fragment(R.layout.password_input_fragment) {
 
         passwordEditTextCheck?.addTextChangedListener {
             //둘다 채워졌는지 여부
-            val enable =
-                passwordEditText!!.text.isNotEmpty() && passwordEditTextCheck!!.text.isNotEmpty()
+            val enable = passwordEditText!!.text.isNotEmpty() && passwordEditTextCheck!!.text.isNotEmpty()
             //동일한 비밀번호 여부
             val check = passwordEditText!!.text == passwordEditTextCheck!!.text
             if (enable || check) {

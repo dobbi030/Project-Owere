@@ -14,19 +14,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Owere"
         android:usesCleartextTraffic="true">
+        <activity android:name=".activity.UserMain.chattingActivity.ChattingActivity"></activity>
         <activity
-            android:name="com.blooburn.owere.activity.loginActivity.LoginActivityRestore"
-            android:windowSoftInputMode="adjustResize|stateHidden"
-            android:exported="true" />
+            android:name=".activity.loginActivity.LoginActivityRestore"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
-            android:name="com.blooburn.owere.activity.loginActivity.LoginActivityEmail"
+            android:name=".activity.loginActivity.LoginActivityEmail"
             android:exported="true" />
-        <activity android:name="com.blooburn.owere.activity.signUpActivity.SetPositionActivity" />
-        <activity android:name="com.blooburn.owere.activity.UserMain.UserMainActivity" />
-        <activity android:name="com.blooburn.owere.activity.loginActivity.LoginActivity_temp" />
-        <activity android:name="com.blooburn.owere.activity.loginActivity.LoginActivityChoice" />
-        <activity android:name="com.blooburn.owere.activity.signUpActivity.SignUpActivity1_choice" />
-        <activity android:name="com.blooburn.owere.activity.MainActivity">
+        <activity android:name=".activity.signUpActivity.SetPositionActivity" />
+        <activity android:name=".activity.UserMain.UserMainActivity" />
+        <activity android:name=".activity.loginActivity.LoginActivity_temp" />
+        <activity android:name=".activity.loginActivity.LoginActivityChoice" />
+        <activity android:name=".activity.signUpActivity.SignUpActivity1_choice" />
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.blooburn.owere.R
 import com.blooburn.owere.databinding.MynameInputFramentBinding

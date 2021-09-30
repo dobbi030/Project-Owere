@@ -8,14 +8,14 @@ import com.blooburn.owere.fragment.userMainFragment.homeFragment.UserHomeSalonFr
 class UserHomeTabAdapter(fragment: Fragment, private var tabCount: Int) :
     FragmentStateAdapter(fragment) {
 
+    private val fragmentList =
+        mutableListOf(UserHomeDesignerFragment(), UserHomeSalonFragment())
+
     override fun getItemCount(): Int {
         return tabCount
     }
 
     override fun createFragment(position: Int): Fragment {
-        return when (position){
-            0 -> UserHomeDesignerFragment()
-            else -> UserHomeSalonFragment()
-        }
+        return fragmentList[position]
     }
 }

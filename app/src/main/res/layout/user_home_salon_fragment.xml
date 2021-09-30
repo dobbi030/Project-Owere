@@ -7,45 +7,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/userSalonChipGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:paddingVertical="8dp"
-        app:chipSpacingHorizontal="8dp"
-        app:singleLine="true">
-
-        <com.google.android.material.chip.Chip
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="10km" />
-
-        <com.google.android.material.chip.Chip
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="매장규모" />
-
-        <com.google.android.material.chip.Chip
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="매장정보" />
-
-        <com.google.android.material.chip.Chip
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="가격대" />
-
-        <com.google.android.material.chip.Chip
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="별점순" />
-    </com.google.android.material.chip.ChipGroup>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="180dp" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -11,6 +11,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 class UserHomeFragment: Fragment(R.layout.user_home_fragment) {
 
     private var binding: UserHomeFragmentBinding? = null
+    lateinit var tabAdapter: UserHomeTabAdapter
     private val tabTitle = listOf("디자이너", "미용실")
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -23,7 +24,7 @@ class UserHomeFragment: Fragment(R.layout.user_home_fragment) {
     }
 
     private fun initTabLayout(){
-        val tabLayout = binding?.userHomeTabLayout!!
+        val tabLayout = binding?.tabLayoutUserHome!!
 
         repeat(2) {
             tabLayout.addTab(tabLayout.newTab())    // 탭 2개 생성
@@ -32,18 +33,19 @@ class UserHomeFragment: Fragment(R.layout.user_home_fragment) {
         initViewPager()
 
         // TabLayout과 ViewPager 연결 + 탭 타이틀 지정
-        TabLayoutMediator(tabLayout, binding?.userHomeViewPager!!){ tab, position ->
+        TabLayoutMediator(tabLayout, binding?.viewPagerUserHome!!){ tab, position ->
             tab.text = tabTitle[position]
         }.attach()
     }
 
     private fun initViewPager(){
-        binding?.userHomeViewPager?.apply{
+        binding?.viewPagerUserHome?.apply{
             isSaveEnabled = false
-            adapter = UserHomeTabAdapter(
+            tabAdapter = UserHomeTabAdapter(
                 this@UserHomeFragment,
-                binding?.userHomeTabLayout!!.tabCount
+                binding?.tabLayoutUserHome!!.tabCount
             )
+            adapter = tabAdapter
         }
     }
 }

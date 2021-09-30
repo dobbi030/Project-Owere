@@ -13,7 +13,7 @@ class ChatItemAdapter  : androidx.recyclerview.widget.ListAdapter<ChatItem, Chat
     inner class ViewHolder(private val binding: ItemChatBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(chatItem: ChatItem) {
-            binding.senderTextView.text = chatItem.senderId
+            binding.senderTextView.text = chatItem.userName
             binding.messageTextView.text = chatItem.message
 
         }
@@ -34,7 +34,7 @@ class ChatItemAdapter  : androidx.recyclerview.widget.ListAdapter<ChatItem, Chat
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<ChatItem>() {
             override fun areItemsTheSame(oldItem: ChatItem, newItem: ChatItem): Boolean {
-                return oldItem == newItem
+                return oldItem.timestamp == newItem.timestamp
             }
 
             override fun areContentsTheSame(oldItem: ChatItem, newItem: ChatItem): Boolean {

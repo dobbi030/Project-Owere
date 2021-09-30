@@ -19,8 +19,14 @@ class ChatListAdapter(val onItemClicked : (ChatListItem)-> Unit) : ListAdapter<C
             binding.root.setOnClickListener{
                 onItemClicked(chatListItem)
             }
+            //채팅방 상대방을 타이틀로 설정
+            //채팅방 유저 명단을 받아옴
+            var chatTitle = chatListItem.opponentName
 
-            binding.chatRoomTitleTextView.text = chatListItem.userId
+
+            //채팅방 타이틀에 상대방이름을 표시
+            binding.chatRoomTitleTextView.text = chatTitle
+
 
         }
 

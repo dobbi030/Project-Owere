@@ -45,12 +45,13 @@ class ChattingDesignerFragment : Fragment(R.layout.layout_chatting_designer_frag
         val chattingDesignerFragmentBinding = LayoutChattingDesignerFragmentBinding.bind(view)
         binding = chattingDesignerFragmentBinding
 
+        //리스트에서 채팅방 클릭시 해당 채팅방으로 이동
         chatListAdapter = ChatListAdapter(onItemClicked = {chatListItem ->
             //채팅방으로 이동하는 코드
             //context에 nullcheck를 걸어둔다
             context?.let{
                 val intent = Intent(it, ChattingActivity::class.java)
-                intent.putExtra("chatRoomId", chatListItem.chatRoomId )
+                intent.putExtra("chatRoomId", chatListItem.chatRoomId)
                 startActivity(intent)
             }
 
@@ -80,12 +81,12 @@ class ChattingDesignerFragment : Fragment(R.layout.layout_chatting_designer_frag
                 snapshot.children.forEach{
                     val model = it.getValue(ChatListItem::class.java)
                     model ?: return
-
+                    //DB에 변화가 생긴다면
                     chatRoomList.add(model) //채팅방 목록 리스트 추가
                 }
 
                 chatListAdapter.submitList(chatRoomList) //변화한 채팅방 목록 어답터에 제출
-                chatListAdapter.notifyDataSetChanged()
+                chatListAdapter.notifyDataSetChanged()//뷰 목록 업데이트
             }
 
             override fun onCancelled(error: DatabaseError) {

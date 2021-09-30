@@ -86,6 +86,8 @@ class ChattingActivity : AppCompatActivity() {
                 userName = "myName"
             )
 
+            val messageID = "${chatItem.timestamp}+${chatItem.uid}"
+            //DB 갱신
             chatDB?.push()?.setValue(chatItem)
         }
 

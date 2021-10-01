@@ -38,8 +38,8 @@ class MyPositionSetFragment : Fragment(R.layout.myposition_set_fragment) {
 
         val userId = auth.currentUser?.uid.toString()
 
-        val currentUserDB1 = Firebase.database.reference.child("Users").child(userId).child("위도")
-        val currentUserDB2 = Firebase.database.reference.child("Users").child(userId).child("경도")
+        val currentUserDB1 = Firebase.database.reference.child("Users").child(userId).child("Latitude")
+        val currentUserDB2 = Firebase.database.reference.child("Users").child(userId).child("longitude")
 
 
 

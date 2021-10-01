@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -38,6 +39,7 @@ class ChattingDesignerFragment : Fragment(R.layout.layout_chatting_designer_frag
         Firebase.auth
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -52,6 +54,7 @@ class ChattingDesignerFragment : Fragment(R.layout.layout_chatting_designer_frag
             context?.let{
                 val intent = Intent(it, ChattingActivity::class.java)
                 intent.putExtra("chatRoomId", chatListItem.chatRoomId)
+                intent.putExtra("userName", chatListItem.myName.toString())
                 startActivity(intent)
             }
 
@@ -74,6 +77,7 @@ class ChattingDesignerFragment : Fragment(R.layout.layout_chatting_designer_frag
 
         //DB 사용할 레퍼런스 초기화 (UserRooms -> 유저Id -> 채팅방ID)
         val chatDB = Firebase.database.reference.child("UserRooms").child(auth.currentUser!!.uid)
+
         //UserId 밑에 데이터 하나라도 변화하면(채팅방 생성, 삭제)
         //DB 변화 리스너 ->한 번만 불러옴
         chatDB.addListenerForSingleValueEvent(object : ValueEventListener {

@@ -2,20 +2,12 @@ package com.blooburn.owere.activity
 
 import android.content.Intent
 
-import android.content.pm.PackageManager
-
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Base64.*
-import android.util.Log
 import android.widget.TextView
 import com.blooburn.owere.R
-import com.blooburn.owere.activity.loginActivity.LoginActivity_temp
+import com.blooburn.owere.activity.loginActivity.LoginActivityTemp
 import com.blooburn.owere.activity.signUpActivity.SignUpActivity1_choice
-
-import android.util.Base64
-import java.security.MessageDigest
-import java.util.*
 
 
 //회원가입 로그인 선택 화면
@@ -50,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         //로그인 버튼 리스너
         logInButton.setOnClickListener {
             //로그인 액티비티로 이동하는 인텐트
-            var intent = Intent(this, LoginActivity_temp::class.java)
+            var intent = Intent(this, LoginActivityTemp::class.java)
             // var intent = Intent(this, LoginActivity_choice::class.java)
 //                getAppKeyHash()
             startActivity(intent)

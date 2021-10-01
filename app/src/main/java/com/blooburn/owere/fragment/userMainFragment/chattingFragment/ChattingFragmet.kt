@@ -11,7 +11,7 @@ import com.blooburn.owere.adapter.chatting.ChattingTabAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
-class chattingFragmet : Fragment(R.layout.layout_chatting_fragment){
+class ChattingFragmet : Fragment(R.layout.layout_chatting_fragment){
 
     private lateinit var chattingTabLayout: TabLayout
     private lateinit var chattingViewPager : ViewPager2

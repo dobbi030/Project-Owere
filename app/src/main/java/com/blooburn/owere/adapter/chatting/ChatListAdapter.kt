@@ -22,10 +22,17 @@ class ChatListAdapter(val onItemClicked : (ChatListItem)-> Unit) : ListAdapter<C
             //채팅방 상대방을 타이틀로 설정
             //채팅방 유저 명단을 받아옴
             var chatTitle = chatListItem.opponentName
+            //마지막 메시지
+            var chatLastMessage = chatListItem.lastMessage
+
 
 
             //채팅방 타이틀에 상대방이름을 표시
             binding.chatRoomTitleTextView.text = chatTitle
+            binding.chattinglistLastmessage.text = chatLastMessage
+//            프로필 표시 필요
+//            binding.chattinglistProfile
+//            시간 표시 필요
 
 
         }

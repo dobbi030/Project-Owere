@@ -1,5 +1,7 @@
 package com.blooburn.owere.activity.UserMain.chattingActivity
 
+import android.app.Activity
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -10,6 +12,7 @@ import com.blooburn.owere.R
 import com.blooburn.owere.adapter.chatting.ChatItemAdapter
 import com.blooburn.owere.item.ChatItem
 import com.blooburn.owere.item.DatabaseChild.Companion.DB_CHAT
+import com.blooburn.owere.item.DatabaseChild.Companion.DB_USERS
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ChildEventListener
@@ -38,9 +41,12 @@ class ChattingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatting)
 
+        //프래그먼트로부터 받아온 정보
         val chatRoomId = intent.getLongExtra("chatRoomId", -1)
+        var userName = intent.getStringExtra("userName")
 
         chatDB = Firebase.database.reference.child(DB_CHAT).child("$chatRoomId")
+
 
         //DB갱신할 때마다  실시간으로 읽어옴
         chatDB?.addChildEventListener(object : ChildEventListener {
@@ -79,11 +85,13 @@ class ChattingActivity : AppCompatActivity() {
         )
         */
         findViewById<Button>(R.id.sendButton).setOnClickListener {
-            val chatItem = ChatItem(profileImg = "userprofile",
+            val chatItem =
+                ChatItem(profileImg = "userprofile",
                 message = findViewById<EditText>(R.id.messageEditText).text.toString(),
                 timestamp = System.currentTimeMillis().toString(),
                 uid = auth.currentUser?.uid.toString(),
-                userName = "myName"
+                //유저 이름 인텐트로 받아오기 필요
+                userName = userName!!
             )
 
             val messageID = "${chatItem.timestamp}+${chatItem.uid}"

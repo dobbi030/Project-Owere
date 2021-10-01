@@ -16,7 +16,7 @@ import com.google.firebase.ktx.Firebase
 
 
 //임시 로그인 회원가입 액티비티
-class LoginActivity_temp : AppCompatActivity() {
+class LoginActivityTemp : AppCompatActivity() {
 
 
     private lateinit var auth : FirebaseAuth    //파이어베이스 인증 사용

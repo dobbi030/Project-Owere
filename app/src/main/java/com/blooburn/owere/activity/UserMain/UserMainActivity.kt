@@ -5,18 +5,45 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.blooburn.owere.R
 import com.blooburn.owere.fragment.userMainFragment.browseFragment.BrowseFragment
-import com.blooburn.owere.fragment.userMainFragment.chattingFragment.chattingFragmet
+import com.blooburn.owere.fragment.userMainFragment.chattingFragment.ChattingFragmet
 import com.blooburn.owere.fragment.userMainFragment.homeFragment.UserHomeFragment
+import com.blooburn.owere.item.DatabaseChild.Companion.DB_USERS
+import com.blooburn.owere.item.UserEntity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 class UserMainActivity : AppCompatActivity() {
+
+    private lateinit var auth : FirebaseAuth
+
+
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_main)
 
+
+        //파이어베이스 인증 인스턴스 초기화
+        auth = FirebaseAuth.getInstance()
+        //로그인 되어 있지 않다면 종료
+        if(auth.currentUser== null){
+            finish()
+        }
+
+        val userDBReference = Firebase.database.reference.child(DB_USERS).child(auth.currentUser?.uid.toString())
+
+
         val homeFragment = UserHomeFragment()
         val browseFragment = BrowseFragment()
-        val chattingFragment = chattingFragmet()
+        val chattingFragment = ChattingFragmet()
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         replaceFragment(homeFragment)   // HomeFragment에서 시작한다

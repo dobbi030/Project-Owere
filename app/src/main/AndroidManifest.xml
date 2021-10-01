@@ -24,7 +24,7 @@
             android:exported="true" />
         <activity android:name=".activity.signUpActivity.SetPositionActivity" />
         <activity android:name=".activity.UserMain.UserMainActivity" />
-        <activity android:name=".activity.loginActivity.LoginActivity_temp" />
+        <activity android:name=".activity.loginActivity.LoginActivityTemp" />
         <activity android:name=".activity.loginActivity.LoginActivityChoice" />
         <activity android:name=".activity.signUpActivity.SignUpActivity1_choice" />
         <activity android:name=".activity.MainActivity">

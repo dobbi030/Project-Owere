@@ -8,7 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import com.blooburn.owere.R
-import com.blooburn.owere.activity.UserMain.UserMainActivity
+import com.blooburn.owere.activity.userMain.UserMainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database

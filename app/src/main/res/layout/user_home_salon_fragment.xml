@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="16dp"
         tools:itemCount="1"
-        tools:listitem="@layout/layout_user_salon" />
+        tools:listitem="@layout/item_user_salon_list" />
 
     <View
         android:layout_width="match_parent"
@@ -46,6 +46,6 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="16dp"
         tools:itemCount="2"
-        tools:listitem="@layout/layout_user_salon" />
+        tools:listitem="@layout/item_user_salon_list" />
 
 </LinearLayout>

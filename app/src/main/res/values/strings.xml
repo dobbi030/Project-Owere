@@ -35,4 +35,14 @@
     <!-- user_home_salon_fragment -->
     <string name="favorite_salon">즐겨찾는 미용실</string>
     <string name="login">로그인</string>
+
+    <!--activity_design_profile -->
+    <string name="chatting">채팅하기</string>
+    <string name="reservation">예약하기</string>
+    <string name="text_price_chart">가격표</string>
+    <string name="text_review_please">후기를 남겨주세요</string>
+    <string name="text_customer_review">고객리뷰</string>
+    <string name="text_all_prices">가격 전체보기</string>
+    <string name="text_all_reviews">리뷰 전체보기</string>
+    <string name="report">신고</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.blooburn.owere.activity.UserMain
+package com.blooburn.owere.activity.userMain
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,12 +8,8 @@ import com.blooburn.owere.fragment.userMainFragment.browseFragment.BrowseFragmen
 import com.blooburn.owere.fragment.userMainFragment.chattingFragment.ChattingFragmet
 import com.blooburn.owere.fragment.userMainFragment.homeFragment.UserHomeFragment
 import com.blooburn.owere.item.DatabaseChild.Companion.DB_USERS
-import com.blooburn.owere.item.UserEntity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="15dp"
+    android:paddingHorizontal="16dp">
+
+
+    <ImageView
+        android:id="@+id/image_item_review"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/text_item_review_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:text="외로운 고양이"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/text_item_review_rating"
+        app:layout_constraintStart_toEndOf="@id/image_item_review"
+        app:layout_constraintTop_toTopOf="@id/image_item_review"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/text_item_review_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="★★★★☆"
+        android:textColor="@color/gray_1"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@id/image_item_review"
+        app:layout_constraintStart_toStartOf="@id/text_item_review_nickname"
+        app:layout_constraintTop_toBottomOf="@id/text_item_review_nickname" />
+
+    <TextView
+        android:id="@+id/text_item_review_dates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:padding="2dp"
+        android:text="이번주"
+        android:textColor="@color/gray_1"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@id/text_item_review_rating"
+        app:layout_constraintStart_toEndOf="@id/text_item_review_rating"
+        app:layout_constraintTop_toTopOf="@id/text_item_review_rating" />
+
+    <TextView
+        android:id="@+id/text_item_review_contents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:maxLines="2"
+        android:text="앞으로는 여기서만 자르려구요.. 김철수 디자이너님으로요.\n갑작스러운 에약에도 요구사항을 척척 들어주셔서 감사합니다."
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/image_item_review" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip_item_review_temp1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="애쉬 베이지"
+        android:textSize="10sp"
+        android:layout_marginTop="14dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_item_review_contents" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip_item_review_temp2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="중단발 커트"
+        android:textSize="10sp"
+        android:layout_marginTop="14dp"
+        android:layout_marginStart="5dp"
+        app:layout_constraintStart_toEndOf="@id/chip_item_review_temp1"
+        app:layout_constraintTop_toBottomOf="@id/text_item_review_contents" />
+
+    <TextView
+        android:id="@+id/button_item_review_report"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/report"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/chip_item_review_temp1"
+        app:layout_constraintBottom_toBottomOf="@id/chip_item_review_temp1"
+        android:textSize="10sp"
+        android:textColor="@color/gray_1"/>
+
+    <View
+        android:layout_marginTop="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_divider"
+        app:layout_constraintTop_toBottomOf="@id/chip_item_review_temp1"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

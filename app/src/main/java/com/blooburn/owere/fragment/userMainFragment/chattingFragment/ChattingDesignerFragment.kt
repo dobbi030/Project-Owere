@@ -2,13 +2,11 @@ package com.blooburn.owere.fragment.userMainFragment.chattingFragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blooburn.owere.R
-import com.blooburn.owere.activity.UserMain.chattingActivity.ChattingActivity
+import com.blooburn.owere.activity.userMain.chattingActivity.ChattingActivity
 import com.blooburn.owere.adapter.chatting.ChatListAdapter
 import com.blooburn.owere.databinding.LayoutChattingDesignerFragmentBinding
 import com.blooburn.owere.item.ChatListItem
@@ -16,12 +14,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import java.sql.Timestamp
-import kotlin.concurrent.timer
 
 class ChattingDesignerFragment : Fragment(R.layout.layout_chatting_designer_fragment) {
 

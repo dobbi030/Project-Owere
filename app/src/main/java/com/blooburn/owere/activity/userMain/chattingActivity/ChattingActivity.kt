@@ -1,7 +1,5 @@
-package com.blooburn.owere.activity.UserMain.chattingActivity
+package com.blooburn.owere.activity.userMain.chattingActivity
 
-import android.app.Activity
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -12,7 +10,6 @@ import com.blooburn.owere.R
 import com.blooburn.owere.adapter.chatting.ChatItemAdapter
 import com.blooburn.owere.item.ChatItem
 import com.blooburn.owere.item.DatabaseChild.Companion.DB_CHAT
-import com.blooburn.owere.item.DatabaseChild.Companion.DB_USERS
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ChildEventListener

@@ -41,6 +41,7 @@
                 app:tint="@color/black"
                 android:contentDescription="@string/explain_back_to_login_arrow" />
 
+            <!--이메일 주소를 입력해 주세요-->
             <EditText
                 android:id="@+id/input_email"
                 android:layout_width="0dp"
@@ -78,11 +79,11 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/round_black_fill_white_background"
-        android:backgroundTint="@color/light_gray"
+        android:backgroundTint="@color/purple_button"
         android:gravity="center"
         android:padding="12dp"
         android:text="@string/send_email"
-        android:textColor="@color/gray_cc"
+        android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

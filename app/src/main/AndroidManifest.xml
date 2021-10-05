@@ -14,7 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Owere"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.UserMain.chattingActivity.ChattingActivity"></activity>
+        <activity
+            android:name=".activity.loginActivity.LoginActivityRegisterPhoneNumber"
+            android:exported="true" />
+        <activity
+            android:name=".activity.loginActivity.LoginActivityCheckEmail"
+            android:exported="true" />
+        <activity android:name=".activity.UserMain.chattingActivity.ChattingActivity" />
         <activity
             android:name=".activity.loginActivity.LoginActivityRestore"
             android:exported="true"

@@ -2,6 +2,7 @@ package com.blooburn.owere.activity.loginActivity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.blooburn.owere.R
 
 class LoginActivityRegisterPhoneNumber : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -14,7 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Owere"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.UserMain.chattingActivity.ChattingActivity"></activity>
+        <activity
+            android:name=".activity.loginActivity.LoginActivityRegisterPhoneNumber"
+            android:exported="true" />
+        <activity
+            android:name=".activity.loginActivity.LoginActivityCheckEmail"
+            android:exported="true" />
+        <activity android:name=".activity.userMain.chattingActivity.ChattingActivity" />
         <activity
             android:name=".activity.loginActivity.LoginActivityRestore"
             android:exported="true"
@@ -23,7 +29,7 @@
             android:name=".activity.loginActivity.LoginActivityEmail"
             android:exported="true" />
         <activity android:name=".activity.signUpActivity.SetPositionActivity" />
-        <activity android:name=".activity.UserMain.UserMainActivity" />
+        <activity android:name=".activity.userMain.UserMainActivity" />
         <activity android:name=".activity.loginActivity.LoginActivityTemp" />
         <activity android:name=".activity.loginActivity.LoginActivityChoice" />
         <activity android:name=".activity.signUpActivity.SignUpActivity1_choice" />

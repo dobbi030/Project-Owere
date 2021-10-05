@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import androidx.core.view.accessibility.AccessibilityViewCommand
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blooburn.owere.R
@@ -28,11 +29,17 @@ class ChattingActivity : AppCompatActivity() {
         Firebase.auth
     }
 
-    private val chatList = mutableListOf<ChatItem>()
+
+
+    private var chatList = mutableListOf<ChatItem>()
 
     private val adapter = ChatItemAdapter()
 
     private var chatDB : DatabaseReference? = null
+
+    private val chatRecyclerview by lazy {
+        findViewById<RecyclerView>(R.id.chatRecyclerView)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +59,7 @@ class ChattingActivity : AppCompatActivity() {
                 chatItem ?: return
 
                 chatList.add(chatItem)
-                adapter.submitList(chatList)
+                adapter.datas = chatList
                 adapter.notifyDataSetChanged()
             }
 
@@ -90,6 +97,13 @@ class ChattingActivity : AppCompatActivity() {
                 //유저 이름 인텐트로 받아오기 필요
                 userName = userName!!
             )
+            chatRecyclerview.scrollToPosition(chatList.size-1)
+
+
+
+
+
+
 
             val messageID = "${chatItem.timestamp}+${chatItem.uid}"
             //DB 갱신

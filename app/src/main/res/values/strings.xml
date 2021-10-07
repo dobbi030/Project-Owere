@@ -47,7 +47,7 @@
 
 
     <string name="announce_check_email">계정에 등록된 이메일(Owere@naver.com)로\n메일이 발송되었습니다.\n잠시 후 이메일을 확인해주세요.</string>
-    <string name="can_not_find_pairing_button"><u>I can't find pairing button</u></string>
+    <string name="can_not_find_pairing_button"><u>I cant find pairing button</u></string>
     <string name="use_another_email"><u>다른 이메일 사용하기</u></string>
     <string name="restore_use_phone"><u>전화번호 사용하기</u></string>
     <string name="check_phone">휴대폰 확인</string>

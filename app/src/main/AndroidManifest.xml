@@ -33,6 +33,7 @@
         <activity android:name=".activity.loginActivity.LoginActivityTemp" />
         <activity android:name=".activity.loginActivity.LoginActivityChoice" />
         <activity android:name=".activity.signUpActivity.SignUpActivity1_choice" />
+
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -13,13 +13,20 @@ import com.blooburn.owere.databinding.ReservationLayoutBinding
 
 class ReservationFragment : Fragment(R.layout.reservation_layout) {
 
-    val items = arrayOf("예정된 예약", "완료된 예약")
+
 
     var binding : ReservationLayoutBinding? = null
+
+    var completedFragment : CompletedFragment? = null
+    var scheduledFragment : ScheduledFragment? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val reservationLayoutBinding = ReservationLayoutBinding.bind(view)
+
+        //프라그먼트 초기화
+        scheduledFragment = ScheduledFragment()
+        completedFragment = CompletedFragment()
 
         binding = reservationLayoutBinding
         val spinner = binding?.reservationSpinner
@@ -32,6 +39,7 @@ class ReservationFragment : Fragment(R.layout.reservation_layout) {
             spinner?.adapter = it
         }
 
+        //스피너 선택 리스너
         spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -39,11 +47,25 @@ class ReservationFragment : Fragment(R.layout.reservation_layout) {
                 position: Int,
                 id: Long
             ) {
-                TODO("Not yet implemented")
+
+
+                when(position){
+                    //첫 번째 아이템 선택
+                    0 -> requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.reservation_fragment_container, scheduledFragment!!)
+                        .commit()
+
+                    //두 번째 아이템 선택
+                    1 ->requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.reservation_fragment_container, completedFragment!!)
+                        .commit()
+                }
+
+
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
+
             }
 
         }

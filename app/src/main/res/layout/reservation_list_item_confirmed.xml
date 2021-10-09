@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_margin="8dp"
+    android:orientation="horizontal">
+
+
+    <ImageView
+        android:id="@+id/reservation_confirmed_profile"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_margin="8dp"
+
+        android:background="@drawable/background_circle"
+        android:backgroundTint="@color/gray_cc"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/reservation_name"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/designer_shop_confirmed"
+        app:layout_constraintStart_toEndOf="@id/reservation_confirmed_profile"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="김철수 디자이너" />
+
+    <TextView
+        android:id="@+id/designer_shop_confirmed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/reservation_name"
+        app:layout_constraintTop_toBottomOf="@id/reservation_name"
+        tools:text="오월 미용실" />
+
+    <TextView
+        android:id="@+id/reservation_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/designer_shop_confirmed"
+
+        app:layout_constraintTop_toBottomOf="@id/designer_shop_confirmed"
+        tools:text="오후 6:30~ 오후 7:30" />
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/ic_chevron_right"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,7 +20,7 @@ class PasswordInputFragment : Fragment(R.layout.password_input_fragment) {
     private var binding: PasswordInputFragmentBinding? = null
     private var password: String? = null
     private var email: String? = null
-    private var customerOrDesigner: String? = null
+    private var userOrDesigner: String? = null
 
     private lateinit var auth: FirebaseAuth    //파이어베이스 인증 사용
 
@@ -47,8 +47,8 @@ class PasswordInputFragment : Fragment(R.layout.password_input_fragment) {
                 email = it
                 binding?.trasmitTest?.text = it
             }
-            bundle.getString("customerOrDesigner")?.let {
-                customerOrDesigner = it
+            bundle.getString("userOrDesigner")?.let {
+                userOrDesigner = it
                 binding?.trasmitTest2?.text = it
             }
         }

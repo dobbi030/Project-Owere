@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import com.blooburn.owere.R
 import com.blooburn.owere.databinding.ReservationLayoutBinding
 
-class ReservationFragment : Fragment(R.layout.reservation_layout) {
+class   ReservationFragment : Fragment(R.layout.reservation_layout) {
 
 
 

@@ -14,7 +14,7 @@ class ChooseFragment : Fragment(R.layout.choose_fragment) {
 
     private var binding : ChooseFragmentBinding? = null
 
-    private var customerOrDesigner : String = "Customer" //스위치 고객 눌림
+    private var userOrDesigner : String = "User" //스위치 고객 눌림
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,7 +30,7 @@ class ChooseFragment : Fragment(R.layout.choose_fragment) {
             binding?.userButton?.setBackgroundResource(R.drawable.item_bg_on)
             binding?.designerButton?.setTextColor(resources.getColor(R.color.black))
             binding?.designerButton?.setBackgroundResource(R.drawable.item_bg_off)
-            customerOrDesigner = "Customer"
+            userOrDesigner = "User"
         }
         //디자이너 선택
         binding?.designerButton?.setOnClickListener {
@@ -38,14 +38,14 @@ class ChooseFragment : Fragment(R.layout.choose_fragment) {
             binding?.userButton?.setBackgroundResource(R.drawable.item_bg_off)
             binding?.designerButton?.setTextColor(resources.getColor(R.color.white))
             binding?.designerButton?.setBackgroundResource(R.drawable.item_bg_on)
-            customerOrDesigner = "Designer"
+            userOrDesigner = "Designer"
         }
 
         binding?.chooseKeepButton?.setOnClickListener {
 
 
-           val bundle = bundleOf("customerOrDesigner" to "${customerOrDesigner}") //어떤 키에 어떤 값으로 번들을 담겠다
-           setFragmentResult("customerOrDesigner", bundle) //request값을 가진 리스너에게 전송
+           val bundle = bundleOf("userOrDesigner" to "${userOrDesigner}") //어떤 키에 어떤 값으로 번들을 담겠다
+           setFragmentResult("userOrDesigner", bundle) //request값을 가진 리스너에게 전송
 
 
             var nextFragment = EmailInputFragment()

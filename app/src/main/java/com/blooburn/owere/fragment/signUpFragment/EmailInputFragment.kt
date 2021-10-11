@@ -16,7 +16,7 @@ class EmailInputFragment : Fragment(R.layout.email_input_fragment) {
     private var email: String? = null
 
 
-    private var customerOrDesigner: String? = null
+    private var userOrDesigner: String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,9 +30,9 @@ class EmailInputFragment : Fragment(R.layout.email_input_fragment) {
 
 
 
-        setFragmentResultListener("customerOrDesigner") { key, bundle ->
-            bundle.getString("customerOrDesigner")?.let {
-                customerOrDesigner = it
+        setFragmentResultListener("userOrDesigner") { key, bundle ->
+            bundle.getString("userOrDesigner")?.let {
+                userOrDesigner = it
             }
         }
 
@@ -44,7 +44,7 @@ class EmailInputFragment : Fragment(R.layout.email_input_fragment) {
 
             var bundle = Bundle()
             bundle.putString("email", email)
-            bundle.putString("customerOrDesigner", customerOrDesigner)
+            bundle.putString("userOrDesigner", userOrDesigner)
 
 //
             setFragmentResult("email",bundle)   //email 키를 가진 리스너에게 전달

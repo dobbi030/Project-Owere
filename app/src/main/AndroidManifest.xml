@@ -14,9 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Owere"
         android:usesCleartextTraffic="true">
+        <activity android:name=".activity.userMain.userReservation.ReservationCanceled"></activity>
         <activity android:name=".activity.userMain.userReservation.ReservationInfo">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activity.loginActivity.LoginActivityRegisterPhoneNumber"
@@ -35,16 +39,9 @@
         <activity android:name=".activity.signUpActivity.SetPositionActivity" />
         <activity android:name=".activity.userMain.UserMainActivity" />
         <activity android:name=".activity.loginActivity.LoginActivityTemp" />
-        <activity android:name=".activity.loginActivity.LoginActivityChoice"></activity>
+        <activity android:name=".activity.loginActivity.LoginActivityChoice" />
         <activity android:name=".activity.signUpActivity.SignUpActivity1_choice" />
-        <activity android:name=".activity.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
+        <activity android:name=".activity.MainActivity"></activity>
         <activity android:name=".activity.userMain.homeActivity.DesignerProfileActivity" />
 
         <meta-data

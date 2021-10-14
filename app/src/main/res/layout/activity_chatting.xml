@@ -20,37 +20,37 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
+            android:contentDescription="@string/explain_back_to_login_arrow"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_baseline_arrow_back_24"
-            app:tint="@color/black"
-            android:contentDescription="@string/explain_back_to_login_arrow" />
+            app:tint="@color/black" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text = "디자이너 김철수"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
             android:textSize="25dp"
             android:textStyle="bold"
-            android:textColor="@color/black"
-            android:layout_gravity="center"/>
+            tools:text="디자이너 김철수" />
 
 
     </LinearLayout>
 
     <View
 
-        app:layout_constraintTop_toBottomOf="@id/chatting_room_bar"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@color/gray_cc"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chatting_room_bar" />
 
     <androidx.recyclerview.widget.RecyclerView
-        app:layout_constraintDimensionRatio=""
         android:id="@+id/chatRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/message_send_container"
+        app:layout_constraintDimensionRatio=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/chatting_room_bar" />
@@ -60,40 +60,39 @@
         android:id="@+id/message_send_container"
         android:layout_width="0dp"
         android:layout_height="64dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/chatRecyclerView"
-        android:weightSum="10"
         android:background="@color/gray_cc"
-        >
+        android:orientation="horizontal"
+        android:weightSum="10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chatRecyclerView">
+
         <EditText
-            android:layout_gravity="center"
-            android:paddingVertical="5dp"
-            android:background="@drawable/round_black_fill_white_background"
-            android:hint="메시지를 입력하세요"
-            android:textSize="20dp"
-            android:layout_weight="10"
             android:id="@+id/messageEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="10"
+            android:background="@drawable/round_black_fill_white_background"
+            android:hint="메시지를 입력하세요"
+            android:paddingVertical="5dp"
+            android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/sendButton"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:layout_gravity="center"
-            android:background="@drawable/send_button"
             android:id="@+id/sendButton"
             android:layout_width="56dp"
             android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:background="@drawable/send_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
 
     </LinearLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

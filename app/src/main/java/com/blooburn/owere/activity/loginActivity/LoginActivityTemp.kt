@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import com.blooburn.owere.R
 import com.blooburn.owere.activity.userMain.UserMainActivity
+import com.blooburn.owere.util.myId
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
@@ -123,6 +124,10 @@ class LoginActivityTemp : AppCompatActivity() {
         currentUserDB.updateChildren(user)      //제일 상위에 DB 안에Users라는 List가 생기고 그안에
         // userId라는 항목으로 오브젝트가 생기고 그안에 user가 저장 유저는 userId를 가지고잇음
         //Users라는 키도 따로 빼둠.
+
+        // 패키지 변수에 유저 아이디 저장
+        myId = userId
+
         val intent = Intent(this, UserMainActivity::class.java) //유저 메인페이지로 이동.
         startActivity(intent)
         finish()

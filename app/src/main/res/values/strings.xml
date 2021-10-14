@@ -58,4 +58,8 @@
 
     <!--detailed_portfolio_fragment-->
     <string name="designer_home">디자이너 홈</string>
+
+    <!--user_designer_item-->
+    <!-- %[argument_index$]format_specifier -->
+    <string name="matching_rate">매칭률 %d%%</string>\
 </resources>

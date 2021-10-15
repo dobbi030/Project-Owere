@@ -15,18 +15,10 @@
             android:fitsSystemWindows="true"
             app:layout_scrollFlags="scroll">
 
-            <androidx.viewpager.widget.ViewPager
+            <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/view_pager_designer_profile"
                 android:layout_width="match_parent"
-                android:layout_height="360dp">
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="14dp"
-                    android:background="@color/gray_divider"
-                    android:paddingHorizontal="16dp" />
-            </androidx.viewpager.widget.ViewPager>
+                android:layout_height="360dp" />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar_designer_profile"

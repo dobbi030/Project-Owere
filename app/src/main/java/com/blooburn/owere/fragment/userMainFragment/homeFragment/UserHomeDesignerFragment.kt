@@ -47,8 +47,8 @@ class UserHomeDesignerFragment : Fragment(R.layout.user_home_designer_fragment) 
 
     /**
      * 즐겨찾는 디자이너 리스트 초기화
-     * 업데이트 or 화면 진입할 때마다 어댑터의 리스트에 접근해서 전체 삭제 -> 추가
-     * 즐겨찾는 디자이너가 많지 않을테니까 괜찮을 것 같다
+     * 업데이트 or 화면 진입할 때마다 어댑터의 리스트에 접근해서 전체 삭제 이후, 하나씩 추가
+     * 즐겨찾는 디자이너가 많지 않을테니 괜찮을 것 같다
      */
     private fun initFavoriteDesignerList() {
         favoriteDesignersReference.addValueEventListener(object: ValueEventListener{
@@ -57,13 +57,19 @@ class UserHomeDesignerFragment : Fragment(R.layout.user_home_designer_fragment) 
                 favoriteDesignerListAdapter.clearList()
 
                 for(dataSnapshot in snapshot.children){
-                    val designerInfo = dataSnapshot.getValue(UserDesignerItem::class.java)
+                    val designerInfo = dataSnapshot.getValue(UserDesignerItem::class.java)?.apply{
+                        if (dataSnapshot.key != null){
+                            designerId = dataSnapshot.key!! // 각 data의 key 값을 디자이너 아이디로 설정해두었습니다
+                        }
+                    }
+
+                    // 디자이너 데이터 하나씩 추가
                     if (designerInfo != null){
                         favoriteDesignerListAdapter.addData(designerInfo)
                     }
                 }
 
-                favoriteDesignerListAdapter.notifyDataSetChanged()
+                favoriteDesignerListAdapter.notifyDataSetChanged()  // 전부 추가하고 나서 어댑터에 알림
             }
 
             override fun onCancelled(error: DatabaseError) {

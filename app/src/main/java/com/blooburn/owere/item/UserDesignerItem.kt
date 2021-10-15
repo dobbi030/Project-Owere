@@ -1,6 +1,7 @@
 package com.blooburn.owere.item
 
 data class UserDesignerItem(
+    var designerId: String = "",
     val name: String = "Name",
     val reviewCount: Int = 0,
     val area: String = "",

@@ -1,6 +1,7 @@
 package com.blooburn.owere.adapter.userHome
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.blooburn.owere.R
+import com.blooburn.owere.activity.userMain.homeActivity.UserDesignerProfileActivity
+import com.blooburn.owere.databinding.ActivityUserDesignerProfileBinding
 import com.blooburn.owere.databinding.ItemUserDesignerListBinding
 import com.blooburn.owere.item.UserDesignerItem
 import com.bumptech.glide.Glide
@@ -34,7 +37,6 @@ class DesignerListAdapter() :
             binding.textUserDesignerRating.text = convertRatingToStar(designer.rating)
             bindProfileImage(this.itemView, binding.imageUserDesigner, designer.profileImagePath)
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -48,6 +50,16 @@ class DesignerListAdapter() :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(position)
+
+        // 디자이너 프로필 화면을 띄운다
+        holder.itemView.setOnClickListener{
+            // 디자이너 아이디 전달
+            val intent = Intent(holder.itemView.context, UserDesignerProfileActivity::class.java).apply{
+                putExtra("designerId", designerList[position].designerId)
+            }
+
+            holder.itemView.context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -110,8 +122,7 @@ class DesignerListAdapter() :
             return
         }
 
-        val imageReference = firebaseStorage.child(imageLocation)
-        Log.d("이미지", "$imageReference")
+        val imageReference = firebaseStorage.child(imageLocation)   // 프로필 이미지가 있는 스토리지 참조
 
         Glide.with(itemView.context)
             .load(imageReference)

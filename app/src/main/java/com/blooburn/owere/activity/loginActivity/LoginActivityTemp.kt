@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import com.blooburn.owere.R
 import com.blooburn.owere.activity.userMain.UserMainActivity
-import com.blooburn.owere.util.myId
+//import com.blooburn.owere.util.myId
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
@@ -126,7 +126,7 @@ class LoginActivityTemp : AppCompatActivity() {
         //Users라는 키도 따로 빼둠.
 
         // 패키지 변수에 유저 아이디 저장
-        myId = userId
+//        myId = userId
 
         val intent = Intent(this, UserMainActivity::class.java) //유저 메인페이지로 이동.
         startActivity(intent)

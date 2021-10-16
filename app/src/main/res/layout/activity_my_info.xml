@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.userMain.mypageActivity.MyInfoActivity">
+
+    <ImageView
+        android:id="@+id/activity_myinfo_backbutton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="16dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        android:layout_marginTop="16dp"
+        app:tint="@color/black" />
+
+    <TextView
+        android:id="@+id/header_myinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="내 정보"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="19dp"
+        android:textStyle="bold"
+        />
+
+    <ImageView
+        android:id="@+id/myinfo_profile_image"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="31dp"
+        android:src="@drawable/button_background_purple"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header_myinfo"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        />
+
+
+    <TextView
+        android:text="프로필 사진 바꾸기"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myinfo_profile_image"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:id="@+id/header_memberinfo"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="회원정보"
+        android:layout_marginLeft="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_myinfo_backbutton"
+        android:layout_marginTop="156dp"
+        android:textStyle="bold"
+        />
+
+    <View
+        android:id="@+id/myinfo_line1"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#E8E8E8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_memberinfo"
+        android:layout_marginTop="9dp"
+        android:layout_marginHorizontal="16dp"
+        />
+
+    <TextView
+        android:id="@+id/header_myinfo_name"
+        android:layout_marginLeft="16dp"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="이름"
+        android:textColor="#939393"
+        app:layout_constraintTop_toBottomOf="@id/myinfo_line1"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="25dp"/>
+
+    <TextView
+        android:id="@+id/myinfo_name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        tools:text="이희원"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="@+id/header_myinfo_name"
+        app:layout_constraintBottom_toBottomOf="@+id/header_myinfo_name"
+        app:layout_constraintStart_toEndOf="@+id/header_myinfo_name"
+        android:layout_marginLeft="16dp"
+        />
+
+
+
+    <TextView
+        android:id="@+id/header_myinfo_phonenumber"
+        android:layout_marginLeft="16dp"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="연락처"
+        android:textColor="#939393"
+        app:layout_constraintTop_toBottomOf="@id/header_myinfo_name"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="25dp"/>
+
+    <TextView
+        android:id="@+id/myinfo_phonenumber_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        tools:text="010-2909-5892"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="@+id/header_myinfo_phonenumber"
+        app:layout_constraintBottom_toBottomOf="@+id/header_myinfo_phonenumber"
+        app:layout_constraintStart_toEndOf="@+id/header_myinfo_phonenumber"
+        android:layout_marginLeft="16dp"
+        />
+
+
+
+    <TextView
+        android:id="@+id/header_myinfo_gender"
+        android:layout_marginLeft="16dp"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="성별"
+        android:textColor="#939393"
+        app:layout_constraintTop_toBottomOf="@id/header_myinfo_phonenumber"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="25dp"/>
+
+    <TextView
+        android:id="@+id/myinfo_gender_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        tools:text="여성"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="@+id/header_myinfo_gender"
+        app:layout_constraintBottom_toBottomOf="@+id/header_myinfo_gender"
+        app:layout_constraintStart_toEndOf="@+id/header_myinfo_gender"
+        android:layout_marginLeft="16dp"
+        />
+
+    <TextView
+        android:id="@+id/header_myinfo_birth"
+        android:layout_marginLeft="16dp"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="생일"
+        android:textColor="#939393"
+        app:layout_constraintTop_toBottomOf="@id/header_myinfo_gender"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="25dp"/>
+
+    <TextView
+        android:id="@+id/myinfo_birth_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        tools:text="생일"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="@+id/header_myinfo_birth"
+        app:layout_constraintBottom_toBottomOf="@+id/header_myinfo_birth"
+        app:layout_constraintStart_toEndOf="@+id/header_myinfo_birth"
+        android:layout_marginLeft="16dp"
+        />
+
+    <TextView
+        android:id="@+id/myinfo_withdrawal_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="회원탈퇴"
+        android:textColor="#939393"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="21dp"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    <View
+        android:id="@+id/myinfo_line2"
+        android:layout_width="0.5dp"
+        android:layout_height="12dp"
+        android:background="#939393"
+        app:layout_constraintEnd_toStartOf="@+id/myinfo_withdrawal_button"
+        android:layout_marginRight="8dp"
+        app:layout_constraintTop_toTopOf="@id/myinfo_withdrawal_button"/>
+
+
+    <TextView
+        android:id="@+id/myinfo_logout_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="로그아웃"
+        android:textColor="#939393"
+        app:layout_constraintEnd_toStartOf="@+id/myinfo_line2"
+        android:layout_marginRight="8dp"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/myinfo_line2"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

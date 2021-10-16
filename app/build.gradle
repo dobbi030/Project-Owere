@@ -75,7 +75,7 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
 
 
-    //카카오 맵 api시작 
+    //카카오 맵 api시작
     implementation files('libs/libDaumMapAndroid.jar')
 
     // Glide

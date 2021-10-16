@@ -7,6 +7,7 @@ import com.blooburn.owere.R
 import com.blooburn.owere.fragment.userMainFragment.browseFragment.BrowseFragment
 import com.blooburn.owere.fragment.userMainFragment.chattingFragment.ChattingFragmet
 import com.blooburn.owere.fragment.userMainFragment.homeFragment.UserHomeFragment
+import com.blooburn.owere.fragment.userMainFragment.myPage.MyPageFragment
 import com.blooburn.owere.fragment.userMainFragment.reservationFragment.ReservationFragment
 import com.blooburn.owere.item.DatabaseChild.Companion.DB_USERS
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -42,6 +43,7 @@ class UserMainActivity : AppCompatActivity() {
         val browseFragment = BrowseFragment()
         val chattingFragment = ChattingFragmet()
         val reservationFragment = ReservationFragment()
+        val myPageFragment = MyPageFragment()
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         replaceFragment(homeFragment)   // HomeFragment에서 시작한다
@@ -53,7 +55,7 @@ class UserMainActivity : AppCompatActivity() {
                 R.id.browse -> replaceFragment(browseFragment)
                 R.id.chatting -> replaceFragment(chattingFragment)
                 R.id.reservation -> replaceFragment(reservationFragment)
-                else -> {}
+                else -> {replaceFragment(myPageFragment)}
             }
 
             true

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/shopImage"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="26dp"
+        android:background="@color/gray_cc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/shopName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@id/shopImage"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="오월 미용실" />
+
+    <ImageView
+        android:id="@+id/starImage"
+        android:layout_width="15dp"
+        android:layout_height="14dp"
+        android:layout_marginTop="3dp"
+        android:src="@drawable/ic_baseline_star_24"
+        app:layout_constraintStart_toStartOf="@id/shopName"
+        app:layout_constraintTop_toBottomOf="@id/shopName" />
+
+    <TextView
+        android:id="@+id/rating_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/starImage"
+        app:layout_constraintStart_toEndOf="@id/starImage"
+        app:layout_constraintTop_toTopOf="@id/starImage"
+        tools:text="4.3" />
+
+    <ImageView
+        android:id="@+id/review_sign"
+        android:layout_width="15dp"
+        android:layout_height="14dp"
+        android:layout_marginLeft="8dp"
+
+        android:src="@drawable/ic_message_balloon"
+        app:layout_constraintBottom_toBottomOf="@id/rating_text"
+        app:layout_constraintStart_toEndOf="@id/rating_text"
+        app:layout_constraintTop_toTopOf="@id/rating_text" />
+
+    <TextView
+        android:id="@+id/review_count_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/review_sign"
+        app:layout_constraintStart_toEndOf="@id/review_sign"
+        app:layout_constraintTop_toTopOf="@id/review_sign"
+        tools:text="43" />
+
+    <TextView
+        android:id="@+id/shop_address_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:textColor="@color/black"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@id/starImage"
+        app:layout_constraintTop_toBottomOf="@id/starImage"
+        tools:text="덕소리 삼익상가 1층" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="11dp"
+        android:background="#CECECE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/shopImage" />
+
+    <ImageView
+        android:id="@+id/like_image"
+        android:layout_width="17dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="51dp"
+        android:layout_marginRight="20dp"
+
+        android:src="@drawable/ic_favorite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#00CCFF" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

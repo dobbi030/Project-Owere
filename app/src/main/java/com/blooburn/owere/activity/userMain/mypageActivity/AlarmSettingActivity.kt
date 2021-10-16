@@ -2,27 +2,17 @@ package com.blooburn.owere.activity.userMain.mypageActivity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.blooburn.owere.R
 
-// 마이페이지 -> 내 정보 액티비티
-class MyInfoActivity : AppCompatActivity() {
+class AlarmSettingActivity : AppCompatActivity() {
 
     private val gobackButton by lazy {
-        findViewById<ConstraintLayout>(R.id.goback_button)
+        findViewById<ConstraintLayout>(R.id.alarmsetting_goback_button)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_my_info)
-
-        gobackButton.setOnClickListener {
-            finish()
-        }
-
-
-
-
+        setContentView(R.layout.activity_alarm_setting)
 
     }
 }

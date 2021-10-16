@@ -14,14 +14,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Owere"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.userMain.mypageActivity.InterestActivity">
-
-        </activity>
+        <activity android:name=".activity.userMain.mypageActivity.SettingActivity"></activity>
+        <activity android:name=".activity.userMain.mypageActivity.IntroduceActivity" />
+        <activity android:name=".activity.userMain.mypageActivity.AlarmSettingActivity" />
+        <activity android:name=".activity.userMain.mypageActivity.QnaActivity" />
+        <activity android:name=".activity.userMain.mypageActivity.EventPromotionActivity" />
+        <activity android:name=".activity.userMain.mypageActivity.NoticeActivity" />
+        <activity android:name=".activity.userMain.mypageActivity.InterestActivity" />
         <activity android:name=".activity.userMain.mypageActivity.MyInfoActivity" />
         <activity android:name=".activity.userMain.userReservation.ReservationCanceled" />
-        <activity android:name=".activity.userMain.userReservation.ReservationInfo">
-
-        </activity>
+        <activity android:name=".activity.userMain.userReservation.ReservationInfo" />
         <activity
             android:name=".activity.loginActivity.LoginActivityRegisterPhoneNumber"
             android:exported="true" />
@@ -41,15 +43,13 @@
         <activity android:name=".activity.loginActivity.LoginActivityTemp" />
         <activity android:name=".activity.loginActivity.LoginActivityChoice" />
         <activity android:name=".activity.signUpActivity.SignUpActivity1_choice" />
-        <activity android:name=".activity.MainActivity" >
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
         <activity android:name=".activity.userMain.homeActivity.UserDesignerProfileActivity" />
 
         <meta-data

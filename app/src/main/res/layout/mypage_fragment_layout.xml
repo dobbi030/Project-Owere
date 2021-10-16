@@ -76,9 +76,9 @@
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                app:layout_constraintHorizontal_chainStyle="spread"
-
                 app:layout_constraintEnd_toStartOf="@id/mypage_interest_button"
+
+                app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/mypage_profile_image" />
 
@@ -95,11 +95,10 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/mypage_myreview_button"
 
-                app:layout_constraintStart_toEndOf="@id/mypage_myreview_button"
-
                 app:layout_constraintEnd_toStartOf="@id/mypage_mygrade_button"
-                app:layout_constraintTop_toTopOf="@id/mypage_myreview_button"
-                 />
+
+                app:layout_constraintStart_toEndOf="@id/mypage_myreview_button"
+                app:layout_constraintTop_toTopOf="@id/mypage_myreview_button" />
 
             <TextView
                 android:id="@+id/mypage_mygrade_button"
@@ -112,10 +111,9 @@
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/mypage_interest_button"
-                app:layout_constraintStart_toEndOf="@+id/mypage_interest_button"
                 app:layout_constraintEnd_toStartOf="@id/mypage_coupon_button"
-                app:layout_constraintTop_toTopOf="@id/mypage_interest_button"
-                 />
+                app:layout_constraintStart_toEndOf="@+id/mypage_interest_button"
+                app:layout_constraintTop_toTopOf="@id/mypage_interest_button" />
 
             <TextView
                 android:id="@+id/mypage_coupon_button"
@@ -126,17 +124,292 @@
                 android:text="쿠폰"
                 android:textColor="@color/black"
 
-                app:layout_constraintEnd_toEndOf="parent"
-
                 android:textSize="12sp"
+
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/mypage_mygrade_button"
+                app:layout_constraintEnd_toEndOf="parent"
 
                 app:layout_constraintStart_toEndOf="@+id/mypage_mygrade_button"
 
                 app:layout_constraintTop_toTopOf="@id/mypage_mygrade_button" />
 
+            <View
+                android:id="@+id/mypage_line1"
+                android:layout_width="0dp"
+                android:layout_height="7dp"
+                android:layout_marginTop="112dp"
+                android:background="#EDEDED"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mypage_myreview_button"
 
+                />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/mypage_notice_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mypage_line1">
+
+                <TextView
+                    android:id="@+id/mypage_header_notice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="20dp"
+                    android:text="공지사항"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/mypage_notice_button"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/ic_chevron_right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_marginTop="20dp"
+                android:id="@+id/mypage_line2"
+                android:layout_width="0dp"
+                android:background="#EDEDED"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mypage_notice_container"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+
+                android:id="@+id/mypage_event_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mypage_line2">
+
+                <TextView
+                    android:id="@+id/mypage_event_notice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="20dp"
+                    android:text="이벤트/프로모션"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/mypage_event_button"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/ic_chevron_right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_marginTop="20dp"
+                android:id="@+id/mypage_line3"
+                android:layout_width="0dp"
+                android:background="#EDEDED"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mypage_event_container"/>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+
+                android:id="@+id/mypage_qna_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mypage_line3">
+
+                <TextView
+                    android:id="@+id/mypage_qna_notice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="20dp"
+                    android:text="문의하기"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/mypage_qna_button"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/ic_chevron_right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_marginTop="20dp"
+                android:id="@+id/mypage_line4"
+                android:layout_width="0dp"
+                android:background="#EDEDED"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mypage_qna_container"/>
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+
+                android:id="@+id/mypage_alarmsetting_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mypage_line4">
+
+                <TextView
+                    android:id="@+id/mypage_alarmsetting_notice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="20dp"
+                    android:text="알림설정"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/mypage_alarmsetting_button"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/ic_chevron_right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <View
+                android:layout_marginTop="20dp"
+                android:id="@+id/mypage_line5"
+                android:layout_width="0dp"
+                android:background="#EDEDED"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mypage_alarmsetting_container"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+
+                android:id="@+id/mypage_setting_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mypage_line5">
+
+                <TextView
+                    android:id="@+id/mypage_setting_notice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="20dp"
+                    android:text="환경설정"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/mypage_setting_button"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/ic_chevron_right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_marginTop="20dp"
+                android:id="@+id/mypage_line6"
+                android:layout_width="0dp"
+                android:background="#EDEDED"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mypage_setting_container"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+
+                android:id="@+id/mypage_introduce_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mypage_line6">
+
+                <TextView
+                    android:id="@+id/mypage_introduce_notice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="20dp"
+                    android:text="O’were(오월) 소개"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/mypage_introduce_button"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/ic_chevron_right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_marginTop="20dp"
+                android:id="@+id/mypage_line7"
+                android:layout_width="0dp"
+                android:background="#EDEDED"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mypage_introduce_container"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

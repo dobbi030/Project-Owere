@@ -91,13 +91,25 @@
         app:layout_constraintTop_toBottomOf="@id/shopImage" />
 
     <ImageView
-        android:id="@+id/like_image"
+        android:id="@+id/shop_like_image"
         android:layout_width="17dp"
         android:layout_height="16dp"
         android:layout_marginTop="51dp"
         android:layout_marginRight="20dp"
 
         android:src="@drawable/ic_favorite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#00CCFF" />
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/shop_unlike_image"
+        android:layout_width="17dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="51dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/ic_unliked_heart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="#00CCFF" />

@@ -1,6 +1,8 @@
 package com.blooburn.owere.adapter.myPage
 
 import android.view.LayoutInflater
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -33,10 +35,16 @@ class InterestDesignerAdpater :
             var designerName = favoriteDesigner.name
 //                //디자이너 이름 표시
             binding.favoriteDesignerName.text = designerName
-//                binding.chattinglistLastmessage.text = chatLastMessage
-////            프로필 표시 필요
-//                binding.chattinglistProfile
-////            시간 표시 필요
+
+            //하트리스너 누르면 좋아요 취소
+            binding.designerLiked.setOnClickListener {
+                binding.designerLiked.visibility = GONE
+                binding.designerUnliked.visibility = VISIBLE
+            }
+            binding.designerUnliked.setOnClickListener {
+                binding.designerUnliked.visibility = GONE
+                binding.designerLiked.visibility = VISIBLE
+            }
 //
 //
         }

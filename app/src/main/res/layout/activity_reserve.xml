@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.userMain.userReservation.ReserveActivity">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            >
+
+            <ImageView
+                android:id="@+id/reserve_back_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_baseline_arrow_back_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/header_reserve"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="19dp"
+                android:gravity="center"
+                android:text="예약하기"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/reserve_designer_profile"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="36dp"
+                android:src="@drawable/background_circle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/header_reserve"
+                tools:background="@color/gray_cc" />
+
+            <TextView
+                android:id="@+id/reserve_designer_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="53dp"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/reserve_designer_profile"
+                app:layout_constraintTop_toBottomOf="@id/header_reserve"
+                tools:text="김철수 디자이너" />
+
+            <ImageView
+                android:id="@+id/room_mark"
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:layout_marginTop="3dp"
+                android:src="@drawable/ic_baseline_room_24"
+                app:layout_constraintStart_toStartOf="@id/reserve_designer_name"
+                app:layout_constraintTop_toBottomOf="@id/reserve_designer_name" />
+
+            <TextView
+                android:id="@+id/reserve_area"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="4dp"
+                android:textColor="#939393"
+                android:textSize="10sp"
+                app:layout_constraintStart_toEndOf="@id/room_mark"
+                app:layout_constraintTop_toBottomOf="@id/reserve_designer_name"
+                tools:text="경기도 하남시 미사동" />
+
+            <TextView
+                android:id="@+id/reserve_designer_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="★★★★☆"
+                android:textColor="@color/purple_button"
+                android:textSize="10sp"
+                app:layout_constraintStart_toEndOf="@id/reserve_area"
+                app:layout_constraintTop_toTopOf="@id/reserve_area" />
+
+            <TextView
+                android:id="@+id/header_choose_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="34dp"
+                android:text="날짜 선택"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reserve_designer_profile" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/reservation_calendar_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/header_choose_date">
+
+                <CalendarView
+                    android:id="@+id/reserve_calendarView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.488"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/header_choose_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="시간 선택"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reservation_calendar_container" />
+
+
+            <View
+                android:id="@+id/reserve_line1"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/header_choose_time"
+                android:background="#E8E8E8"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="6dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="오전"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reserve_line1"
+                android:layout_marginTop="13dp"
+                android:layout_marginLeft="16dp"
+                android:textSize="14sp"
+                android:textColor="#636363"
+                />
+            
+            <TextView
+                android:layout_width="76dp"
+                android:layout_height="33dp"
+                android:text="08:00"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reserve_line1"
+                android:layout_marginTop="38dp"
+                android:layout_marginLeft="16dp"
+                android:gravity="center"
+                android:background="@drawable/rounded_black_square_background"/>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="오후"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reserve_line1"
+                android:layout_marginTop="128dp"
+                android:layout_marginLeft="16dp"
+                android:textSize="14sp"
+                android:textColor="#636363"
+                />
+
+            <TextView
+                android:id="@+id/reserve_time_keepbutton"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:text="계속하기"
+                android:textColor="@color/white"
+                android:background="@drawable/button_background_purple"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginHorizontal="16dp"
+                app:layout_constraintTop_toBottomOf="@id/reserve_line1"
+                android:layout_marginTop="310dp"
+                android:layout_marginBottom="21dp"
+                android:gravity="center"/>
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,6 +19,12 @@ class MyPageFragment : Fragment(R.layout.mypage_fragment_layout) {
         binding = myPageFragmentLayoutBinding
 
 
+        initButton()
+
+
+    }
+
+    private fun initButton(){
         binding?.mypageInterestButton!!.setOnClickListener {
             var intent = Intent(requireContext(), InterestActivity::class.java)
             startActivity(intent)
@@ -44,6 +50,7 @@ class MyPageFragment : Fragment(R.layout.mypage_fragment_layout) {
             startActivity(intent)
 
         }
+
     }
 }
 

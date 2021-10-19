@@ -43,17 +43,17 @@ class ChattingDesignerFragment : Fragment(R.layout.layout_chatting_designer_frag
         binding = chattingDesignerFragmentBinding
 
         //리스트에서 채팅방 클릭시 해당 채팅방으로 이동
-        chatListAdapter = ChatListAdapter(onItemClicked = {chatListItem ->
+        chatListAdapter = ChatListAdapter { chatListItem ->
             //채팅방으로 이동하는 코드
             //context에 nullcheck를 걸어둔다
-            context?.let{
+            context?.let {
                 val intent = Intent(it, ChattingActivity::class.java)
                 intent.putExtra("chatRoomId", chatListItem.chatRoomId)
                 intent.putExtra("userName", chatListItem.myName.toString())
                 startActivity(intent)
             }
 
-        })
+        }
 
         binding?.chatListRecyclerView?.adapter = chatListAdapter
         binding?.chatListRecyclerView?.layoutManager =LinearLayoutManager(context)

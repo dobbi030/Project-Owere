@@ -5,18 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.blooburn.owere.R
-
-import com.blooburn.owere.databinding.ItemChatMychatBinding
-import com.blooburn.owere.databinding.ItemChatOpponentBinding
-
 import com.blooburn.owere.item.ChatItem
-
-
 import com.google.firebase.auth.FirebaseAuth
 
 

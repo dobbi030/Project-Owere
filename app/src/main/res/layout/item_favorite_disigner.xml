@@ -36,10 +36,24 @@
 
 
     <ImageView
+
+        android:id="@+id/designer_liked"
         android:layout_width="17dp"
         android:layout_height="16dp"
         android:layout_marginRight="20dp"
         android:src="@drawable/ic_favorite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#00CCFF" />
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/designer_unliked"
+        android:layout_width="17dp"
+        android:layout_height="16dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/ic_unliked_heart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

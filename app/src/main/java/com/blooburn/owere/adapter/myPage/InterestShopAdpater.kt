@@ -1,6 +1,7 @@
 package com.blooburn.owere.adapter.myPage
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -29,12 +30,6 @@ class InterestShopAdpater:
 //                //마지막 메시지
 //                var chatLastMessage = chatListItem.lastMessage
 
-
-//            val area: String,
-//            val name: String,
-//            val profileImagePath: String,
-//            val rating: Double,
-//            val reviewCount: Int
             var myShopName = favoriteShop.name
             var myshopArea = favoriteShop.area
             var myShopRating = favoriteShop.rating
@@ -44,6 +39,17 @@ class InterestShopAdpater:
             binding.shopAddressText.text = myshopArea
             binding.reviewCountText.text = myShopReviewCount.toString()
             binding.ratingText.text = myShopRating.toString()
+
+            //하트리스너 누르면 좋아요 취소
+            binding.shopLikeImage.setOnClickListener {
+                binding.shopLikeImage.visibility = View.GONE
+                binding.shopUnlikeImage.visibility = View.VISIBLE
+            }
+            binding.shopUnlikeImage.setOnClickListener {
+                binding.shopUnlikeImage.visibility = View.GONE
+                binding.shopLikeImage.visibility = View.VISIBLE
+            }
+//
 
 //                binding.chattinglistLastmessage.text = chatLastMessage
 ////            프로필 표시 필요

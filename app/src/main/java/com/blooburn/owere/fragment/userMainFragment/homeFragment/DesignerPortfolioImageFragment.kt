@@ -18,6 +18,7 @@ class DesignerPortfolioImageFragment(private val imagePath: StorageReference): F
         binding = DesignerPortfolioImageFragmentBinding.bind(view)
         Glide.with(this)
             .load(imagePath)
+            .centerCrop()
             .error(R.drawable.icon_person_24)
             .into(binding?.imageViewDesignerProfile!!)
     }

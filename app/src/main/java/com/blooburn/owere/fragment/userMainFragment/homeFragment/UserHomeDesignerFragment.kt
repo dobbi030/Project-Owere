@@ -57,15 +57,15 @@ class UserHomeDesignerFragment : Fragment(R.layout.user_home_designer_fragment) 
                 favoriteDesignerListAdapter.clearList()
 
                 for(dataSnapshot in snapshot.children){
-                    val designerInfo = dataSnapshot.getValue(UserDesignerItem::class.java)?.apply{
+                    val designerData = dataSnapshot.getValue(UserDesignerItem::class.java)?.apply{
                         if (dataSnapshot.key != null){
                             designerId = dataSnapshot.key!! // 각 data의 key 값을 디자이너 아이디로 설정해두었습니다
                         }
                     }
 
                     // 디자이너 데이터 하나씩 추가
-                    if (designerInfo != null){
-                        favoriteDesignerListAdapter.addData(designerInfo)
+                    if (designerData != null){
+                        favoriteDesignerListAdapter.addData(designerData)
                     }
                 }
 

@@ -7,32 +7,35 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.Owere.DesignerProfileAppbar">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:layout_scrollFlags="scroll">
+            app:contentScrim="@color/white"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/view_pager_designer_profile"
+                android:id="@+id/view_pager_user_designer_profile"
                 android:layout_width="match_parent"
-                android:layout_height="360dp" />
+                android:layout_height="360dp"
+                app:layout_collapseMode="parallax" />
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar_designer_profile"
+                android:id="@+id/toolbar_user_designer_profile"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@android:color/transparent"
                 android:minHeight="?attr/actionBarSize"
-                app:navigationIcon="@drawable/ic_close"
+                app:layout_collapseMode="pin"
                 app:menu="@menu/toolbar_designer_profile"
-                app:layout_collapseMode="pin" />
+                app:navigationIcon="@drawable/ic_close" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
@@ -43,10 +46,12 @@
             android:orientation="vertical">
 
             <include
+                android:id="@+id/view_user_designer_profile_information"
                 layout="@layout/item_user_designer_list"
                 android:paddingHorizontal="16dp" />
 
             <TextView
+                android:id="@+id/text_user_designer_profile_introduction"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="23dp"
@@ -82,19 +87,19 @@
                 android:textStyle="bold" />
 
             <include
-                android:id="@+id/view_designer_profile_menu1"
+                android:id="@+id/view_user_designer_profile_menu1"
                 layout="@layout/item_price_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <include
-                android:id="@+id/view_designer_profile_menu2"
+                android:id="@+id/view_user_designer_profile_menu2"
                 layout="@layout/item_price_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <include
-                android:id="@+id/view_designer_profile_menu3"
+                android:id="@+id/view_user_designer_profile_menu3"
                 layout="@layout/item_price_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -107,7 +112,7 @@
                 android:paddingHorizontal="13dp" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_designer_profile_prices"
+                android:id="@+id/button_user_designer_profile_prices"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
@@ -132,7 +137,7 @@
                 android:layout_marginTop="25dp">
 
                 <TextView
-                    android:id="@+id/text_designer_profile_review_please"
+                    android:id="@+id/text_user_designer_profile_review_please"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/text_review_please"
@@ -143,30 +148,30 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/text_designer_profile_review_star"
+                    android:id="@+id/text_user_designer_profile_review_star"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="6dp"
                     android:text="★★★★☆"
                     android:textColor="@color/purple_button"
                     android:textSize="24sp"
-                    app:layout_constraintEnd_toStartOf="@id/text_designer_profile_review_rating"
+                    app:layout_constraintEnd_toStartOf="@id/text_user_designer_profile_review_rating"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text_designer_profile_review_please" />
+                    app:layout_constraintTop_toBottomOf="@id/text_user_designer_profile_review_please" />
 
                 <TextView
-                    android:id="@+id/text_designer_profile_review_rating"
+                    android:id="@+id/text_user_designer_profile_review_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4.0"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@id/text_designer_profile_review_star"
+                    app:layout_constraintBottom_toBottomOf="@id/text_user_designer_profile_review_star"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/text_designer_profile_review_star"
-                    app:layout_constraintTop_toTopOf="@id/text_designer_profile_review_star" />
+                    app:layout_constraintStart_toEndOf="@id/text_user_designer_profile_review_star"
+                    app:layout_constraintTop_toTopOf="@id/text_user_designer_profile_review_star" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
@@ -179,6 +184,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
+                android:layout_marginTop="16dp"
                 android:orientation="horizontal"
                 android:paddingHorizontal="16dp">
 
@@ -192,7 +198,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/text_designer_profile_review_count"
+                    android:id="@+id/text_user_designer_profile_review_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
@@ -202,49 +208,63 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_user_designer_profile_review_images"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
-                android:orientation="horizontal"
-                android:paddingHorizontal="16dp">
+                android:paddingHorizontal="8dp">
 
                 <ImageButton
-                    android:id="@+id/image_button_designer_profile_review1"
+                    android:id="@+id/image_button_user_designer_profile_review0"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_height="0dp"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="h, 1:1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <ImageButton
-                    android:id="@+id/image_button_designer_profile_review2"
+                    android:id="@+id/image_button_user_designer_profile_review1"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_height="0dp"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="h, 1:1"
+                    app:layout_constraintStart_toEndOf="@id/image_button_user_designer_profile_review0"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <ImageButton
-                    android:id="@+id/image_button_designer_profile_review3"
+                    android:id="@+id/image_button_user_designer_profile_review2"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_height="0dp"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="h, 1:1"
+                    app:layout_constraintStart_toEndOf="@id/image_button_user_designer_profile_review1"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <ImageButton
-                    android:id="@+id/image_button_designer_profile_more"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:id="@+id/image_button_user_designer_profile_review3"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_height="0dp"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="h, 1:1"
+                    app:layout_constraintStart_toEndOf="@id/image_button_user_designer_profile_review2"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:srcCompat="@tools:sample/avatars" />
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -252,20 +272,27 @@
                 android:layout_marginTop="25dp"
                 android:background="@color/gray_divider" />
 
-            <include
-                android:id="@+id/view_designer_profile_review1"
-                layout="@layout/item_review" />
+            <LinearLayout
+                android:id="@+id/layout_user_designer_profile_reviews"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <include
-                android:id="@+id/view_designer_profile_review2"
-                layout="@layout/item_review" />
+                <include
+                    android:id="@+id/view_user_designer_profile_review1"
+                    layout="@layout/item_review" />
 
-            <include
-                android:id="@+id/view_designer_profile_review3"
-                layout="@layout/item_review" />
+                <include
+                    android:id="@+id/view_user_designer_profile_review2"
+                    layout="@layout/item_review" />
+
+                <include
+                    android:id="@+id/view_user_designer_profile_review3"
+                    layout="@layout/item_review" />
+            </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_designer_profile_reviews"
+                android:id="@+id/button_user_designer_profile_reviews"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
@@ -282,9 +309,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
                 android:layout_marginTop="23dp"
-                android:background="@color/gray_divider" />
+                android:background="@color/gray_divider"
+                android:layout_marginBottom="92dp"/>
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"

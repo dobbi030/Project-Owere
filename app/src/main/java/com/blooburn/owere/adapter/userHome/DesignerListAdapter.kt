@@ -13,12 +13,13 @@ import com.blooburn.owere.activity.userMain.homeActivity.UserDesignerProfileActi
 import com.blooburn.owere.databinding.ActivityUserDesignerProfileBinding
 import com.blooburn.owere.databinding.ItemUserDesignerListBinding
 import com.blooburn.owere.item.UserDesignerItem
+import com.blooburn.owere.util.DesignerProfileHandler
 import com.bumptech.glide.Glide
 import com.firebase.ui.storage.images.FirebaseImageLoader
 import com.google.firebase.storage.FirebaseStorage
 
-class DesignerListAdapter() :
-    RecyclerView.Adapter<DesignerListAdapter.ViewHolder>() {
+class DesignerListAdapter :
+    RecyclerView.Adapter<DesignerListAdapter.ViewHolder>(), DesignerProfileHandler {
 
     private val designerList = mutableListOf<UserDesignerItem>()
     private val firebaseStorage = FirebaseStorage.getInstance().reference
@@ -34,8 +35,8 @@ class DesignerListAdapter() :
             binding.textUserDesignerReviewCount.text = buildReviewCountString(designer.reviewCount)
             binding.textUserDesignerMatching.text =
                 this.itemView.context.getString(R.string.matching_rate, designer.matchingRate)
-            binding.textUserDesignerRating.text = convertRatingToStar(designer.rating)
-            bindProfileImage(this.itemView, binding.imageUserDesigner, designer.profileImagePath)
+            binding.textUserDesignerStar.text = convertRatingToStar(designer.rating)
+            bindProfileImage(this.itemView, binding.imageUserDesigner, designer.profileImagePath, true)
         }
     }
 
@@ -53,9 +54,9 @@ class DesignerListAdapter() :
 
         // 디자이너 프로필 화면을 띄운다
         holder.itemView.setOnClickListener{
-            // 디자이너 아이디 전달
+            // 디자이너 객체 전달
             val intent = Intent(holder.itemView.context, UserDesignerProfileActivity::class.java).apply{
-                putExtra("designerId", designerList[position].designerId)
+                putExtra("designerData", designerList[position])
             }
 
             holder.itemView.context.startActivity(intent)
@@ -72,61 +73,5 @@ class DesignerListAdapter() :
     // 다자이너 아이템 추가
     fun addData(designerInfo: UserDesignerItem){
         designerList.add(designerInfo)
-    }
-
-    /**
-     * 리뷰 개수 텍스트 반환
-     */
-    private fun buildReviewCountString(count: Int): String {
-        return StringBuilder()
-            .append("리뷰(")
-            .append(
-                when (count > 50) {
-                    true -> "50+)"
-                    else -> "$count)"
-                }
-            )
-            .toString()
-    }
-
-    /**
-     * 평점 -> 별점 변환
-     */
-    private fun convertRatingToStar(rating: Float): String {
-        return when{
-            rating < 0 -> ""
-            0 <= rating && rating < 1  -> "☆"
-            1 <= rating && rating < 1.5 -> "★☆"
-            1.5 <= rating && rating < 2 -> "★★"
-            2 <= rating && rating < 2.5 -> "★★☆"
-            2.5 <= rating && rating < 3 -> "★★★"
-            3 <= rating && rating < 3.5 -> "★★★☆"
-            3.5 <= rating && rating < 4 -> "★★★★"
-            4 <= rating && rating < 4.5 -> "★★★★☆"
-            else -> "★★★★★"
-        }
-    }
-
-    /**
-     * 프로필 이미지 적용
-     */
-    private fun bindProfileImage(itemView: View, imageView: ImageView, imageLocation: String){
-
-        // 임시 예외 처리
-        if (imageLocation.isEmpty()){
-            Glide.with(itemView.context)
-                .load(R.drawable.icon_person_24)
-                .circleCrop()
-                .into(imageView)
-
-            return
-        }
-
-        val imageReference = firebaseStorage.child(imageLocation)   // 프로필 이미지가 있는 스토리지 참조
-
-        Glide.with(itemView.context)
-            .load(imageReference)
-            .circleCrop()
-            .into(imageView)
     }
 }

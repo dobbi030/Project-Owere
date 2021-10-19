@@ -56,7 +56,7 @@
         app:layout_constraintTop_toTopOf="@id/text_item_review_rating" />
 
     <TextView
-        android:id="@+id/text_item_review_contents"
+        android:id="@+id/text_item_review_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
@@ -74,7 +74,7 @@
         android:textSize="10sp"
         android:layout_marginTop="14dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_item_review_contents" />
+        app:layout_constraintTop_toBottomOf="@id/text_item_review_description" />
 
     <com.google.android.material.chip.Chip
         android:id="@+id/chip_item_review_temp2"
@@ -85,7 +85,7 @@
         android:layout_marginTop="14dp"
         android:layout_marginStart="5dp"
         app:layout_constraintStart_toEndOf="@id/chip_item_review_temp1"
-        app:layout_constraintTop_toBottomOf="@id/text_item_review_contents" />
+        app:layout_constraintTop_toBottomOf="@id/text_item_review_description" />
 
     <TextView
         android:id="@+id/button_item_review_report"

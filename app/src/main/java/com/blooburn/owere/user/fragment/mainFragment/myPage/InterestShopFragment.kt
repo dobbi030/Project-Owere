@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.blooburn.owere.R
 import com.blooburn.owere.user.adapter.myPage.InterestShopAdpater
 import com.blooburn.owere.databinding.LayoutInterestShopFragmentBinding
-import com.blooburn.owere.user.item.FavoriteShop
+import com.blooburn.owere.user.item.ShopListItem
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -24,7 +24,7 @@ class InterestShopFragment : Fragment(R.layout.layout_interest_shop_fragment) {
     private lateinit var interestShopAdpater : InterestShopAdpater
     //관심 미용실 목록
 
-    private var favoriteShopList = mutableListOf<FavoriteShop>()
+    private var favoriteShopList = mutableListOf<ShopListItem>()
 
     private val auth : FirebaseAuth by lazy {
         Firebase.auth
@@ -59,7 +59,7 @@ class InterestShopFragment : Fragment(R.layout.layout_interest_shop_fragment) {
         chatDB.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.forEach{
-                    val model = it.getValue(FavoriteShop::class.java)
+                    val model = it.getValue(ShopListItem::class.java)
                     model ?: return
                     //DB에 변화가 생긴다면
                     favoriteShopList.add(model) // 목록 리스트 추가

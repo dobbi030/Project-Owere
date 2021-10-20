@@ -240,6 +240,16 @@
 
 
 
+            <View
+                android:id="@+id/reserve_price_line9"
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                android:layout_marginTop="22dp"
+                android:background="#EDEDED"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/reserve_menu_dyeing_container" />
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/reserve_menu_dyeing_container"
@@ -253,8 +263,41 @@
                 tools:listitem="@layout/item_reserve_price_menu"
                 />
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="118dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reserve_price_line9"
+                android:paddingBottom="48dp"
+                >
+
+                <TextView
+                    android:id="@+id/menu_choice_complete_button"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginHorizontal="16dp"
+                    android:text="선택완료"
+                    android:textSize="16sp"
+                    android:background="@drawable/button_background_purple"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="26dp"
+
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

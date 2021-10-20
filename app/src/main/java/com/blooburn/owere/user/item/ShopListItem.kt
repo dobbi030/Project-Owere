@@ -1,6 +1,6 @@
 package com.blooburn.owere.user.item
 
-data class FavoriteShop(
+data class ShopListItem(
     val area: String,
     val name: String,
     val profileImagePath: String,

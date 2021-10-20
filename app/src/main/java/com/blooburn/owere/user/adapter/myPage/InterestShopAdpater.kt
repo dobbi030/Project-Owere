@@ -8,16 +8,16 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 import com.blooburn.owere.databinding.MypageFavoriteShopBindingBinding
-import com.blooburn.owere.user.item.FavoriteShop
+import com.blooburn.owere.user.item.ShopListItem
 
 class InterestShopAdpater:
-    ListAdapter<FavoriteShop, InterestShopAdpater.ViewHolder>(diffUtil) {
+    ListAdapter<ShopListItem, InterestShopAdpater.ViewHolder>(diffUtil) {
 
 
     inner class ViewHolder(private val binding: MypageFavoriteShopBindingBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(favoriteShop: FavoriteShop) {
+        fun bind(shopListItem: ShopListItem) {
 
 //            컴포넌트 클릭 이벤트
 //            binding.root.setOnClickListener {
@@ -29,10 +29,10 @@ class InterestShopAdpater:
 //                //마지막 메시지
 //                var chatLastMessage = chatListItem.lastMessage
 
-            var myShopName = favoriteShop.name
-            var myshopArea = favoriteShop.area
-            var myShopRating = favoriteShop.rating
-            var myShopReviewCount = favoriteShop.reviewCount
+            var myShopName = shopListItem.name
+            var myshopArea = shopListItem.area
+            var myShopRating = shopListItem.rating
+            var myShopReviewCount = shopListItem.reviewCount
 //                //디자이너 이름 표시
             binding.shopName.text = myShopName
             binding.shopAddressText.text = myshopArea
@@ -79,17 +79,17 @@ class InterestShopAdpater:
 
 
     companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<FavoriteShop>() {
+        val diffUtil = object : DiffUtil.ItemCallback<ShopListItem>() {
             override fun areItemsTheSame(
-                oldItem: FavoriteShop,
-                newItem: FavoriteShop
+                oldItem: ShopListItem,
+                newItem: ShopListItem
             ): Boolean {
                 return oldItem == newItem
             }
 
             override fun areContentsTheSame(
-                oldItem: FavoriteShop,
-                newItem: FavoriteShop
+                oldItem: ShopListItem,
+                newItem: ShopListItem
             ): Boolean {
                 return oldItem == newItem
             }

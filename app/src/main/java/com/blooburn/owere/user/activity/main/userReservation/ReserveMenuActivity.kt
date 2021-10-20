@@ -6,6 +6,7 @@ import android.widget.CheckBox
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blooburn.owere.databinding.ActivityReserveMenuBinding
 import com.blooburn.owere.user.adapter.userReservation.MenuSelectAdapter
+import com.blooburn.owere.user.fragment.mainFragment.reservationFragment.MenuBottomDialogFragment
 import com.blooburn.owere.user.item.StyleMenuItem
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -15,11 +16,8 @@ import com.google.firebase.ktx.Firebase
 
 class ReserveMenuActivity : AppCompatActivity() {
 
-
-
-
-
-
+    //길이추가 커스텀 다이얼로그
+    val menuBottomDialogFragment : MenuBottomDialogFragment? = MenuBottomDialogFragment()
 
     //메뉴선택 목록 레이아웃 바인딩
     private var binding: ActivityReserveMenuBinding? = null
@@ -48,6 +46,12 @@ class ReserveMenuActivity : AppCompatActivity() {
         //바인딩 사용
         binding = ActivityReserveMenuBinding.inflate(layoutInflater)
         setContentView(binding?.root)
+
+        //선택완료 버튼 리스너
+        binding?.menuChoiceCompleteButton?.setOnClickListener {
+            //선택완료 시 커스텀 다이얼로그 띄워주기
+            menuBottomDialogFragment?.show(supportFragmentManager,menuBottomDialogFragment.tag)
+        }
 
 
         //커트 리사이클러뷰 어답터 설정
@@ -101,7 +105,7 @@ class ReserveMenuActivity : AppCompatActivity() {
         cutDB.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
-                var menuIndex = 0 //인덱스
+
                 snapshot.children.forEach {
                     val model = it.getValue(StyleMenuItem::class.java)
                     model ?: return
@@ -110,7 +114,7 @@ class ReserveMenuActivity : AppCompatActivity() {
                     menuSelectAdapterCut.addData(model)
 
 
-                    menuIndex++//아이템 인덱스 증가
+
 
 
 
@@ -128,7 +132,7 @@ class ReserveMenuActivity : AppCompatActivity() {
 
         magicDB.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                var menuIndex=0
+
                 snapshot.children.forEach {
                     val model = it.getValue(StyleMenuItem::class.java)
                     model ?: return
@@ -155,7 +159,7 @@ class ReserveMenuActivity : AppCompatActivity() {
         permDB.addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                var menuIndex = 0
+
                 snapshot.children.forEach {
                     val model = it.getValue(StyleMenuItem::class.java)
                     model ?: return
@@ -211,8 +215,3 @@ interface CheckboxAddedListener {
     }
 }
 var checkBoxlist = mutableListOf<CheckBox>()
-
-
-
-
-

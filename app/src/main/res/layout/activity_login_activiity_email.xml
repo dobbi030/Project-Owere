@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_linear_gradient_background"
-    tools:context=".activity.loginActivity.LoginActivityEmail">
+    tools:context=".user.activity.loginActivity.LoginActivityEmail">
 
     <TextView
         android:id="@+id/nothing"

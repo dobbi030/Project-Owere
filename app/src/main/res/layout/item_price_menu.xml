@@ -2,12 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="16dp"
     android:layout_marginTop="16dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     
     <TextView
-        android:id="@+id/reserve_price_menu_title"
+        android:id="@+id/text_price_menu_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
@@ -17,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/reserve_price_menu_price"
+        android:id="@+id/text_price_menu_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
@@ -26,7 +25,7 @@
         android:textSize="14sp"
         android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/reserve_price_menu_title" />
+        app:layout_constraintTop_toBottomOf="@id/text_price_menu_title" />
 
     <View
         android:layout_width="1dp"
@@ -34,12 +33,12 @@
         android:layout_marginStart="10dp"
         android:paddingVertical="1dp"
         android:background="@color/black"
-        app:layout_constraintTop_toTopOf="@id/reserve_price_menu_price"
-        app:layout_constraintStart_toEndOf="@id/reserve_price_menu_price"
-        app:layout_constraintBottom_toBottomOf="@id/reserve_price_menu_price" />
+        app:layout_constraintTop_toTopOf="@id/text_price_menu_price"
+        app:layout_constraintStart_toEndOf="@id/text_price_menu_price"
+        app:layout_constraintBottom_toBottomOf="@id/text_price_menu_price" />
 
     <TextView
-        android:id="@+id/reserve_item_price_time"
+        android:id="@+id/text_price_menu_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
@@ -47,19 +46,19 @@
         android:layout_marginStart="20dp"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/reserve_price_menu_price"
-        app:layout_constraintTop_toTopOf="@id/reserve_price_menu_price"
-        app:layout_constraintBottom_toBottomOf="@id/reserve_price_menu_price"/>
+        app:layout_constraintStart_toEndOf="@id/text_price_menu_price"
+        app:layout_constraintTop_toTopOf="@id/text_price_menu_price"
+        app:layout_constraintBottom_toBottomOf="@id/text_price_menu_price"/>
 
     <TextView
-        android:id="@+id/reserve_item_price_option"
+        android:id="@+id/text_price_menu_option"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/gray_cc"
         android:text="길이추가"
         android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="@id/reserve_price_menu_title"
-        app:layout_constraintTop_toBottomOf="@id/reserve_price_menu_price"
+        app:layout_constraintStart_toStartOf="@id/text_price_menu_title"
+        app:layout_constraintTop_toBottomOf="@id/text_price_menu_price"
         android:layout_marginTop="6dp"/>
 
 

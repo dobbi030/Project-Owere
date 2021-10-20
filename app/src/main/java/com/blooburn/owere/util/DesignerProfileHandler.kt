@@ -11,7 +11,7 @@ interface DesignerProfileHandler {
     /**
      * 평점 -> 별점 변환
      */
-    fun convertRatingToStar(rating: Float): String {
+    fun convertRatingToStar(rating: Double): String {
         return when{
             rating < 0 -> ""
             0 <= rating && rating < 1  -> "☆"

@@ -86,23 +86,31 @@
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
-            <include
-                android:id="@+id/view_user_designer_profile_menu1"
-                layout="@layout/item_price_menu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:id="@+id/layout_user_designer_profile_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <include
-                android:id="@+id/view_user_designer_profile_menu2"
-                layout="@layout/item_price_menu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                <include
+                    android:id="@+id/view_user_designer_profile_menu1"
+                    layout="@layout/item_price_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-            <include
-                android:id="@+id/view_user_designer_profile_menu3"
-                layout="@layout/item_price_menu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                <include
+                    android:id="@+id/view_user_designer_profile_menu2"
+                    layout="@layout/item_price_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <include
+                    android:id="@+id/view_user_designer_profile_menu3"
+                    layout="@layout/item_price_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -120,7 +128,7 @@
                 android:background="@drawable/rounded_black_square_background"
                 android:gravity="center"
                 android:paddingVertical="8dp"
-                android:text="가격 전체보기"
+                android:text="@string/see_all_prices"
                 android:textColor="@color/black"
                 android:textSize="16dp"
                 android:textStyle="bold" />

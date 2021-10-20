@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.userMain.mypageActivity.MyInfoActivity">
+    tools:context=".user.activity.main.mypageActivity.MyInfoActivity">
 
     <ImageView
         android:id="@+id/activity_myinfo_backbutton"

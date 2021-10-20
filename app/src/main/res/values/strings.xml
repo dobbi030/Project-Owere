@@ -62,4 +62,7 @@
     <!--user_designer_item-->
     <!-- %[argument_index$]format_specifier -->
     <string name="matching_rate">매칭률 %d%%</string>\
+
+    <!--activity_user_designer_profile-->
+    <string name="see_all_prices">가격 전체보기</string>
 </resources>

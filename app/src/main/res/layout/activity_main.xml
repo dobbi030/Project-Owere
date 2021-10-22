@@ -32,7 +32,7 @@
         app:layout_constraintTop_toBottomOf="@id/nothing" />
 
     <TextView
-        android:id="@+id/cantLogin_Button"
+        android:id="@+id/cannot_login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="60dp"
@@ -55,7 +55,7 @@
         android:text="@string/login"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/cantLogin_Button"
+        app:layout_constraintBottom_toTopOf="@+id/cannot_login_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

@@ -1,13 +1,26 @@
 package com.blooburn.owere.user.activity.loginActivity
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.blooburn.owere.R
 
-
 class LoginActivityChoice : AppCompatActivity() {
+
+    private val logInButton: TextView by lazy {
+        findViewById(R.id.email_Button)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_login_choice)
+
+        logInButton.setOnClickListener {
+            //회원가입 액티비티로 이동하는 인텐트
+            var intent = Intent(this, LoginActivityEmail::class.java)
+            startActivity(intent)
+        }
     }
 }

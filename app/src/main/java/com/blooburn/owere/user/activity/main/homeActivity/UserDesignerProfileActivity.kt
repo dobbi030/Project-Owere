@@ -1,7 +1,7 @@
 package com.blooburn.owere.user.activity.main.homeActivity
 
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
@@ -11,16 +11,16 @@ import androidx.appcompat.widget.Toolbar
 import androidx.viewpager2.widget.ViewPager2
 import com.blooburn.owere.R
 import com.blooburn.owere.databinding.ItemPriceMenuBinding
-import com.blooburn.owere.user.adapter.userHome.DesignerPortfolioSliderAdapter
+import com.blooburn.owere.user.adapter.home.DesignerPortfolioSliderAdapter
 import com.blooburn.owere.user.fragment.mainFragment.homeFragment.AllPricesFragment
 import com.blooburn.owere.user.item.StyleMenuItem
 import com.blooburn.owere.user.item.UserDesignerItem
 import com.blooburn.owere.user.item.UserReview
+import com.blooburn.owere.util.DESIGNER_DATA_KEY
 import com.blooburn.owere.util.DesignerProfileHandler
 import com.blooburn.owere.util.databaseInstance
 import com.blooburn.owere.util.storageInstance
 import com.google.firebase.database.*
-import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
 class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler {
@@ -36,6 +36,8 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
     private lateinit var priceChartReference: DatabaseReference
 
     private lateinit var sliderAdapter: DesignerPortfolioSliderAdapter
+
+    private val allPricesFragmentName = "allPrices"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,8 +60,12 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
      * 가격 전체 보기 -> 프래그먼트 생성
      */
     private val priceClickListener = View.OnClickListener{
-        // val fragment = AllPricesFragment(designerData!!.designerId)
-        // val fragmentTransaction = supportFragmentManager.beginTransaction()
+        val fragment = AllPricesFragment(designerData!!.designerId)
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction
+            .replace(R.id.fragment_container_user_designer_profile, fragment)
+            .addToBackStack(allPricesFragmentName)
+            .commitAllowingStateLoss()
     }
 
 
@@ -72,7 +78,7 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
         // path = "portfolio/[디자이너 id]"
         getPortfolioImagesPath()
         setDesignerInformation()
-        getAndSetPrice()
+        getAndSetFirstPrice()
         getAndSetReviewImages()
         getAndSetReviews()
     }
@@ -86,7 +92,7 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
             finish()
         }
 
-        designerData = extras!!.getParcelable("designerData")   // DesignerData 객체 읽기
+        designerData = extras!!.getParcelable(DESIGNER_DATA_KEY)   // DesignerData 객체 읽기
         if (designerData == null) {
             finish()
         }
@@ -124,6 +130,8 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
             return
         }
 
+
+        Log.d("로그", "$designerData")
         val reviewStar = convertRatingToStar(designerData!!.rating)
 
         // 디자이너 프로필 보여주는 view
@@ -171,7 +179,7 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
     /**
      * 첫 메뉴(커트) 가격표 불러와서 저장
      */
-    private fun getAndSetPrice() {
+    private fun getAndSetFirstPrice() {
         priceChartReference.child(pricePath)
             .addListenerForSingleValueEvent(object : ValueEventListener {
 
@@ -191,7 +199,7 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
                         menuViewBinding.textPriceMenuTitle.text = menuItem.menuName
                         menuViewBinding.textPriceMenuPrice.text = menuItem.menuPrice
                         menuViewBinding.textPriceMenuTime.text = menuItem.menuTime
-                        TODO("옵션은 현재 생략")
+                        //todo: 옵션은 지금 생략했음
                     }
                 }
 
@@ -286,7 +294,7 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
 
         // 뒤로가기 버튼 리스너
         toolbar.setNavigationOnClickListener {
-            finish()
+            onBackPressed()
         }
     }
 

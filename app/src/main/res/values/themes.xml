@@ -16,5 +16,6 @@
 
     <style name="Theme.Owere.DesignerProfileAppbar">
         <item name="colorControlNormal">@color/black</item>
+        <item name="elevation">0dp</item>
     </style>
 </resources>

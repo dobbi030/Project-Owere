@@ -1,4 +1,4 @@
-package com.blooburn.owere.user.adapter.userHome
+package com.blooburn.owere.user.adapter.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

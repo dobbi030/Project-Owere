@@ -5,7 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blooburn.owere.R
-import com.blooburn.owere.user.adapter.userHome.DesignerListAdapter
+import com.blooburn.owere.user.adapter.home.DesignerListAdapter
 import com.blooburn.owere.databinding.UserHomeDesignerFragmentBinding
 import com.blooburn.owere.user.item.UserDesignerItem
 import com.google.firebase.database.DataSnapshot

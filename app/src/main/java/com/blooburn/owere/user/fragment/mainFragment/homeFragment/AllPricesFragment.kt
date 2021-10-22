@@ -49,7 +49,7 @@ class AllPricesFragment(private val designerId: String?) : Fragment(R.layout.all
 
                     // 컨테이너 view 생성
                     val menuContainerBinding = LayoutMenuContainerBinding.inflate(layoutInflater,
-                    binding?.root,
+                        binding?.layoutAllPricesContainer,
                     true)
 
                     // 커트, 매직, 펌과 같은 메뉴의 대표 타이틀
@@ -58,8 +58,7 @@ class AllPricesFragment(private val designerId: String?) : Fragment(R.layout.all
                     // 1. 서브 메뉴(ex: 볼륨 매직, 일반 커트)를 DB에서 불러온다.
                     // 2. 서브 메뉴 view 생성 -> 컨테이너에 추가
                     // 3. view에 서브 메뉴 데이터 세팅
-                    getAndInflateSubMenu(containerSnapshot.children, menuContainerBinding.root)
-
+                    getAndInflateSubMenu(containerSnapshot.children, menuContainerBinding.actualLayoutMenuContainer)
                 }
             }
 

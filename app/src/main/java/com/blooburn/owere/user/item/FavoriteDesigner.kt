@@ -1,7 +1,7 @@
 package com.blooburn.owere.user.item
 
 //관심 디자이너 객체
-open class FavoriteDesigner(
+data class FavoriteDesigner(
     val area :String,
     val matchingRate : Int,
     val name : String,

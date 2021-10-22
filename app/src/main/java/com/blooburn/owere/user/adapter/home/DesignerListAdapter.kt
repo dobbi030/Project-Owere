@@ -1,6 +1,7 @@
-package com.blooburn.owere.user.adapter.userHome
+package com.blooburn.owere.user.adapter.home
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,6 +9,7 @@ import com.blooburn.owere.R
 import com.blooburn.owere.user.activity.main.homeActivity.UserDesignerProfileActivity
 import com.blooburn.owere.databinding.ItemUserDesignerListBinding
 import com.blooburn.owere.user.item.UserDesignerItem
+import com.blooburn.owere.util.DESIGNER_DATA_KEY
 import com.blooburn.owere.util.DesignerProfileHandler
 import com.google.firebase.storage.FirebaseStorage
 
@@ -15,7 +17,6 @@ class DesignerListAdapter :
     RecyclerView.Adapter<DesignerListAdapter.ViewHolder>(), DesignerProfileHandler {
 
     private val designerList = mutableListOf<UserDesignerItem>()
-    private val firebaseStorage = FirebaseStorage.getInstance().reference
 
     inner class ViewHolder(private val binding: ItemUserDesignerListBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -49,7 +50,7 @@ class DesignerListAdapter :
         holder.itemView.setOnClickListener{
             // 디자이너 객체 전달
             val intent = Intent(holder.itemView.context, UserDesignerProfileActivity::class.java).apply{
-                putExtra("designerData", designerList[position])
+                putExtra(DESIGNER_DATA_KEY, designerList[position])
             }
 
             holder.itemView.context.startActivity(intent)

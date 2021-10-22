@@ -1,4 +1,4 @@
-package com.blooburn.owere.user.adapter.userHome
+package com.blooburn.owere.user.adapter.home
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter

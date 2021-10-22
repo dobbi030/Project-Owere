@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.blooburn.owere.R
-import com.blooburn.owere.user.adapter.userHome.UserHomeTabAdapter
+import com.blooburn.owere.user.adapter.home.UserHomeTabAdapter
 import com.blooburn.owere.databinding.UserHomeFragmentBinding
 import com.google.android.material.tabs.TabLayoutMediator
 

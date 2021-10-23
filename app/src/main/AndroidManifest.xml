@@ -14,43 +14,48 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Owere"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.userMain.mypageActivity.SettingActivity"></activity>
-        <activity android:name=".activity.userMain.mypageActivity.IntroduceActivity" />
-        <activity android:name=".activity.userMain.mypageActivity.AlarmSettingActivity" />
-        <activity android:name=".activity.userMain.mypageActivity.QnaActivity" />
-        <activity android:name=".activity.userMain.mypageActivity.EventPromotionActivity" />
-        <activity android:name=".activity.userMain.mypageActivity.NoticeActivity" />
-        <activity android:name=".activity.userMain.mypageActivity.InterestActivity" />
-        <activity android:name=".activity.userMain.mypageActivity.MyInfoActivity" />
-        <activity android:name=".activity.userMain.userReservation.ReservationCanceled" />
-        <activity android:name=".activity.userMain.userReservation.ReservationInfo" />
+        <activity android:name=".user.activity.main.userReservation.ReserveSalonActivity"></activity>
+        <activity android:name=".user.activity.main.mypageActivity.SettingActivity" />
+        <activity android:name=".user.activity.main.mypageActivity.IntroduceActivity" />
+        <activity android:name=".user.activity.main.mypageActivity.AlarmSettingActivity" />
+        <activity android:name=".user.activity.main.mypageActivity.QnaActivity" />
+        <activity android:name=".user.activity.main.mypageActivity.EventPromotionActivity" />
+        <activity android:name=".user.activity.main.mypageActivity.NoticeActivity" />
+        <activity android:name=".user.activity.main.mypageActivity.InterestActivity" />
+        <activity android:name=".user.activity.main.mypageActivity.MyInfoActivity" />
+        <activity android:name=".user.activity.main.userReservation.ReservationCanceled" />
+        <activity android:name=".user.activity.main.userReservation.ReservationInfo" />
         <activity
-            android:name=".activity.loginActivity.LoginActivityRegisterPhoneNumber"
+            android:name=".user.activity.loginActivity.LoginActivityRegisterPhoneNumber"
             android:exported="true" />
         <activity
-            android:name=".activity.loginActivity.LoginActivityCheckEmail"
+            android:name=".user.activity.loginActivity.LoginActivityCheckEmail"
             android:exported="true" />
-        <activity android:name=".activity.userMain.chattingActivity.ChattingActivity" />
+        <activity android:name=".user.activity.main.chattingActivity.ChattingActivity" />
         <activity
-            android:name=".activity.loginActivity.LoginActivityRestore"
+            android:name=".user.activity.loginActivity.LoginActivityRestore"
             android:exported="true"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
-            android:name=".activity.loginActivity.LoginActivityEmail"
+            android:name=".user.activity.loginActivity.LoginActivityEmail"
             android:exported="true" />
-        <activity android:name=".activity.signUpActivity.SetPositionActivity" />
-        <activity android:name=".activity.userMain.UserMainActivity" />
-        <activity android:name=".activity.loginActivity.LoginActivityTemp" />
-        <activity android:name=".activity.loginActivity.LoginActivityChoice" />
-        <activity android:name=".activity.signUpActivity.SignUpActivity1_choice" />
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".user.activity.signUpActivity.SetPositionActivity" />
+        <activity android:name=".user.activity.main.UserMainActivity" />
+        <activity android:name=".user.activity.loginActivity.LoginActivityTemp" />
+        <activity android:name=".user.activity.loginActivity.LoginActivityChoice" />
+        <activity android:name=".user.activity.signUpActivity.SignUpActivity1_choice" />
+        <activity android:name=".user.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.userMain.homeActivity.UserDesignerProfileActivity" />
+        <activity android:name=".user.activity.main.homeActivity.UserDesignerProfileActivity" />
+        <activity android:name=".user.activity.main.userReservation.ShopsOfDesignerActivity"></activity>
+        <activity android:name=".user.activity.main.userReservation.ReserveMenuActivity">
+
+        </activity>
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"

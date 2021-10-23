@@ -9,28 +9,15 @@ import com.blooburn.owere.R
 import com.blooburn.owere.user.activity.main.userReservation.CheckboxAddedListener
 import com.blooburn.owere.user.activity.main.userReservation.checkBoxlist
 import com.blooburn.owere.databinding.ItemReservePriceMenuBinding
+import com.blooburn.owere.user.activity.main.userReservation.selectedMenu
 import com.blooburn.owere.user.item.StyleMenuItem
 
 
 class MenuSelectAdapter(private val checkboxAddedListener: CheckboxAddedListener) :
     RecyclerView.Adapter<MenuSelectAdapter.ViewHolder>() {
 
-//    //체크박스 중복방지
-//    private val selectedPosition = 0    //선택된 체크박스 위치
-//    private var dataList: ArrayList<StyleMenuItem>? = null  //아이템 리스트
-//    private var selectCheck: ArrayList<Int>? = null
-//    var context: Context? = null
-//
-//    fun SimpleRecyclerviewAdapter(context: Context?, dataList: ArrayList<StyleMenuItem>?, selectCheck: ArrayList<Int>?
-//    ) {
-//        this.dataList = dataList
-//        this.selectCheck = selectCheck
-//        this.context = context
-//
-//    }
-
-
     var selectedIndex = 0
+
 
 
     //뷰홀더
@@ -61,6 +48,12 @@ class MenuSelectAdapter(private val checkboxAddedListener: CheckboxAddedListener
 
             //메뉴 시간
             binding.reserveItemPriceTime.text = menulist.menuTime
+
+            binding.reserveMenuCheckbox.setOnCheckedChangeListener { _, isChecked ->
+                if(isChecked){
+                    selectedMenu = menulist
+                }
+            }
 
 
         }

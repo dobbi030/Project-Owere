@@ -23,13 +23,13 @@ class ShopListOfDesignerAdapter : RecyclerView.Adapter<ShopListOfDesignerAdapter
 
             val shoplist = shopList[position]
             //이름
-            binding.favoriteSalonNameTextView.text = shoplist.name
+            binding.reserveSalonNameText.text = shoplist.name
             //리뷰 카운트
-            binding.favoriteDesignerReviewTextView.text = buildReviewCountString(shoplist.reviewCount)
+            binding.reserveSalonDesignerReview.text = buildReviewCountString(shoplist.reviewCount)
             //별점(핸들러 인터페이스 사용)
-            binding.favoriteSalonRatingTextView.text = convertRatingToStar(shoplist.rating)
+            binding.reserveSalonRatingText.text = convertRatingToStar(shoplist.rating)
             //주소
-            binding.favoriteSalonAddressTextView.text= shoplist.area
+            binding.reserveSalonAddressText.text= shoplist.area
 
         }
 

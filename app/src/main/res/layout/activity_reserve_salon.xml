@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".user.activity.main.userReservation.ReserveSalonActivity">
+
+    <ImageView
+        android:id="@+id/reserve_back_button"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/header_reserve"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:gravity="center"
+        android:text="예약하기"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/reserve_salon_item_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_reserve"
+        android:paddingTop="15dp"
+        >
+        <ImageView
+            android:id="@+id/reserve_salon_profile_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/reserve_salon_name_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="김철수 디자이너"
+            app:layout_constraintBottom_toTopOf="@id/reserve_salon_designer_review"
+            app:layout_constraintStart_toEndOf="@id/reserve_salon_profile_image"
+            app:layout_constraintTop_toTopOf="@id/reserve_salon_profile_image"
+            app:layout_constraintVertical_chainStyle="spread" />
+
+        <TextView
+            android:id="@+id/reserve_salon_designer_review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="리뷰(50+)"
+            app:layout_constraintBottom_toTopOf="@id/reserve_salon_address_text"
+            app:layout_constraintStart_toStartOf="@id/reserve_salon_name_text"
+            app:layout_constraintTop_toBottomOf="@id/reserve_salon_name_text" />
+
+        <View
+            android:id="@+id/favoriteSalonDivider0"
+            android:layout_width="1.5dp"
+            android:layout_height="12dp"
+            android:layout_marginStart="8dp"
+            android:background="@color/gray_cc"
+            app:layout_constraintBottom_toBottomOf="@id/reserve_salon_designer_review"
+            app:layout_constraintStart_toEndOf="@id/reserve_salon_designer_review"
+            app:layout_constraintTop_toTopOf="@id/reserve_salon_designer_review" />
+
+        <TextView
+            android:id="@+id/reserve_salon_rating_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="★★★★☆"
+            app:layout_constraintBottom_toBottomOf="@+id/reserve_salon_designer_review"
+            app:layout_constraintStart_toEndOf="@id/favoriteSalonDivider0"
+            app:layout_constraintTop_toTopOf="@+id/reserve_salon_designer_review" />
+
+        <TextView
+            android:id="@+id/reserve_salon_address_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="서울시 송파구 가락동 헬리오시티 B동 3층"
+            app:layout_constraintBottom_toTopOf="@+id/favoriteSalonCutTextView"
+            app:layout_constraintStart_toStartOf="@id/reserve_salon_designer_review"
+            app:layout_constraintTop_toBottomOf="@id/reserve_salon_designer_review" />
+
+        <TextView
+            android:id="@+id/favoriteSalonCutTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="커트 12000원"
+            app:layout_constraintBottom_toBottomOf="@id/reserve_salon_profile_image"
+            app:layout_constraintStart_toStartOf="@+id/reserve_salon_address_text"
+            app:layout_constraintTop_toBottomOf="@+id/reserve_salon_address_text" />
+
+        <View
+            android:id="@+id/favoriteSalonDivider1"
+            android:layout_width="1.5dp"
+            android:layout_height="12dp"
+            android:layout_marginStart="8dp"
+            android:background="@color/gray_cc"
+            app:layout_constraintBottom_toBottomOf="@id/favoriteSalonCutTextView"
+            app:layout_constraintStart_toEndOf="@id/favoriteSalonCutTextView"
+            app:layout_constraintTop_toTopOf="@id/favoriteSalonCutTextView" />
+
+        <TextView
+            android:id="@+id/favoriteSalonPermTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="펌 20000원"
+            app:layout_constraintStart_toStartOf="@+id/favoriteSalonDivider1"
+            app:layout_constraintTop_toTopOf="@+id/favoriteSalonCutTextView" />
+
+        <View
+            android:id="@+id/favoriteSalonDivider2"
+            android:layout_width="1.5dp"
+            android:layout_height="12dp"
+            android:layout_marginStart="8dp"
+            android:background="@color/gray_cc"
+            app:layout_constraintBottom_toBottomOf="@id/favoriteSalonPermTextView"
+            app:layout_constraintStart_toEndOf="@id/favoriteSalonPermTextView"
+            app:layout_constraintTop_toTopOf="@id/favoriteSalonPermTextView" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="염색 23000원"
+            app:layout_constraintStart_toStartOf="@+id/favoriteSalonDivider2"
+            app:layout_constraintTop_toTopOf="@+id/favoriteSalonCutTextView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <TextView
+        android:id="@+id/menu_choice_complete_button"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="22dp"
+        android:layout_marginHorizontal="16dp"
+        android:text="결제하러 가기"
+        android:textSize="16sp"
+        android:background="@drawable/button_background_purple"
+        android:textColor="@color/white"
+        android:layout_marginTop="26dp"
+
+        />
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

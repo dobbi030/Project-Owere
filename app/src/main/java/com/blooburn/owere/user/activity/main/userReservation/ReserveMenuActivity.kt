@@ -1,23 +1,32 @@
 package com.blooburn.owere.user.activity.main.userReservation
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.CheckBox
+import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blooburn.owere.databinding.ActivityReserveMenuBinding
+
 import com.blooburn.owere.user.adapter.userReservation.MenuSelectAdapter
 import com.blooburn.owere.user.fragment.mainFragment.reservationFragment.MenuBottomDialogFragment
 import com.blooburn.owere.user.item.StyleMenuItem
+import com.blooburn.owere.user.item.UserDesignerItem
+import com.blooburn.owere.util.DESIGNER_DATA_KEY
+import com.blooburn.owere.util.databaseInstance
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 
 class ReserveMenuActivity : AppCompatActivity() {
 
+    private var designerData: UserDesignerItem? = null//프로필에서 전달받을 디자이너 객체
+
     //길이추가 커스텀 다이얼로그
-    val menuBottomDialogFragment : MenuBottomDialogFragment? = MenuBottomDialogFragment()
+    val menuBottomDialogFragment: MenuBottomDialogFragment? = MenuBottomDialogFragment()
 
     //메뉴선택 목록 레이아웃 바인딩
     private var binding: ActivityReserveMenuBinding? = null
@@ -28,18 +37,21 @@ class ReserveMenuActivity : AppCompatActivity() {
     private lateinit var menuSelectAdapterPerm: MenuSelectAdapter
     private lateinit var menuSelectAdapterDyeing: MenuSelectAdapter
 
+    private val databaseReference = databaseInstance.reference
 
-    //DB 사용할 레퍼런스 초기화 (designerPriceChart -> 디자이너 Id -> 메뉴들)
-    val tempDesignerId = "designer0" //디자이너 아이디
+    //디자이너 아이디
+    var designerId : String?=null
 
-    val cutDB =
-        Firebase.database.reference.child("designerPriceChart").child(tempDesignerId).child("커트")
-    val magicDB =
-        Firebase.database.reference.child("designerPriceChart").child(tempDesignerId).child("매직")
-    val dyeingDB =
-        Firebase.database.reference.child("designerPriceChart").child(tempDesignerId).child("염색")
-    val permDB =
-        Firebase.database.reference.child("designerPriceChart").child(tempDesignerId).child("펌")
+
+
+    //각 리사이클러뷰 데이터를 가져올 DB레퍼런스
+    var cutDB : DatabaseReference?= null
+    var magicDB :DatabaseReference?= null
+
+    var dyeingDB :DatabaseReference?= null
+
+    var permDB  :DatabaseReference?= null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,16 +59,58 @@ class ReserveMenuActivity : AppCompatActivity() {
         binding = ActivityReserveMenuBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
-        //선택완료 버튼 리스너
-        binding?.menuChoiceCompleteButton?.setOnClickListener {
-            //선택완료 시 커스텀 다이얼로그 띄워주기
-            menuBottomDialogFragment?.show(supportFragmentManager,menuBottomDialogFragment.tag)
+        /**
+         * 수신 인텐트로 전달받은 디자이너 정보 저장
+         */
+        getDesignerDataFromIntent()
+
+        /**
+         * 리사이클러뷰 어답터 설정
+         */
+        initAdapter()
+        /**
+         * 디자이너 아이디로 DB Reference 설정
+         */
+        setDataReferences()
+
+
+        /**
+         * 선택완료 버튼 리스너
+         */
+        initButton()
+
+
+
+        /**
+         * 디자이너 메뉴 목록 불러와서 적용
+         */
+        initMenu()
+
+
+    }
+
+    /**
+     * 수신 인텐트로 전달받은 디자이너 정보 저장
+     */
+    private fun getDesignerDataFromIntent() {
+        val extras = intent.extras  // 송신 액티비티가 보낸 데이터 참조
+        if (extras == null) {
+            finish()
         }
 
+        designerData = extras!!.getParcelable(DESIGNER_DATA_KEY)   // DesignerData 객체 읽기
+        if (designerData == null) {
+            finish()
+        }
+    }
 
+    /**
+     * 리사이클러뷰 어답터 설정
+     */
+    private fun initAdapter() {
         //커트 리사이클러뷰 어답터 설정
         //인터페이스 implement
-        menuSelectAdapterCut = MenuSelectAdapter (object : CheckboxAddedListener {
+        menuSelectAdapterCut = MenuSelectAdapter(object : CheckboxAddedListener {
             override fun addCheckBox(checkbox: CheckBox) {
                 checkBoxlist.add(checkbox)
             }
@@ -66,9 +120,8 @@ class ReserveMenuActivity : AppCompatActivity() {
         binding?.reserveMenuCutContainer?.layoutManager = LinearLayoutManager(this)
         menuSelectAdapterCut.clearList()//뷰가 생성될 때마다 클리어 해줌
 
-
         //매직 리사이클러뷰 어답터 설정
-        menuSelectAdapterMagic = MenuSelectAdapter (object : CheckboxAddedListener {
+        menuSelectAdapterMagic = MenuSelectAdapter(object : CheckboxAddedListener {
             override fun addCheckBox(checkbox: CheckBox) {
                 checkBoxlist.add(checkbox)
             }
@@ -79,7 +132,7 @@ class ReserveMenuActivity : AppCompatActivity() {
         menuSelectAdapterMagic.clearList()
 
         //펌 리사이클러뷰 어답터 설정
-        menuSelectAdapterPerm = MenuSelectAdapter (object : CheckboxAddedListener {
+        menuSelectAdapterPerm = MenuSelectAdapter(object : CheckboxAddedListener {
             override fun addCheckBox(checkbox: CheckBox) {
                 checkBoxlist.add(checkbox)
             }
@@ -90,7 +143,7 @@ class ReserveMenuActivity : AppCompatActivity() {
         menuSelectAdapterPerm.clearList()
 
         //염색
-        menuSelectAdapterDyeing = MenuSelectAdapter (object : CheckboxAddedListener {
+        menuSelectAdapterDyeing = MenuSelectAdapter(object : CheckboxAddedListener {
             override fun addCheckBox(checkbox: CheckBox) {
                 checkBoxlist.add(checkbox)
             }
@@ -100,118 +153,104 @@ class ReserveMenuActivity : AppCompatActivity() {
         menuSelectAdapterDyeing.clearList()
 
 
-        //tempDesignerId 밑에 데이터 하나라도 변화하면(생성, 삭제)
-        //DB 변화 리스너 ->한 번만 불러옴
-        cutDB.addListenerForSingleValueEvent(object : ValueEventListener {
+    }
+
+    /**
+     * 메뉴 데이터를 어답터에 업데이트
+     */
+    private fun getAndSetMenu(menuReference: DatabaseReference?, Adapter : MenuSelectAdapter) {
+        menuReference!!.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-
-
                 snapshot.children.forEach {
                     val model = it.getValue(StyleMenuItem::class.java)
                     model ?: return
                     //DB에 변화가 생긴다면
 //
-                    menuSelectAdapterCut.addData(model)
-
-
-
-
-
-
+                    Adapter.addData(model)
 
                 }
 
-                menuSelectAdapterCut.notifyDataSetChanged()//뷰 목록 업데이트
+                Adapter.notifyDataSetChanged()//뷰 목록 업데이트
             }
-
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-
+            override fun onCancelled(error: DatabaseError) {}
         })
+    }
 
-        magicDB.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
+    /**
+     * 메뉴 뷰 초기화
+     */
+    private fun initMenu() {
+        //tempDesignerId 밑에 데이터 하나라도 변화하면(생성, 삭제)
+        //DB 변화 리스너 ->한 번만 불러옴
 
-                snapshot.children.forEach {
-                    val model = it.getValue(StyleMenuItem::class.java)
-                    model ?: return
-                    //DB에 변화가 생긴다면
-                    menuSelectAdapterMagic.addData(model) //목록 리스트 추가
-
-
-
-
-                }
-
-
-//                추가해주기
-                menuSelectAdapterMagic.notifyDataSetChanged()//뷰 목록 업데이트
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-
-        })
-
-
-        permDB.addListenerForSingleValueEvent(object : ValueEventListener {
-
-            override fun onDataChange(snapshot: DataSnapshot) {
-
-                snapshot.children.forEach {
-                    val model = it.getValue(StyleMenuItem::class.java)
-                    model ?: return
-                    //DB에 변화가 생긴다면
-                    menuSelectAdapterPerm.addData(model) //목록 리스트 추가
-
-
-
-                }
-
-
-//                추가해주기
-                menuSelectAdapterPerm.notifyDataSetChanged()//뷰 목록 업데이트
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-
-        })
-
-        dyeingDB.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                var menuIndex = 0
-                snapshot.children.forEach {
-                    val model = it.getValue(StyleMenuItem::class.java)
-                    model ?: return
-                    //DB에 변화가 생긴다면
-                    menuSelectAdapterDyeing.addData(model) //채팅방 목록 리스트 추가
-
-
-
-                }
-
-
-//                추가해주기
-                menuSelectAdapterDyeing.notifyDataSetChanged()//뷰 목록 업데이트
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-
-        })
+        /**
+         * 메뉴 데이터를 어답터에 업데이트
+         */
+        getAndSetMenu(cutDB,menuSelectAdapterCut)
+        getAndSetMenu(magicDB,menuSelectAdapterMagic)
+        getAndSetMenu(permDB,menuSelectAdapterPerm)
+        getAndSetMenu(dyeingDB,menuSelectAdapterDyeing)
 
 
     }
+
+    /**
+     * 디자이너 아이디로 DB Reference 설정
+     */
+    private fun setDataReferences() {
+        // 디자이너의 데이터 참조
+        //DB 사용할 레퍼런스 초기화 (designerPriceChart -> 디자이너 Id -> 메뉴들)
+        designerId = designerData?.designerId.toString();
+
+//        "designer0" //디자이너 아이디
+
+        cutDB = databaseReference.child("designerPriceChart").child(designerId!!).child("커트")
+        magicDB = databaseReference.child("designerPriceChart").child(designerId!!).child("매직")
+        dyeingDB = databaseReference.child("designerPriceChart").child(designerId!!).child("염색")
+        permDB = databaseReference.child("designerPriceChart").child(designerId!!).child("펌")
+    }
+    private fun initButton(){
+        binding?.menuChoiceCompleteButton?.setOnClickListener {
+            //선택된 메뉴 객체 확인
+
+
+            if(selectedMenu==null){
+                Toast.makeText(this,"메뉴를 선택해주세요", Toast.LENGTH_SHORT).show()
+            }else{
+                if(selectedMenu?.addLength==1){
+                    //선택완료 시 커스텀 다이얼로그 띄워주기
+                    menuBottomDialogFragment?.show(supportFragmentManager, menuBottomDialogFragment.tag)
+
+                    val bundle = bundleOf() //어떤 키에 어떤 값으로 번들을 담겠다
+
+                    bundle.putParcelable(DESIGNER_DATA_KEY,designerData)
+                    menuBottomDialogFragment?.arguments = bundle
+
+
+
+
+                }else{
+                    //길이 추가 상관없는 메뉴 선택시 샵 선택 액티비티로 전환
+                    val intent = Intent(this, ShopsOfDesignerActivity::class.java)
+                    intent.putExtra(DESIGNER_DATA_KEY,designerData)
+                    startActivity(intent)
+
+                }
+                checkBoxlist.clear()
+                selectedMenu = null
+            }
+
+        }
+
+    }
+
 }
 
 //체크박스를 위한 인터페이스
 interface CheckboxAddedListener {
-    fun addCheckBox(checkbox: CheckBox){
+    fun addCheckBox(checkbox: CheckBox) {
     }
 }
+
 var checkBoxlist = mutableListOf<CheckBox>()
+var selectedMenu : StyleMenuItem? = null

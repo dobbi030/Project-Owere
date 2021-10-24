@@ -3,7 +3,6 @@ package com.blooburn.owere.user.activity.main.userReservation
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.Geocoder
 import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
@@ -22,19 +21,32 @@ import com.blooburn.owere.R
 
 
 import com.blooburn.owere.user.activity.signUpActivity.SetPositionActivity
+import com.blooburn.owere.user.adapter.userReservation.MenuSelectAdapter
 import com.blooburn.owere.user.adapter.userReservation.ShopListOfDesignerAdapter
 import com.blooburn.owere.user.item.ShopListItem
+import com.blooburn.owere.user.item.StyleMenuItem
+import com.blooburn.owere.user.item.UserDesignerItem
+import com.blooburn.owere.util.DESIGNER_DATA_KEY
+import com.blooburn.owere.util.databaseInstance
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
-import kotlin.math.log
+
 
 class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEventListener {
+
+    private var designerData: UserDesignerItem? = null//프로필에서 전달받을 디자이너 객체
+    private var menu : StyleMenuItem? = null//선택한 메뉴
+    //기장 옵션
+    var lengthOption :String = ""
+
+    private val databaseReference = databaseInstance.reference
 
     private lateinit var mapView: MapView
 
@@ -61,16 +73,13 @@ class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEven
     //어답터
     private val shopListOfDesignerAdapter = ShopListOfDesignerAdapter()
 
-    /**
-     *임시 디자이너 아이디
-     */
-    val tempDesignerId = "designer0" //
+    //디자이너 아이디
+    var designerId : String?=null
 
-    /**
-     * DB 레퍼런스
-     */
-    val shopsDB =
-        Firebase.database.reference.child("DesignerShops").child(tempDesignerId)
+
+//     DB 레퍼런스
+
+    var shopsDB : DatabaseReference? = null
 
     var REQUIRED_PERMISSIONS = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION)
 
@@ -84,39 +93,18 @@ class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEven
         setContentView(R.layout.activity_shops_of_designer)
 
 
+
+        getDesignerDataFromIntent()
+        setDataReferences()
         /**
          * 리사이클러뷰 어답터 설정
          */
 
-        shopRecyclerView.adapter = shopListOfDesignerAdapter
-        shopRecyclerView.layoutManager = LinearLayoutManager(this)
-        shopListOfDesignerAdapter.clearList()
-        salonList.clear()
+        initAdapter()
 
-        shopsDB.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                snapshot.children.forEach {
-                    val model = it.getValue(ShopListItem::class.java)
-                    model ?: return
-                    //DB에 변화가 생긴다면
-//
-                    shopListOfDesignerAdapter.addData(model)//어답터에 모델 추가
-                    salonList.add(model)    //미용실 리스트에 모델추가 (마커찍기 메소드에 넣어줄 리스트)
-                    Log.d("markerOn", "item is ${salonList.get(0).name}")
+        //데이터를 어답터에 업데이트
+        getAndSetMenu(shopsDB,shopListOfDesignerAdapter)
 
-                    /**
-                     * 지도에 마커 찍기
-                     */
-                    updateMarker(model)// 마커 추가해주기
-                }
-                shopListOfDesignerAdapter.notifyDataSetChanged()// 뷰목록 업데이트
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-
-        })
 
 
 
@@ -177,8 +165,7 @@ class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEven
 
 
         val marker = MapPOIItem()
-        Log.d("markerOn", "marking")
-        Log.d("markerOn", "shop is $shop.name")
+
         marker.apply {
             itemName = shop.name   // 마커 이름
             mapPoint = MapPoint.mapPointWithGeoCoord(37.461384, 126.900345)   // 좌표
@@ -364,6 +351,80 @@ class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEven
         }
 
 
+    }
+    /**
+     * 수신 인텐트로 전달받은 디자이너 정보 저장
+     */
+    private fun getDesignerDataFromIntent() {
+        val extras = intent.extras  // 송신 액티비티가 보낸 데이터 참조
+        if (extras == null) {
+            finish()
+        }
+
+        designerData = extras!!.getParcelable(DESIGNER_DATA_KEY)   // DesignerData 객체 읽기
+        menu = extras!!.getParcelable("SESLECTED_MENU_DATA_KEY") //선택한 메뉴 객체 읽기
+        lengthOption = extras.getString("lengthOption").toString()//선택한 옵션
+        if (designerData == null) {
+            finish()
+        }
+    }
+    /**
+     * 디자이너 아이디로 DB Reference 설정
+     */
+    private fun setDataReferences() {
+        // 디자이너의 데이터 참조
+        //DB 사용할 레퍼런스 초기화 (designerPriceChart -> 디자이너 Id -> 메뉴들)
+        designerId = designerData?.designerId.toString();
+
+
+    //디자이너 아이디
+
+        shopsDB = databaseReference.child("DesignerShops").child(designerId!!)
+
+       
+    }
+    /**
+     * 리사이클러뷰 어답터 설정
+     */
+    private fun initAdapter() {
+        //미용실 목록 리사이클러뷰 어답터 설정
+        shopRecyclerView.adapter = shopListOfDesignerAdapter
+        shopRecyclerView.layoutManager = LinearLayoutManager(this)
+        shopListOfDesignerAdapter.clearList()
+        salonList.clear()
+
+
+
+    }
+
+    /**
+     *  데이터를 어답터에 업데이트
+     */
+    private fun getAndSetMenu(menuReference: DatabaseReference?, Adapter :ShopListOfDesignerAdapter) {
+        menuReference!!.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.children.forEach {
+                    val model = it.getValue(ShopListItem::class.java)
+                    model ?: return
+                    //DB에 변화가 생긴다면
+//
+                    Adapter.addData(model)//어답터에 모델 추가
+                    salonList.add(model)    //미용실 리스트에 모델추가 (마커찍기 메소드에 넣어줄 리스트)
+                    Log.d("markerOn", "item is ${salonList.get(0).name}")
+
+                    /**
+                     * 지도에 마커 찍기
+                     */
+                    updateMarker(model)// 마커 추가해주기
+                }
+                shopListOfDesignerAdapter.notifyDataSetChanged()// 뷰목록 업데이트
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
     }
 
     companion object {

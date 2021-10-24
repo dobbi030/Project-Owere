@@ -221,9 +221,14 @@ class ReserveMenuActivity : AppCompatActivity() {
                     //선택완료 시 커스텀 다이얼로그 띄워주기
                     menuBottomDialogFragment?.show(supportFragmentManager, menuBottomDialogFragment.tag)
 
+                    //프래그먼트로 객체 전달
                     val bundle = bundleOf() //어떤 키에 어떤 값으로 번들을 담겠다
 
+                    //디자이너 정보 전송
                     bundle.putParcelable(DESIGNER_DATA_KEY,designerData)
+                    //선택한 메뉴 전송
+                    bundle.putParcelable("SESLECTED_MENU_DATA_KEY", selectedMenu)
+
                     menuBottomDialogFragment?.arguments = bundle
 
 
@@ -253,4 +258,5 @@ interface CheckboxAddedListener {
 }
 
 var checkBoxlist = mutableListOf<CheckBox>()
+//전달 해줄 객체
 var selectedMenu : StyleMenuItem? = null

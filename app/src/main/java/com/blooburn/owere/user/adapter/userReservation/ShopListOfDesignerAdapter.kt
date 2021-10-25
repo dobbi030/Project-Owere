@@ -11,7 +11,7 @@ import com.blooburn.owere.util.DesignerProfileHandler
 /**
  * 디자이너가 설정한 미용실 리스트를 위한 어답터
  */
-class ShopListOfDesignerAdapter : RecyclerView.Adapter<ShopListOfDesignerAdapter.ViewHolder>(),DesignerProfileHandler{
+class ShopListOfDesignerAdapter(val onItemClicked: (ShopListItem) -> Unit?) : RecyclerView.Adapter<ShopListOfDesignerAdapter.ViewHolder>(),DesignerProfileHandler{
 
 
     private var shopList = mutableListOf<ShopListItem>()
@@ -21,7 +21,12 @@ class ShopListOfDesignerAdapter : RecyclerView.Adapter<ShopListOfDesignerAdapter
 
         fun bind(position: Int) {
 
+
             val shoplist = shopList[position]
+            //컴포넌트 클릭 이벤트 //액티비티에서 구현
+            binding.root.setOnClickListener {
+                onItemClicked(shoplist)
+            }
             //이름
             binding.reserveSalonNameText.text = shoplist.name
             //리뷰 카운트

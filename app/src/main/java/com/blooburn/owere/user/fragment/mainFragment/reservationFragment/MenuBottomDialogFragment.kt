@@ -69,8 +69,6 @@ class MenuBottomDialogFragment : BottomSheetDialogFragment() {
 
         // 선택완료 버튼 리스너
         choiceButton.setOnClickListener {
-
-
             // 디자이너 설정 미용실 액티비티로 이동
             val intent = Intent(requireContext(), ShopsOfDesignerActivity::class.java)
             //디자이너 객체 전송
@@ -81,6 +79,5 @@ class MenuBottomDialogFragment : BottomSheetDialogFragment() {
             intent.putExtra("lengthOption",lengthOption)
             startActivity(intent)
         }
-
     }
 }

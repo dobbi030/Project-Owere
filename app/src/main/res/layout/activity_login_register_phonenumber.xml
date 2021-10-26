@@ -44,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@id/left_arrow" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/continue_Button"
+        android:id="@+id/continue_Button_2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"

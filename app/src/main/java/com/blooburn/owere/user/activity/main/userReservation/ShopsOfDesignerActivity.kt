@@ -3,7 +3,6 @@ package com.blooburn.owere.user.activity.main.userReservation
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.Geocoder
 import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
@@ -20,21 +19,34 @@ import androidx.recyclerview.widget.RecyclerView
 import com.blooburn.owere.R
 
 
-
 import com.blooburn.owere.user.activity.signUpActivity.SetPositionActivity
 import com.blooburn.owere.user.adapter.userReservation.ShopListOfDesignerAdapter
 import com.blooburn.owere.user.item.ShopListItem
+import com.blooburn.owere.user.item.StyleMenuItem
+import com.blooburn.owere.user.item.UserDesignerItem
+import com.blooburn.owere.util.DESIGNER_DATA_KEY
+import com.blooburn.owere.util.databaseInstance
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.selects.select
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
-import kotlin.math.log
 
-class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEventListener {
+
+class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEventListener,
+    MapView.POIItemEventListener {
+
+    private var designerData: UserDesignerItem? = null//프로필에서 전달받을 디자이너 객체
+    private var menu: StyleMenuItem? = null//선택한 메뉴
+
+    //기장 옵션
+    private var lengthOption: String = ""
+    private var selectedShop: ShopListItem? = null //선택할 미용실
+
+    private val databaseReference = databaseInstance.reference
 
     private lateinit var mapView: MapView
 
@@ -57,20 +69,29 @@ class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEven
      * 미용실 리스트
      */
     private var salonList = mutableListOf<ShopListItem>()
+    private var markerList = mutableMapOf<String, ShopListItem>()
 
     //어답터
-    private val shopListOfDesignerAdapter = ShopListOfDesignerAdapter()
+    private val shopListOfDesignerAdapter = ShopListOfDesignerAdapter { shopListItem ->
+        this.let {
+            val intent = Intent(this, ReserveSalonActivity::class.java)
+            //디자이너 객체 전송
+            intent.putExtra(DESIGNER_DATA_KEY, designerData)
+            //선택한 메뉴 객체 전송
+            intent.putExtra("SESLECTED_MENU_DATA_KEY", menu)
+            //메뉴선택메뉴의 옵션 전송(기장 추가)
+            intent.putExtra("lengthOption", lengthOption)
+            startActivity(intent)
+        }
+    }
 
-    /**
-     *임시 디자이너 아이디
-     */
-    val tempDesignerId = "designer0" //
+    //디자이너 아이디
+    var designerId: String? = null
 
-    /**
-     * DB 레퍼런스
-     */
-    val shopsDB =
-        Firebase.database.reference.child("DesignerShops").child(tempDesignerId)
+
+//     DB 레퍼런스
+
+    var shopsDB: DatabaseReference? = null
 
     var REQUIRED_PERMISSIONS = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION)
 
@@ -84,42 +105,17 @@ class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEven
         setContentView(R.layout.activity_shops_of_designer)
 
 
+
+        getDesignerDataFromIntent()
+        setDataReferences()
+
         /**
          * 리사이클러뷰 어답터 설정
          */
+        initAdapter()
 
-        shopRecyclerView.adapter = shopListOfDesignerAdapter
-        shopRecyclerView.layoutManager = LinearLayoutManager(this)
-        shopListOfDesignerAdapter.clearList()
-        salonList.clear()
-
-        shopsDB.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                snapshot.children.forEach {
-                    val model = it.getValue(ShopListItem::class.java)
-                    model ?: return
-                    //DB에 변화가 생긴다면
-//
-                    shopListOfDesignerAdapter.addData(model)//어답터에 모델 추가
-                    salonList.add(model)    //미용실 리스트에 모델추가 (마커찍기 메소드에 넣어줄 리스트)
-                    Log.d("markerOn", "item is ${salonList.get(0).name}")
-
-                    /**
-                     * 지도에 마커 찍기
-                     */
-                    updateMarker(model)// 마커 추가해주기
-                }
-                shopListOfDesignerAdapter.notifyDataSetChanged()// 뷰목록 업데이트
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-
-        })
-
-
-
+        //데이터를 어답터에 업데이트
+        getAndSetShop(shopsDB, shopListOfDesignerAdapter)
 
         /**
          * 맵뷰 추가
@@ -177,11 +173,11 @@ class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEven
 
 
         val marker = MapPOIItem()
-        Log.d("markerOn", "marking")
-        Log.d("markerOn", "shop is $shop.name")
+        markerList.put(shop.name, shop)
         marker.apply {
+
             itemName = shop.name   // 마커 이름
-            mapPoint = MapPoint.mapPointWithGeoCoord(37.461384, 126.900345)   // 좌표
+            mapPoint = MapPoint.mapPointWithGeoCoord(shop.latitude, shop.longitude)   //  미용실좌표
             tag = 0
             markerType = MapPOIItem.MarkerType.CustomImage          // 마커 모양 (커스텀)
             customImageResourceId = R.drawable.place_marker            // 커스텀 마커 이미지
@@ -366,11 +362,120 @@ class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEven
 
     }
 
+    /**
+     * 수신 인텐트로 전달받은 디자이너 정보 저장
+     */
+    private fun getDesignerDataFromIntent() {
+        val extras = intent.extras  // 송신 액티비티가 보낸 데이터 참조
+        if (extras == null) {
+            finish()
+        }
+
+        designerData = extras!!.getParcelable(DESIGNER_DATA_KEY)   // DesignerData 객체 읽기
+        menu = extras!!.getParcelable("SESLECTED_MENU_DATA_KEY") //선택한 메뉴 객체 읽기
+        lengthOption = extras.getString("lengthOption").toString()//선택한 옵션
+
+        if (designerData == null) { //디자이너 객체가 없다면 종료
+            finish()
+        }
+    }
+
+    /**
+     * 디자이너 아이디로 DB Reference 설정
+     */
+    private fun setDataReferences() {
+        // 디자이너의 데이터 참조
+        //DB 사용할 레퍼런스 초기화 (designerPriceChart -> 디자이너 Id -> 메뉴들)
+        designerId = designerData?.designerId.toString();
+
+        //디자이너 아이디
+        shopsDB = databaseReference.child("DesignerShops").child(designerId!!)
+    }
+
+    /**
+     * 리사이클러뷰 어답터 설정
+     */
+    private fun initAdapter() {
+        //미용실 목록 리사이클러뷰 어답터 설정
+        shopRecyclerView.adapter = shopListOfDesignerAdapter
+        shopRecyclerView.layoutManager = LinearLayoutManager(this)
+        shopListOfDesignerAdapter.clearList()
+        salonList.clear()
+    }
+
+    /**
+     *  데이터를 어답터에 업데이트
+     */
+    private fun getAndSetShop(
+        menuReference: DatabaseReference?,
+        Adapter: ShopListOfDesignerAdapter
+    ) {
+        menuReference!!.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.children.forEach {
+                    val model = it.getValue(ShopListItem::class.java)
+                    model ?: return
+
+                    //DB에 변화가 생긴다면
+
+                    Adapter.addData(model)//어답터에 모델 추가
+                    salonList.add(model)    //미용실 리스트에 모델추가 (마커찍기 메소드에 넣어줄 리스트)
+                    Log.d("markerOn", "item is ${salonList.get(0).name}")
+
+                    /**
+                     * 지도에 마커 찍기
+                     */
+                    updateMarker(model) //마커 추가해주기
+                }
+                shopListOfDesignerAdapter.notifyDataSetChanged()// 뷰목록 업데이트
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
+    }
+
     companion object {
         val PERMISSION_REQUEST_CODE = 100
         val GPS_ENABLE_REQUEST_CODE = 2001
 
         val LOG_TAG = "MainActivity"
+    }
+
+    //마커 클릭 관련인터페이스 implement
+    override fun onPOIItemSelected(p0: MapView?, p1: MapPOIItem?) {
+
+    }
+
+    override fun onCalloutBalloonOfPOIItemTouched(p0: MapView?, p1: MapPOIItem?) {
+
+    }
+
+    //마커 풍선 클릭 시 다음 액티비티로 이동
+    override fun onCalloutBalloonOfPOIItemTouched(
+        p0: MapView?,
+        p1: MapPOIItem?,
+        p2: MapPOIItem.CalloutBalloonButtonType?
+    ) {
+        val intent = Intent(this, ReserveSalonActivity::class.java)
+        selectedShop = markerList.get(p1!!.itemName)
+
+        intent.putExtra("selectedShop", selectedShop)
+
+        //디자이너 객체 전송
+        intent.putExtra(DESIGNER_DATA_KEY, designerData)
+        //선택한 메뉴 객체 전송
+        intent.putExtra("SESLECTED_MENU_DATA_KEY", menu)
+        //메뉴선택메뉴의 옵션 전송(기장 추가)
+        intent.putExtra("lengthOption", lengthOption)
+        startActivity(intent)
+
+    }
+
+    override fun onDraggablePOIItemMoved(p0: MapView?, p1: MapPOIItem?, p2: MapPoint?) {
+
     }
 
 }

@@ -30,13 +30,12 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="47dp"
         android:layout_marginTop="208dp"
-
-        android:src="@drawable/ic_chevron_right"
+        android:src="@drawable/main_linear_gradient_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/cantLogin_Button"
+        android:id="@+id/cannot_login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"

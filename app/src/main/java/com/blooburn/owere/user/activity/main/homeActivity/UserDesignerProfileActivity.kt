@@ -1,5 +1,6 @@
 package com.blooburn.owere.user.activity.main.homeActivity
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -7,10 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.Toolbar
 import androidx.viewpager2.widget.ViewPager2
 import com.blooburn.owere.R
 import com.blooburn.owere.databinding.ItemPriceMenuBinding
+import com.blooburn.owere.user.activity.main.userReservation.ReserveMenuActivity
 import com.blooburn.owere.user.adapter.home.DesignerPortfolioSliderAdapter
 import com.blooburn.owere.user.fragment.mainFragment.homeFragment.AllPricesFragment
 import com.blooburn.owere.user.item.StyleMenuItem
@@ -52,8 +55,8 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
 
         initDataAndView() // 모든 뷰의 데이터 초기화 작업
 
-        val priceButton = findViewById<Button>(R.id.button_user_designer_profile_prices)
-        priceButton.setOnClickListener(priceClickListener)
+        initButton()
+
     }
 
     /**
@@ -309,4 +312,23 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
         return super.onOptionsItemSelected(item)
     }
     */
+
+    /**
+     * 버튼 초기화
+     */
+    private fun initButton(){
+        val priceButton = findViewById<Button>(R.id.button_user_designer_profile_prices)
+        priceButton.setOnClickListener(priceClickListener)
+
+        //예약하기 버튼
+        val reserveButton = findViewById<AppCompatButton>(R.id.button_user_designer_profile_reserve)
+        reserveButton.setOnClickListener {
+            //예약하기의 메뉴선택 액티비티로 전환, 디자이너 객체 정보 전달
+            val intent = Intent(this, ReserveMenuActivity::class.java)
+            intent.putExtra(DESIGNER_DATA_KEY,designerData)
+            startActivity(intent)
+        }
+        //채팅하기 버튼
+        val chattingButton = findViewById<AppCompatButton>(R.id.button_user_designer_profile_chatting)
+    }
 }

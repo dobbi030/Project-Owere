@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Owere"
         android:usesCleartextTraffic="true">
-        <activity android:name=".user.activity.main.mypageActivity.SettingActivity"></activity>
+        <activity android:name=".user.activity.main.userReservation.ReserveSalonActivity"></activity>
+        <activity android:name=".user.activity.main.mypageActivity.SettingActivity" />
         <activity android:name=".user.activity.main.mypageActivity.IntroduceActivity" />
         <activity android:name=".user.activity.main.mypageActivity.AlarmSettingActivity" />
         <activity android:name=".user.activity.main.mypageActivity.QnaActivity" />
@@ -39,24 +40,24 @@
             android:name=".user.activity.loginActivity.LoginActivityEmail"
             android:exported="true" />
         <activity android:name=".user.activity.signUpActivity.SetPositionActivity" />
-        <activity android:name=".user.activity.main.UserMainActivity" >
-
-        </activity>
+        <activity android:name=".user.activity.main.UserMainActivity" />
         <activity android:name=".user.activity.loginActivity.LoginActivityTemp" />
         <activity android:name=".user.activity.loginActivity.LoginActivityChoice" />
         <activity android:name=".user.activity.signUpActivity.SignUpActivity1_choice" />
         <activity android:name=".user.activity.MainActivity">
-
-        </activity>
-        <activity android:name=".user.activity.main.homeActivity.UserDesignerProfileActivity" />
-
-        <activity android:name=".designer.activity.main.DesignerMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".user.activity.main.homeActivity.UserDesignerProfileActivity" />
+        <activity android:name=".user.activity.main.userReservation.ShopsOfDesignerActivity"></activity>
+        <activity android:name=".user.activity.main.userReservation.ReserveMenuActivity">
+
+        </activity>
+
+        <activity android:name=".designer.activity.main.DesignerMainActivity" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"

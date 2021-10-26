@@ -325,6 +325,7 @@
         android:paddingBottom="8dp">
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_user_designer_profile_chatting"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="3dp"
@@ -336,6 +337,7 @@
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_user_designer_profile_reserve"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="3dp"

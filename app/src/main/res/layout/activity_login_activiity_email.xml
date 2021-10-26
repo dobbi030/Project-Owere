@@ -30,24 +30,24 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="47dp"
         android:layout_marginTop="208dp"
-        android:background="@drawable/ic_owere_white_1"
+        android:background="@drawable/main_linear_gradient_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/cantLogin_Button"
+        android:id="@+id/cannot_login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
         android:text="@string/cannot_login"
         android:textColor="@color/white"
         android:textSize="12sp"
-        app:layout_constraintTop_toBottomOf="@id/continue_Button"
+        app:layout_constraintTop_toBottomOf="@id/continue_Button_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/continue_Button"
+        android:id="@+id/continue_Button_2"
         android:layout_width="0dp"
         android:layout_height="47dp"
         android:layout_marginHorizontal="32dp"
@@ -57,7 +57,7 @@
         android:text="@string/login_continue"
         android:textColor="@color/white"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/cantLogin_Button"
+        app:layout_constraintBottom_toTopOf="@+id/cannot_login_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/email_box" />
@@ -73,9 +73,9 @@
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/continue_Button"
-        app:layout_constraintEnd_toEndOf="@id/continue_Button"
-        app:layout_constraintStart_toStartOf="@id/continue_Button"
+        app:layout_constraintBottom_toTopOf="@id/continue_Button_2"
+        app:layout_constraintEnd_toEndOf="@id/continue_Button_2"
+        app:layout_constraintStart_toStartOf="@id/continue_Button_2"
         app:layout_constraintTop_toBottomOf="@id/owere_white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

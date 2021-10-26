@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_designer_profile_share"
+        android:title="search"
+        android:icon="@drawable/ic_baseline_search_48"
+        android:iconTint="@color/black"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_designer_profile_favorite"
+        android:title="notification"
+        android:icon="@drawable/ic_notification_filled"
+        android:iconTint="@color/black"
+        app:showAsAction="always" />
+</menu>

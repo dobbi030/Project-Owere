@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="16dp">
+
+
+    <ImageView
+        android:id="@+id/image_reserved_user"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/text_reserved_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="이희원 님"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintBottom_toTopOf="@id/text_reserved_user_shop"
+        app:layout_constraintStart_toEndOf="@id/image_reserved_user"
+        app:layout_constraintTop_toTopOf="@id/image_reserved_user" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/button_reserved_user_chat"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/ic_chat_bubble"
+        android:tint="@color/blue_main_background"
+        app:layout_constraintBottom_toBottomOf="@id/text_reserved_user_name"
+        app:layout_constraintStart_toEndOf="@id/text_reserved_user_name"
+        app:layout_constraintTop_toTopOf="@id/text_reserved_user_name" />
+
+    <TextView
+        android:id="@+id/text_reserved_user_shop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="오월 미용실"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/text_reserved_user_time"
+        app:layout_constraintStart_toStartOf="@id/text_reserved_user_name"
+        app:layout_constraintTop_toBottomOf="@id/text_reserved_user_name" />
+
+    <TextView
+        android:id="@+id/text_reserved_user_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="매칭률 98%"
+        android:textColor="@color/gray_cc"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@id/image_reserved_user"
+        app:layout_constraintStart_toStartOf="@id/text_reserved_user_name"
+        app:layout_constraintTop_toBottomOf="@id/text_reserved_user_shop" />
+
+    <ImageButton
+        android:layout_width="8dp"
+        android:layout_height="12dp"
+        android:src="@drawable/ic_baseline_chevron_right_24"
+        app:layout_constraintTop_toTopOf="@id/image_reserved_user"
+        app:layout_constraintBottom_toBottomOf="@id/image_reserved_user"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/black" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

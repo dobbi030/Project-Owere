@@ -55,7 +55,7 @@ class UserMainActivity : AppCompatActivity() {
                 R.id.browse -> replaceFragment(browseFragment)
                 R.id.chatting -> replaceFragment(chattingFragment)
                 R.id.reservation -> replaceFragment(reservationFragment)
-                else -> {replaceFragment(myPageFragment)}
+                else -> replaceFragment(myPageFragment)
             }
 
             true

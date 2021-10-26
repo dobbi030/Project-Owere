@@ -65,4 +65,10 @@
 
     <!--activity_user_designer_profile-->
     <string name="see_all_prices">가격 전체보기</string>
+
+    <!--designer_confirmed_reservation_fragment -->
+    <string name="today">TODAY</string>
+    <string name="scheduled_reservation">예정된 예약</string>
+    <string name="completed_reservation">완료된 예약</string>
+    <string name="total_reservation_count">전체 <font color="#00CCFF">%d</font>건</string>
 </resources>

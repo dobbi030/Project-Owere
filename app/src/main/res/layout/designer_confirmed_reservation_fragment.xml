@@ -26,10 +26,11 @@
             android:textSize="25sp"
             android:textStyle="bold" />
 
-        <CalendarView
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
             android:id="@+id/calendar_designer_confirmed_reservation"
             android:layout_width="match_parent"
-            android:layout_height="374dp" />
+            android:layout_height="374dp"
+            app:mcv_selectionColor="@color/purple_calendar"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

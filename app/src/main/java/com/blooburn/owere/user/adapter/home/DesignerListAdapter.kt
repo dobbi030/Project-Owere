@@ -30,7 +30,12 @@ class DesignerListAdapter :
             binding.textUserDesignerMatching.text =
                 this.itemView.context.getString(R.string.matching_rate, designer.matchingRate)
             binding.textUserDesignerStar.text = convertRatingToStar(designer.rating)
-            bindProfileImage(this.itemView, binding.imageUserDesigner, designer.profileImagePath, true)
+            bindProfileImage(
+                this.itemView,
+                binding.imageUserDesigner,
+                designer.profileImagePath,
+                true
+            )
         }
     }
 
@@ -47,11 +52,12 @@ class DesignerListAdapter :
         holder.bind(position)
 
         // 디자이너 프로필 화면을 띄운다
-        holder.itemView.setOnClickListener{
+        holder.itemView.setOnClickListener {
             // 디자이너 객체 전달
-            val intent = Intent(holder.itemView.context, UserDesignerProfileActivity::class.java).apply{
-                putExtra(DESIGNER_DATA_KEY, designerList[position])
-            }
+            val intent =
+                Intent(holder.itemView.context, UserDesignerProfileActivity::class.java).apply {
+                    putExtra(DESIGNER_DATA_KEY, designerList[position])
+                }
 
             holder.itemView.context.startActivity(intent)
         }
@@ -65,7 +71,7 @@ class DesignerListAdapter :
     fun clearList() = designerList.clear()
 
     // 다자이너 아이템 추가
-    fun addData(designerInfo: UserDesignerItem){
+    fun addData(designerInfo: UserDesignerItem) {
         designerList.add(designerInfo)
     }
 }

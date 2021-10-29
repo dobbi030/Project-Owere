@@ -71,4 +71,7 @@
     <string name="scheduled_reservation">예정된 예약</string>
     <string name="completed_reservation">완료된 예약</string>
     <string name="total_reservation_count">전체 <font color="#00CCFF">%d</font>건</string>
+    <string name="settling_fee"><font color="#FF0000">정산하기</font></string>
+    <string name="settlement_completed"><font color="#00CCFF">정산완료</font></string>
+    <string name="reservation_time">%1$s ~ %2$s</string>
 </resources>

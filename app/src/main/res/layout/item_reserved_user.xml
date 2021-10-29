@@ -65,13 +65,26 @@
         app:layout_constraintStart_toStartOf="@id/text_reserved_user_name"
         app:layout_constraintTop_toBottomOf="@id/text_reserved_user_shop" />
 
-    <ImageButton
-        android:layout_width="8dp"
-        android:layout_height="12dp"
+    <ImageView
+        android:id="@+id/image_reserved_user_arrow"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:visibility="gone"
         android:src="@drawable/ic_baseline_chevron_right_24"
-        app:layout_constraintTop_toTopOf="@id/image_reserved_user"
-        app:layout_constraintBottom_toBottomOf="@id/image_reserved_user"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="@color/black" />
 
+    <TextView
+        android:id="@+id/text_reserved_user_settle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/settling_fee"
+        android:textColor="@color/red"
+        android:textSize="10sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/black" />
 </androidx.constraintlayout.widget.ConstraintLayout>

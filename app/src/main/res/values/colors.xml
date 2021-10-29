@@ -15,4 +15,5 @@
     <color name="light_gray">#F8F8F8</color>
     <color name="dark_gray">#484C4F</color>
     <color name="red">#FF0000</color>
+    <color name="purple_calendar">#855CF8</color>
 </resources>

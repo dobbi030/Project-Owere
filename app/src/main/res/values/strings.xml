@@ -23,9 +23,9 @@
     <string name="send_email">이메일 보내기</string>
     <string name="explain_back_to_login_arrow">로그인 화면으로 돌아가는 화살표 모양의 버튼</string>
     <string name="announce_write_correct_email">올바른 이메일 주소를 입력하세요.</string>
-    <string name="icon_of_kakaotalk">Icon of kakaotalk</string>
-    <string name="icon_of_facebook">Icon of facebook</string>
-    <string name="icon_of_email">Icon of email</string>
+    <string name="icon_kakaotalk">Icon kakaotalk</string>
+    <string name="icon_facebook">Icon facebook</string>
+    <string name="icon_google">Icon google</string>
 
     <!-- user_home_designer_fragment -->
     <string name="favorite_designer">즐겨찾는 디자이너</string>
@@ -65,4 +65,6 @@
 
     <!--activity_user_designer_profile-->
     <string name="see_all_prices">가격 전체보기</string>
+
+    <string name="firebase_web_client_id">"260202805759-p5ff8qashfb05ab9p13ui7f329326h6b.apps.googleusercontent.com"</string>
 </resources>

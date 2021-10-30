@@ -30,7 +30,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
-import kotlinx.coroutines.selects.select
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
@@ -106,7 +105,7 @@ class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEven
 
 
 
-        getDesignerDataFromIntent()
+        getDataFromIntent()
         setDataReferences()
 
         /**
@@ -365,7 +364,7 @@ class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEven
     /**
      * 수신 인텐트로 전달받은 디자이너 정보 저장
      */
-    private fun getDesignerDataFromIntent() {
+    private fun getDataFromIntent() {
         val extras = intent.extras  // 송신 액티비티가 보낸 데이터 참조
         if (extras == null) {
             finish()
@@ -460,6 +459,7 @@ class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEven
         p2: MapPOIItem.CalloutBalloonButtonType?
     ) {
         val intent = Intent(this, ReserveSalonActivity::class.java)
+        //전달받은 MapPOIItem의 이름으로 가진 미용실객체를 맵에서 꺼내옴
         selectedShop = markerList.get(p1!!.itemName)
 
         intent.putExtra("selectedShop", selectedShop)
@@ -477,5 +477,7 @@ class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEven
     override fun onDraggablePOIItemMoved(p0: MapView?, p1: MapPOIItem?, p2: MapPoint?) {
 
     }
+
+
 
 }

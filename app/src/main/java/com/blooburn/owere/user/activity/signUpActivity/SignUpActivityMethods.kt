@@ -24,7 +24,10 @@ class SignUpActivityMethods : AppCompatActivity() {
     private val googleSignInButton: SignInButton by lazy { findViewById(R.id.sign_in_button_google) }
 
     // Google Login result
-    private val RC_SIGN_IN = 9001
+    companion object {
+        private const val TAG = "GoogleActivity"
+        private const val RC_SIGN_IN = 9001
+    }
 
     // Google Api Client
     private lateinit var googleSignInClient: GoogleSignInClient
@@ -48,15 +51,14 @@ class SignUpActivityMethods : AppCompatActivity() {
         // Initialize Firebase Auth
         auth = Firebase.auth
 
+        if(auth.currentUser!=null){
+            Toast.makeText(this, "기존 아이디를 로그아웃합니다.", Toast.LENGTH_SHORT).show()
+            auth.signOut()
+        }
+
         googleSignInButton.setOnClickListener {
 
-            if(auth.currentUser!=null){
-                Toast.makeText(this, "기존 아이디를 로그아웃합니다.", Toast.LENGTH_SHORT).show()
-                auth.signOut()
-            }
-
-            val signInIntent = googleSignInClient.signInIntent
-            startActivityForResult(signInIntent, RC_SIGN_IN)
+            signIn()
         }
     }
 
@@ -106,16 +108,33 @@ class SignUpActivityMethods : AppCompatActivity() {
     }
 
 
-    override fun onStart() {
-        super.onStart()
+    //은선님의 실수
+    //액티비티 시작되었을 때
+
+//    override fun onStart() {
+//        super.onStart()
+//
+    //액티비티 생성되자마자 구글로그인이 되어있는 상황이라서 상호님이 바로 다음액티비티로 넘어가게 되는 상황발생
+//        val currentUser = auth.currentUser
+//        updateUI(currentUser)
+//
+//    }
+
+    // onStart말고 onRestart로 옮김으로서 로그인계정 선택 이후에 updateUI함수가 호출되도록 변경
+    override fun onRestart() {
+        super.onRestart()
         // Check if user is signed in (non-null) and update UI accordingly.
+
         val currentUser = auth.currentUser
         updateUI(currentUser)
     }
 
 
     private fun updateUI(account: FirebaseUser?) {
+        //로그인이 되어있다면 다음 액티비티 실행
+
         if (account != null) {
+
             val intent: Intent = Intent(this, SignUpActivity1_choice::class.java)
             startActivity(intent)
 //        finish()
@@ -123,4 +142,9 @@ class SignUpActivityMethods : AppCompatActivity() {
             Log.d(TAG, "Google Sign In is failed: FirebaseUser is null")
         }
     }
+
+    
 }
+
+
+

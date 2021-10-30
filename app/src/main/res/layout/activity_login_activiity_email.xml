@@ -8,7 +8,7 @@
     tools:context=".user.activity.loginActivity.LoginActivityEmail">
 
     <TextView
-        android:id="@+id/nothing"
+        android:id="@+id/explain_owere"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"

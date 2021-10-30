@@ -9,7 +9,7 @@
     tools:context=".user.activity.MainActivity">
 
     <TextView
-        android:id="@+id/nothing"
+        android:id="@+id/explain_owere"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
@@ -28,8 +28,8 @@
         android:text="OWERE"
         android:textColor="@color/white"
         android:textSize="40sp"
-        app:layout_constraintStart_toStartOf="@id/nothing"
-        app:layout_constraintTop_toBottomOf="@id/nothing" />
+        app:layout_constraintStart_toStartOf="@id/explain_owere"
+        app:layout_constraintTop_toBottomOf="@id/explain_owere" />
 
     <TextView
         android:id="@+id/cannot_login_button"

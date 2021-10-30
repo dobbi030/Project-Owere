@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="google_style">
+        <item name="font">
+            @font/roboto_medium
+        </item>
+        <item name="android:textSize">
+            14sp
+        </item>
+        <item name="android:textColor">
+            @color/white
+        </item>
+    </style>
 </resources>

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "260202805759-lcgq2ih5ntigd1m7rjca11hhapd10ort.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.blooburn.owere",
+            "certificate_hash": "15ce4117bcc52458e972976a80e0c7967a992a77"
+          }
+        },
+        {
           "client_id": "260202805759-p5ff8qashfb05ab9p13ui7f329326h6b.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -28,7 +36,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "260202805759-p5ff8qashfb05ab9p13ui7f329326h6b.apps.googleusercontent.com",
+              "client_id": "260202805759-0dmoc0sergs0fmnqp1k97lgtk5mrkbej.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

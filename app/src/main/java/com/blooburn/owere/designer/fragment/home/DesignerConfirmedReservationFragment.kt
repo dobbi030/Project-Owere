@@ -12,6 +12,7 @@ import com.blooburn.owere.designer.adapter.home.DesignerReservationListAdapter
 import com.blooburn.owere.designer.item.DesignerReservation
 import com.blooburn.owere.util.CustomDividerDecoration
 import com.blooburn.owere.util.TypeOfDesignerReservation
+import com.blooburn.owere.util.ZONE_ID
 import com.blooburn.owere.util.databaseInstance
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -19,7 +20,11 @@ import com.google.firebase.database.ValueEventListener
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalTime
+import org.threeten.bp.ZoneId
 import org.threeten.bp.temporal.ChronoField
+import java.sql.Timestamp
+import java.text.SimpleDateFormat
+import java.util.*
 
 class DesignerConfirmedReservationFragment :
     Fragment(R.layout.designer_confirmed_reservation_fragment) {

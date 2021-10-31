@@ -7,7 +7,10 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.blooburn.owere.R
+import com.blooburn.owere.user.item.ShopListItem
+import com.blooburn.owere.user.item.StyleMenuItem
 import com.blooburn.owere.user.item.UserDesignerItem
+import com.blooburn.owere.util.DESIGNER_DATA_KEY
 import com.blooburn.owere.util.DesignerProfileHandler
 import com.blooburn.owere.util.databaseInstance
 import com.blooburn.owere.util.storageInstance
@@ -15,9 +18,19 @@ import com.bumptech.glide.Glide
 import com.google.firebase.database.DatabaseReference
 
 //예약하기 액티비티 (날짜, 시간 예약)
-class ReserveActivity : AppCompatActivity(), DesignerProfileHandler {
+class ReserveTimeActivity : AppCompatActivity(), DesignerProfileHandler {
 
+    //프로필에서 전달받을 디자이너 객체
     private var designerData: UserDesignerItem? = null
+    //전달받을 선택한 메뉴
+    private var menu: StyleMenuItem? = null
+
+    //전달받을 기장 옵션
+    private var lengthOption: String = ""
+    //전달받을 선택할 미용실
+    private var selectedShop: ShopListItem? = null
+
+
 
     private val databaseReference = databaseInstance.reference
     private val storageReference = storageInstance.reference
@@ -34,26 +47,12 @@ class ReserveActivity : AppCompatActivity(), DesignerProfileHandler {
     }
 
     private fun initDataAndView(){
-        // 수신 인텐트로 전달받은 디자이너 정보 저장
-        getDesignerDataFromIntent()
+        // 수신 인텐트로 전달받을 정보 할당
+        getDataFromIntent()
         setDataReferences()// 디자이너 아이디로 DB에서 데이터들 Reference 설정
 
         setDesignerInformation()
 
-    }
-    /**
-     * 수신 인텐트로 전달받은 디자이너 정보 저장
-     */
-    private fun getDesignerDataFromIntent() {
-        val extras = intent.extras  // 송신 액티비티가 보낸 데이터 참조
-        if (extras == null) {
-            finish()
-        }
-
-        designerData = extras!!.getParcelable("designerData")   // DesignerData 객체 읽기
-        if (designerData == null) {
-            finish()
-        }
     }
 
     /**
@@ -109,6 +108,25 @@ class ReserveActivity : AppCompatActivity(), DesignerProfileHandler {
             var intent = Intent(this, ReserveMenuActivity::class.java)
             intent.putExtra("designerData",designerData)
             startActivity(intent)
+        }
+    }
+
+    /**
+     * 수신 인텐트로 전달받은 디자이너 정보 저장
+     */
+    private fun getDataFromIntent() {
+        val extras = intent.extras  // 송신 액티비티가 보낸 데이터 참조
+        if (extras == null) {
+            finish()
+        }
+
+        designerData = extras!!.getParcelable(DESIGNER_DATA_KEY)   // DesignerData 객체 읽기
+        menu = extras!!.getParcelable("SESLECTED_MENU_DATA_KEY") //선택한 메뉴 객체 읽기
+        lengthOption = extras.getString("lengthOption").toString()//선택한 옵션
+        selectedShop = extras.getParcelable("selectedShop")// 선택한 미용실 객체읽기
+
+        if (designerData == null) { //디자이너 객체가 없다면 종료
+            finish()
         }
     }
 

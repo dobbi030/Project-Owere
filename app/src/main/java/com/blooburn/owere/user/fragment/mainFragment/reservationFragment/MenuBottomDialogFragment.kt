@@ -38,8 +38,8 @@ class MenuBottomDialogFragment : BottomSheetDialogFragment() {
         //디자이너 객체 받기
         designerData = bundle.getParcelable<Parcelable>(DESIGNER_DATA_KEY) as UserDesignerItem?
         menu = bundle.getParcelable<Parcelable>("SESLECTED_MENU_DATA_KEY") as StyleMenuItem?
-        Log.d(DESIGNER_DATA_KEY,designerData!!.name)
-        Log.d("SESLECTED_MENU_DATA_KEY",menu!!.menuName)
+        //Log.d(DESIGNER_DATA_KEY,designerData!!.name)
+        //Log.d("SESLECTED_MENU_DATA_KEY",menu!!.menuName)
 
         //전달해줄 기장 옵션
         var lengthOption :String = "기본+0"

@@ -8,10 +8,14 @@ import android.util.Log
 import android.view.View
 
 import android.widget.TextView
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.blooburn.owere.R
 import com.blooburn.owere.databinding.ActivityReserveMenuBinding
 import com.blooburn.owere.databinding.ActivityReserveTimeBinding
 import com.blooburn.owere.designer.item.DesignerReservation
+import com.blooburn.owere.user.adapter.userReservation.ReserveTimeAdapter
 import com.blooburn.owere.user.item.ShopListItem
 import com.blooburn.owere.user.item.StyleMenuItem
 import com.blooburn.owere.user.item.UserDesignerItem
@@ -54,6 +58,13 @@ class ReserveTimeActivity : AppCompatActivity(), DesignerProfileHandler {
     private val storageReference = storageInstance.reference
     private lateinit var designerReference: DatabaseReference
 
+    //시간 선택 버튼 리사이클러뷰
+    private val timeTabRecyclerView: RecyclerView by lazy {
+        findViewById(R.id.time_button_recyclerview)
+    }
+
+    private val timeTabAdapter = ReserveTimeAdapter()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,8 +79,11 @@ class ReserveTimeActivity : AppCompatActivity(), DesignerProfileHandler {
         // 수신 인텐트로 전달받을 정보 할당
         getDataFromIntent()
         setDataReferences()// 디자이너 아이디로 DB에서 데이터들 Reference 설정
-
         setDesignerInformation()
+
+        timeTabRecyclerView.adapter= timeTabAdapter
+        timeTabRecyclerView.layoutManager = GridLayoutManager(this,2)
+        timeTabAdapter.clearData()
 
     }
 
@@ -167,10 +181,11 @@ class ReserveTimeActivity : AppCompatActivity(), DesignerProfileHandler {
 
 //
         //오늘인 경우
-            //1. 현재시간 이전의 좌석 이용불가
-        var i = 0;
+            //1. 현재 이전시간의 좌석 예약불가
+
         for (i in 0..nowHour * 2) {
-            //현재시간 이전의 이용가능 좌석 개수 으로 초기화
+            //현재시간 이전의 이용가능 좌석 개수 0으로 초기화
+                //ex)
                 //00시 ->timeArray[0], 00시 30분 -> timeArray[1]
                 //01시 ->timeArray[2], 01시 30분 -> timeArray[3]
                 //02시 ->timeArray[4], 02시 30분 -> timeArray[5]
@@ -182,9 +197,9 @@ class ReserveTimeActivity : AppCompatActivity(), DesignerProfileHandler {
 
             //30분인 경우
         if(nowMinute !=0){
-            timeArray[i+1] = 0
+            timeArray[nowHour * 2+1] = 0
         }
-        i = 0
+
 
 
         /*TODO
@@ -192,10 +207,14 @@ class ReserveTimeActivity : AppCompatActivity(), DesignerProfileHandler {
                 timeArray[start시간]~ timeArray[end시간] -> timeArray[i]-- 자리 1씩 감소
                 디자이너 예약 DB와 미용실 예약 DB둘다 조회
                  */
+
         //예약된 시간 확인
         val reservationsReferencePath = "designerReservations/${designerData?.designerId}/"
 
+        //캘린더 현재 시간 설정
         binding?.reserveCalendarView!!.currentDate = CalendarDay.today()
+
+        //달력
         binding?.reserveCalendarView!!.setOnDateChangedListener{calendarView, date, isSelected ->
 
             if(isSelected){
@@ -208,11 +227,8 @@ class ReserveTimeActivity : AppCompatActivity(), DesignerProfileHandler {
 
 
                                 //들어온 예약 리스트 DB 조회
-                                val scheduledList = mutableListOf<DesignerReservation>()
 
                                 // 반환된 값은 0에서 24 * 60 * 60 – 1 사이 *1000
-                                val currentTime = LocalTime.now().toSecondOfDay() * 1000
-
                                 snapshot.children.forEach { reservationSnapshot ->
                                     val reservation =
                                         reservationSnapshot.getValue(DesignerReservation::class.java)
@@ -220,15 +236,24 @@ class ReserveTimeActivity : AppCompatActivity(), DesignerProfileHandler {
                                     Log.d("시간", "currentTime: $currentTime, endTime: ${reservation?.endTime!!}")
                                     // 끝나는 시간이 현재 시간을 지났을 때
                                     if (currentTime < reservation?.endTime!!) {
-                                        //reservation.startTime// 이거 시간 분 값 얻은 후 배열로 바꿔줌
+                                        //reservation.startTime
+                                        // 이거 시간 분 값 얻은 후 배열로 바꿔줌
                                         var startHour = LocalTime.ofSecondOfDay(reservation.startTime).hour
-                                        var startMin = LocalTime.ofSecondOfDay(reservation.startTime).minute
+                                        var startMin = 0
+                                        if(LocalTime.ofSecondOfDay(reservation.startTime).minute!=0){
+                                            startMin=1
+                                        }
 
                                         var endHour = LocalTime.ofSecondOfDay(reservation.endTime).hour
-                                        var endMin = LocalTime.ofSecondOfDay(reservation.endTime).minute
+                                        var endMin = 0
+                                        if(LocalTime.ofSecondOfDay(reservation.endTime).minute!=0){
+                                            endMin =1
+                                        }
+
+
 
                                         //예약되어있는 시간의 자리 수 1씩 감소
-                                        for( i in startHour*2 ..endHour*2){
+                                        for( i in startHour*2+startMin ..endHour*2+endMin){
                                             timeArray[i]--
                                             if(timeArray[i]==0){
                                                 continue
@@ -236,8 +261,6 @@ class ReserveTimeActivity : AppCompatActivity(), DesignerProfileHandler {
                                         }
 
 
-                                    }else{
-                                        scheduledList.add(reservation)
                                     }
                                 }
 
@@ -261,12 +284,14 @@ class ReserveTimeActivity : AppCompatActivity(), DesignerProfileHandler {
         //짝수 일 때
         for(i in 0 until 46 step 2){
             if(timeArray[i]!=0){
+
                 /*TODO
                     i/2 시 자리 있음 리사이클러뷰 어답터에 넘겨줌 -> i/2 시 예약 버튼 생성
                     ex) timeArray[6] -> 3시 자리 있음
-
-
                  */
+
+                timeTabAdapter.addData(String.format("%02d",i/2)+":00")
+
             }
 
         }
@@ -278,6 +303,7 @@ class ReserveTimeActivity : AppCompatActivity(), DesignerProfileHandler {
                     ex) timeArray[7] -> 3시 30분 자리 있음
 
                  */
+                timeTabAdapter.addData(String.format("%02d",i/2)+":30")
             }
 
         }
@@ -286,19 +312,7 @@ class ReserveTimeActivity : AppCompatActivity(), DesignerProfileHandler {
     }
 
 
-    // 년월일 -> LocalDate
-    // val date2 = LocalDate.of(2021, 11, 2)
-    // 이런 방식 외에도 LocalDate나 LocalTime으로 변환하는 방법이 더 있는 것 같습니다.
 
-    // LocalDate -> (Long) epoch day
-    // date0.getLong(ChronoField.EPOCH_DAY)
-
-    // LocalDate -> time stamp, milliseconds (epoch time)
-    // LocalDate.atStartOfDay().atZone(ZoneId.of(ZONE_ID)).toEpochSecond()
-
-    // LocalTime -> time stamp, milliseconds (epoch time)
-    // val time0_1 = LocalTime.of(10, 30).toSecondOfDay() * 1000
-    // -> 10시30분을 밀리세컨드로 변환
 
 
 }

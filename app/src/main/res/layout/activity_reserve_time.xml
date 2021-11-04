@@ -43,25 +43,22 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-
-
             <LinearLayout
                 android:id="@+id/reserve_activity_designer_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/reserve_back_button"
-                android:layout_marginTop="3dp">
-                <include
-                android:id="@+id/reserve_activity_designer_profile"
-                layout="@layout/item_user_designer_list"
+                app:layout_constraintTop_toBottomOf="@id/reserve_back_button">
 
-                 />
+                <include
+                    android:id="@+id/reserve_activity_designer_profile"
+                    layout="@layout/item_user_designer_list"
+
+                    />
 
 
             </LinearLayout>
-
-
 
 
             <TextView
@@ -84,10 +81,11 @@
                 android:orientation="vertical"
                 app:layout_constraintTop_toBottomOf="@id/header_choose_date">
 
-                <CalendarView
+
+                <com.prolificinteractive.materialcalendarview.MaterialCalendarView
                     android:id="@+id/reserve_calendarView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="312dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginEnd="8dp"
@@ -95,7 +93,9 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.488"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:mcv_selectionColor="@color/purple_calendar" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
@@ -114,68 +114,39 @@
                 android:id="@+id/reserve_line1"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/header_choose_time"
-                android:background="#E8E8E8"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="6dp"
+                android:background="#E8E8E8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/header_choose_time" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/time_button_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@id/reserve_time_keepbutton"
+                app:layout_constraintTop_toBottomOf="@+id/reserve_line1"
+
                 />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="오전"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/reserve_line1"
-                android:layout_marginTop="13dp"
-                android:layout_marginLeft="16dp"
-                android:textSize="14sp"
-                android:textColor="#636363"
-                />
-            
-            <TextView
-                android:layout_width="76dp"
-                android:layout_height="33dp"
-                android:text="08:00"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/reserve_line1"
-                android:layout_marginTop="38dp"
-                android:layout_marginLeft="16dp"
-                android:gravity="center"
-                android:background="@drawable/rounded_black_square_background"/>
 
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="오후"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/reserve_line1"
-                android:layout_marginTop="128dp"
-                android:layout_marginLeft="16dp"
-                android:textSize="14sp"
-                android:textColor="#636363"
-                />
 
             <TextView
                 android:id="@+id/reserve_time_keepbutton"
                 android:layout_width="0dp"
                 android:layout_height="44dp"
-                android:text="계속하기"
-                android:textColor="@color/white"
-                android:background="@drawable/button_background_purple"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginHorizontal="16dp"
-                app:layout_constraintTop_toBottomOf="@id/reserve_line1"
                 android:layout_marginTop="310dp"
                 android:layout_marginBottom="21dp"
-                android:gravity="center"/>
-
-
-
+                android:background="@drawable/button_background_purple"
+                android:gravity="center"
+                android:text="계속하기"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reserve_line1" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

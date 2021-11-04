@@ -1,12 +1,15 @@
 package com.blooburn.owere.designer.adapter.home
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.blooburn.owere.R
 import com.blooburn.owere.databinding.ItemReservedUserBinding
+import com.blooburn.owere.designer.activity.main.DesignerReservationDetailActivity
 import com.blooburn.owere.designer.item.DesignerReservation
+import com.blooburn.owere.util.DESIGNER_RESERVATION_DETAIL_KEY
 import com.blooburn.owere.util.TypeOfDesignerReservation
 import com.blooburn.owere.util.DesignerProfileHandler
 import java.text.SimpleDateFormat
@@ -17,7 +20,7 @@ class DesignerReservationListAdapter :
 
     private var reservationList = mutableListOf<DesignerReservation>()
 
-    open inner class ViewHolder(private val binding: ItemReservedUserBinding) :
+    inner class ViewHolder(private val binding: ItemReservedUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(position: Int) {
@@ -32,27 +35,9 @@ class DesignerReservationListAdapter :
             )
             binding.textReservedUserName.text = reservation.userName
             binding.textReservedUserShop.text = reservation.shop
-            binding.textReservedUserTime.text =
-                itemView.context.getString(
-                    R.string.reservation_time,
-                    convertMilliSecondsToTimeString(reservation.startTime),
-                    convertMilliSecondsToTimeString(reservation.endTime)
-                )
+            binding.textReservedUserTime.text = getTreatmentTime(itemView, reservation)
 
-            when (reservation.type) {
-                TypeOfDesignerReservation.SCHEDULED -> {
-                    binding.imageReservedUserArrow.visibility = View.VISIBLE
-                    binding.textReservedUserSettle.visibility = View.GONE
-                }
-                TypeOfDesignerReservation.COMPLETED -> {
-                    binding.textReservedUserSettle.text =
-                        this.itemView.context.getString(R.string.settling_fee)
-                }
-                TypeOfDesignerReservation.SETTLED -> {
-                    binding.textReservedUserSettle.text =
-                        this.itemView.context.getString(R.string.settlement_completed)
-                }
-            }
+            initDependingOnType(binding, reservation.type)
         }
     }
 
@@ -71,6 +56,15 @@ class DesignerReservationListAdapter :
         position: Int
     ) {
         holder.bind(position)
+
+        holder.itemView.setOnClickListener{
+            val intent =
+                Intent(holder.itemView.context, DesignerReservationDetailActivity::class.java).apply{
+                    putExtra(DESIGNER_RESERVATION_DETAIL_KEY, reservationList[position])
+                }
+
+            holder.itemView.context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -88,6 +82,34 @@ class DesignerReservationListAdapter :
         }
 
         return formatter.format(milliSeconds)
+    }
+
+    private fun getTreatmentTime(itemView: View, reservation: DesignerReservation): String{
+        return itemView.context.getString(
+            R.string.reservation_time,
+            convertMilliSecondsToTimeString(reservation.startTime),
+            convertMilliSecondsToTimeString(reservation.endTime)
+        )
+    }
+
+    private fun initDependingOnType(binding: ItemReservedUserBinding, type: TypeOfDesignerReservation){
+        val arrowImageView = binding.imageReservedUserArrow
+        val settlementTextView = binding.textReservedUserSettle
+        val context = binding.root.context
+
+        when (type) {
+            TypeOfDesignerReservation.SCHEDULED -> {
+                arrowImageView.visibility = View.VISIBLE
+                settlementTextView.visibility = View.GONE
+            }
+
+            TypeOfDesignerReservation.COMPLETED ->
+                settlementTextView.text = context.getString(R.string.settling_fee)
+
+            TypeOfDesignerReservation.SETTLED ->
+                settlementTextView.text = context.getString(R.string.settlement_completed_blue)
+
+        }
     }
 
 }

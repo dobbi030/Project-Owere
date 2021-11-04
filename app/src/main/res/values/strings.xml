@@ -68,12 +68,32 @@
 
     <!--designer_confirmed_reservation_fragment -->
     <string name="today">TODAY</string>
+    <string name="text_today">%1$d월 %2$d일</string>
     <string name="scheduled_reservation">예정된 예약</string>
     <string name="completed_reservation">완료된 예약</string>
     <string name="total_reservation_count">전체 <font color="#00CCFF">%d</font>건</string>
     <string name="settling_fee"><font color="#FF0000">정산하기</font></string>
-    <string name="settlement_completed"><font color="#00CCFF">정산완료</font></string>
+    <string name="settlement_completed_blue"><font color="#00CCFF">정산완료</font></string>
     <string name="reservation_time">%1$s ~ %2$s</string>
+
+    <!--activity_designer_reservation_detail-->
+    <string name="reservation_information">예약 정보</string>
+    <string name="dates">날짜</string>
+    <string name="time">시간</string>
+    <string name="designer">디자이너</string>
+    <string name="shop">미용실</string>
+    <string name="menu_type">메뉴 종류</string>
+    <string name="menu_price">메뉴 가격</string>
+    <string name="total_price">상품합계</string>
+    <string name="discount_amount">할인금액</string>
+    <string name="coupon_discount">쿠폰 할인</string>
+    <string name="using_point">포인트 사용</string>
+    <string name="payment_amount">결제금액</string>
+    <string name="payment_method">결제방법</string>
+    <string name="customer_request">고객의 당부사항</string>
+    <string name="has_additional_treatment">추가 시술이 있었나요?</string>
+    <string name="settlement_completed">정산완료</string>
+    <string name="choice_completed">선택완료</string>
 
     <string name="firebase_web_client_id">"260202805759-p5ff8qashfb05ab9p13ui7f329326h6b.apps.googleusercontent.com"</string>
 </resources>

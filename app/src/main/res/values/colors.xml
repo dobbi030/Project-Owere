@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray_cc">#939393</color>
     <color name="gray_divider">#EDEDED</color>
+    <color name="gray_background">#DEDEDE</color>
     <color name="purple_main_background">#CC66FF</color>
     <color name="blue_main_background">#00CCFF</color>
     <color name="purple_button">#BD39FF</color>
@@ -16,4 +17,5 @@
     <color name="dark_gray">#484C4F</color>
     <color name="red">#FF0000</color>
     <color name="purple_calendar">#855CF8</color>
+    <color name="purple_button2">#A512EF</color>
 </resources>

@@ -6,7 +6,10 @@ import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.Toolbar
@@ -19,11 +22,11 @@ import com.blooburn.owere.user.fragment.mainFragment.homeFragment.AllPricesFragm
 import com.blooburn.owere.user.item.StyleMenuItem
 import com.blooburn.owere.user.item.UserDesignerItem
 import com.blooburn.owere.user.item.UserReview
-import com.blooburn.owere.util.DESIGNER_DATA_KEY
-import com.blooburn.owere.util.DesignerProfileHandler
-import com.blooburn.owere.util.databaseInstance
-import com.blooburn.owere.util.storageInstance
-import com.google.firebase.database.*
+import com.blooburn.owere.util.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.StorageReference
 
 class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler {
@@ -39,8 +42,6 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
     private lateinit var priceChartReference: DatabaseReference
 
     private lateinit var sliderAdapter: DesignerPortfolioSliderAdapter
-
-    private val allPricesFragmentName = "allPrices"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,12 +63,12 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
     /**
      * 가격 전체 보기 -> 프래그먼트 생성
      */
-    private val priceClickListener = View.OnClickListener{
-        val fragment = AllPricesFragment(designerData!!.designerId)
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction
+    private val priceClickListener = View.OnClickListener {
+        val fragment = AllPricesFragment(hasCheckBox = false)
+
+        supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container_user_designer_profile, fragment)
-            .addToBackStack(allPricesFragmentName)
+            .addToBackStack(ALL_PRICES_FRAGMENT_NAME)
             .commitAllowingStateLoss()
     }
 
@@ -316,7 +317,7 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
     /**
      * 버튼 초기화
      */
-    private fun initButton(){
+    private fun initButton() {
         val priceButton = findViewById<Button>(R.id.button_user_designer_profile_prices)
         priceButton.setOnClickListener(priceClickListener)
 
@@ -325,10 +326,11 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
         reserveButton.setOnClickListener {
             //예약하기의 메뉴선택 액티비티로 전환, 디자이너 객체 정보 전달
             val intent = Intent(this, ReserveMenuActivity::class.java)
-            intent.putExtra(DESIGNER_DATA_KEY,designerData)
+            intent.putExtra(DESIGNER_DATA_KEY, designerData)
             startActivity(intent)
         }
         //채팅하기 버튼
-        val chattingButton = findViewById<AppCompatButton>(R.id.button_user_designer_profile_chatting)
+        val chattingButton =
+            findViewById<AppCompatButton>(R.id.button_user_designer_profile_chatting)
     }
 }

@@ -50,10 +50,9 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/text_designer_confirmed_reservation_scheduled"
+                android:id="@+id/text_designer_confirmed_reservation_scheduled_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/total_reservation_count"
                 android:textColor="@color/gray_cc"
                 android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -89,10 +88,9 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/text_designer_confirmed_reservation_completed"
+                android:id="@+id/text_designer_confirmed_reservation_completed_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/total_reservation_count"
                 android:textColor="@color/gray_cc"
                 android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"

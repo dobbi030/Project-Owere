@@ -9,6 +9,12 @@ val storageInstance = FirebaseStorage.getInstance()
 
 const val DESIGNER_DATA_KEY = "designerData"
 
+// DesignerConfirmedReservation.kt - DesignerReservationListAdapter에서 예약 아이템 클릭했을 때 bundle key
+const val DESIGNER_RESERVATION_DETAIL_KEY = "designerReservationDetail"
+
+// addToBackStack(ALL_PRICES_FRAGMENT_NAME)
+const val ALL_PRICES_FRAGMENT_NAME = "allPrices"
+
 // 년월일 -> LocalDate
 // val date2 = LocalDate.of(2021, 11, 2)
 // 이런 방식 외에도 LocalDate나 LocalTime으로 변환하는 방법이 더 있는 것 같습니다.

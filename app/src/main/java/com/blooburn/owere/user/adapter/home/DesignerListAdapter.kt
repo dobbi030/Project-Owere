@@ -1,17 +1,15 @@
 package com.blooburn.owere.user.adapter.home
 
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.blooburn.owere.R
-import com.blooburn.owere.user.activity.main.homeActivity.UserDesignerProfileActivity
 import com.blooburn.owere.databinding.ItemUserDesignerListBinding
+import com.blooburn.owere.user.activity.main.homeActivity.UserDesignerProfileActivity
 import com.blooburn.owere.user.item.UserDesignerItem
 import com.blooburn.owere.util.DESIGNER_DATA_KEY
 import com.blooburn.owere.util.DesignerProfileHandler
-import com.google.firebase.storage.FirebaseStorage
 
 class DesignerListAdapter :
     RecyclerView.Adapter<DesignerListAdapter.ViewHolder>(), DesignerProfileHandler {

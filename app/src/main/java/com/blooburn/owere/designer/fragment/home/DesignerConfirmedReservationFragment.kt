@@ -6,8 +6,10 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.blooburn.owere.R
 import com.blooburn.owere.databinding.DesignerConfirmedReservationFragmentBinding
+import com.blooburn.owere.designer.`interface`.home.ReservationsUpdatedListener
 import com.blooburn.owere.designer.adapter.home.DesignerReservationListAdapter
 import com.blooburn.owere.designer.item.DesignerReservation
 import com.blooburn.owere.util.CustomDividerDecoration
@@ -37,40 +39,34 @@ class DesignerConfirmedReservationFragment :
     private lateinit var scheduledAdapter: DesignerReservationListAdapter
     private lateinit var completedAdapter: DesignerReservationListAdapter
 
+    private val dateFormatter = SimpleDateFormat("MM월 dd일", Locale.KOREA)
+        .apply { timeZone = TimeZone.getTimeZone("KST") }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = DesignerConfirmedReservationFragmentBinding.bind(view)
 
-        // 예정된 예약 리사이클러뷰
-        binding?.recyclerDesignerConfirmedReservationScheduled?.apply {
+        // 예정된 예약 리사이클러뷰 초기화
+        scheduledAdapter = DesignerReservationListAdapter()
+        initReservationsRecyclerView(
+            binding?.recyclerDesignerConfirmedReservationScheduled!!,
+            scheduledAdapter
+        )
 
-            // custom divider 적용
-            addItemDecoration(
-                CustomDividerDecoration(1f, ContextCompat.getColor(this.context, R.color.gray_cc))
-            )
-
-            layoutManager = LinearLayoutManager(context)
-            scheduledAdapter = DesignerReservationListAdapter()
-            adapter = scheduledAdapter
-        }
-
-        // 완료된 예약 리사이클러뷰
-        binding?.recyclerDesignerConfirmedReservationCompleted?.apply {
-
-            // custom divider 적용
-            addItemDecoration(
-                CustomDividerDecoration(1f, ContextCompat.getColor(this.context, R.color.gray_cc))
-            )
-
-            layoutManager = LinearLayoutManager(context)
-            completedAdapter = DesignerReservationListAdapter()
-            adapter = completedAdapter
-        }
+        // 완료된 예약 리사이클러뷰 초기화
+        completedAdapter = DesignerReservationListAdapter()
+        initReservationsRecyclerView(
+            binding?.recyclerDesignerConfirmedReservationCompleted!!,
+            completedAdapter
+        )
 
         binding?.calendarDesignerConfirmedReservation?.currentDate = CalendarDay.today()
         binding?.calendarDesignerConfirmedReservation?.setOnDateChangedListener { calendarView, date, isSelected ->
+
             if (isSelected) {
+                updateTodayText(date.date)  // 오늘 날짜 업데이트
+
                 tempEpochDay = date.date.getLong(ChronoField.EPOCH_DAY)
                 val referencePathOfSelectedDay = reservationsReferencePath + tempEpochDay
 
@@ -87,18 +83,22 @@ class DesignerConfirmedReservationFragment :
                                 val reservation =
                                     reservationSnapshot.getValue(DesignerReservation::class.java)
 
-                                Log.d("시간", "currentTime: $currentTime, endTime: ${reservation?.endTime!!}")
+                                Log.d(
+                                    "시간",
+                                    "currentTime: $currentTime, endTime: ${reservation?.endTime!!}"
+                                )
                                 // 끝나는 시간이 현재 시간을 지났을 때
                                 if (currentTime < reservation?.endTime!!) {
                                     reservation.type = TypeOfDesignerReservation.COMPLETED
                                     completedList.add(reservation)
-                                }else{
+                                } else {
                                     scheduledList.add(reservation)
                                 }
                             }
-
                             scheduledAdapter.setData(scheduledList)
                             completedAdapter.setData(completedList)
+
+                            updateReservationsCount(scheduledList.size, completedList.size)
                         }
 
                         override fun onCancelled(error: DatabaseError) {}
@@ -121,6 +121,42 @@ class DesignerConfirmedReservationFragment :
             val time2_2 = LocalTime.of(19, 0).toSecondOfDay() * 1000
             Log.d("시간", "$time0_1, $time0_2,\n$time1_1, $time1_2,\n$time2_1, $time2_2")
         }
+    }
+
+    /**
+     * 예약 리사이클러뷰 초기화
+     */
+    private fun initReservationsRecyclerView(
+        recyclerView: RecyclerView,
+        _adapter: DesignerReservationListAdapter
+    ) {
+        recyclerView.apply {
+            // custom divider 적용
+            addItemDecoration(
+                CustomDividerDecoration(1f, ContextCompat.getColor(this.context, R.color.gray_cc))
+            )
+
+            layoutManager = LinearLayoutManager(context)
+            adapter = _adapter
+        }
+    }
+
+    /**
+     * 예약 불러올 때, 개수 나타내는 text 업데이트
+     */
+    private fun updateReservationsCount(scheduledCount: Int, completedCount: Int) {
+        binding?.textDesignerConfirmedReservationScheduledCount?.text = if (scheduledCount > 0)
+            getString(R.string.total_reservation_count, scheduledCount) else ""
+        binding?.textDesignerConfirmedReservationCompletedCount?.text = if (completedCount > 0)
+            getString(R.string.total_reservation_count, completedCount) else ""
+    }
+
+    /**
+     * 오늘 월일 텍스트 업데이트
+     */
+    private fun updateTodayText(date: LocalDate) {
+        binding?.textDesignerConfirmedReservationToday?.text =
+            getString(R.string.text_today, date.monthValue, date.dayOfMonth)
     }
 
     private fun getReservations() {

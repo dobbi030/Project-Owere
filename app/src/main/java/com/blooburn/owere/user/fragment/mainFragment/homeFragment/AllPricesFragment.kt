@@ -14,23 +14,22 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 
-class AllPricesFragment(private val designerId: String?) : Fragment(R.layout.all_prices_fragment) {
+class AllPricesFragment(private val hasCheckBox: Boolean) : Fragment(R.layout.all_prices_fragment){
 
     private var binding: AllPricesFragmentBinding? = null
-    private val priceChartReference =
-        databaseInstance.reference.child("designerPriceChart/$designerId")
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 디자이너 아이디 전달 못받았으면 종료
-        if (designerId == null) {
-            onDestroy()
-        }
-
         binding = AllPricesFragmentBinding.bind(view)
 
-        getAndAddMenuItems() // 모든 가격표(메뉴)를 불러오고, view를 동적 생성 해서 보여준다
+        // 모든 가격표(메뉴)를 불러온 후, view를 동적 생성 해서 보여준다
+        getAndAddMenuItems()
+
+        // 선택 가능 모드일 때, 선택 완료 버튼을 보여준다
+        if (hasCheckBox){
+            binding?.buttonAllPrices?.visibility = View.VISIBLE
+        }
     }
 
     /**
@@ -40,7 +39,13 @@ class AllPricesFragment(private val designerId: String?) : Fragment(R.layout.all
      * 4. 서브 뷰도 받아온 만큼 동적으로 생성해서 불러온 데이터를 적용한다.
      */
     private fun getAndAddMenuItems(){
-        priceChartReference.addListenerForSingleValueEvent(object: ValueEventListener{
+
+        //Todo : 로그인했을 때 아이디 저장해놓고 따러 불러오기
+        val tempDesignerId = "designer0"
+        val priceChartReference =
+            databaseInstance.reference.child("designerPriceChart/$tempDesignerId")
+
+        priceChartReference.addListenerForSingleValueEvent(object: ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
 
@@ -50,7 +55,12 @@ class AllPricesFragment(private val designerId: String?) : Fragment(R.layout.all
                     // 컨테이너 view 생성
                     val menuContainerBinding = LayoutMenuContainerBinding.inflate(layoutInflater,
                         binding?.layoutAllPricesContainer,
-                    true)
+                        false)
+
+                    // 마지막에 있는 버튼 앞에 추가
+                    binding?.layoutAllPricesContainer!!.apply {
+                        addView(menuContainerBinding.root, this.childCount - 1)
+                    }
 
                     // 커트, 매직, 펌과 같은 메뉴의 대표 타이틀
                     menuContainerBinding.textMenuContainerTitle.text = containerSnapshot.key
@@ -93,5 +103,7 @@ class AllPricesFragment(private val designerId: String?) : Fragment(R.layout.all
         subMenuBinding.textPriceMenuTitle.text = subMenuItem.menuName
         subMenuBinding.textPriceMenuPrice.text = subMenuItem.menuPrice
         subMenuBinding.textPriceMenuTime.text = subMenuItem.menuTime
+
+        if (hasCheckBox) subMenuBinding.checkBoxPriceMenu.visibility = View.VISIBLE
     }
 }

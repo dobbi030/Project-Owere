@@ -34,12 +34,14 @@ class MenuBottomDialogFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var bundle = bundleOf()
         //디자이너 객체 받기
-        designerData = bundle.getParcelable<Parcelable>(DESIGNER_DATA_KEY) as UserDesignerItem?
-        menu = bundle.getParcelable<Parcelable>("SESLECTED_MENU_DATA_KEY") as StyleMenuItem?
-        //Log.d(DESIGNER_DATA_KEY,designerData!!.name)
-        //Log.d("SESLECTED_MENU_DATA_KEY",menu!!.menuName)
+        designerData = arguments?.getParcelable<Parcelable>(DESIGNER_DATA_KEY) as UserDesignerItem?
+        //번들로 하는 거 아님 실수 주의
+        //designerData = bundle.getParcelable<Parcelable>(DESIGNER_DATA_KEY) as UserDesignerItem?
+        //menu = bundle.getParcelable<Parcelable>("SESLECTED_MENU_DATA_KEY") as StyleMenuItem?
+        menu = arguments?.getParcelable<Parcelable>("SESLECTED_MENU_DATA_KEY") as StyleMenuItem?
+        Log.d(DESIGNER_DATA_KEY,designerData!!.name)
+        Log.d("SESLECTED_MENU_DATA_KEY",menu!!.menuName)
 
         //전달해줄 기장 옵션
         var lengthOption :String = "기본+0"

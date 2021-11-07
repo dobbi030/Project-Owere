@@ -219,7 +219,7 @@ class ReserveMenuActivity : AppCompatActivity() {
             }else{
                 if(selectedMenu?.addLength==1){
                     //선택완료 시 커스텀 다이얼로그 띄워주기
-                    menuBottomDialogFragment?.show(supportFragmentManager, menuBottomDialogFragment.tag)
+
 
                     //프래그먼트로 객체 전달
                     val bundle = bundleOf() //어떤 키에 어떤 값으로 번들을 담겠다
@@ -230,6 +230,8 @@ class ReserveMenuActivity : AppCompatActivity() {
                     bundle.putParcelable("SESLECTED_MENU_DATA_KEY", selectedMenu)
 
                     menuBottomDialogFragment?.arguments = bundle
+
+                    menuBottomDialogFragment?.show(supportFragmentManager, menuBottomDialogFragment.tag)
 
 
 

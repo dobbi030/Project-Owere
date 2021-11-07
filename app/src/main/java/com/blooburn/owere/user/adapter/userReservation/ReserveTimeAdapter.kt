@@ -1,14 +1,18 @@
 package com.blooburn.owere.user.adapter.userReservation
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 import com.blooburn.owere.databinding.ItemReserveTimeTabBinding
+import com.blooburn.owere.user.activity.main.userReservation.CheckboxAddedListener
+import com.blooburn.owere.user.activity.main.userReservation.SelectTimeInterface
+import com.blooburn.owere.user.item.ShopListItem
 import com.blooburn.owere.user.item.StyleMenuItem
 
 //시간 날짜 예약 레이아웃에서 시간 선택 버튼 리사이클러뷰 어답터(격자형)
-class ReserveTimeAdapter : RecyclerView.Adapter<ReserveTimeAdapter.ViewHolder>() {
+class ReserveTimeAdapter(private val selectTimeInterface: SelectTimeInterface) : RecyclerView.Adapter<ReserveTimeAdapter.ViewHolder>() {
 
 
 
@@ -21,6 +25,10 @@ class ReserveTimeAdapter : RecyclerView.Adapter<ReserveTimeAdapter.ViewHolder>()
             ){
                 fun bind(position : Int){
                     binding.timeTab.text = timeList[position]
+                    selectTimeInterface.addTime(binding.timeTab)
+                    binding.timeTab.setOnClickListener {
+
+                    }
 
                 }
             }

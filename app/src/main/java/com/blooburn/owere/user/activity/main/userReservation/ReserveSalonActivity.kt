@@ -14,14 +14,15 @@ import com.blooburn.owere.util.DESIGNER_DATA_KEY
 class ReserveSalonActivity : AppCompatActivity() {
 
     //프로필에서 전달받을 디자이너 객체
-    private var designerData: UserDesignerItem? = null
+    private lateinit var designerData: UserDesignerItem
     //전달받을 선택한 메뉴
-    private var menu: StyleMenuItem? = null
+    private lateinit var menu: StyleMenuItem
 
     //전달받을 기장 옵션
-    private var lengthOption: String = ""
+    private lateinit var lengthOption: String
     //전달받을 선택할 미용실
-    private var selectedShop: ShopListItem? = null
+    private lateinit var selectedShop: ShopListItem
+
 
     //레이아웃 텍스트뷰
     private val salonName : TextView by lazy {
@@ -91,10 +92,10 @@ class ReserveSalonActivity : AppCompatActivity() {
             finish()
         }
 
-        designerData = extras!!.getParcelable(DESIGNER_DATA_KEY)   // DesignerData 객체 읽기
-        menu = extras!!.getParcelable("SESLECTED_MENU_DATA_KEY") //선택한 메뉴 객체 읽기
+        designerData = extras!!.getParcelable(DESIGNER_DATA_KEY)!!   // DesignerData 객체 읽기
+        menu = extras!!.getParcelable("SESLECTED_MENU_DATA_KEY")!! //선택한 메뉴 객체 읽기
         lengthOption = extras.getString("lengthOption").toString()//선택한 옵션
-        selectedShop = extras.getParcelable("selectedShop")// 선택한 미용실 객체읽기
+        selectedShop = extras.getParcelable("selectedShop")!!// 선택한 미용실 객체읽기
 
         if (designerData == null) { //디자이너 객체가 없다면 종료
             finish()

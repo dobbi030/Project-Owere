@@ -1,5 +1,5 @@
 package com.blooburn.owere.user.activity.main.userReservation
-
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -35,20 +35,28 @@ import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
 
 
-class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEventListener,
-    MapView.POIItemEventListener {
+class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEventListener{
 
-    private var designerData: UserDesignerItem? = null//프로필에서 전달받을 디자이너 객체
-    private var menu: StyleMenuItem? = null//선택한 메뉴
+    private val eventListener = MarkerEventListener(this) // 마커 클릭 이벤트 리스너 등록
+
+    private lateinit var designerData: UserDesignerItem//프로필에서 전달받을 디자이너 객체
+    private lateinit var menu: StyleMenuItem //선택한 메뉴
 
     //기장 옵션
     private var lengthOption: String = ""
-    private var selectedShop: ShopListItem? = null //선택할 미용실
+    private lateinit var selectedShop: ShopListItem  //선택할 미용실
 
     private val databaseReference = databaseInstance.reference
 
-    private lateinit var mapView: MapView
 
+
+    val mapViewContainer: ViewGroup by lazy{
+        findViewById(R.id.shopof_designer_mapview)
+    }
+    //net.daum.mf.map.api.MapView 객체를 생성
+    private val mapView: MapView by lazy{
+        MapView(this)
+    }
     /**
      *  바텀 시트뷰에 추가해줄 리사이클러뷰(미용실 목록)
      */
@@ -80,6 +88,8 @@ class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEven
             intent.putExtra("SESLECTED_MENU_DATA_KEY", menu)
             //메뉴선택메뉴의 옵션 전송(기장 추가)
             intent.putExtra("lengthOption", lengthOption)
+            //선택한 미용실 보내기
+            intent.putExtra("selectedShop", shopListItem)
             startActivity(intent)
         }
     }
@@ -104,6 +114,12 @@ class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEven
         setContentView(R.layout.activity_shops_of_designer)
 
 
+        if (!checkLocationServicesStatus()) {
+            showDialogForLocationServiceSetting()
+
+        } else {
+            checkRunTimePermission()
+        }
 
         getDataFromIntent()
         setDataReferences()
@@ -120,7 +136,25 @@ class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEven
          * 맵뷰 추가
          */
 
-        initMapView()
+
+
+        //맵 사용
+//        mapView = MapView(this) //net.daum.mf.map.api.MapView 객체를 생성
+        mapView.setCurrentLocationEventListener(this)
+        mapView.setDaumMapApiKey("API_KEY");
+
+        mapViewContainer.addView(mapView)
+
+
+
+        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(latitude, longitude), true)
+        mapView.setZoomLevel(2, true)    //작을수록 가까움
+        mapView.zoomIn(true)
+        mapView.zoomOut(true)
+
+        mapView.setPOIItemEventListener(eventListener) // 마커 클릭 이벤트 리스너 등록
+
+       // initMapView()
 
 
     }
@@ -133,6 +167,7 @@ class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEven
                 mapPointGeo?.latitude,
                 mapPointGeo?.longitude,
                 p2
+
             )
         )
 
@@ -192,29 +227,29 @@ class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEven
 
 
     //맵뷰 설정
-    fun initMapView() {
-        //Activity 의 content-view 에 삽입하면 지도화면을 손쉽게 구현
-        val mapViewContainer: ViewGroup = findViewById(R.id.shopof_designer_mapview)
-
-        //맵 사용
-        mapView = MapView(this) //net.daum.mf.map.api.MapView 객체를 생성
-        mapView.setCurrentLocationEventListener(this)
-        mapView.setDaumMapApiKey("API_KEY");
-
-        mapViewContainer.addView(mapView)
-
-        if (!checkLocationServicesStatus()) {
-            showDialogForLocationServiceSetting()
-
-        } else {
-            checkRunTimePermission()
-        }
-
-        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(latitude, longitude), true)
-        mapView.setZoomLevel(2, true)    //작을수록 가까움
-        mapView.zoomIn(true)
-        mapView.zoomOut(true)
-    }
+//    fun initMapView() {
+//        //Activity 의 content-view 에 삽입하면 지도화면을 손쉽게 구현
+//        val mapViewContainer: ViewGroup = findViewById(R.id.shopof_designer_mapview)
+//
+//        //맵 사용
+//        mapView = MapView(this) //net.daum.mf.map.api.MapView 객체를 생성
+//        mapView.setCurrentLocationEventListener(this)
+//        mapView.setDaumMapApiKey("API_KEY");
+//
+//        mapViewContainer.addView(mapView)
+//
+//        if (!checkLocationServicesStatus()) {
+//            showDialogForLocationServiceSetting()
+//
+//        } else {
+//            checkRunTimePermission()
+//        }
+//
+//        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(latitude, longitude), true)
+//        mapView.setZoomLevel(2, true)    //작을수록 가까움
+//        mapView.zoomIn(true)
+//        mapView.zoomOut(true)
+//    }
 
     private fun checkRunTimePermission() {
         //런타입 퍼미션 처리
@@ -370,8 +405,8 @@ class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEven
             finish()
         }
 
-        designerData = extras!!.getParcelable(DESIGNER_DATA_KEY)   // DesignerData 객체 읽기
-        menu = extras!!.getParcelable("SESLECTED_MENU_DATA_KEY") //선택한 메뉴 객체 읽기
+        designerData = extras!!.getParcelable(DESIGNER_DATA_KEY)!!   // DesignerData 객체 읽기
+        menu = extras!!.getParcelable("SESLECTED_MENU_DATA_KEY")!! //선택한 메뉴 객체 읽기
         lengthOption = extras.getString("lengthOption").toString()//선택한 옵션
 
         if (designerData == null) { //디자이너 객체가 없다면 종료
@@ -443,40 +478,50 @@ class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEven
         val LOG_TAG = "MainActivity"
     }
 
-    //마커 클릭 관련인터페이스 implement
-    override fun onPOIItemSelected(p0: MapView?, p1: MapPOIItem?) {
 
+    inner class MarkerEventListener(val context: Context): MapView.POIItemEventListener {
+        override fun onPOIItemSelected(mapView: MapView?, poiItem: MapPOIItem?) {
+            // 마커 클릭 시
+        }
+
+        override fun onCalloutBalloonOfPOIItemTouched(mapView: MapView?, poiItem: MapPOIItem?) {
+            // 말풍선 클릭 시 (Deprecated)
+            // 이 함수도 작동하지만 그냥 아래 있는 함수에 작성하자
+        }
+
+        override fun onCalloutBalloonOfPOIItemTouched(mapView: MapView?, poiItem: MapPOIItem?, buttonType: MapPOIItem.CalloutBalloonButtonType?) {
+            // 말풍선 클릭 시
+//            val builder = AlertDialog.Builder(context)
+//            val itemList = arrayOf("토스트", "마커 삭제", "취소")
+//            builder.setTitle("${poiItem?.itemName}")
+//            builder.setItems(itemList) { dialog, which ->
+//                when(which) {
+//                    0 -> Toast.makeText(context, "토스트", Toast.LENGTH_SHORT).show()  // 토스트
+//                    1 -> mapView?.removePOIItem(poiItem)    // 마커 삭제
+//                    2 -> dialog.dismiss()   // 대화상자 닫기
+//                }
+//            }
+//            builder.show()
+
+            //전달받은 MapPOIItem의 이름으로 가진 미용실객체를 맵에서 꺼내옴
+            selectedShop = markerList.get(poiItem!!.itemName)!!
+            val intent = Intent(context, ReserveSalonActivity::class.java)
+            intent.putExtra("selectedShop", selectedShop)
+            //디자이너 객체 전송
+            intent.putExtra(DESIGNER_DATA_KEY, designerData)
+            //선택한 메뉴 객체 전송
+            intent.putExtra("SESLECTED_MENU_DATA_KEY", menu)
+            //메뉴 선택 메뉴의 옵션 전송(기장 추가)
+            intent.putExtra("lengthOption", lengthOption)
+            startActivity(intent)
+        }
+
+        override fun onDraggablePOIItemMoved(mapView: MapView?, poiItem: MapPOIItem?, mapPoint: MapPoint?) {
+            // 마커의 속성 중 isDraggable = true 일 때 마커를 이동시켰을 경우
+        }
     }
 
-    override fun onCalloutBalloonOfPOIItemTouched(p0: MapView?, p1: MapPOIItem?) {
 
-    }
-
-    //마커 풍선 클릭 시 다음 액티비티로 이동
-    override fun onCalloutBalloonOfPOIItemTouched(
-        p0: MapView?,
-        p1: MapPOIItem?,
-        p2: MapPOIItem.CalloutBalloonButtonType?
-    ) {
-        val intent = Intent(this, ReserveSalonActivity::class.java)
-        //전달받은 MapPOIItem의 이름으로 가진 미용실객체를 맵에서 꺼내옴
-        selectedShop = markerList.get(p1!!.itemName)
-
-        intent.putExtra("selectedShop", selectedShop)
-
-        //디자이너 객체 전송
-        intent.putExtra(DESIGNER_DATA_KEY, designerData)
-        //선택한 메뉴 객체 전송
-        intent.putExtra("SESLECTED_MENU_DATA_KEY", menu)
-        //메뉴선택메뉴의 옵션 전송(기장 추가)
-        intent.putExtra("lengthOption", lengthOption)
-        startActivity(intent)
-
-    }
-
-    override fun onDraggablePOIItemMoved(p0: MapView?, p1: MapPOIItem?, p2: MapPoint?) {
-
-    }
 
 
 

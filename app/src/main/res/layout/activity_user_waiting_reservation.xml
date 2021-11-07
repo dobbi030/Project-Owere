@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".user.activity.main.userReservation.ReservationInfo"
+    android:paddingBottom="16dp">
+
+    <TextView
+
+        android:id="@+id/reservation_info_top"
+        android:layout_width="0dp"
+        android:layout_height="95dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="#BD39FF"
+        android:text="예약대기 중"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        />
+
+
+    <View
+        android:id="@+id/group211"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="19dp"
+        android:background="@color/gray_cc"
+        app:layout_constraintTop_toBottomOf="@+id/reservation_info_top" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/group211"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <TextView
+                android:id="@+id/reservation_info_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="예약 정보"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="25dp"
+                />
+
+            <TextView
+                android:id="@+id/reservation_date_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="날짜"
+                app:layout_constraintTop_toBottomOf="@+id/reservation_info_head"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="14sp"
+                android:textColor="#939393"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="23dp"
+                />
+            <TextView
+                android:id="@+id/reservation_date_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text ="8월18일(목)"
+                app:layout_constraintStart_toEndOf="@+id/reservation_date_head"
+                app:layout_constraintBottom_toBottomOf="@id/reservation_date_head"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="59dp"
+                android:layout_marginTop="23dp"
+                />
+            <TextView
+                android:id="@+id/reservation_time_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="시간"
+                app:layout_constraintTop_toBottomOf="@+id/reservation_date_head"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="14sp"
+                android:textColor="#939393"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                />
+            <TextView
+                android:id="@+id/reservation_time_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text ="오전 10:00 ~ 오전 11:00"
+                app:layout_constraintStart_toEndOf="@+id/reservation_time_head"
+                app:layout_constraintBottom_toBottomOf="@id/reservation_time_head"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="59dp"
+                android:layout_marginTop="23dp"
+                />
+
+            <TextView
+                android:id="@+id/reservation_designer_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="디자이너"
+                app:layout_constraintTop_toBottomOf="@+id/reservation_time_head"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="14sp"
+                android:textColor="#939393"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                />
+            <TextView
+                android:id="@+id/reservation_designer_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text ="김철수 디자이너"
+                app:layout_constraintStart_toEndOf="@+id/reservation_designer_head"
+                app:layout_constraintBottom_toBottomOf="@id/reservation_designer_head"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="33dp"
+                android:layout_marginTop="23dp"
+                />
+
+            <TextView
+                android:id="@+id/reservation_shop_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="미용실"
+                app:layout_constraintTop_toBottomOf="@+id/reservation_designer_head"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="14sp"
+                android:textColor="#939393"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                />
+            <TextView
+                android:id="@+id/reservation_shop_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text ="오월 미용실"
+                app:layout_constraintStart_toEndOf="@+id/reservation_shop_head"
+                app:layout_constraintBottom_toBottomOf="@id/reservation_shop_head"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="46dp"
+                android:layout_marginTop="23dp"
+                />
+
+            <TextView
+                android:id="@+id/reservation_menu_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="메뉴 종류"
+                app:layout_constraintTop_toBottomOf="@+id/reservation_shop_head"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="14sp"
+                android:textColor="#939393"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                />
+            <TextView
+                android:id="@+id/reservation_menu_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text ="C컬펌"
+                app:layout_constraintStart_toEndOf="@+id/reservation_menu_head"
+                app:layout_constraintBottom_toBottomOf="@id/reservation_menu_head"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="29dp"
+                android:layout_marginTop="23dp"
+                />
+
+            <TextView
+                android:id="@+id/reservation_price_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="메뉴 가격"
+                app:layout_constraintTop_toBottomOf="@+id/reservation_menu_head"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="14sp"
+                android:textColor="#939393"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                />
+            <TextView
+                android:id="@+id/reservation_price_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text ="35,000원"
+                app:layout_constraintStart_toEndOf="@+id/reservation_price_head"
+                app:layout_constraintBottom_toBottomOf="@id/reservation_price_head"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="29dp"
+                android:layout_marginTop="23dp"
+                />
+
+            <View
+                android:id="@+id/group222"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="22dp"
+                android:background="@color/gray_cc"
+                app:layout_constraintTop_toBottomOf="@+id/reservation_price_head"
+                android:layout_marginHorizontal="16dp"/>
+
+            <TextView
+                android:id="@+id/reservation_productsum_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="상품 합계"
+                app:layout_constraintTop_toBottomOf="@id/group222"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="19sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="21dp"
+                />
+
+            <TextView
+                android:id="@+id/reservation_productsum_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="35,000원"
+                app:layout_constraintTop_toTopOf="@id/reservation_productsum_head"
+                app:layout_constraintBottom_toBottomOf="@id/reservation_productsum_head"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="19sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginRight="16dp"
+
+                />
+
+            <View
+                android:id="@+id/group233"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="21dp"
+                android:background="@color/gray_cc"
+                app:layout_constraintTop_toBottomOf="@+id/reservation_productsum_head"
+                android:layout_marginHorizontal="16dp"/>
+
+            <TextView
+                android:id="@+id/reservation_rebate_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="할인 금액"
+                app:layout_constraintTop_toBottomOf="@id/group233"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="23dp"
+                />
+
+            <TextView
+                android:id="@+id/reservation_coupon_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="쿠폰 할인"
+                app:layout_constraintTop_toBottomOf="@id/reservation_rebate_head"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="14sp"
+                android:textColor="#939393"
+                android:textStyle="bold"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="21dp"
+                />
+
+            <TextView
+                android:id="@+id/reservation_coupon_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="-3000"
+                app:layout_constraintTop_toTopOf="@id/reservation_coupon_head"
+                app:layout_constraintBottom_toBottomOf="@id/reservation_coupon_head"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="14sp"
+                android:textColor="#939393"
+                android:textStyle="bold"
+                android:layout_marginRight="16dp"
+
+                />
+            <TextView
+                android:id="@+id/reservation_point_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="포인트 사용"
+                app:layout_constraintTop_toBottomOf="@id/reservation_coupon_head"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="14sp"
+                android:textColor="#939393"
+                android:textStyle="bold"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                />
+
+            <TextView
+                android:id="@+id/reservation_point_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="0000"
+                app:layout_constraintTop_toTopOf="@id/reservation_point_head"
+                app:layout_constraintBottom_toBottomOf="@id/reservation_point_head"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="14sp"
+                android:textColor="#939393"
+                android:textStyle="bold"
+                android:layout_marginRight="16dp"
+
+                />
+            <View
+                android:id="@+id/group244"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="21dp"
+                android:background="@color/gray_cc"
+                app:layout_constraintTop_toBottomOf="@+id/reservation_point_head"
+                android:layout_marginHorizontal="16dp"/>
+
+            <TextView
+                android:id="@+id/reservation_totalpay_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="결제 금액"
+                app:layout_constraintTop_toBottomOf="@id/group244"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="21dp"
+                />
+
+            <TextView
+                android:id="@+id/reservation_totalpay_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="32,000원"
+                app:layout_constraintTop_toTopOf="@id/reservation_totalpay_head"
+                app:layout_constraintBottom_toBottomOf="@id/reservation_totalpay_head"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="16sp"
+                android:textColor="#A512EF"
+                android:textStyle="bold"
+                android:layout_marginRight="16dp"
+
+                />
+
+            <View
+                android:id="@+id/group255"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="21dp"
+                android:background="@color/gray_cc"
+                app:layout_constraintTop_toBottomOf="@+id/reservation_totalpay_head"
+                android:layout_marginHorizontal="16dp"/>
+
+            <TextView
+                android:id="@+id/reservation_payment_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="결제 방법"
+                app:layout_constraintTop_toBottomOf="@id/group255"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="21dp"
+                />
+
+            <TextView
+                android:id="@+id/reservation_payment_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="신용카드/kb국민카드"
+                app:layout_constraintTop_toTopOf="@id/reservation_payment_head"
+                app:layout_constraintBottom_toBottomOf="@id/reservation_payment_head"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginRight="16dp"
+
+                />
+
+            <View
+                android:id="@+id/group266"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="21dp"
+                android:background="@color/gray_cc"
+                app:layout_constraintTop_toBottomOf="@+id/reservation_payment_head"
+                android:layout_marginHorizontal="16dp"/>
+
+            <TextView
+                android:id="@+id/reservation_ask_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="당부 사항"
+                app:layout_constraintTop_toBottomOf="@id/group266"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="21dp"
+                />
+
+            <TextView
+                android:id="@+id/waiting_reservation_gohome_button"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="27dp"
+                android:layout_marginBottom="21dp"
+                android:background="@drawable/button_background_purple"
+                android:gravity="center"
+                android:text="홈으로 돌아가기"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reservation_ask_head" />
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

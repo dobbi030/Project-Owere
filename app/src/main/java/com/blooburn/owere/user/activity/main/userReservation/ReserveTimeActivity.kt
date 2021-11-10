@@ -36,7 +36,7 @@ import kotlin.time.hours
 
 
 //예약하기 액티비티 (날짜, 시간 예약)
-class  ReserveTimeActivity : AppCompatActivity(), DesignerProfileHandler {
+class  ReserveTimeActivity : AppCompatActivity(), DesignerProfileHandler{
 
     //프로필에서 전달받을 디자이너 객체
     private lateinit var designerData: UserDesignerItem
@@ -71,17 +71,26 @@ class  ReserveTimeActivity : AppCompatActivity(), DesignerProfileHandler {
 
 
 
+    //체크버튼 단일 선택 가능하도록 구현한 어답터
     private val timeTabAdapter = ReserveTimeAdapter(object : SelectTimeInterface{
-        override var checklist: MutableList<TextView>
-            get() = TODO("Not yet implemented")
-            set(value) {}
-        override var reserveTime: TextView
-            get() = TODO("Not yet implemented")
-            set(value) {}
 
-        override fun addTime(timeButton: TextView) {
-            checklist.add(reserveTime)
+        //시간 선택 버튼들 배열
+        override var checklist: MutableList<CheckBox> = mutableListOf()
+
+        //선택한 시간 버튼
+        override var reserveTime: CheckBox? = null
+
+        override fun addTime(timeButton: CheckBox) {
+
+            if(checklist==null){
+                checklist = mutableListOf()
+            }
+
+            checklist.add(timeButton)
         }
+
+
+
 
     })
 
@@ -169,6 +178,7 @@ class  ReserveTimeActivity : AppCompatActivity(), DesignerProfileHandler {
         var keepButton = findViewById<TextView>(R.id.reserve_time_keepbutton)
         keepButton.setOnClickListener {
 
+            selectedTime = timeTabAdapter.selectedTime?.text.toString()
             if(selectedTime ==null){
                 Toast.makeText(this,"예약시간을 선택해주세요.",Toast.LENGTH_LONG)
             }else{
@@ -386,10 +396,8 @@ class  ReserveTimeActivity : AppCompatActivity(), DesignerProfileHandler {
 }
 //단일 선택구현을 위한 인터페이스
 interface SelectTimeInterface{
-    var checklist: MutableList<TextView>
-    var reserveTime : TextView
-    fun addTime(timeButton : TextView){
-
-    }
+    var checklist: MutableList<CheckBox>
+    var reserveTime : CheckBox?
+    fun addTime(timeButton : CheckBox)
 
 }

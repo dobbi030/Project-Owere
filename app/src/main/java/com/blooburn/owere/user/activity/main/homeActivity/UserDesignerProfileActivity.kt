@@ -16,6 +16,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.viewpager2.widget.ViewPager2
 import com.blooburn.owere.R
 import com.blooburn.owere.databinding.ItemPriceMenuBinding
+import com.blooburn.owere.user.activity.main.chattingActivity.ChattingActivity
 import com.blooburn.owere.user.activity.main.userReservation.ReserveMenuActivity
 import com.blooburn.owere.user.adapter.home.DesignerPortfolioSliderAdapter
 import com.blooburn.owere.user.fragment.mainFragment.homeFragment.AllPricesFragment
@@ -330,7 +331,12 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
             startActivity(intent)
         }
         //채팅하기 버튼
-        val chattingButton =
-            findViewById<AppCompatButton>(R.id.button_user_designer_profile_chatting)
+        val chattingButton = findViewById<AppCompatButton>(R.id.button_user_designer_profile_chatting)
+        chattingButton.setOnClickListener {
+            //채팅방으로 이동
+            val intent = Intent(this, ChattingActivity::class.java)
+            intent.putExtra(DESIGNER_DATA_KEY,designerData)
+            startActivity(intent)
+        }
     }
 }

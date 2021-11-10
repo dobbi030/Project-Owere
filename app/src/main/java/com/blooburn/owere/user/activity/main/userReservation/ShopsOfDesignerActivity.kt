@@ -34,7 +34,8 @@ import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
 
-
+//지도에서 디자이너가 근무가능한 미용실 선택하는 액티비티
+// 카카오 지도 api사용
 class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEventListener{
 
     private val eventListener = MarkerEventListener(this) // 마커 클릭 이벤트 리스너 등록

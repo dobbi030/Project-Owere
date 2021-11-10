@@ -56,7 +56,7 @@ class ChattingDesignerFragment : Fragment(R.layout.layout_chatting_designer_frag
         }
 
         binding?.chatListRecyclerView?.adapter = chatListAdapter
-        binding?.chatListRecyclerView?.layoutManager =LinearLayoutManager(context)
+        binding?.chatListRecyclerView?.layoutManager = LinearLayoutManager(context)
 
 
 

@@ -10,6 +10,8 @@ import com.blooburn.owere.R
 import com.blooburn.owere.user.adapter.chatting.ChatItemAdapter
 import com.blooburn.owere.user.item.ChatItem
 import com.blooburn.owere.user.item.DatabaseChild.Companion.DB_CHAT
+import com.blooburn.owere.user.item.UserDesignerItem
+import com.blooburn.owere.util.DESIGNER_DATA_KEY
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ChildEventListener
@@ -29,6 +31,11 @@ class ChattingActivity : AppCompatActivity() {
     }
 
 
+    //디자이너 프로필에서 전달받을 디자이너 객체
+    private lateinit var designerData: UserDesignerItem
+
+
+
 
     private var chatList = mutableListOf<ChatItem>()
 
@@ -44,8 +51,11 @@ class ChattingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatting)
 
+        getDataFromIntent()
+
         //프래그먼트로부터 받아온 정보
         val chatRoomId = intent.getLongExtra("chatRoomId", -1)
+
         var userName = intent.getStringExtra("userName")
 
         chatDB = Firebase.database.reference.child(DB_CHAT).child("$chatRoomId")
@@ -112,5 +122,22 @@ class ChattingActivity : AppCompatActivity() {
 
 
 
+    }
+
+    /**
+     * 수신 인텐트로 전달받은 디자이너 정보 저장
+     */
+    private fun getDataFromIntent() {
+        val extras = intent.extras  // 송신 액티비티가 보낸 데이터 참조
+        if (extras == null) {
+            finish()
+        }
+
+        designerData = extras!!.getParcelable(DESIGNER_DATA_KEY)!!   // DesignerData 객체 읽기
+
+
+        if (designerData == null) { //디자이너 객체가 없다면 종료
+            finish()
+        }
     }
 }

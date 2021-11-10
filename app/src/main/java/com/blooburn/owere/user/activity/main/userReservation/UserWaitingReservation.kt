@@ -10,6 +10,8 @@ import com.blooburn.owere.user.item.StyleMenuItem
 import com.blooburn.owere.user.item.UserDesignerItem
 import com.blooburn.owere.util.DESIGNER_DATA_KEY
 
+//예약 신청 완료
+//예약 정보 보여주기 액티비티(예약대기중) -> 홈으로 이동
 class UserWaitingReservation : AppCompatActivity() {
 
     //프로필에서 전달받을 디자이너 객체
@@ -19,15 +21,15 @@ class UserWaitingReservation : AppCompatActivity() {
     private lateinit var menu: StyleMenuItem
 
     //전달받을 기장 옵션
-    private var lengthOption: String = ""
+    private var lengthOption : String = ""
 
     //전달받을 선택할 미용실
-    private lateinit var selectedShop: ShopListItem  //선택할 미용실
+    private lateinit var selectedShop : ShopListItem  //선택할 미용실
 
     private lateinit var selectedTime : String //예약한 시간
 
     // 예약대기 레이아웃 바인딩
-    private lateinit var binding: ActivityUserWaitingReservationBinding
+    private lateinit var binding : ActivityUserWaitingReservationBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

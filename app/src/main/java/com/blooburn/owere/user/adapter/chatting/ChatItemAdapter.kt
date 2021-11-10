@@ -10,15 +10,15 @@ import com.blooburn.owere.R
 import com.blooburn.owere.user.item.ChatItem
 import com.google.firebase.auth.FirebaseAuth
 
-
+//채팅창 메시지를 나열하는 리사이클러뷰 어답터
 class ChatItemAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-
+    //현재 이용하는 유저의 정보를 불러오기 위한 Firebase 인스턴스
     private val mProfileUid = FirebaseAuth.getInstance()
-    var datas = mutableListOf<ChatItem>()
+    var datas = mutableListOf<ChatItem>() //메시지를 담을 배열
 
 
-    //ListAdapter임포트 adroidx주의
+    //뷰 홀더 (상대방메시지)
     inner class ViewHolderOpMessage(view: View) :
         RecyclerView.ViewHolder(view) {
         var senderMessageText = view.findViewById<TextView>(R.id.senderTextView)
@@ -30,7 +30,7 @@ class ChatItemAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         }
     }
-
+    //뷰 홀더(나의 메시지)
     inner class ViewHolderMyMessage(view: View) :
         RecyclerView.ViewHolder(view) {
 

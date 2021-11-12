@@ -46,6 +46,7 @@ class UserWaitingReservation : AppCompatActivity() {
     // 예약대기 레이아웃 바인딩
     private lateinit var binding: ActivityUserWaitingReservationBinding
 
+    private lateinit var reservationId : String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -60,9 +61,10 @@ class UserWaitingReservation : AppCompatActivity() {
 
         getDataFromIntent() //수신 인텐트로 전달받은 디자이너 정보 저장
 
-        setReservationData() //전달받은 예약정보를 뷰에 적용
+
 
         updateDataReservation()//수신 인텐트로 전달받은 디자이너 정보 저장
+        setReservationData() //전달받은 예약정보를 뷰에 적용
 
         initButton()
 
@@ -110,6 +112,7 @@ class UserWaitingReservation : AppCompatActivity() {
         selectedTime = extras.getString("selectedTime").toString()//예약 시간 받기
 
         reservedDate = extras.getString("reservedDate").toString()//예약 날짜 받기
+        reservationId = extras.getString("reservationId").toString()//유저 예약내역 PrimaryKey
         //날짜 필요
         if (designerData == null) { //디자이너 객체가 없다면 종료
             finish()
@@ -127,25 +130,85 @@ class UserWaitingReservation : AppCompatActivity() {
 
         //해당 날짜 유저 예약내역 레퍼런스
         val ReservationUserDB = databaseInstance.reference.child("UserReservation")
-            .child(auth.currentUser!!.uid).child(reservedDate)
+            .child(auth.currentUser!!.uid).child(selectedTime)
 
         //해당 날짜 디자이너 예약내역 레퍼런스
         val ReservationDesignerDB = databaseInstance.reference.child("designerReservations")
             .child(designerData.designerId).child(reservedDate)
 
-        var userEntity: UserEntity? = null
-
-        val designerUpdate = mutableMapOf<String, Any>()
-        val userUpdate = mutableMapOf<String, Any>()
 
 
-        currentUserDB.child(auth.currentUser!!.uid)
+        var designerUpdate = mutableMapOf<String, Any>()
+        var userUpdate = mutableMapOf<String, Any>()
+
+
+        currentUserDB
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    userEntity = snapshot.getValue(UserEntity::class.java)
+                    //userEntity = snapshot.getValue(UserEntity::class.java)
+                    snapshot.children.forEach {
+                        val model = it.getValue(UserEntity::class.java)
+                        model ?: return
+                        //DB에 변화가 생긴다면
 
-                    designerUpdate["userName"] = userEntity!!.myName
-                    userUpdate["userName"] = userEntity!!.myName
+                        if(auth!!.currentUser!!.uid == model.userId){
+                            designerUpdate["userName"] = model!!.myName
+
+
+                            designerUpdate["profileImagePath"] = ""
+
+                            designerUpdate["shop"] = selectedShop.name
+
+                            // hour to secondofDay + minute to secondofDay
+                            designerUpdate["startTime"] = hourMinuteToSecondOfDay(selectedTime)
+
+                            //임시로 시작 시간 + 20분으로 해둠
+                            designerUpdate["endTime"] = hourMinuteToSecondOfDay(selectedTime) + 60 * 60 * 1000 / 3
+
+                            designerUpdate["accepted"] = 1
+
+                            designerUpdate["type"] = TypeOfDesignerReservation.SCHEDULED
+
+
+                            //유저 Reservation
+                            //designerName: "디자이너1"
+                            //endTime: 39600000
+                            //profileImagePath: "profileImages/users/37mCYRBcd2QRRg6f9LjI3SqIclY..."
+                            //shop: "오월 미용실"
+                            //startTime: 37800000
+                            //userName: "박성준"
+                            userUpdate["userName"] = model!!.myName
+                            userUpdate["accepted"] = 1 //임시 원래는 0
+                            userUpdate["designerName"] = designerData.name
+
+                            userUpdate["endTime"] =
+                                reservedDate.toLong()*86400000+ hourMinuteToSecondOfDay(selectedTime) + 60 * 60 * 1000 / 3 //임시로 시작 시간 + 20분으로 해둠
+
+                            userUpdate["profileImagePath"] = designerData.profileImagePath
+
+                            userUpdate["shop"] = selectedShop.name
+
+                            userUpdate["startTime"] = reservedDate.toLong()* 86400000+hourMinuteToSecondOfDay(selectedTime)
+
+
+                            //디자이너 예약내역 DB업데이트
+                            ReservationDesignerDB.child(auth.currentUser!!.uid)
+                                .updateChildren(designerUpdate)
+
+                            //유저 예약내역 DB업데이트
+
+
+                            ReservationUserDB
+                                .updateChildren(userUpdate)
+                        }
+
+
+
+
+
+                    }
+
+
 
                 }
 
@@ -156,48 +219,6 @@ class UserWaitingReservation : AppCompatActivity() {
 
 
 
-        designerUpdate["profileImagePath"] = ""
-
-        designerUpdate["shop"] = selectedShop.name
-
-        // hour to secondofDay + minute to secondofDay
-        designerUpdate["startTime"] = hourMinuteToSecondOfDay(selectedTime)
-
-        //임시로 시작 시간 + 20분으로 해둠
-        designerUpdate["endTime"] = hourMinuteToSecondOfDay(selectedTime) + 60 * 60 * 1000 / 3
-
-        designerUpdate["accepted"] = 0
-
-        designerUpdate["type"] = TypeOfDesignerReservation.SCHEDULED
-
-
-        //유저 Reservation
-        //designerName: "디자이너1"
-        //endTime: 39600000
-        //profileImagePath: "profileImages/users/37mCYRBcd2QRRg6f9LjI3SqIclY..."
-        //shop: "오월 미용실"
-        //startTime: 37800000
-        //userName: "박성준"
-        userUpdate["accepted"] = 0
-        userUpdate["designerName"] = designerData.name
-
-        userUpdate["endTime"] =
-            hourMinuteToSecondOfDay(selectedTime) + 60 * 60 * 1000 / 3 //임시로 시작 시간 + 20분으로 해둠
-
-        userUpdate["profileImagePath"] = designerData.profileImagePath
-
-        userUpdate["shop"] = selectedShop.name
-
-        userUpdate["startTime"] = hourMinuteToSecondOfDay(selectedTime)
-
-
-        //디자이너 예약내역 DB업데이트
-        ReservationDesignerDB.child(auth.currentUser!!.uid)
-            .updateChildren(designerUpdate)
-
-        //유저 예약내역 DB업데이트
-        ReservationUserDB.child(designerData.designerId)
-            .updateChildren(userUpdate)
 
 
     }

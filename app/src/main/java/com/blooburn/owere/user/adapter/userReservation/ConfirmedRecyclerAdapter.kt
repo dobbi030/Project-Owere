@@ -9,7 +9,7 @@ import com.blooburn.owere.R
 
 import com.blooburn.owere.user.item.ReservationListItem
 
-class ConfirmedListViewAdapter (private val items: MutableList<ReservationListItem>) : BaseAdapter(){
+class ConfirmedRecyclerAdapter (private val items: MutableList<ReservationListItem>) : BaseAdapter(){
     override fun getCount(): Int {
         return items.size
     }

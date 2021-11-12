@@ -201,6 +201,7 @@ class  ReserveTimeActivity : AppCompatActivity(), DesignerProfileHandler{
                 //예약 날짜
                 intent.putExtra("reservedDate",reservedDate) //1241
 
+                intent.putExtra("reservationId", "${designerData.designerId}@Time${LocalTime.now()}")
                 startActivity(intent)
             }
 

@@ -77,8 +77,8 @@ class DesignerConfirmedReservationFragment :
 
                             val scheduledList = mutableListOf<DesignerReservation>()
                             val completedList = mutableListOf<DesignerReservation>()
-                            val currentTime = LocalTime.now().toSecondOfDay() * 1000
 
+                            val currentTime = LocalTime.now().toSecondOfDay() * 1000
                             snapshot.children.forEach { reservationSnapshot ->
                                 val reservation =
                                     reservationSnapshot.getValue(DesignerReservation::class.java)

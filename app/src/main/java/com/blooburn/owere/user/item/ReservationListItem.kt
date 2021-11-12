@@ -1,5 +1,8 @@
 package com.blooburn.owere.user.item
 
+import android.os.Parcelable
+import com.blooburn.owere.util.TypeOfDesignerReservation
+
 //예약 리스트에 보여줄 객체
 data class ReservationListItem(
 
@@ -9,6 +12,9 @@ data class ReservationListItem(
     val time : String,   //예약 시간
     val userId : String, //유저 아이디
     val menuItem : StyleMenuItem, //선택 메뉴
-    val option : String //옵션 추가(길이, 커트)
+    val option : String, //옵션 추가(길이, 커트)
+    val accepted : Int //수락여부
 
-)
+){
+    constructor() : this("", "", "", "", "",StyleMenuItem(),"",0)
+}

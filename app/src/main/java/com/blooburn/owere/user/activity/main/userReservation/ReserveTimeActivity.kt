@@ -50,10 +50,12 @@ class  ReserveTimeActivity : AppCompatActivity(), DesignerProfileHandler{
     //전달받을 선택할 미용실
     private lateinit var selectedShop: ShopListItem  //선택할 미용실
 
-    private lateinit var selectedTime : String
+    private lateinit var selectedTime : String// 예약 시간
+    private lateinit var reservedDate : String //예약날짜
 
     //날짜 시간 예약 레이아웃 바인딩
     private var binding: ActivityReserveTimeBinding? = null
+
 
 
     private var tempEpochDay = 0L
@@ -179,6 +181,8 @@ class  ReserveTimeActivity : AppCompatActivity(), DesignerProfileHandler{
         keepButton.setOnClickListener {
 
             selectedTime = timeTabAdapter.selectedTime?.text.toString()
+
+
             if(selectedTime ==null){
                 Toast.makeText(this,"예약시간을 선택해주세요.",Toast.LENGTH_LONG)
             }else{
@@ -192,7 +196,10 @@ class  ReserveTimeActivity : AppCompatActivity(), DesignerProfileHandler{
                 intent.putExtra("lengthOption", lengthOption)
                 //선택한 미용실 보내기
                 intent.putExtra("selectedShop", selectedShop)
+                //선택한 시간
                 intent.putExtra("selectedTime", selectedTime)
+                //예약 날짜
+                intent.putExtra("reservedDate",reservedDate) //1241
 
                 startActivity(intent)
             }
@@ -265,6 +272,7 @@ class  ReserveTimeActivity : AppCompatActivity(), DesignerProfileHandler{
 
                 //선택 날짜 값
                 tempEpochDay = date.date.getLong(org.threeten.bp.temporal.ChronoField.EPOCH_DAY)
+                reservedDate = tempEpochDay.toString()//넘겨주기 위하여  날짜 할당
                 //만약 선택한 날짜와 현재 날짜와 같은 날일 경우
                 if(LocalDate.now().getLong(org.threeten.bp.temporal.ChronoField.EPOCH_DAY)== tempEpochDay){
 
@@ -297,7 +305,6 @@ class  ReserveTimeActivity : AppCompatActivity(), DesignerProfileHandler{
                 databaseInstance.reference.child(referencePathOfSelectedDay).
                         addListenerForSingleValueEvent(object : ValueEventListener{
                             override fun onDataChange(snapshot: DataSnapshot) {
-
 
                                 //들어온 예약 리스트 DB 조회
 

@@ -24,10 +24,13 @@ import com.blooburn.owere.user.item.StyleMenuItem
 import com.blooburn.owere.user.item.UserDesignerItem
 import com.blooburn.owere.user.item.UserReview
 import com.blooburn.owere.util.*
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 
 class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler {
@@ -35,6 +38,13 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
     private var designerData: UserDesignerItem? = null
     private val reviewImagePathList = mutableListOf<String>()
     private val pricePath = "커트"
+
+    //유저 정보를 넘겨주기 위해 파이어베이스 인증 인스턴트 생성
+    private val auth : FirebaseAuth by lazy{
+        Firebase.auth
+    }
+    //유저 아이디를 넘겨줄것임
+    private lateinit var userId : String
 
     private val databaseReference = databaseInstance.reference
     private val storageReference = storageInstance.reference
@@ -48,6 +58,7 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_designer_profile)
 
+        userId = auth.currentUser!!.uid
         val toolbar = findViewById<Toolbar>(R.id.toolbar_user_designer_profile)
         initToolbar(toolbar)
 
@@ -332,10 +343,13 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
         }
         //채팅하기 버튼
         val chattingButton = findViewById<AppCompatButton>(R.id.button_user_designer_profile_chatting)
-        chattingButton.setOnClickListener {
+        chattingButton.setOnClickListener{
+
             //채팅방으로 이동
             val intent = Intent(this, ChattingActivity::class.java)
-            intent.putExtra(DESIGNER_DATA_KEY,designerData)
+            intent.putExtra(DESIGNER_DATA_KEY, designerData)
+            //채팅방 아이디 전송 @User@${userId}@UserId@$디자이너ID
+            intent.putExtra("chatRoomId","@User@${userId}@Designer@${designerData!!.designerId}")
             startActivity(intent)
         }
     }

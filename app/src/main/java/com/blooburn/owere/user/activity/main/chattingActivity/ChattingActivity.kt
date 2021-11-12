@@ -11,13 +11,12 @@ import com.blooburn.owere.user.adapter.chatting.ChatItemAdapter
 import com.blooburn.owere.user.item.ChatItem
 import com.blooburn.owere.user.item.DatabaseChild.Companion.DB_CHAT
 import com.blooburn.owere.user.item.UserDesignerItem
+import com.blooburn.owere.user.item.UserEntity
 import com.blooburn.owere.util.DESIGNER_DATA_KEY
+import com.blooburn.owere.util.databaseInstance
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
@@ -32,17 +31,19 @@ class ChattingActivity : AppCompatActivity() {
 
 
     //디자이너 프로필에서 전달받을 디자이너 객체
-    private lateinit var designerData: UserDesignerItem
-
-
-
+    private var designerData: UserDesignerItem? = null
 
     private var chatList = mutableListOf<ChatItem>()
 
+    //리사이클러뷰 어답터
     private val adapter = ChatItemAdapter()
 
+    //파이어베이스 데이터베이스 레퍼런스를 받을 변수
     private var chatDB : DatabaseReference? = null
 
+    private val currentUserDB = databaseInstance.reference.child("Users")
+    private val UserRoomsDB = databaseInstance.reference.child("UserRooms")
+    //채팅 내용이 들어갈 리사이클러뷰
     private val chatRecyclerview by lazy {
         findViewById<RecyclerView>(R.id.chatRecyclerView)
     }
@@ -53,10 +54,35 @@ class ChattingActivity : AppCompatActivity() {
 
         getDataFromIntent()
 
-        //프래그먼트로부터 받아온 정보
-        val chatRoomId = intent.getLongExtra("chatRoomId", -1)
+        //채팅방 목록 프래그먼트로부터 받아온 정보
+        //채팅방 아이디 @User@${userId}@UserId@$디자이너ID
+        val chatRoomId = intent.getStringExtra("chatRoomId")
 
-        var userName = intent.getStringExtra("userName")
+
+        var userName : String? = intent.getStringExtra("userName")
+
+        if (userName == null){
+            var userEntity : UserEntity?
+            //유저 네임을 DB에서 가져옴
+        currentUserDB.child(auth.currentUser!!.uid).addListenerForSingleValueEvent(object :
+            ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                userEntity = snapshot.getValue(UserEntity::class.java)
+                userName = userEntity!!.myName
+
+
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
+
+        }
+
+
 
         chatDB = Firebase.database.reference.child(DB_CHAT).child("$chatRoomId")
 
@@ -97,6 +123,7 @@ class ChattingActivity : AppCompatActivity() {
             val userName: String
         )
         */
+
         findViewById<Button>(R.id.sendButton).setOnClickListener {
             val chatItem =
                 ChatItem(profileImg = "userprofile",
@@ -106,7 +133,27 @@ class ChattingActivity : AppCompatActivity() {
                 //유저 이름 인텐트로 받아오기 필요
                 userName = userName!!
             )
-            chatRecyclerview.scrollToPosition(chatList.size-1)
+            //UserRooms 업데이트
+            val userRoomsStatus = mutableMapOf<String, Any>()
+            userRoomsStatus["chatRoomId"] = chatRoomId!!
+            userRoomsStatus["lastMessage"] = findViewById<EditText>(R.id.messageEditText).text.toString()
+            userRoomsStatus["myName"] = userName!!
+            userRoomsStatus["opponentId"] = designerData?.designerId.toString()
+            userRoomsStatus["opponentName"] = designerData?.name.toString()
+            userRoomsStatus["profileImg"] = designerData?.profileImagePath.toString()
+            UserRoomsDB.child(auth.currentUser!!.uid).child(chatRoomId!!).updateChildren(userRoomsStatus)
+
+
+            val designerRoomsStatus = mutableMapOf<String, Any>()
+            designerRoomsStatus["chatRoomId"] = chatRoomId!!
+            designerRoomsStatus["lastMessage"] = findViewById<EditText>(R.id.messageEditText).text.toString()
+            designerRoomsStatus["myName"] = designerData?.name.toString()
+            designerRoomsStatus["opponentId"] = auth.currentUser!!.uid
+            designerRoomsStatus["opponentName"] = userName.toString()
+            designerRoomsStatus["profileImg"] = ""
+            UserRoomsDB.child(designerData!!.designerId).child(chatRoomId!!).updateChildren(designerRoomsStatus)
+
+            chatRecyclerview.scrollToPosition(chatList.size)
 
 
 
@@ -128,16 +175,15 @@ class ChattingActivity : AppCompatActivity() {
      * 수신 인텐트로 전달받은 디자이너 정보 저장
      */
     private fun getDataFromIntent() {
+
         val extras = intent.extras  // 송신 액티비티가 보낸 데이터 참조
         if (extras == null) {
             finish()
         }
 
-        designerData = extras!!.getParcelable(DESIGNER_DATA_KEY)!!   // DesignerData 객체 읽기
+        designerData = extras?.getParcelable(DESIGNER_DATA_KEY) // DesignerData 객체 읽기
 
 
-        if (designerData == null) { //디자이너 객체가 없다면 종료
-            finish()
-        }
+
     }
 }

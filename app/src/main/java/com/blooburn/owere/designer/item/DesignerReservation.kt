@@ -12,7 +12,8 @@ data class DesignerReservation(
     val shop: String,
     val startTime: Long,
     val endTime: Long,
-    var type: TypeOfDesignerReservation
+    var type: TypeOfDesignerReservation,
+    var accepted : Int // 디자이너 수락여부
 ) : Parcelable {
-    constructor() : this("", "", "", 0, 0, TypeOfDesignerReservation.SCHEDULED)
+    constructor() : this("", "", "", 0, 0, TypeOfDesignerReservation.SCHEDULED,0)
 }

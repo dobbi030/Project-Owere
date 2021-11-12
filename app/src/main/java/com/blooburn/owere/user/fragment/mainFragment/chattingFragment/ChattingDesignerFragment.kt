@@ -45,13 +45,11 @@ class ChattingDesignerFragment : Fragment(R.layout.layout_chatting_designer_frag
         //리스트에서 채팅방 클릭시 해당 채팅방으로 이동
         chatListAdapter = ChatListAdapter { chatListItem ->
             //채팅방으로 이동하는 코드
-            //context에 nullcheck를 걸어둔다
-            context?.let {
-                val intent = Intent(it, ChattingActivity::class.java)
+                val intent = Intent(requireContext(), ChattingActivity::class.java)
                 intent.putExtra("chatRoomId", chatListItem.chatRoomId)
-                intent.putExtra("userName", chatListItem.myName.toString())
+                intent.putExtra("userName", chatListItem.myName)
                 startActivity(intent)
-            }
+
 
         }
 

@@ -9,9 +9,16 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import com.blooburn.owere.R
 import com.blooburn.owere.user.activity.main.UserMainActivity
+import com.blooburn.owere.user.item.ChatListItem
+import com.blooburn.owere.user.item.UserEntity
+import com.blooburn.owere.util.ApplicationForShared
+import com.blooburn.owere.util.databaseInstance
 //import com.blooburn.owere.util.myId
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
@@ -21,6 +28,9 @@ class LoginActivityTemp : AppCompatActivity() {
 
 
     private lateinit var auth : FirebaseAuth    //파이어베이스 인증 사용
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -127,6 +137,32 @@ class LoginActivityTemp : AppCompatActivity() {
 
         // 패키지 변수에 유저 아이디 저장
 //        myId = userId
+
+
+
+//        var userEntity : UserEntity?
+//        var userName : String?= null
+//        currentUserDB.addListenerForSingleValueEvent(object : ValueEventListener{
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                userEntity = snapshot.getValue(UserEntity::class.java)
+//                userName = userEntity!!.myName
+//
+//
+//
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//
+//            }
+//
+//        })
+
+//        //로그인 정보 저장
+//        ApplicationForShared.prefs.apply {
+//            setShared("userId",userId)
+//            setShared("userName", userName!!)
+//        }
+
 
         val intent = Intent(this, UserMainActivity::class.java) //유저 메인페이지로 이동.
         startActivity(intent)

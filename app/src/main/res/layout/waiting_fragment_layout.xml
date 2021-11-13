@@ -33,8 +33,8 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ListView
-        android:id="@+id/listview_waiting"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_waiting"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"

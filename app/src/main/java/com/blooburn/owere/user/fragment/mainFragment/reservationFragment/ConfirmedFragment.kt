@@ -76,7 +76,7 @@ class ConfirmedFragment : Fragment(R.layout.confirmed_fragment_layout) {
 
                         // 끝나는 시간이 현재 시간을 지나지 않았을 때 && 디자이너의 수락
                         //currentTime > reservationEnd &&
-                                if (currentTime < reservationEnd &&reservation.accepted==1) {
+                                if (currentTime < reservationEnd && reservation.accepted==1) {
                                     confirmedReservation.add(reservation)
                                 }
                             }

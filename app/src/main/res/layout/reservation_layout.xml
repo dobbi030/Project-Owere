@@ -14,12 +14,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Spinner
+            android:background="@drawable/spinner_background"
             android:id="@+id/reservation_spinner"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/reservation_AlarmButton"

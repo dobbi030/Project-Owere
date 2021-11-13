@@ -10,6 +10,7 @@ data class ReservationListItem(
 
     val profile : String, //디자이너 프로필
     val designerName : String, //디자이너 이름
+    val designerId : String,//디자이너 아이디
     val shop : String, // 미용실
     val startTime : Long,   //예약 시간
     val endTime : Long,
@@ -19,7 +20,7 @@ data class ReservationListItem(
     val accepted : Int //수락여부
 
 ) : Parcelable {
-    constructor() : this("", "","",0, 0, "", StyleMenuItem(),"",1)
+    constructor() : this("", "","","",0, 0, "", StyleMenuItem(),"",1)
 }
 //유저 Reservation
 //designerName: "디자이너1"

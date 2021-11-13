@@ -31,6 +31,7 @@ import java.util.*
 class DesignerConfirmedReservationFragment :
     Fragment(R.layout.designer_confirmed_reservation_fragment) {
 
+
     private val tempDesignerId = "designer0"
     private var tempEpochDay = 0L
     private val reservationsReferencePath = "designerReservations/$tempDesignerId/"

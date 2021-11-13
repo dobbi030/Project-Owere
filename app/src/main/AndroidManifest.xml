@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Owere"
         android:usesCleartextTraffic="true">
-        <activity android:name=".user.adapter.userReservation.UserReservationDetailActivity"></activity>
+        <activity android:name=".user.activity.main.userReservation.UserReservationDetailActivity"></activity>
         <activity android:name=".user.activity.main.userReservation.UserWaitingReservation"></activity>
         <activity android:name=".designer.activity.main.DesignerReservationDetailActivity"></activity>
         <activity

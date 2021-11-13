@@ -108,7 +108,7 @@ class SignUpActivityMethods : AppCompatActivity() {
     }
 
 
-    //은선님의 실수
+//은선님의 실수
     //액티비티 시작되었을 때
 
 //    override fun onStart() {

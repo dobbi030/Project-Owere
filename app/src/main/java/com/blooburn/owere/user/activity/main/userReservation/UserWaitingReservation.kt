@@ -130,7 +130,7 @@ class UserWaitingReservation : AppCompatActivity() {
 
         //해당 날짜 유저 예약내역 레퍼런스
         val ReservationUserDB = databaseInstance.reference.child("UserReservation")
-            .child(auth.currentUser!!.uid).child(selectedTime)
+            .child(auth.currentUser!!.uid).child(firebaseStringPathInput())
 
         //해당 날짜 디자이너 예약내역 레퍼런스
         val ReservationDesignerDB = databaseInstance.reference.child("designerReservations")
@@ -165,7 +165,7 @@ class UserWaitingReservation : AppCompatActivity() {
                             //임시로 시작 시간 + 20분으로 해둠
                             designerUpdate["endTime"] = hourMinuteToSecondOfDay(selectedTime) + 60 * 60 * 1000 / 3
 
-                            designerUpdate["accepted"] = 1
+                            designerUpdate["accepted"] = 0
 
                             designerUpdate["type"] = TypeOfDesignerReservation.SCHEDULED
 
@@ -178,15 +178,16 @@ class UserWaitingReservation : AppCompatActivity() {
                             //startTime: 37800000
                             //userName: "박성준"
                             userUpdate["userName"] = model!!.myName
-                            userUpdate["accepted"] = 1 //임시 원래는 0
+                            userUpdate["accepted"] = 0 //임시 원래는 0
                             userUpdate["designerName"] = designerData.name
 
                             userUpdate["endTime"] =
-                                reservedDate.toLong()*86400000+ hourMinuteToSecondOfDay(selectedTime) + 60 * 60 * 1000 / 3 //임시로 시작 시간 + 20분으로 해둠
+                                reservedDate.toLong()*86400000+ hourMinuteToSecondOfDay(selectedTime) + 60 * 60 / 3 //임시로 시작 시간 + 20분으로 해둠
 
                             userUpdate["profileImagePath"] = designerData.profileImagePath
 
                             userUpdate["shop"] = selectedShop.name
+                            userUpdate["designerId"] = designerData.designerId
 
                             userUpdate["startTime"] = reservedDate.toLong()* 86400000+hourMinuteToSecondOfDay(selectedTime)
 
@@ -243,6 +244,12 @@ class UserWaitingReservation : AppCompatActivity() {
         } catch (e: Exception) {
             return e.toString()
         }
+    }
+    /**
+     * 파이어베이스 child에 들어갈 경로 (예약 primarykey를 예약 시간 타임스탬프로 설정)
+     */
+    private fun firebaseStringPathInput() : String{
+        return (reservedDate.toLong()* 86400000+hourMinuteToSecondOfDay(selectedTime)).toString()
     }
 
 

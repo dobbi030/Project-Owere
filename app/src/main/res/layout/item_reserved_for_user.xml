@@ -77,16 +77,33 @@
         app:tint="@color/black" />
 
     <TextView
-        android:id="@+id/text_reserved_user_settle"
         android:layout_width="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:id="@+id/text_reserved_user_review"
+
         android:layout_height="wrap_content"
-        android:text="@string/settling_fee"
+        android:text="후기 작성하기"
         android:textColor="@color/red"
         android:textSize="10sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_reserved_for_user_right"
         app:tint="@color/black" />
-    
+
+    <ImageView
+        android:id="@+id/btn_reserved_for_user_right"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_chevron_right"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

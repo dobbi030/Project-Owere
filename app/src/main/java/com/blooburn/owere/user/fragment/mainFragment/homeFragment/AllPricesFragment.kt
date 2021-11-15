@@ -1,6 +1,7 @@
 package com.blooburn.owere.user.fragment.mainFragment.homeFragment
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -14,21 +15,53 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 
-class AllPricesFragment(private val hasCheckBox: Boolean) : Fragment(R.layout.all_prices_fragment){
+class AllPricesFragment(private val isAdditionTreatment: Boolean) : Fragment(R.layout.all_prices_fragment), View.OnClickListener{
 
     private var binding: AllPricesFragmentBinding? = null
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = AllPricesFragmentBinding.bind(view)
+        binding = AllPricesFragmentBinding.bind(view).apply{
+            root.visibility = View.INVISIBLE
+        }
+
+        // 추가 시술 선택 모드인지 or 일반 가격표만 보는 화면인지에 따라 다르게 화면 적용
+        when(isAdditionTreatment){
+            true -> initForAdditionalTreatment()
+            else -> initForShowingPrices()
+        }
 
         // 모든 가격표(메뉴)를 불러온 후, view를 동적 생성 해서 보여준다
         getAndAddMenuItems()
+    }
 
-        // 선택 가능 모드일 때, 선택 완료 버튼을 보여준다
-        if (hasCheckBox){
-            binding?.buttonAllPrices?.visibility = View.VISIBLE
+    /**
+     * 가격표만 보는 경우
+     */
+    private fun initForShowingPrices(){
+        binding?.apply{
+            layoutAllPricesAdditionalTopBar.visibility = View.GONE    // 추가 시술 화면 상단바
+            buttonAllPricesChoose.visibility = View.GONE    // 선택 완료 버튼
+            buttonAllPricesBack.setOnClickListener(this@AllPricesFragment)  // 뒤로가는 버튼
+        }
+    }
+
+    /**
+     * 추가 시술 선택하는 경우
+     */
+    private fun initForAdditionalTreatment(){
+        binding?.apply{
+            layoutAllPricesTopBar.visibility = View.GONE    // 일반 가격표 화면 상단바
+            buttonAllPricesAdditionalBack.setOnClickListener(this@AllPricesFragment)
         }
     }
 
@@ -55,12 +88,7 @@ class AllPricesFragment(private val hasCheckBox: Boolean) : Fragment(R.layout.al
                     // 컨테이너 view 생성
                     val menuContainerBinding = LayoutMenuContainerBinding.inflate(layoutInflater,
                         binding?.layoutAllPricesContainer,
-                        false)
-
-                    // 마지막에 있는 버튼 앞에 추가
-                    binding?.layoutAllPricesContainer!!.apply {
-                        addView(menuContainerBinding.root, this.childCount - 1)
-                    }
+                        true)
 
                     // 커트, 매직, 펌과 같은 메뉴의 대표 타이틀
                     menuContainerBinding.textMenuContainerTitle.text = containerSnapshot.key
@@ -70,6 +98,8 @@ class AllPricesFragment(private val hasCheckBox: Boolean) : Fragment(R.layout.al
                     // 3. view에 서브 메뉴 데이터 세팅
                     getAndInflateSubMenu(containerSnapshot.children, menuContainerBinding.actualLayoutMenuContainer)
                 }
+
+                binding?.root?.visibility = View.VISIBLE
             }
 
             override fun onCancelled(error: DatabaseError) {}
@@ -99,11 +129,22 @@ class AllPricesFragment(private val hasCheckBox: Boolean) : Fragment(R.layout.al
         }
     }
 
+    /**
+     * 세부 메뉴의 UI에 data 적용
+     */
     private fun setSubMenuView(subMenuItem: MenuItem, subMenuBinding: ItemPriceMenuBinding){
         subMenuBinding.textPriceMenuTitle.text = subMenuItem.menuName
         subMenuBinding.textPriceMenuPrice.text = subMenuItem.menuPrice
         subMenuBinding.textPriceMenuTime.text = subMenuItem.menuTime
 
-        if (hasCheckBox) subMenuBinding.checkBoxPriceMenu.visibility = View.VISIBLE
+        // 추가 비용 선택하는 화면일 때 체크박스를 보여준다
+        if (isAdditionTreatment) subMenuBinding.checkBoxPriceMenu.visibility = View.VISIBLE
+    }
+
+    /**
+     * 상단의 화면에서 나가는 버튼 리스너
+     */
+    override fun onClick(view: View?) {
+        requireActivity().supportFragmentManager.popBackStack()
     }
 }

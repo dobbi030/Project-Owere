@@ -1,15 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
 
     <LinearLayout
-        android:id="@+id/layout_all_prices_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingBottom="48dp">
+
+        <!-- 단순 가격표 보는 화면일 때 visibility 활성화 -->
+        <LinearLayout
+            android:id="@+id/layout_all_prices_top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:gravity="center_vertical">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/button_all_prices_back"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="20dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_baseline_arrow_back_24"
+                app:tint="@color/black"/>
+        </LinearLayout>
+
+
+        <!-- 추가 비용 선택하는 화면일 때 visibility 활성화 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_all_prices_additional_top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/button_all_prices_additional_back"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="20dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_baseline_clear_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/black" />
+
+            <TextView
+                android:id="@+id/text_additional_treatment_title"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:gravity="center"
+                android:text="추가 비용"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -21,11 +72,25 @@
             android:textSize="25dp"
             android:textStyle="bold" />
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:visibility="gone"
-            android:id="@+id/button_all_prices"
+        <!-- 메뉴가 추가되는 곳 -->
+        <LinearLayout
+            android:id="@+id/layout_all_prices_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+
+        <include
+            layout="@layout/view_divider_5dp"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_marginVertical="24dp" />
+
+        <!-- 추가 비용 선택하는 화면일 때 visibility 활성화 -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_all_prices_choose"
             android:layout_width="match_parent"
             android:layout_height="44dp"
+            android:layout_marginHorizontal="16dp"
             android:background="@drawable/round_white_background"
             android:backgroundTint="@color/purple_button2"
             android:text="@string/choice_completed"

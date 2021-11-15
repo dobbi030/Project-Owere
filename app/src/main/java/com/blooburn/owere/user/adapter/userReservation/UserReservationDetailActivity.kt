@@ -1,22 +1,23 @@
-package com.blooburn.owere.designer.activity.main
+package com.blooburn.owere.user.adapter.userReservation
+
+
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.blooburn.owere.R
 import com.blooburn.owere.designer.item.DesignerReservation
 import com.blooburn.owere.user.fragment.mainFragment.homeFragment.AllPricesFragment
+import com.blooburn.owere.user.item.ReservationListItem
 import com.blooburn.owere.util.ALL_PRICES_FRAGMENT_NAME
 import com.blooburn.owere.util.DESIGNER_RESERVATION_DETAIL_KEY
 import com.blooburn.owere.util.TypeOfDesignerReservation
 
-class DesignerReservationDetailActivity : AppCompatActivity() {
+class UserReservationDetailActivity : AppCompatActivity() {
 
-    private var reservation: DesignerReservation? = null
+    private var reservation: ReservationListItem? = null
     private val tempDesignerId = "designer0"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +39,7 @@ class DesignerReservationDetailActivity : AppCompatActivity() {
         }
 
         reservation =
-            extras!!.getParcelable(DESIGNER_RESERVATION_DETAIL_KEY)   // DesignerReservation 객체 읽기
+            extras!!.getParcelable("userReservationDetail")   // DesignerReservation 객체 읽기
         if (reservation == null) {
             finish()
         }
@@ -50,32 +51,30 @@ class DesignerReservationDetailActivity : AppCompatActivity() {
      * 2. click listener
      */
     private fun initBottomButtons() {
-        if (reservation!!.type == TypeOfDesignerReservation.COMPLETED) {
-            setBottomButtonsVisible()
-            setAdditionalTreatmentClickListener()
-        }
-
-
+//        setBottomButtonsVisibility()
+        setBottomButtonsClickListener()
     }
 
-    /**
-     * 정산할 예약일 때만 아래에 정산 관련 버튼들이 보이도록 한다
-     */
-    private fun setBottomButtonsVisible() {
-        findViewById<LinearLayout>(R.id.layout_designer_reservation_detail_buttons).visibility =
-            View.VISIBLE
+//    /**
+//     * 정산할 예약일 때만 아래에 정산 관련 버튼들이 보이도록 한다
+//     */
+//    private fun setBottomButtonsVisibility() {
+//        if (reservation!!.type == TypeOfDesignerReservation.COMPLETED) {
+//            findViewById<LinearLayout>(R.id.layout_designer_reservation_detail_buttons).visibility =
+//                View.VISIBLE
+//        }
+//    }
 
+    private fun setBottomButtonsClickListener() {
+        setAdditionalTreatmentClickListener()
     }
 
-    /**
-     * 추가시술 버튼 클릭 리스너
-     */
     private fun setAdditionalTreatmentClickListener() {
         val buttonView =
-            findViewById<Button>(R.id.button_designer_reservation_detail_additional_treatment)
+            findViewById<androidx.appcompat.widget.AppCompatButton>(R.id.button_designer_reservation_detail_additional_treatment)
 
         buttonView.setOnClickListener {
-            val fragment = AllPricesFragment(isAdditionTreatment = true)
+            val fragment = AllPricesFragment(hasCheckBox = true)
 
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_designer_reservation_detail, fragment)

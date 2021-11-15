@@ -61,11 +61,11 @@
         app:layout_constraintTop_toBottomOf="@id/text_price_menu_price"
         android:layout_marginTop="6dp"/>
 
+    <!-- 추가 비용 선택하는 경우에 활성화 -->
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/checkBox_price_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         app:layout_constraintTop_toTopOf="@id/text_price_menu_title"
         app:layout_constraintBottom_toBottomOf="@id/text_price_menu_option"
         app:layout_constraintEnd_toEndOf="parent"/>

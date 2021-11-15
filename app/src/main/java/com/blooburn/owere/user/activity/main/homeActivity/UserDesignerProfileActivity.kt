@@ -76,7 +76,7 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
      * 가격 전체 보기 -> 프래그먼트 생성
      */
     private val priceClickListener = View.OnClickListener {
-        val fragment = AllPricesFragment(hasCheckBox = false)
+        val fragment = AllPricesFragment(isAdditionTreatment = false)
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container_user_designer_profile, fragment)

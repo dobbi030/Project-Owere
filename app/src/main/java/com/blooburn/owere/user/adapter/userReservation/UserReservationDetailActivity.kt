@@ -74,7 +74,7 @@ class UserReservationDetailActivity : AppCompatActivity() {
             findViewById<androidx.appcompat.widget.AppCompatButton>(R.id.button_designer_reservation_detail_additional_treatment)
 
         buttonView.setOnClickListener {
-            val fragment = AllPricesFragment(hasCheckBox = true)
+            val fragment = AllPricesFragment(isAdditionTreatment = true)
 
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_designer_reservation_detail, fragment)

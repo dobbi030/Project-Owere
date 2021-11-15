@@ -1,7 +1,9 @@
 package com.blooburn.owere.designer.activity.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
@@ -48,30 +50,32 @@ class DesignerReservationDetailActivity : AppCompatActivity() {
      * 2. click listener
      */
     private fun initBottomButtons() {
-        setBottomButtonsVisibility()
-        setBottomButtonsClickListener()
+        if (reservation!!.type == TypeOfDesignerReservation.COMPLETED) {
+            setBottomButtonsVisible()
+            setAdditionalTreatmentClickListener()
+        }
+
+
     }
 
     /**
      * 정산할 예약일 때만 아래에 정산 관련 버튼들이 보이도록 한다
      */
-    private fun setBottomButtonsVisibility() {
-        if (reservation!!.type == TypeOfDesignerReservation.COMPLETED) {
-            findViewById<LinearLayout>(R.id.layout_designer_reservation_detail_buttons).visibility =
-                View.VISIBLE
-        }
+    private fun setBottomButtonsVisible() {
+        findViewById<LinearLayout>(R.id.layout_designer_reservation_detail_buttons).visibility =
+            View.VISIBLE
+
     }
 
-    private fun setBottomButtonsClickListener() {
-        setAdditionalTreatmentClickListener()
-    }
-
+    /**
+     * 추가시술 버튼 클릭 리스너
+     */
     private fun setAdditionalTreatmentClickListener() {
         val buttonView =
-            findViewById<ImageButton>(R.id.button_designer_reservation_detail_additional_treatment)
+            findViewById<Button>(R.id.button_designer_reservation_detail_additional_treatment)
 
         buttonView.setOnClickListener {
-            val fragment = AllPricesFragment(hasCheckBox = true)
+            val fragment = AllPricesFragment(isAdditionTreatment = true)
 
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_designer_reservation_detail, fragment)

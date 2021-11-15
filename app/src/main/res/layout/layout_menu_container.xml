@@ -8,14 +8,13 @@
         layout="@layout/view_divider_5dp"
         android:layout_width="match_parent"
         android:layout_height="5dp"
-        android:layout_marginTop="24dp" />
+        android:layout_marginVertical="24dp" />
 
     <LinearLayout
         android:id="@+id/actual_layout_menu_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingVertical="26dp"
         android:paddingHorizontal="16dp">
 
         <TextView

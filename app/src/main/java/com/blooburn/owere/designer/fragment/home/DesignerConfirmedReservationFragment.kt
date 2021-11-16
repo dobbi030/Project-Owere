@@ -89,12 +89,12 @@ class DesignerConfirmedReservationFragment :
             if (isSelected) {
                 updateTodayText(date.date)  // 오늘 날짜 UI 업데이트
 
-                val selectedDayStamp = date.date.getLong(ChronoField.EPOCH_DAY) // 선택된 날짜 스탬프
+                val selectedDateStamp = date.date.getLong(ChronoField.EPOCH_DAY) // 선택된 날짜 스탬프
                 val referencePathOfSelectedDay =
-                    reservationsReferencePath + selectedDayStamp   // 해당 날짜의 DB 주소
+                    reservationsReferencePath + selectedDateStamp   // 해당 날짜의 DB 주소
 
                 // 선택 날짜의 예약 목록들을 DB에서 불러와서 업데이트한다
-                loadAndSetReservationsFromDB(referencePathOfSelectedDay, selectedDayStamp)
+                loadAndSetReservationsFromDB(referencePathOfSelectedDay, selectedDateStamp)
                 // 예약 개수 나타내는 UI 업데이트
                 updateCountOfReservations(scheduledList.size, completedList.size)
             }
@@ -116,6 +116,7 @@ class DesignerConfirmedReservationFragment :
                     snapshot.children.forEach { reservationSnapshot ->
                         val reservation =
                             reservationSnapshot.getValue(DesignerReservation::class.java)
+                        reservation?.userId = reservationSnapshot.key ?: "" // key = userId
 
                         // 예정된, 정산할, 정산된 예약 분류
                         if (reservation != null) {
@@ -123,8 +124,8 @@ class DesignerConfirmedReservationFragment :
                         }
                     }
 
-                    scheduledAdapter.setData(scheduledList)
-                    completedAdapter.setData(completedList)
+                    scheduledAdapter.setData(selectedDayStamp, scheduledList)
+                    completedAdapter.setData(selectedDayStamp, completedList)
                     // 예약 개수 나타내는 UI 업데이트
                     updateCountOfReservations(scheduledList.size, completedList.size)
                 }

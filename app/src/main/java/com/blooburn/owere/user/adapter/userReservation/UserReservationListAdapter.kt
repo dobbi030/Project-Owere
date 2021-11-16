@@ -6,12 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.blooburn.owere.R
-import com.blooburn.owere.databinding.DesignerConfirmedReservationFragmentBinding
 import com.blooburn.owere.databinding.ItemReservedUserBinding
-import com.blooburn.owere.designer.activity.main.DesignerReservationDetailActivity
-import com.blooburn.owere.designer.item.DesignerReservation
 import com.blooburn.owere.user.item.ReservationListItem
-import com.blooburn.owere.util.DESIGNER_RESERVATION_DETAIL_KEY
 import com.blooburn.owere.util.DesignerProfileHandler
 import com.blooburn.owere.util.TypeOfDesignerReservation
 import java.text.SimpleDateFormat

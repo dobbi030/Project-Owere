@@ -9,9 +9,7 @@ import com.blooburn.owere.R
 import com.blooburn.owere.databinding.ItemReservedUserBinding
 import com.blooburn.owere.designer.activity.main.DesignerReservationDetailActivity
 import com.blooburn.owere.designer.item.DesignerReservation
-import com.blooburn.owere.util.DESIGNER_RESERVATION_DETAIL_KEY
-import com.blooburn.owere.util.TypeOfDesignerReservation
-import com.blooburn.owere.util.DesignerProfileHandler
+import com.blooburn.owere.util.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -19,6 +17,7 @@ class DesignerReservationListAdapter :
     RecyclerView.Adapter<DesignerReservationListAdapter.ViewHolder>(), DesignerProfileHandler {
 
     private var reservationList = mutableListOf<DesignerReservation>()
+    private var selectedDateStamp = 0L
 
     inner class ViewHolder(private val binding: ItemReservedUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -37,7 +36,7 @@ class DesignerReservationListAdapter :
             binding.textReservedUserShop.text = reservation.shop
             binding.textReservedUserTime.text = getTreatmentTime(itemView, reservation)
 
-            initDependingOnType(binding, reservation.type)
+            initUIDependingOnType(binding, reservation.type)
         }
     }
 
@@ -58,9 +57,12 @@ class DesignerReservationListAdapter :
         holder.bind(position)
 
         holder.itemView.setOnClickListener{
+
+            // userId 전달 -> 수신 액티비티에서 userId로 DB의 예약정보에 접근
             val intent =
                 Intent(holder.itemView.context, DesignerReservationDetailActivity::class.java).apply{
-                    putExtra(DESIGNER_RESERVATION_DETAIL_KEY, reservationList[position])
+                    putExtra(UID_KEY, reservationList[position].userId)
+                    putExtra(DATE_STAMP_KEY, selectedDateStamp)
                 }
 
             holder.itemView.context.startActivity(intent)
@@ -71,11 +73,15 @@ class DesignerReservationListAdapter :
         return reservationList.size
     }
 
-    fun setData(list: MutableList<DesignerReservation>) {
+    fun setData(newDateStamp: Long, list: MutableList<DesignerReservation>) {
         reservationList = list
+        selectedDateStamp = newDateStamp    // 프래그먼트에서 지금 보여주고 있는 날짜의 stamp
         notifyDataSetChanged()
     }
 
+    /**
+     * 타임스탬프를 문자열로 변환
+     */
     private fun convertMilliSecondsToTimeString(milliSeconds: Long): String {
         val formatter = SimpleDateFormat("a kk:mm", Locale.KOREA).apply {
             timeZone = TimeZone.getTimeZone("KST")
@@ -84,6 +90,9 @@ class DesignerReservationListAdapter :
         return formatter.format(milliSeconds)
     }
 
+    /**
+     * 예약된 시술 시간 "시작 ~ 끝" 문자열로 변환
+     */
     private fun getTreatmentTime(itemView: View, reservation: DesignerReservation): String{
         return itemView.context.getString(
             R.string.reservation_time,
@@ -92,7 +101,10 @@ class DesignerReservationListAdapter :
         )
     }
 
-    private fun initDependingOnType(binding: ItemReservedUserBinding, type: TypeOfDesignerReservation){
+    /**
+     * 예약 타입(예정, 시술완료, 정산완료)에 따라 뷰 UI를 다르게 보여준다
+     */
+    private fun initUIDependingOnType(binding: ItemReservedUserBinding, type: TypeOfDesignerReservation){
         val arrowImageView = binding.imageReservedUserArrow
         val settlementTextView = binding.textReservedUserSettle
         val context = binding.root.context

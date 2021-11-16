@@ -3,17 +3,11 @@ package com.blooburn.owere.user.adapter.userReservation
 
 
 import android.os.Bundle
-import android.view.View
-import android.widget.ImageButton
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.blooburn.owere.R
-import com.blooburn.owere.designer.item.DesignerReservation
 import com.blooburn.owere.user.fragment.mainFragment.homeFragment.AllPricesFragment
 import com.blooburn.owere.user.item.ReservationListItem
 import com.blooburn.owere.util.ALL_PRICES_FRAGMENT_NAME
-import com.blooburn.owere.util.DESIGNER_RESERVATION_DETAIL_KEY
-import com.blooburn.owere.util.TypeOfDesignerReservation
 
 class UserReservationDetailActivity : AppCompatActivity() {
 

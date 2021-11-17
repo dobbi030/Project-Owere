@@ -6,9 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.blooburn.owere.R
-import com.blooburn.owere.databinding.ItemReservedForUserBinding
 import com.blooburn.owere.databinding.ItemReservedUserBinding
-import com.blooburn.owere.user.activity.main.userReservation.UserReservationDetailActivity
 import com.blooburn.owere.user.item.ReservationListItem
 import com.blooburn.owere.util.DesignerProfileHandler
 import com.blooburn.owere.util.TypeOfDesignerReservation
@@ -21,7 +19,7 @@ RecyclerView.Adapter<UserReservationListAdapter.ViewHolder>(), DesignerProfileHa
 
     private var reservationList = mutableListOf<ReservationListItem>()
 
-    inner class ViewHolder(private val binding: ItemReservedForUserBinding) :
+    inner class ViewHolder(private val binding: ItemReservedUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(position: Int) {
@@ -38,9 +36,6 @@ RecyclerView.Adapter<UserReservationListAdapter.ViewHolder>(), DesignerProfileHa
             binding.textReservedUserName.text = reservation.designerName
             binding.textReservedUserShop.text = reservation.shop
             binding.textReservedUserTime.text = getTreatmentTime(itemView, reservation)
-            binding.textReservedUserReview.setOnClickListener {
-                var intent = Intent()
-            }
 
 
         }
@@ -51,7 +46,7 @@ RecyclerView.Adapter<UserReservationListAdapter.ViewHolder>(), DesignerProfileHa
         viewType: Int
     ): UserReservationListAdapter.ViewHolder {
         val view =
-            ItemReservedForUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemReservedUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return ViewHolder(view)
     }

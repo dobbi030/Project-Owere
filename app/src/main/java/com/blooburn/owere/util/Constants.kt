@@ -10,7 +10,8 @@ val storageInstance = FirebaseStorage.getInstance()
 const val DESIGNER_DATA_KEY = "designerData"
 
 // DesignerConfirmedReservation.kt - DesignerReservationListAdapter에서 예약 아이템 클릭했을 때 bundle key
-const val DESIGNER_RESERVATION_DETAIL_KEY = "designerReservationDetail"
+const val UID_KEY= "userId"  // 유저 아이디
+const val DATE_STAMP_KEY = "dateStamp" // 날짜 스탬프
 
 // addToBackStack(ALL_PRICES_FRAGMENT_NAME)
 const val ALL_PRICES_FRAGMENT_NAME = "allPrices"

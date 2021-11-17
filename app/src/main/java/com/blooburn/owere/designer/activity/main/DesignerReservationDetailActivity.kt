@@ -4,44 +4,71 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.blooburn.owere.R
-import com.blooburn.owere.designer.item.DesignerReservation
+import com.blooburn.owere.designer.item.DesignerReservationDetail
 import com.blooburn.owere.user.fragment.mainFragment.homeFragment.AllPricesFragment
-import com.blooburn.owere.util.ALL_PRICES_FRAGMENT_NAME
-import com.blooburn.owere.util.DESIGNER_RESERVATION_DETAIL_KEY
-import com.blooburn.owere.util.TypeOfDesignerReservation
+import com.blooburn.owere.util.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.GenericTypeIndicator
+import com.google.firebase.database.ValueEventListener
 
 class DesignerReservationDetailActivity : AppCompatActivity() {
 
-    private var reservation: DesignerReservation? = null
+    private var reservation: DesignerReservationDetail? = null
     private val tempDesignerId = "designer0"
+    private var userId = ""
+    private var dateStamp = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_designer_reservation_detail)
 
-        getReservationFromIntent()
-        initBottomButtons()
-
+        getUserIdFromIntent()
+        getReservationFromDBAndInitBottomButtons()
     }
 
     /**
-     * 수신 인텐트로 전달받은 예약 정보(DesignerReservation) 저장
+     * 수신 인텐트로 전달받은 예약한 유저의 아이디 저장
      */
-    private fun getReservationFromIntent() {
+    private fun getUserIdFromIntent() {
         val extras = intent.extras  // 송신 액티비티가 보낸 데이터 참조
         if (extras == null) {
             finish()
         }
 
-        reservation =
-            extras!!.getParcelable(DESIGNER_RESERVATION_DETAIL_KEY)   // DesignerReservation 객체 읽기
-        if (reservation == null) {
+        userId = extras?.getString(UID_KEY) ?: ""
+        dateStamp = extras?.getLong(DATE_STAMP_KEY) ?: 0
+        if (userId == "" || dateStamp == 0L) {
             finish()
         }
+    }
+
+    private fun getReservationFromDBAndInitBottomButtons(){
+        val referencePath = "designerReservations/$tempDesignerId/$dateStamp/$userId"
+        databaseInstance.reference.child(referencePath).addListenerForSingleValueEvent(object :
+            ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val reservation = snapshot.getValue(DesignerReservationDetail::class.java)
+                if (reservation == null) {
+                    finish()
+                }
+
+                // initBottomButtons() // TODO 타입 받아오는 문제 해결
+
+                /* 파이어베이스에서 리스트 읽는 방법2
+
+                val genericTypeIndicator = object : GenericTypeIndicator<List<String>>() {}
+                val listOfMenu = snapshot.child("menuList").getValue(genericTypeIndicator)
+                Log.d("listOfMenu", "$listOfMenu")
+                */
+            }
+
+            override fun onCancelled(error: DatabaseError) {}
+
+        })
     }
 
     /**
@@ -54,8 +81,6 @@ class DesignerReservationDetailActivity : AppCompatActivity() {
             setBottomButtonsVisible()
             setAdditionalTreatmentClickListener()
         }
-
-
     }
 
     /**

@@ -15,9 +15,11 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 
-class AllPricesFragment(private val isAdditionTreatment: Boolean) : Fragment(R.layout.all_prices_fragment), View.OnClickListener{
+class AllPricesFragment(private val isAdditionTreatment: Boolean) :
+    Fragment(R.layout.all_prices_fragment), View.OnClickListener {
 
     private var binding: AllPricesFragmentBinding? = null
+    // private val menuList: MutableList<>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,12 +32,12 @@ class AllPricesFragment(private val isAdditionTreatment: Boolean) : Fragment(R.l
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = AllPricesFragmentBinding.bind(view).apply{
+        binding = AllPricesFragmentBinding.bind(view).apply {
             root.visibility = View.INVISIBLE
         }
 
         // 추가 시술 선택 모드인지 or 일반 가격표만 보는 화면인지에 따라 다르게 화면 적용
-        when(isAdditionTreatment){
+        when (isAdditionTreatment) {
             true -> initForAdditionalTreatment()
             else -> initForShowingPrices()
         }
@@ -47,8 +49,8 @@ class AllPricesFragment(private val isAdditionTreatment: Boolean) : Fragment(R.l
     /**
      * 가격표만 보는 경우
      */
-    private fun initForShowingPrices(){
-        binding?.apply{
+    private fun initForShowingPrices() {
+        binding?.apply {
             layoutAllPricesAdditionalTopBar.visibility = View.GONE    // 추가 시술 화면 상단바
             buttonAllPricesChoose.visibility = View.GONE    // 선택 완료 버튼
             buttonAllPricesBack.setOnClickListener(this@AllPricesFragment)  // 뒤로가는 버튼
@@ -58,8 +60,8 @@ class AllPricesFragment(private val isAdditionTreatment: Boolean) : Fragment(R.l
     /**
      * 추가 시술 선택하는 경우
      */
-    private fun initForAdditionalTreatment(){
-        binding?.apply{
+    private fun initForAdditionalTreatment() {
+        binding?.apply {
             layoutAllPricesTopBar.visibility = View.GONE    // 일반 가격표 화면 상단바
             buttonAllPricesAdditionalBack.setOnClickListener(this@AllPricesFragment)
         }
@@ -71,14 +73,14 @@ class AllPricesFragment(private val isAdditionTreatment: Boolean) : Fragment(R.l
      * 3. 컨테이너 마다 서브 메뉴를 모두 불러온다.
      * 4. 서브 뷰도 받아온 만큼 동적으로 생성해서 불러온 데이터를 적용한다.
      */
-    private fun getAndAddMenuItems(){
+    private fun getAndAddMenuItems() {
 
         //Todo : 로그인했을 때 아이디 저장해놓고 따러 불러오기
         val tempDesignerId = "designer0"
         val priceChartReference =
             databaseInstance.reference.child("designerPriceChart/$tempDesignerId")
 
-        priceChartReference.addListenerForSingleValueEvent(object: ValueEventListener {
+        priceChartReference.addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
 
@@ -86,9 +88,11 @@ class AllPricesFragment(private val isAdditionTreatment: Boolean) : Fragment(R.l
                 snapshot.children.forEach { containerSnapshot ->
 
                     // 컨테이너 view 생성
-                    val menuContainerBinding = LayoutMenuContainerBinding.inflate(layoutInflater,
+                    val menuContainerBinding = LayoutMenuContainerBinding.inflate(
+                        layoutInflater,
                         binding?.layoutAllPricesContainer,
-                        true)
+                        true
+                    )
 
                     // 커트, 매직, 펌과 같은 메뉴의 대표 타이틀
                     menuContainerBinding.textMenuContainerTitle.text = containerSnapshot.key
@@ -96,7 +100,10 @@ class AllPricesFragment(private val isAdditionTreatment: Boolean) : Fragment(R.l
                     // 1. 서브 메뉴(ex: 볼륨 매직, 일반 커트)를 DB에서 불러온다.
                     // 2. 서브 메뉴 view 생성 -> 컨테이너에 추가
                     // 3. view에 서브 메뉴 데이터 세팅
-                    getAndInflateSubMenu(containerSnapshot.children, menuContainerBinding.actualLayoutMenuContainer)
+                    getAndInflateSubMenu(
+                        containerSnapshot.children,
+                        menuContainerBinding.actualLayoutMenuContainer
+                    )
                 }
 
                 binding?.root?.visibility = View.VISIBLE
@@ -111,7 +118,10 @@ class AllPricesFragment(private val isAdditionTreatment: Boolean) : Fragment(R.l
      * 2. 서브 메뉴 view 생성 -> 컨테이너에 추가
      * 3. view에 서브 메뉴 데이터 세팅
      */
-    private fun getAndInflateSubMenu(snapshotList: Iterable<DataSnapshot>, containerView: ViewGroup) {
+    private fun getAndInflateSubMenu(
+        snapshotList: Iterable<DataSnapshot>,
+        containerView: ViewGroup
+    ) {
 
         // 볼륨 매직, 일반 커트와 같은 서브 메뉴
         snapshotList.forEach {
@@ -132,7 +142,7 @@ class AllPricesFragment(private val isAdditionTreatment: Boolean) : Fragment(R.l
     /**
      * 세부 메뉴의 UI에 data 적용
      */
-    private fun setSubMenuView(subMenuItem: MenuItem, subMenuBinding: ItemPriceMenuBinding){
+    private fun setSubMenuView(subMenuItem: MenuItem, subMenuBinding: ItemPriceMenuBinding) {
         subMenuBinding.textPriceMenuTitle.text = subMenuItem.menuName
         subMenuBinding.textPriceMenuPrice.text = subMenuItem.menuPrice
         subMenuBinding.textPriceMenuTime.text = subMenuItem.menuTime

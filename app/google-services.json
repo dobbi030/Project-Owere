@@ -23,14 +23,6 @@
           }
         },
         {
-          "client_id": "260202805759-g1rpkuggn70mo5h1ho005hereq1abneo.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.blooburn.owere",
-            "certificate_hash": "aa4d5121eaadc871dfa7afdafaee2638757ff73b"
-          }
-        },
-        {
           "client_id": "260202805759-lcgq2ih5ntigd1m7rjca11hhapd10ort.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

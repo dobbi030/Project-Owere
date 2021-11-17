@@ -15,12 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Owere"
         android:usesCleartextTraffic="true">
-        <activity android:name=".user.activity.main.userReservation.UserReservationDetailActivity"></activity>
-        <activity android:name=".user.activity.main.userReservation.UserWaitingReservation"></activity>
-        <activity android:name=".designer.activity.main.DesignerReservationDetailActivity"></activity>
+        <activity android:name=".user.activity.main.userReservation.ReviewWriteActivity"></activity>
+        <activity android:name=".user.activity.main.userReservation.UserReservationDetailActivity" />
+        <activity android:name=".user.activity.main.userReservation.UserWaitingReservation" />
+        <activity android:name=".designer.activity.main.DesignerReservationDetailActivity" />
         <activity
             android:name=".user.activity.signUpActivity.SignUpActivityMethods"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity android:name=".user.activity.main.userReservation.ReserveSalonActivity" />
         <activity android:name=".user.activity.main.userReservation.ReserveTimeActivity" />
         <activity android:name=".user.activity.main.mypageActivity.SettingActivity" />

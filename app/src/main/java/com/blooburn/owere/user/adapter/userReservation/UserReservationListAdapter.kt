@@ -38,6 +38,9 @@ RecyclerView.Adapter<UserReservationListAdapter.ViewHolder>(), DesignerProfileHa
             binding.textReservedUserName.text = reservation.designerName
             binding.textReservedUserShop.text = reservation.shop
             binding.textReservedUserTime.text = getTreatmentTime(itemView, reservation)
+            binding.textReservedUserReview.setOnClickListener {
+                var intent = Intent()
+            }
 
 
         }

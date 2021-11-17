@@ -4,10 +4,11 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 
-//미용실 객체
+//미용실 객체 (관심 미용실 / )
 @Parcelize
 data class ShopListItem(
 
+    val shopId : String,
     val area: String,//주소
     val name: String,
     val profileImagePath: String,
@@ -18,6 +19,6 @@ data class ShopListItem(
 
 ) : Parcelable {
     //인자가 없는 경우 추가 필요 (에러)
-    constructor() : this("", "", "", 0.0, 0,0.0,0.0)
+    constructor() : this("","", "", "", 0.0, 0,0.0,0.0)
 }
 

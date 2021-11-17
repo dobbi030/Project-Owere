@@ -16,17 +16,18 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
+//프래그먼트 관심디자이너
 class InterestDesignerFragment : Fragment(R.layout.layout_interest_designer_fragment) {
 
     // 관심 디자이너 레이아웃 바인딩
     private var binding : LayoutInterestDesignerFragmentBinding? = null
     //디자이너 리스트 리사이클러뷰를 위한 어답터
-
     private lateinit var interestDesignerAdpater : InterestDesignerAdpater
     //관심 디자이너 목록
 
     private var favoriteDesignerList = mutableListOf<FavoriteDesigner>()
 
+    private lateinit var currentUserID : String
     private val auth : FirebaseAuth by lazy {
         Firebase.auth
     }
@@ -34,11 +35,13 @@ class InterestDesignerFragment : Fragment(R.layout.layout_interest_designer_frag
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         //바인딩 초기화
         val interestDesignerFragmentBinding = LayoutInterestDesignerFragmentBinding.bind(view)
         binding = interestDesignerFragmentBinding
 
-        interestDesignerAdpater = InterestDesignerAdpater()
+        currentUserID = auth.currentUser!!.uid
+        interestDesignerAdpater = InterestDesignerAdpater(currentUserID)
 
 
 
@@ -53,7 +56,7 @@ class InterestDesignerFragment : Fragment(R.layout.layout_interest_designer_frag
         }
 
         //DB 사용할 레퍼런스 초기화 (favoriteDesigners -> 유저Id -> 디자이너)
-        val chatDB = Firebase.database.reference.child("favoriteDesigners").child(auth.currentUser!!.uid)
+        val chatDB = Firebase.database.reference.child("favoriteDesigners").child(currentUserID)
 
         //UserId 밑에 데이터 하나라도 변화하면(채팅방 생성, 삭제)
         //DB 변화 리스너 ->한 번만 불러옴

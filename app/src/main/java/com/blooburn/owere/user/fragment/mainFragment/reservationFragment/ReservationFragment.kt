@@ -26,6 +26,7 @@ class   ReservationFragment : Fragment(R.layout.reservation_layout) {
         completedFragment = CompletedFragment()
 
         binding = reservationLayoutBinding
+
         val spinner = binding?.reservationSpinner
         ArrayAdapter.createFromResource(
             requireContext(),
@@ -34,7 +35,9 @@ class   ReservationFragment : Fragment(R.layout.reservation_layout) {
         ).also {
             it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinner?.adapter = it
+
         }
+
 
         //스피너 선택 리스너
         spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{

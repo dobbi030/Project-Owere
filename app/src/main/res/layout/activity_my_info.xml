@@ -93,7 +93,7 @@
         android:layout_marginTop="25dp"/>
 
     <TextView
-        android:id="@+id/myinfo_name_text"
+        android:id="@+id/myinfo_activity_name_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"
@@ -120,7 +120,7 @@
         android:layout_marginTop="25dp"/>
 
     <TextView
-        android:id="@+id/myinfo_phonenumber_text"
+        android:id="@+id/myinfo_activity_phonenumber_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"

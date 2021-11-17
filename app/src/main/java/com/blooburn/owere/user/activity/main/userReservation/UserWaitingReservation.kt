@@ -151,6 +151,7 @@ class UserWaitingReservation : AppCompatActivity() {
                         model ?: return
                         //DB에 변화가 생긴다면
 
+
                         if(auth!!.currentUser!!.uid == model.userId){
                             designerUpdate["userName"] = model!!.myName
 
@@ -160,6 +161,7 @@ class UserWaitingReservation : AppCompatActivity() {
                             designerUpdate["shop"] = selectedShop.name
 
                             // hour to secondofDay + minute to secondofDay
+                            //00:00
                             designerUpdate["startTime"] = hourMinuteToSecondOfDay(selectedTime)
 
                             //임시로 시작 시간 + 20분으로 해둠
@@ -266,3 +268,5 @@ class UserWaitingReservation : AppCompatActivity() {
 //    var type: TypeOfDesignerReservation,
 //    var accepted : Int // 디자이너 수락여부
 //)
+
+

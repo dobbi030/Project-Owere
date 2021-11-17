@@ -29,7 +29,7 @@ class UserHomeDesignerFragment : Fragment(R.layout.user_home_designer_fragment) 
 
         binding = UserHomeDesignerFragmentBinding.bind(view)
 
-        favoriteDesignerListAdapter = DesignerListAdapter() // 즐겨찾는 디자이너 리스트 어댑터
+        favoriteDesignerListAdapter = DesignerListAdapter() //즐겨찾는 디자이너 리스트 어댑터
 
         // 즐겨찾는 디자이너 리사클이클러 뷰 초기화
         binding?.favoriteDesignerRecyclerView?.apply{
@@ -39,6 +39,7 @@ class UserHomeDesignerFragment : Fragment(R.layout.user_home_designer_fragment) 
 
         // 즐겨찾는 디자이너 리스트 초기화, 파이어베이스와 연동
         initFavoriteDesignerList()
+
     }
 
     /**
@@ -69,7 +70,7 @@ class UserHomeDesignerFragment : Fragment(R.layout.user_home_designer_fragment) 
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+
             }
         })
     }

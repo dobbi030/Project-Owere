@@ -9,10 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.blooburn.owere.databinding.MypageFavoriteShopBindingBinding
 import com.blooburn.owere.user.item.ShopListItem
-
-class InterestShopAdpater:
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+//관심 미용실 목록을 위한 어답터
+class InterestShopAdpater(currentUserID : String):
     ListAdapter<ShopListItem, InterestShopAdpater.ViewHolder>(diffUtil) {
 
+
+
+    //DB 사용할 레퍼런스 초기화 (favoriteDesigners -> 유저Id -> 디자이너)
+    val favoriteShopDB = Firebase.database.reference.child("favoriteShop").child(currentUserID)
 
     inner class ViewHolder(private val binding: MypageFavoriteShopBindingBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -43,10 +49,16 @@ class InterestShopAdpater:
             binding.shopLikeImage.setOnClickListener {
                 binding.shopLikeImage.visibility = View.GONE
                 binding.shopUnlikeImage.visibility = View.VISIBLE
+
+                //관심 미용실 DB에서 삭제
+                favoriteShopDB.child(shopListItem.shopId).removeValue()
             }
             binding.shopUnlikeImage.setOnClickListener {
                 binding.shopUnlikeImage.visibility = View.GONE
                 binding.shopLikeImage.visibility = View.VISIBLE
+
+                //관심 미용실 DB에서 삭제
+                favoriteShopDB.child(shopListItem.shopId).setValue(shopListItem)
             }
 //
 

@@ -6,15 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".user.activity.loginActivity.LoginActivityCheckEmail">
 
-    <ImageView
-        android:id="@+id/left_arrow"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_go_back"
         android:layout_width="16dp"
         android:layout_height="16dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="44dp"
+        android:layout_margin="20dp"
         android:contentDescription="@string/explain_back_to_login_arrow"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_baseline_arrow_back_24"
+        android:background="@drawable/ic_baseline_arrow_back_24"
+        android:backgroundTint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/black" />
@@ -30,7 +30,7 @@
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/left_arrow" />
+        app:layout_constraintTop_toBottomOf="@id/button_go_back" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -56,6 +56,7 @@
         app:layout_constraintTop_toBottomOf="@id/check_email" />
 
     <TextView
+        android:id="@+id/another_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="380dp"
@@ -69,6 +70,7 @@
         app:layout_constraintTop_toBottomOf="@id/check_email" />
 
     <TextView
+        android:id="@+id/use_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="413dp"

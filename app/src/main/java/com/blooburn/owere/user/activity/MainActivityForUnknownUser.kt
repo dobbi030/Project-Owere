@@ -1,11 +1,14 @@
-package com.blooburn.owere.user.activity.signUpActivity
+package com.blooburn.owere.user.activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.blooburn.owere.R
+import com.blooburn.owere.designer.activity.main.DesignerMainActivity
+import com.blooburn.owere.user.activity.main.UserMainActivity
+import com.blooburn.owere.user.activity.signUpActivity.SignUpActivity1_choice
+import com.blooburn.owere.util.databaseInstance
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -15,16 +18,30 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 
 
-class SignUpActivityMethods : AppCompatActivity() {
+/*
+* 1. 이 화면에서는 무조건 현재 로그인이 되어 있지 않은 사용자로 간주
+* 2. 로그인 혹은 가입하는 계정의 이전 로그인 기록을 찾음
+* 3. 이전 로그인 기록이 있다면 해당 계정에 맞는 페이지로,
+* 4. 없다면 가입 페이지로 전환
+*/
 
-    private val googleSignInButton: SignInButton by lazy { findViewById(R.id.sign_in_button_google) }
+
+class MainActivityForUnknownUser : AppCompatActivity() {
+
+    var uids: DatabaseReference = databaseInstance.getReference("Uids");
+
+    private val googleSignInButton: SignInButton by lazy { findViewById(R.id.sign_in_button) }
 
     // Google Login result
     companion object {
-        private const val TAG = "GoogleActivity"
+        private const val TAG = "MainActivityForUnKnownUser"
         private const val RC_SIGN_IN = 9001
     }
 
@@ -37,7 +54,7 @@ class SignUpActivityMethods : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_up_methods)
+        setContentView(R.layout.activity_main_for_unknown_user)
 
 // Configure Google Sign In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -49,11 +66,6 @@ class SignUpActivityMethods : AppCompatActivity() {
 
         // Initialize Firebase Auth
         auth = Firebase.auth
-
-        if (auth.currentUser != null) {
-            Toast.makeText(this, "기존 아이디를 로그아웃합니다.", Toast.LENGTH_SHORT).show()
-            auth.signOut()
-        }
 
         googleSignInButton.setOnClickListener {
             signIn()
@@ -106,42 +118,54 @@ class SignUpActivityMethods : AppCompatActivity() {
     }
 
 
-    //은선님의 실수
-    //액티비티 시작되었을 때
-
-//    override fun onStart() {
-//        super.onStart()
-//
-    //액티비티 생성되자마자 구글로그인이 되어있는 상황이라서 상호님이 바로 다음액티비티로 넘어가게 되는 상황발생
-//        val currentUser = auth.currentUser
-//        updateUI(currentUser)
-//
-//    }
-
-    // onStart말고 onRestart로 옮김으로서 로그인계정 선택 이후에 updateUI함수가 호출되도록 변경
-    override fun onRestart() {
-        super.onRestart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-
-        val currentUser = auth.currentUser
-        updateUI(currentUser)
-    }
-
-
     private fun updateUI(account: FirebaseUser?) {
-        //로그인이 되어있다면 다음 액티비티 실행
-
         if (account != null) {
+            // Uids 참조, 자식 노드의 키 값과 현재 유저의 uid 비교
+            uids.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    var agreement: Boolean = false
+                    snapshot.children.forEach {
+                        // 로그인이 되어있다면 다음 액티비티 실행 (= uid와 키 값 일치)
+                        if (it.key == account.uid) {
+                            agreement = true
+                            val mode = it.value
+                            // 고객 로그인
+                            if (mode == "User") {
+                                val intent: Intent = Intent(
+                                    this@MainActivityForUnknownUser,
+                                    UserMainActivity::class.java
+                                )
+                                startActivity(intent)
+                                // 디자이너 로그인
+                            } else if (mode == "Designer") {
+                                val intent: Intent = Intent(
+                                    this@MainActivityForUnknownUser,
+                                    DesignerMainActivity::class.java
+                                )
+                                startActivity(intent)
+                            }
+                        }
+                    }
+                    if (!agreement) {
+                        // uid와 일치하는 키 값 없음 (= 처음 로그인 하는 유저)
+                        val currentUserUid: DatabaseReference = uids.child(account.uid)
+                        currentUserUid.setValue("None")
+                        val intent: Intent =
+                            Intent(
+                                this@MainActivityForUnknownUser,
+                                SignUpActivity1_choice::class.java
+                            )
+                        startActivity(intent)
+                    }
+                }
 
-            val intent: Intent = Intent(this, SignUpActivity1_choice::class.java)
-            startActivity(intent)
-//        finish()
+                override fun onCancelled(error: DatabaseError) {}
+            })
+//            finish()
         } else {
             Log.d(TAG, "Google Sign In is failed: FirebaseUser is null")
         }
     }
-
-
 }
 
 

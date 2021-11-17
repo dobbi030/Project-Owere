@@ -5,10 +5,11 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.blooburn.owere.R
+import com.google.android.gms.common.SignInButton
 
 class LoginActivityChoice : AppCompatActivity() {
 
-    private val logInButton: TextView by lazy {
+    private val logInButton: SignInButton by lazy {
         findViewById(R.id.email_Button)
     }
 
@@ -19,7 +20,7 @@ class LoginActivityChoice : AppCompatActivity() {
 
         logInButton.setOnClickListener {
             //회원가입 액티비티로 이동하는 인텐트
-            var intent = Intent(this, LoginActivityEmail::class.java)
+            val intent = Intent(this, LoginActivityEmail::class.java)
             startActivity(intent)
         }
     }

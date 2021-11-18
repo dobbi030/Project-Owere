@@ -23,7 +23,7 @@ const val ALL_PRICES_FRAGMENT_NAME = "allPrices"
 // LocalDate -> (Long) epoch day
 // date0.getLong(ChronoField.EPOCH_DAY)
 
-// LocalDate -> time stamp, milliseconds (epoch time)
+// LocalDate -> TimeStamp (milliseconds, epoch time)
 // LocalDate.atStartOfDay().atZone(ZoneId.of(ZONE_ID)).toEpochSecond()
 const val ZONE_ID = "Asia/Seoul"
 

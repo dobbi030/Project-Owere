@@ -36,7 +36,7 @@
         android:layout_height="16dp"
         android:layout_marginStart="8dp"
         android:src="@drawable/ic_chat_bubble"
-        android:tint="@color/blue_main_background"
+        android:tint="@color/blue_00CCFF"
         app:layout_constraintBottom_toBottomOf="@id/text_reserved_user_name"
         app:layout_constraintStart_toEndOf="@id/text_reserved_user_name"
         app:layout_constraintTop_toTopOf="@id/text_reserved_user_name" />
@@ -81,7 +81,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/settling_fee"
-        android:textColor="@color/red"
         android:textSize="10sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

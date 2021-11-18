@@ -62,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:background="@color/blue_main_background"
+        android:background="@color/blue_00CCFF"
         android:padding="2dp"
         android:text="매칭률 98%"
         android:textColor="@color/white"

@@ -10,7 +10,7 @@ import com.blooburn.owere.user.item.StyleMenuItem
 import com.blooburn.owere.user.item.UserDesignerItem
 import com.blooburn.owere.user.item.UserEntity
 import com.blooburn.owere.util.DESIGNER_DATA_KEY
-import com.blooburn.owere.util.TypeOfDesignerReservation
+import com.blooburn.owere.util.TypeOfReservation
 import com.blooburn.owere.util.databaseInstance
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -18,7 +18,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
-import org.threeten.bp.LocalTime
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -167,7 +166,7 @@ class UserWaitingReservation : AppCompatActivity() {
 
                             designerUpdate["accepted"] = 1
 
-                            designerUpdate["type"] = TypeOfDesignerReservation.SCHEDULED
+                            designerUpdate["type"] = TypeOfReservation.SCHEDULED
 
 
                             //유저 Reservation

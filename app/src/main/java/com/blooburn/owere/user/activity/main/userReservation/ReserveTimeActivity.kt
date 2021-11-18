@@ -1,20 +1,16 @@
 package com.blooburn.owere.user.activity.main.userReservation
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-
 import android.view.View
 import android.widget.CheckBox
-
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blooburn.owere.R
-import com.blooburn.owere.databinding.ActivityReserveMenuBinding
 import com.blooburn.owere.databinding.ActivityReserveTimeBinding
 import com.blooburn.owere.designer.item.DesignerReservation
 import com.blooburn.owere.user.adapter.userReservation.ReserveTimeAdapter
@@ -24,15 +20,11 @@ import com.blooburn.owere.user.item.UserDesignerItem
 import com.blooburn.owere.util.*
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalTime
-import java.lang.Long.getLong
-import java.time.temporal.ChronoField
-import kotlin.time.hours
 
 
 //예약하기 액티비티 (날짜, 시간 예약)

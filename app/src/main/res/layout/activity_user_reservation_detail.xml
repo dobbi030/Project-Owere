@@ -366,16 +366,7 @@
             android:paddingVertical="8dp">
 
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_designer_reservation_detail_settle"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/round_white_background"
-                android:backgroundTint="@color/purple_button2"
-                android:text="@string/settlement_completed"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
+
         </LinearLayout>
 
         <androidx.fragment.app.FragmentContainerView

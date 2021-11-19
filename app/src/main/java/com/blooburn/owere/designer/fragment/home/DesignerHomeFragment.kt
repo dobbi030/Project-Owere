@@ -9,6 +9,8 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.blooburn.owere.R
 import com.blooburn.owere.databinding.DesignerHomeFragmentBinding
+import com.blooburn.owere.databinding.WaitingFragmentLayoutBinding
+import com.blooburn.owere.user.fragment.mainFragment.reservationFragment.WaitingFragment
 
 class DesignerHomeFragment : Fragment(R.layout.designer_home_fragment) {
 
@@ -17,6 +19,10 @@ class DesignerHomeFragment : Fragment(R.layout.designer_home_fragment) {
 
     private val confirmedReservationFragment: DesignerConfirmedReservationFragment? by lazy{
         DesignerConfirmedReservationFragment()
+    }
+    //대기중인 고객 예약 리스트
+    private val waitingReservationFragment : DesignerWaitingReservationFragment? by lazy {
+        DesignerWaitingReservationFragment()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,10 +58,17 @@ class DesignerHomeFragment : Fragment(R.layout.designer_home_fragment) {
         ) {
 
             when (position) {
-                in 0..1 -> requireActivity().supportFragmentManager.beginTransaction()
+                0 -> requireActivity().supportFragmentManager.beginTransaction()
                     .replace(
                         R.id.fragment_container_designer_home,
                         confirmedReservationFragment ?: return
+                    )
+                    .commit()
+
+                //예약 수락 대기중 프래그먼트 by 정민 추가
+                1 ->requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(
+                        R.id.fragment_container_designer_home, waitingReservationFragment ?: return
                     )
                     .commit()
             }

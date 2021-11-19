@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.blooburn.owere.R
 import com.blooburn.owere.user.fragment.mainFragment.browseFragment.BrowseFragment
-import com.blooburn.owere.user.fragment.mainFragment.chattingFragment.ChattingFragmet
+import com.blooburn.owere.user.fragment.mainFragment.chattingFragment.ChattingFragment
 import com.blooburn.owere.user.fragment.mainFragment.homeFragment.UserHomeFragment
 import com.blooburn.owere.user.fragment.mainFragment.myPage.MyPageFragment
 import com.blooburn.owere.user.fragment.mainFragment.reservationFragment.ReservationFragment
@@ -36,7 +36,7 @@ class UserMainActivity : AppCompatActivity() {
 
         val homeFragment = UserHomeFragment()
         val browseFragment = BrowseFragment()
-        val chattingFragment = ChattingFragmet()
+        val chattingFragment = ChattingFragment()
         val reservationFragment = ReservationFragment()
         val myPageFragment = MyPageFragment()
 
@@ -54,6 +54,15 @@ class UserMainActivity : AppCompatActivity() {
             }
 
             true
+        }
+    }
+
+    //로그아웃 후 finish처리
+    override fun onResume() {
+        super.onResume()
+
+        if(auth.currentUser== null){
+            finish()
         }
     }
 

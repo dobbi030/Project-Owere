@@ -1,4 +1,4 @@
-package com.blooburn.owere.user.fragment.mainFragment.chattingFragment
+package com.blooburn.owere.designer.fragment.chatting
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,15 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.blooburn.owere.R
+import com.blooburn.owere.designer.adapter.chatting.ChattingTabAdapterDesigner
 import com.blooburn.owere.user.adapter.chatting.ChattingTabAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
-class ChattingFragmet : Fragment(R.layout.layout_chatting_fragment){
+
+class ChattingForDesignerFragment : Fragment(R.layout.layout_chatting_fragment){
 
     private lateinit var chattingTabLayout: TabLayout
     private lateinit var chattingViewPager : ViewPager2
-    private val tabTitle = listOf("디자이너", "미용실")
+    private val tabTitle = listOf("고객", "미용실")
 
     /**
      * tabLayout과 viewPager를 초기화하기 위해 사용했습니다.
@@ -63,7 +65,7 @@ class ChattingFragmet : Fragment(R.layout.layout_chatting_fragment){
 
     private fun initChattingViewPager(){
         chattingViewPager.isSaveEnabled = false
-        chattingViewPager.adapter = ChattingTabAdapter(this, chattingTabLayout.tabCount)
+        chattingViewPager.adapter = ChattingTabAdapterDesigner(this, chattingTabLayout.tabCount)
     }
 
 

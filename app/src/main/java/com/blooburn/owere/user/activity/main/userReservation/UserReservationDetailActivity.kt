@@ -97,3 +97,6 @@ class UserReservationDetailActivity : AppCompatActivity() {
 //        }
 //    }
 }
+
+
+// Copyright 2021 by Jeong-woo Choe and Yenjo Han// Counter with No clear, No loading// Normal count when carry_in_l =0, // and simply produce revised_clock, accompanying with 'carry_out_l'module R_clock_divided_by_2bits_original ( clk, carry_in_l,    q_count, carry_out_l, revised_clock ); parameter nbits = 2; input clk, carry_in_l ; output reg [nbits-1:0] q_count = 0 ; output reg carry_out_l = 1 ; output reg revised_clock = 0 ; // produce revised_clock  always @( negedge carry_out_l )  begin revised_clock <= ~ revised_clock ;   end// produce carry_out_l  always @(q_count)  begin carry_out_l <= ~&q_count ;   end// count always @(posedge clk && !carry_in_l)   begin q_count <= q_count + 1;   endendmodule // R_clock_divided_by_2bits_origi

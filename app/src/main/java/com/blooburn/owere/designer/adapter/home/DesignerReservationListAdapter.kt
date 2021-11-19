@@ -9,6 +9,7 @@ import com.blooburn.owere.R
 import com.blooburn.owere.databinding.ItemReservedUserBinding
 import com.blooburn.owere.designer.activity.main.DesignerReservationDetailActivity
 import com.blooburn.owere.designer.item.DesignerReservation
+import com.blooburn.owere.user.item.ReservationListItem
 import com.blooburn.owere.util.*
 import java.text.SimpleDateFormat
 import java.util.*

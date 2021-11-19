@@ -21,21 +21,36 @@ class SettingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
+        if(auth.currentUser == null){
+            this.finish()
+        }
 
 
 
         logOutButton.setOnClickListener {
             val dialog = MemeberQuitDialog(this,auth)
             dialog.myDiag(this,auth)
-            this.finish()
+
+
         }
 
 
 
     }
+
+    //로그아웃 후 finish처리
+    override fun onResume() {
+        super.onResume()
+
+        if(auth.currentUser== null){
+            finish()
+        }
+    }
+
+
 }
 
-//커스텀다이얼로그 (예약을 취소하실 건가요?)
+//커스텀다이얼로그 (로그아웃 하실 건가요?)
 class MemeberQuitDialog(context: Context,auth : FirebaseAuth) {
     private val dialog = Dialog(context)
 
@@ -60,6 +75,8 @@ class MemeberQuitDialog(context: Context,auth : FirebaseAuth) {
         yesButton.setOnClickListener {
 
             auth.signOut()
+            //프래그먼트 삭제
+            dialog.dismiss()
 
         }
 

@@ -22,7 +22,7 @@
             android:exported="true">
 
         </activity>
-        <activity android:name=".user.adapter.userReservation.UserReservationDetailActivity" />
+
         <activity android:name=".user.activity.main.userReservation.UserWaitingReservation" />
         <activity android:name=".designer.activity.main.DesignerReservationDetailActivity" />
         <activity
@@ -60,6 +60,7 @@
         <activity android:name=".user.activity.loginActivity.LoginActivityChoice" />
         <activity android:name=".user.activity.signUpActivity.SignUpActivity1_choice" />
         <activity android:name=".user.activity.MainActivity" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -70,7 +71,9 @@
         <activity android:name=".user.activity.main.userReservation.ShopsOfDesignerActivity" />
         <activity android:name=".user.activity.main.userReservation.ReserveMenuActivity" />
 
-        <activity android:name=".designer.activity.main.DesignerMainActivity" />
+        <activity android:name=".designer.activity.main.DesignerMainActivity" >
+
+        </activity>
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"

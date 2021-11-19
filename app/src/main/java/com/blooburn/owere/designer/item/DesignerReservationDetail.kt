@@ -11,9 +11,10 @@ data class DesignerReservationDetail(
     override var type: Int,
     val designerName: String,
     val menuList: MutableList<String>,    // 시술할 메뉴들
-    val priceList: MutableList<Int>         // 메뉴에 따른 가격들
+    val priceList: MutableList<Int>,         // 메뉴에 따른 가격들
+    val request: String
 
 ) : DesignerReservation() {
     constructor() : this("", "", 0, 0,
-        TypeOfReservation.SCHEDULED.value, "", mutableListOf(), mutableListOf())
+        TypeOfReservation.SCHEDULED.value, "", mutableListOf(), mutableListOf(), "")
 }

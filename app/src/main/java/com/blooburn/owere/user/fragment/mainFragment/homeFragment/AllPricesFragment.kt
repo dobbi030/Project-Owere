@@ -19,7 +19,7 @@ class AllPricesFragment(private val isAdditionTreatment: Boolean) :
     Fragment(R.layout.all_prices_fragment), View.OnClickListener {
 
     private var binding: AllPricesFragmentBinding? = null
-    // private val menuList: MutableList<>
+    private val menuList = mutableListOf<MenuItem>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -124,15 +124,17 @@ class AllPricesFragment(private val isAdditionTreatment: Boolean) :
     ) {
 
         // 볼륨 매직, 일반 커트와 같은 서브 메뉴
-        snapshotList.forEach {
-            val subMenuItem = it.getValue(MenuItem::class.java) ?: return
+        snapshotList.forEach { snapshot ->
+            val subMenuItem = snapshot.getValue(MenuItem::class.java) ?: return
 
             // view(binding) 동적 생성
             val subMenuBinding = ItemPriceMenuBinding.inflate(
                 layoutInflater,
                 containerView,
                 true
-            )
+            ). also{
+                if (isAdditionTreatment) subMenuItem.checkBox = it.checkBoxPriceMenu
+            }
 
             // 뷰 데이터 설정
             setSubMenuView(subMenuItem, subMenuBinding)
@@ -148,7 +150,10 @@ class AllPricesFragment(private val isAdditionTreatment: Boolean) :
         subMenuBinding.textPriceMenuTime.text = subMenuItem.menuTime
 
         // 추가 비용 선택하는 화면일 때 체크박스를 보여준다
-        if (isAdditionTreatment) subMenuBinding.checkBoxPriceMenu.visibility = View.VISIBLE
+        if (isAdditionTreatment) {
+            subMenuBinding.checkBoxPriceMenu.visibility = View.VISIBLE
+            subMenuItem.checkBox = subMenuBinding.checkBoxPriceMenu
+        }
     }
 
     /**

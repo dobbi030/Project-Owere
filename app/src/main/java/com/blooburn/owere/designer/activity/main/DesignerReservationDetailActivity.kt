@@ -11,6 +11,7 @@ import com.blooburn.owere.R
 import com.blooburn.owere.designer.item.DesignerReservation
 import com.blooburn.owere.designer.item.DesignerReservationDetail
 import com.blooburn.owere.user.fragment.mainFragment.homeFragment.AllPricesFragment
+import com.blooburn.owere.user.item.MenuItem
 import com.blooburn.owere.util.*
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -19,7 +20,12 @@ import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DesignerReservationDetailActivity : AppCompatActivity() {
+interface DetailMenuItemHandler{
+    val menuItemList: MutableList<MenuItem>
+    fun onMenuChangedListener(changedList: MutableList<MenuItem>)
+}
+
+class DesignerReservationDetailActivity : AppCompatActivity(), DetailMenuItemHandler {
 
     private var reservation: DesignerReservationDetail? = null
     private val tempDesignerId = "designer0"
@@ -27,6 +33,31 @@ class DesignerReservationDetailActivity : AppCompatActivity() {
     private var dateStamp = 0L  // 송신 인텐트에서 건네 받을 값
     private val milliSecondsPerDay = 86400000 // 24시간에 해당하는 밀리세컨드
 
+    private val priceTxtView: TextView by lazy {
+        findViewById(R.id.text_designer_reservation_detail_price)
+    }
+    private val menuTxtView: TextView by lazy {
+        findViewById(R.id.text_designer_reservation_detail_menu)
+    }
+    private val totalPriceTxtView: TextView by lazy {
+        findViewById(R.id.text_designer_reservation_detail_total_price)
+    }
+    private val paymentTxtView: TextView by lazy {
+        findViewById(R.id.text_designer_reservation_detail_final_payment)
+    }
+
+    override val menuItemList = mutableListOf<MenuItem>()
+    override fun onMenuChangedListener(changedList: MutableList<MenuItem>) {
+        val menuList = mutableListOf<String>()
+        val priceList = mutableListOf<Int>()
+
+        changedList.forEach { menuItem ->
+            menuList.add(menuItem.menuName)
+            priceList.add(Integer.parseInt(menuItem.menuPrice))
+        }
+
+        initMenuAndPriceTextView(menuList, priceList)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +94,7 @@ class DesignerReservationDetailActivity : AppCompatActivity() {
                     finish()
                 }
 
-                if (reservation!!.type == TypeOfReservation.TREATED.value) initBottomButtons()
+                initBottomButtons()
                 initUI()
 
                 /* 파이어베이스에서 리스트 읽는 방법2
@@ -91,17 +122,9 @@ class DesignerReservationDetailActivity : AppCompatActivity() {
             reservation!!.designerName  // 디자이너
         findViewById<TextView>(R.id.text_designer_reservation_detail_shop).text =
             reservation!!.shop  // 미용실
-        findViewById<TextView>(R.id.text_designer_reservation_detail_menu).text =
-            getStringOfMenuFrom(reservation!!.menuList) // 메뉴 종류
 
-        getStringsOfPriceFrom(reservation!!.priceList).let { (menuPrices, totalPrice) ->
-            findViewById<TextView>(R.id.text_designer_reservation_detail_price).text =
-                menuPrices  // 메뉴 가격
-            findViewById<TextView>(R.id.text_designer_reservation_detail_total_price).text =
-                totalPrice  // 상품 합계
-            findViewById<TextView>(R.id.text_designer_reservation_detail_final_payment).text =
-                totalPrice  // 결제 금액 --> 당장은 상품 합계 = 결제 금액
-        }
+        // 메뉴 종류, 메뉴 가격, 상품 합계, 결제 금액 텍스트 초기화
+        initMenuAndPriceTextView(reservation!!.menuList, reservation!!.priceList)
 
     }
 
@@ -111,15 +134,10 @@ class DesignerReservationDetailActivity : AppCompatActivity() {
      * 2. click listener
      */
     private fun initBottomButtons() {
-        // TODO 실제 쓸 코드
-        /*if (reservation?.type == TypeOfReservation.COMPLETED.value) {
+        if (reservation!!.type == TypeOfReservation.TREATED.value){
             setBottomButtonsVisible()
             setAdditionalTreatmentClickListener()
-        }*/
-
-        // 임시
-        setBottomButtonsVisible()
-        setAdditionalTreatmentClickListener()
+        }
     }
 
     /**
@@ -177,6 +195,16 @@ class DesignerReservationDetailActivity : AppCompatActivity() {
             convertMilliSecondsToTimeString(reservation.startTime),
             convertMilliSecondsToTimeString(reservation.endTime)
         )
+    }
+
+    private fun initMenuAndPriceTextView(menuList: List<String>, priceList: List<Int>){
+        menuTxtView.text = getStringOfMenuFrom(menuList) // 메뉴 종류
+
+        getStringsOfPriceFrom(priceList).let { (menuPrices, totalPrice) ->
+            priceTxtView.text = menuPrices  // 메뉴 가격
+            totalPriceTxtView.text = totalPrice  // 상품 합계
+            paymentTxtView.text = totalPrice  // 결제 금액 --> 당장은 상품 합계 = 결제 금액
+        }
     }
 
     /**

@@ -10,8 +10,8 @@ data class DesignerReservationDetail(
     override val endTime: Long,
     override var type: Int,
     val designerName: String,
-    val menuList: MutableList<String>,    // 시술할 메뉴들
-    val priceList: MutableList<Int>,         // 메뉴에 따른 가격들
+    var menuList: MutableList<String>,    // 시술할 메뉴들
+    var priceList: MutableList<Int>,         // 메뉴에 따른 가격들
     val request: String
 
 ) : DesignerReservation() {

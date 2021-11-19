@@ -20,14 +20,13 @@ import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-interface DetailMenuItemHandler{
-    val menuItemList: MutableList<MenuItem>
-    fun onMenuChangedListener(changedList: MutableList<MenuItem>)
+interface MenuChangedListener {
+    var reservation: DesignerReservationDetail?
+    fun onMenuChanged(changedList: MutableList<MenuItem>)
 }
 
-class DesignerReservationDetailActivity : AppCompatActivity(), DetailMenuItemHandler {
+class DesignerReservationDetailActivity : AppCompatActivity(), MenuChangedListener {
 
-    private var reservation: DesignerReservationDetail? = null
     private val tempDesignerId = "designer0"
     private var userId = ""
     private var dateStamp = 0L  // 송신 인텐트에서 건네 받을 값
@@ -46,17 +45,24 @@ class DesignerReservationDetailActivity : AppCompatActivity(), DetailMenuItemHan
         findViewById(R.id.text_designer_reservation_detail_final_payment)
     }
 
-    override val menuItemList = mutableListOf<MenuItem>()
-    override fun onMenuChangedListener(changedList: MutableList<MenuItem>) {
+    /**
+     * AllPricesFragment - 추가 시술에서 사용:
+     */
+    override var reservation: DesignerReservationDetail? = null // DB에서 받아옴
+    override fun onMenuChanged(changedList: MutableList<MenuItem>) {
         val menuList = mutableListOf<String>()
         val priceList = mutableListOf<Int>()
 
         changedList.forEach { menuItem ->
             menuList.add(menuItem.menuName)
-            priceList.add(Integer.parseInt(menuItem.menuPrice))
+            priceList.add(Integer.parseInt(menuItem.menuPrice.dropLast(1))) // 15000원의 "원" drop
         }
 
+        reservation?.menuList = menuList
+        reservation?.priceList = priceList
         initMenuAndPriceTextView(menuList, priceList)
+
+        supportFragmentManager.popBackStack()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -134,7 +140,7 @@ class DesignerReservationDetailActivity : AppCompatActivity(), DetailMenuItemHan
      * 2. click listener
      */
     private fun initBottomButtons() {
-        if (reservation!!.type == TypeOfReservation.TREATED.value){
+        if (reservation!!.type == TypeOfReservation.TREATED.value) {
             setBottomButtonsVisible()
             setAdditionalTreatmentClickListener()
         }
@@ -156,7 +162,8 @@ class DesignerReservationDetailActivity : AppCompatActivity(), DetailMenuItemHan
             findViewById<Button>(R.id.button_designer_reservation_detail_additional_treatment)
 
         buttonView.setOnClickListener {
-            val fragment = AllPricesFragment(isAdditionTreatment = true)
+            val fragment =
+                AllPricesFragment(isAdditionTreatment = true, _menuChangedListener = this)
 
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_designer_reservation_detail, fragment)
@@ -197,7 +204,7 @@ class DesignerReservationDetailActivity : AppCompatActivity(), DetailMenuItemHan
         )
     }
 
-    private fun initMenuAndPriceTextView(menuList: List<String>, priceList: List<Int>){
+    private fun initMenuAndPriceTextView(menuList: List<String>, priceList: List<Int>) {
         menuTxtView.text = getStringOfMenuFrom(menuList) // 메뉴 종류
 
         getStringsOfPriceFrom(priceList).let { (menuPrices, totalPrice) ->

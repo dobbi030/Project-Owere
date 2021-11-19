@@ -66,6 +66,7 @@
         android:id="@+id/checkBox_price_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="0sp"
         app:layout_constraintTop_toTopOf="@id/text_price_menu_title"
         app:layout_constraintBottom_toBottomOf="@id/text_price_menu_option"
         app:layout_constraintEnd_toEndOf="parent"/>

@@ -12,13 +12,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.blooburn.owere.databinding.ItemFavoriteDisignerBinding
 
 import com.blooburn.owere.user.item.FavoriteDesigner
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
-class InterestDesignerAdpater :
+//관심 디자이너 목록을 위한 어답터
+class InterestDesignerAdpater(currentUserID : String) :
     ListAdapter<FavoriteDesigner, InterestDesignerAdpater.ViewHolder>(diffUtil) {
 
 
+
+    //DB 사용할 레퍼런스 초기화 (favoriteDesigners -> 유저Id -> 디자이너)
+    val favoriteDesignerDB = Firebase.database.reference.child("favoriteDesigners").child(currentUserID)
+
     inner class ViewHolder(private val binding: ItemFavoriteDisignerBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+
 
         fun bind(favoriteDesigner: FavoriteDesigner) {
 
@@ -40,16 +49,24 @@ class InterestDesignerAdpater :
             binding.designerLiked.setOnClickListener {
                 binding.designerLiked.visibility = GONE
                 binding.designerUnliked.visibility = VISIBLE
+
+                //관심 디자이너 DB에서 삭제
+                favoriteDesignerDB.child(favoriteDesigner.designerId).removeValue()
             }
+
+            //빈 하트 다시 누르면 좋아요
             binding.designerUnliked.setOnClickListener {
                 binding.designerUnliked.visibility = GONE
                 binding.designerLiked.visibility = VISIBLE
+
+                //관심 디자이너 DB에서 생성
+                favoriteDesignerDB.child(favoriteDesigner.designerId).setValue(favoriteDesigner)
             }
-//
-//
+
+
+
         }
-//
-//
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

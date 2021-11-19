@@ -10,6 +10,7 @@ class ReservationInfo : AppCompatActivity() {
 
 
 
+
     val reservationBottomDialogFragment : ReservationBottomDialogFrament? = ReservationBottomDialogFrament()
 
     override fun onCreate(savedInstanceState: Bundle?) {

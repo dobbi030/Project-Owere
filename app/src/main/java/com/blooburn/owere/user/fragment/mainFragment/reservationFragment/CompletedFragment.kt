@@ -86,22 +86,6 @@ class CompletedFragment : Fragment(R.layout.confirmed_fragment_layout) {
 
     }
 
-    /**
-     * 예약 리사이클러뷰 초기화
-     */
-    private fun initReservationsRecyclerView(
-        recyclerView: RecyclerView,
-        _adapter: UserReservationListAdapter
-    ) {
-        recyclerView.apply {
-            // custom divider 적용
-            addItemDecoration(
-                CustomDividerDecoration(1f, ContextCompat.getColor(this.context, R.color.gray_cc))
-            )
 
-            layoutManager = LinearLayoutManager(context)
-            adapter = _adapter
-        }
-    }
 
 }

@@ -37,7 +37,7 @@ class InterestShopFragment : Fragment(R.layout.layout_interest_shop_fragment) {
         val interestShopFragmentBinding = LayoutInterestShopFragmentBinding.bind(view)
         binding = interestShopFragmentBinding
 
-        interestShopAdpater = InterestShopAdpater()
+        interestShopAdpater = InterestShopAdpater(auth.currentUser!!.uid)
 
 
 

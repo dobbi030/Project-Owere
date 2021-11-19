@@ -25,6 +25,7 @@ import org.threeten.bp.temporal.ChronoField
 class DesignerConfirmedReservationFragment :
     Fragment(R.layout.designer_confirmed_reservation_fragment) {
 
+
     private val tempDesignerId = "designer0"
     private val reservationsReferencePath = "designerReservations/$tempDesignerId/"
     private var binding: DesignerConfirmedReservationFragmentBinding? = null

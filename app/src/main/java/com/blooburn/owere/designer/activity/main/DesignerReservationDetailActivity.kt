@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.blooburn.owere.R
 import com.blooburn.owere.designer.item.DesignerReservation
 import com.blooburn.owere.designer.item.DesignerReservationDetail
@@ -47,6 +48,7 @@ class DesignerReservationDetailActivity : AppCompatActivity(), DetailMenuItemHan
     }
 
     override val menuItemList = mutableListOf<MenuItem>()
+
     override fun onMenuChangedListener(changedList: MutableList<MenuItem>) {
         val menuList = mutableListOf<String>()
         val priceList = mutableListOf<Int>()
@@ -138,6 +140,10 @@ class DesignerReservationDetailActivity : AppCompatActivity(), DetailMenuItemHan
             setBottomButtonsVisible()
             setAdditionalTreatmentClickListener()
         }
+            //아직 수락되지 않은 상태라면
+        if(reservation!!.type == TypeOfReservation.ACCEPTED.value){
+            setBottomButtonsYesOrNo()
+        }
     }
 
     /**
@@ -145,6 +151,13 @@ class DesignerReservationDetailActivity : AppCompatActivity(), DetailMenuItemHan
      */
     private fun setBottomButtonsVisible() {
         findViewById<LinearLayout>(R.id.layout_designer_reservation_detail_buttons).visibility =
+            View.VISIBLE
+    }
+    /**
+     * 수락되지 않은 예약일 때만 아래에 정산 관련 버튼들이 보이도록 한다
+     */
+    private fun setBottomButtonsYesOrNo(){
+        findViewById<ConstraintLayout>(R.id.layout_designer_reservation_detail_yes_no_container).visibility =
             View.VISIBLE
     }
 
@@ -231,4 +244,5 @@ class DesignerReservationDetailActivity : AppCompatActivity(), DetailMenuItemHan
             .reduce { acc, price -> "$acc + $price" }, decimalFormat.format(totalPrice)
         )
     }
+
 }

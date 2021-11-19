@@ -90,7 +90,7 @@ class UserWaitingReservation : AppCompatActivity() {
             reservationDesignerText.text = designerData.name //김철수
             reservationShopText.text = selectedShop.name    //00미용실
             reservationMenuText.text = menu.menuName    //메뉴이름
-            reservationPriceText.text = menu.menuPrice  //000원
+            reservationPriceText.text = "${menu.menuPrice}원"  //000원
 
         }
     }
@@ -168,7 +168,11 @@ class UserWaitingReservation : AppCompatActivity() {
 
                             designerUpdate["accepted"] = 0
 
-                            designerUpdate["type"] = TypeOfReservation.SCHEDULED
+                            designerUpdate["type"] = TypeOfReservation.ACCEPTED.value
+                            designerUpdate["menuList"] = listOf(menu.menuName)
+                            designerUpdate["priceList"] = listOf(Integer.parseInt(menu.menuPrice.replace("[^\\\\d]","")))
+
+
 
 
                             //유저 Reservation

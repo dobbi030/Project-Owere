@@ -44,7 +44,7 @@ class MenuSelectAdapter(private val checkboxAddedListener: CheckboxAddedListener
             }
 
             //메뉴 가격
-            binding.reservePriceMenuPrice.text = menulist.menuPrice
+            binding.reservePriceMenuPrice.text = "${menulist.menuPrice} 원"
 
             //메뉴 시간
             binding.reserveItemPriceTime.text = menulist.menuTime

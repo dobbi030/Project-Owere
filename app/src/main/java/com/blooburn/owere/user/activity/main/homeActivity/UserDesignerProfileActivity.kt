@@ -213,7 +213,7 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
                         )
 
                         menuViewBinding.textPriceMenuTitle.text = menuItem.menuName
-                        menuViewBinding.textPriceMenuPrice.text = menuItem.menuPrice
+                        menuViewBinding.textPriceMenuPrice.text = "${menuItem.menuPrice}"
                         menuViewBinding.textPriceMenuTime.text = menuItem.menuTime
                         //todo: 옵션은 지금 생략했음
                     }

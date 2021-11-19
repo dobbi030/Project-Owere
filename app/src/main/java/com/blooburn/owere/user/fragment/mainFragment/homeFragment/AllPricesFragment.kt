@@ -146,7 +146,7 @@ class AllPricesFragment(private val isAdditionTreatment: Boolean) :
      */
     private fun setSubMenuView(subMenuItem: MenuItem, subMenuBinding: ItemPriceMenuBinding) {
         subMenuBinding.textPriceMenuTitle.text = subMenuItem.menuName
-        subMenuBinding.textPriceMenuPrice.text = subMenuItem.menuPrice
+        subMenuBinding.textPriceMenuPrice.text = "${subMenuItem.menuPrice}원"
         subMenuBinding.textPriceMenuTime.text = subMenuItem.menuTime
 
         // 추가 비용 선택하는 화면일 때 체크박스를 보여준다

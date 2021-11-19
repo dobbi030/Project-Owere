@@ -11,8 +11,6 @@ import com.blooburn.owere.R
 import com.blooburn.owere.user.fragment.mainFragment.reservationFragment.ReservationBottomDialogFrament
 import com.blooburn.owere.user.item.ReservationListItem
 
-
-
 class UserReservationDetailActivity : AppCompatActivity() {
 
     private var reservation: ReservationListItem? = null

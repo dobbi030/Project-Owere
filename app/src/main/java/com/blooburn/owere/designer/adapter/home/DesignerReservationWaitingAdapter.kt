@@ -9,16 +9,20 @@ import com.blooburn.owere.R
 import com.blooburn.owere.databinding.ItemReservedUserBinding
 import com.blooburn.owere.designer.activity.main.DesignerReservationDetailActivity
 import com.blooburn.owere.designer.item.DesignerReservation
-import com.blooburn.owere.user.item.ReservationListItem
-import com.blooburn.owere.util.*
+import com.blooburn.owere.util.DATE_STAMP_KEY
+import com.blooburn.owere.util.DesignerProfileHandler
+import com.blooburn.owere.util.TypeOfReservation
+import com.blooburn.owere.util.UID_KEY
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DesignerReservationListAdapter :
-    RecyclerView.Adapter<DesignerReservationListAdapter.ViewHolder>(), DesignerProfileHandler {
+//수락 대기중인 고객의 예약리스트 어답터
+class DesignerReservationWaitingAdapter :
+    RecyclerView.Adapter<DesignerReservationWaitingAdapter.ViewHolder>(), DesignerProfileHandler {
 
     private var reservationList = mutableListOf<DesignerReservation>()
-    private var selectedDateStamp = 0L
+    private var selectedDateStamp = mutableMapOf<Long,Int>()
+    private var selectedDate : Long = 0
 
     inner class ViewHolder(private val binding: ItemReservedUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -44,7 +48,7 @@ class DesignerReservationListAdapter :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): DesignerReservationListAdapter.ViewHolder {
+    ): DesignerReservationWaitingAdapter.ViewHolder {
         val view =
             ItemReservedUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
@@ -52,21 +56,30 @@ class DesignerReservationListAdapter :
     }
 
     override fun onBindViewHolder(
-        holder: DesignerReservationListAdapter.ViewHolder,
+        holder: DesignerReservationWaitingAdapter.ViewHolder,
         position: Int
     ) {
         holder.bind(position)
 
         holder.itemView.setOnClickListener{
 
-            // userId 전달 -> 수신 액티비티에서 userId로 DB의 예약정보에 접근
-            val intent =
-                Intent(holder.itemView.context, DesignerReservationDetailActivity::class.java).apply{
-                    putExtra(UID_KEY, reservationList[position].userId)
-                    putExtra(DATE_STAMP_KEY, selectedDateStamp)
+            selectedDateStamp.forEach {
+                if(position<=it.value){
+                    selectedDate = it.key
+                    return@forEach
                 }
 
-            holder.itemView.context.startActivity(intent)
+            }
+
+                // userId 전달 -> 수신 액티비티에서 userId로 DB의 예약정보에 접근
+                val intent =
+                    Intent(holder.itemView.context, DesignerReservationDetailActivity::class.java).apply{
+                        putExtra(UID_KEY, reservationList[position].userId)
+                        putExtra(DATE_STAMP_KEY, selectedDate)
+                    }
+
+                holder.itemView.context.startActivity(intent)
+
         }
     }
 
@@ -74,9 +87,19 @@ class DesignerReservationListAdapter :
         return reservationList.size
     }
 
-    fun setData(newDateStamp: Long, list: MutableList<DesignerReservation>) {
-        reservationList = list
-        selectedDateStamp = newDateStamp    // 프래그먼트에서 지금 보여주고 있는 날짜의 stamp
+    fun addData(newDateStamp: Long, list: MutableList<DesignerReservation>) {
+
+        //해당 날짜 스탬프와 해당날짜인 예약 수
+        selectedDateStamp.put(newDateStamp,reservationList.size + list.size)     // 프래그먼트에서 지금 보여주고 있는 날짜의
+        if(reservationList.isEmpty()){
+            reservationList = list
+        }else{
+            for(i in 0..list.size-1){
+                reservationList.add(list[i])
+            }
+        }
+
+
         notifyDataSetChanged()
     }
 

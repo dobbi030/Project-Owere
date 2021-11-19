@@ -36,7 +36,7 @@
         android:layout_height="16dp"
         android:layout_marginStart="8dp"
         android:src="@drawable/ic_chat_bubble"
-        android:tint="@color/blue_main_background"
+        android:tint="@color/blue_00CCFF"
         app:layout_constraintBottom_toBottomOf="@id/text_reserved_user_name"
         app:layout_constraintStart_toEndOf="@id/text_reserved_user_name"
         app:layout_constraintTop_toTopOf="@id/text_reserved_user_name" />

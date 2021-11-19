@@ -1,33 +1,37 @@
 package com.blooburn.owere.user.fragment.mainFragment.homeFragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.blooburn.owere.R
 import com.blooburn.owere.databinding.AllPricesFragmentBinding
 import com.blooburn.owere.databinding.ItemPriceMenuBinding
 import com.blooburn.owere.databinding.LayoutMenuContainerBinding
+import com.blooburn.owere.designer.activity.main.MenuChangedListener
 import com.blooburn.owere.user.item.MenuItem
 import com.blooburn.owere.util.databaseInstance
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 
-class AllPricesFragment(private val isAdditionTreatment: Boolean) :
+class AllPricesFragment(
+    private val isAdditionTreatment: Boolean,
+    _menuChangedListener: MenuChangedListener? = null
+) :
     Fragment(R.layout.all_prices_fragment), View.OnClickListener {
 
     private var binding: AllPricesFragmentBinding? = null
-    private val menuList = mutableListOf<MenuItem>()
+    private val allMenuItemList = mutableListOf<MenuItem>()
+    private val checkedMenuItemList = mutableListOf<MenuItem>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
-    }
+    // 추가 시술 선택 완료 버튼 리스너
+    // DesignerReservationDetailActivity.kt와 통신
+    private val menuChangedListener = _menuChangedListener
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -53,7 +57,7 @@ class AllPricesFragment(private val isAdditionTreatment: Boolean) :
         binding?.apply {
             layoutAllPricesAdditionalTopBar.visibility = View.GONE    // 추가 시술 화면 상단바
             buttonAllPricesChoose.visibility = View.GONE    // 선택 완료 버튼
-            buttonAllPricesBack.setOnClickListener(this@AllPricesFragment)  // 뒤로가는 버튼
+            buttonAllPricesBack.setOnClickListener(this@AllPricesFragment)  // 뒤로가기 버튼
         }
     }
 
@@ -64,6 +68,15 @@ class AllPricesFragment(private val isAdditionTreatment: Boolean) :
         binding?.apply {
             layoutAllPricesTopBar.visibility = View.GONE    // 일반 가격표 화면 상단바
             buttonAllPricesAdditionalBack.setOnClickListener(this@AllPricesFragment)
+            buttonAllPricesChoose.setOnClickListener {
+                if (checkedMenuItemList.isEmpty()) {
+                    // TODO 임시 메시지, 어떻게 처리?
+                    Toast.makeText(requireContext(), "메뉴를 선택해주세요.", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                menuChangedListener?.onMenuChanged(checkedMenuItemList)
+            }
         }
     }
 
@@ -75,7 +88,7 @@ class AllPricesFragment(private val isAdditionTreatment: Boolean) :
      */
     private fun getAndAddMenuItems() {
 
-        //Todo : 로그인했을 때 아이디 저장해놓고 따러 불러오기
+        //Todo : 로그인했을 때 저장된 아이디로 불러오기
         val tempDesignerId = "designer0"
         val priceChartReference =
             databaseInstance.reference.child("designerPriceChart/$tempDesignerId")
@@ -106,7 +119,7 @@ class AllPricesFragment(private val isAdditionTreatment: Boolean) :
                     )
                 }
 
-                binding?.root?.visibility = View.VISIBLE
+                binding?.root?.visibility = View.VISIBLE    // 데이터 로딩되고 나서 레이아웃 보여준다
             }
 
             override fun onCancelled(error: DatabaseError) {}
@@ -132,7 +145,7 @@ class AllPricesFragment(private val isAdditionTreatment: Boolean) :
                 layoutInflater,
                 containerView,
                 true
-            ). also{
+            ).also {
                 if (isAdditionTreatment) subMenuItem.checkBox = it.checkBoxPriceMenu
             }
 
@@ -149,10 +162,45 @@ class AllPricesFragment(private val isAdditionTreatment: Boolean) :
         subMenuBinding.textPriceMenuPrice.text = "${subMenuItem.menuPrice}원"
         subMenuBinding.textPriceMenuTime.text = subMenuItem.menuTime
 
-        // 추가 비용 선택하는 화면일 때 체크박스를 보여준다
-        if (isAdditionTreatment) {
-            subMenuBinding.checkBoxPriceMenu.visibility = View.VISIBLE
-            subMenuItem.checkBox = subMenuBinding.checkBoxPriceMenu
+        // 추가 비용 선택하는 화면 -> 체크박스 관련된 모든 프로세스 추가
+        if (isAdditionTreatment) initCheckBox(subMenuItem, subMenuBinding)
+    }
+
+    /**
+     * 체크박스 관련 프로세스
+     */
+    private fun initCheckBox(subMenuItem: MenuItem, subMenuBinding: ItemPriceMenuBinding) {
+        subMenuBinding.checkBoxPriceMenu.let {
+            it.visibility = View.VISIBLE  // 체크박스를 사용자에게 보여준다
+            subMenuItem.checkBox = it     // 체크박스를 메뉴 객체가 가리키도록 한다
+        }
+
+        // 체크박스와 MenuItem을 어떻게 연동시킬지 고민하다가
+        // textSize를 0으로 하고, 체크박스를 리스트에 추가할 때마다 text에 인덱스 값을 넣었습니다.
+        subMenuItem.checkBox?.text = allMenuItemList.size.toString()
+        allMenuItemList.add(subMenuItem)
+
+        // 체크 O / X -> checkedMenuItemList에 체크박스에 대응되는 menuItem을 추가 / 삭제
+        subMenuItem.checkBox?.setOnCheckedChangeListener(onCheckedChanged)
+
+        // 변경 전에 시술 받기로 되어있던 메뉴에 체크, 액티비티 인터페이스에서 전달 받음
+        // 메뉴 이름으로 같은 메뉴인지 판단
+        if (menuChangedListener?.reservation?.menuList?.contains(subMenuItem.menuName) == true) {
+            subMenuItem.checkBox?.isChecked = true
+        }
+    }
+
+    /**
+     * 체크 O / X -> checkedMenuItemList에 체크박스에 대응되는 menuItem을 추가 / 삭제
+     */
+    private val onCheckedChanged = CompoundButton.OnCheckedChangeListener { checkBox, checked ->
+        val idx = checkBox?.text.toString().toInt()
+
+        if (checked) {
+            checkedMenuItemList.add(allMenuItemList[idx])
+            Log.d("checked", "$checkedMenuItemList")
+        } else {
+            checkedMenuItemList.remove(allMenuItemList[idx])
         }
     }
 

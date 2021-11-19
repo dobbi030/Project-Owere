@@ -1,7 +1,6 @@
 package com.blooburn.owere.designer.fragment.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -12,19 +11,16 @@ import com.blooburn.owere.databinding.DesignerConfirmedReservationFragmentBindin
 import com.blooburn.owere.designer.adapter.home.DesignerReservationListAdapter
 import com.blooburn.owere.designer.item.DesignerReservation
 import com.blooburn.owere.util.CustomDividerDecoration
-import com.blooburn.owere.util.TypeOfDesignerReservation
+import com.blooburn.owere.util.TypeOfReservation
 import com.blooburn.owere.util.databaseInstance
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.prolificinteractive.materialcalendarview.CalendarDay
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalTime
 import org.threeten.bp.temporal.ChronoField
-import java.text.SimpleDateFormat
-import java.util.*
 
 class DesignerConfirmedReservationFragment :
     Fragment(R.layout.designer_confirmed_reservation_fragment) {
@@ -32,7 +28,6 @@ class DesignerConfirmedReservationFragment :
 
     private val tempDesignerId = "designer0"
     private val reservationsReferencePath = "designerReservations/$tempDesignerId/"
-    private val currentDayStamp = LocalDate.now().getLong(ChronoField.EPOCH_DAY)
     private var binding: DesignerConfirmedReservationFragmentBinding? = null
 
     private lateinit var scheduledAdapter: DesignerReservationListAdapter
@@ -158,6 +153,11 @@ class DesignerConfirmedReservationFragment :
         selectedDayStamp: Long,
         currentTime: Int
     ) {
+        when(reservation.type){
+            TypeOfReservation.SCHEDULED.value -> scheduledList.add(reservation)
+            else -> completedList.add(reservation)
+        }
+        /*
         // 선택된 날이 과거일 때
         if (selectedDayStamp < currentDayStamp) {
             reservation.type = TypeOfDesignerReservation.COMPLETED
@@ -175,5 +175,6 @@ class DesignerConfirmedReservationFragment :
                 scheduledList.add(reservation)
             }
         }
+        */
     }
 }

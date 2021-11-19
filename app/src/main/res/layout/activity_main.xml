@@ -13,7 +13,7 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:contentDescription="@string/logo_of_owere"
-        android:src="@drawable/logo_owere"
+        android:src="@drawable/ic_favorite"
         android:textColor="@color/white"
         android:textSize="40sp" />
 

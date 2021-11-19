@@ -105,23 +105,26 @@ class DesignerReservationListAdapter :
     /**
      * 예약 타입(예정, 시술완료, 정산완료)에 따라 뷰 UI를 다르게 보여준다
      */
-    private fun initUIDependingOnType(binding: ItemReservedUserBinding, type: TypeOfDesignerReservation){
+    private fun initUIDependingOnType(binding: ItemReservedUserBinding, type: Int){
         val arrowImageView = binding.imageReservedUserArrow
         val settlementTextView = binding.textReservedUserSettle
         val context = binding.root.context
 
         when (type) {
-            TypeOfDesignerReservation.SCHEDULED -> {
+            TypeOfReservation.SCHEDULED.value -> {
                 arrowImageView.visibility = View.VISIBLE
                 settlementTextView.visibility = View.GONE
             }
 
-            TypeOfDesignerReservation.COMPLETED ->
+            TypeOfReservation.TREATED.value ->{
                 settlementTextView.text = context.getString(R.string.settling_fee)
+                settlementTextView.setTextColor(context.getColor(R.color.red))
+            }
 
-            TypeOfDesignerReservation.SETTLED ->
+            TypeOfReservation.SETTLED.value ->{
                 settlementTextView.text = context.getString(R.string.settlement_completed_blue)
-
+                settlementTextView.setTextColor(context.getColor(R.color.blue_00CCFF))
+            }
         }
     }
 

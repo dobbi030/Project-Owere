@@ -10,7 +10,7 @@ import com.blooburn.owere.databinding.ItemReservedUserBinding
 import com.blooburn.owere.user.activity.main.userReservation.UserReservationDetailActivity
 import com.blooburn.owere.user.item.ReservationListItem
 import com.blooburn.owere.util.DesignerProfileHandler
-import com.blooburn.owere.util.TypeOfDesignerReservation
+import com.blooburn.owere.util.TypeOfReservation
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -101,21 +101,21 @@ RecyclerView.Adapter<UserReservationListAdapter.ViewHolder>(), DesignerProfileHa
         )
     }
 
-    private fun initDependingOnType(binding: ItemReservedUserBinding, type: TypeOfDesignerReservation){
+    private fun initDependingOnType(binding: ItemReservedUserBinding, type: TypeOfReservation){
         val arrowImageView = binding.imageReservedUserArrow
         val settlementTextView = binding.textReservedUserSettle
         val context = binding.root.context
 
         when (type) {
-            TypeOfDesignerReservation.SCHEDULED -> {
+            TypeOfReservation.SCHEDULED -> {
                 arrowImageView.visibility = View.VISIBLE
                 settlementTextView.visibility = View.GONE
             }
 
-            TypeOfDesignerReservation.COMPLETED ->
+            TypeOfReservation.TREATED ->
                 settlementTextView.text = context.getString(R.string.settling_fee)
 
-            TypeOfDesignerReservation.SETTLED ->
+            TypeOfReservation.SETTLED ->
                 settlementTextView.text = context.getString(R.string.settlement_completed_blue)
 
         }

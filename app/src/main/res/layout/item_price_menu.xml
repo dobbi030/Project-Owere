@@ -62,7 +62,7 @@
         android:layout_marginTop="6dp"/>
 
     <!-- 추가 비용 선택하는 경우에 활성화 -->
-    <com.google.android.material.checkbox.MaterialCheckBox
+    <CheckBox
         android:id="@+id/checkBox_price_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -1,7 +1,6 @@
 package com.blooburn.owere.user.item
 
 import android.os.Parcelable
-import com.blooburn.owere.util.TypeOfDesignerReservation
 import kotlinx.android.parcel.Parcelize
 
 //예약 리스트에 보여줄 객체

@@ -37,9 +37,8 @@ android {
         jvmTarget = '1.8'
     }
     //뷰바인딩 추가
-    viewBinding {
-        enabled = true
-
+    buildFeatures {
+        viewBinding = true
     }
 }
 
@@ -71,7 +70,7 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-storage:8.0.0'
 
 
-    def fragment_version = "1.3.1"
+    def fragment_version = "1.3.6"
 
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
 

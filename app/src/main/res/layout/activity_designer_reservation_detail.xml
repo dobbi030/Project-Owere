@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -12,12 +13,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingHorizontal="16dp">
+            android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize">
+                android:layout_height="?attr/actionBarSize"
+                android:paddingHorizontal="16dp">
 
                 <ImageButton
                     android:id="@+id/button_designer_reservation_detail_back"
@@ -47,6 +48,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="20dp"
                 android:text="박성준님"
@@ -59,6 +61,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:text="@string/reservation_information"
                 android:textColor="@color/black"
@@ -68,7 +71,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="24dp">
+                android:layout_marginVertical="24dp"
+                android:paddingHorizontal="16dp">
 
                 <TextView
                     android:id="@+id/text_designer_reservation_detail_dates_title"
@@ -84,14 +88,14 @@
                     android:id="@+id/text_designer_reservation_detail_dates"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/reservation_information"
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toTopOf="@id/text_designer_reservation_detail_time"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.27"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/reservation_information" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -107,11 +111,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@string/reservation_information"
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="@id/text_designer_reservation_detail_dates"
-                    app:layout_constraintTop_toBottomOf="@id/text_designer_reservation_detail_dates" />
+                    app:layout_constraintTop_toBottomOf="@id/text_designer_reservation_detail_dates"
+                    tools:text="@string/reservation_information" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -127,11 +131,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@string/reservation_information"
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="@id/text_designer_reservation_detail_dates"
-                    app:layout_constraintTop_toBottomOf="@id/text_designer_reservation_detail_time" />
+                    app:layout_constraintTop_toBottomOf="@id/text_designer_reservation_detail_time"
+                    tools:text="@string/reservation_information" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -147,11 +151,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@string/reservation_information"
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="@id/text_designer_reservation_detail_dates"
-                    app:layout_constraintTop_toBottomOf="@id/text_designer_reservation_detail_designer" />
+                    app:layout_constraintTop_toBottomOf="@id/text_designer_reservation_detail_designer"
+                    tools:text="@string/reservation_information" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -164,14 +168,16 @@
 
                 <TextView
                     android:id="@+id/text_designer_reservation_detail_menu"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@string/reservation_information"
                     android:textColor="@color/black"
                     android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintStart_toStartOf="@id/text_designer_reservation_detail_dates"
-                    app:layout_constraintTop_toBottomOf="@id/text_designer_reservation_detail_shop" />
+                    app:layout_constraintTop_toBottomOf="@id/text_designer_reservation_detail_shop"
+                    tools:text="@string/reservation_information" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -184,22 +190,29 @@
 
                 <TextView
                     android:id="@+id/text_designer_reservation_detail_price"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@string/reservation_information"
                     android:textColor="@color/black"
                     android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintStart_toStartOf="@id/text_designer_reservation_detail_dates"
-                    app:layout_constraintTop_toBottomOf="@id/text_designer_reservation_detail_menu" />
+                    app:layout_constraintTop_toBottomOf="@id/text_designer_reservation_detail_menu"
+                    tools:text="@string/reservation_information" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <include layout="@layout/view_divider_1dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:background="@color/gray_divider" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="20dp">
+                android:layout_marginVertical="20dp"
+                android:paddingHorizontal="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -215,19 +228,24 @@
                     android:id="@+id/text_designer_reservation_detail_total_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="35,000원"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="35,000원" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <include layout="@layout/view_divider_1dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:background="@color/gray_divider" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:text="@string/discount_amount"
                 android:textColor="@color/black"
@@ -237,7 +255,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="16dp">
+                android:layout_marginVertical="16dp"
+                android:paddingHorizontal="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -252,7 +271,7 @@
                     android:id="@+id/text_designer_reservation_detail_coupon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="-3,000원"
+                    android:text="@string/zero_won"
                     android:textColor="@color/gray_cc"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -272,19 +291,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="0원"
+                    android:text="@string/zero_won"
                     android:textColor="@color/gray_cc"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_designer_reservation_detail_coupon" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <include layout="@layout/view_divider_1dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:background="@color/gray_divider" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="20dp">
+                android:layout_marginVertical="20dp"
+                android:paddingHorizontal="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -297,23 +321,28 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/text_designer_reservation_detail_total_payment"
+                    android:id="@+id/text_designer_reservation_detail_final_payment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="32,000원"
                     android:textColor="@color/purple_button2"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="35,000원" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <include layout="@layout/view_divider_1dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:background="@color/gray_divider" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="20dp">
+                android:layout_marginVertical="20dp"
+                android:paddingHorizontal="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -337,11 +366,16 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <include layout="@layout/view_divider_1dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:background="@color/gray_divider" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:text="@string/customer_request"
                 android:textColor="@color/black"
@@ -351,6 +385,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="16dp"
                 android:background="@drawable/rounded_square_background"
                 android:backgroundTint="@color/gray_background"
@@ -365,6 +400,7 @@
                 android:id="@+id/layout_designer_reservation_detail_buttons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
                 android:orientation="vertical"
                 android:paddingVertical="8dp"

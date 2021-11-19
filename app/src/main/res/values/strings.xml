@@ -94,6 +94,7 @@
     <string name="has_additional_treatment">추가 시술이 있었나요?</string>
     <string name="settlement_completed">정산완료</string>
     <string name="choice_completed">선택완료</string>
+    <string name="zero_won">0원</string>
 
     <string name="firebase_web_client_id">"260202805759-p5ff8qashfb05ab9p13ui7f329326h6b.apps.googleusercontent.com"</string>
     <string name="logo_of_owere">Logo of Owere</string>

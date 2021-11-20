@@ -43,7 +43,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:background="@color/gray_cc"
+                android:background="@color/gray_939393"
                 android:id="@+id/introduce_image1"
                 android:layout_width="0dp"
                 android:layout_height="594dp"

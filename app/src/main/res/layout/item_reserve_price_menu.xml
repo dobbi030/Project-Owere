@@ -55,7 +55,7 @@
         android:id="@+id/reserve_item_price_option"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/gray_cc"
+        android:textColor="@color/gray_939393"
         android:text="길이추가"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="@id/reserve_price_menu_title"

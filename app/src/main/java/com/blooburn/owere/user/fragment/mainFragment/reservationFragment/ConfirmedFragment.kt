@@ -8,21 +8,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blooburn.owere.R
 import com.blooburn.owere.databinding.ConfirmedFragmentLayoutBinding
-import com.blooburn.owere.databinding.LayoutChattingDesignerFragmentBinding
 import com.blooburn.owere.user.adapter.userReservation.UserReservationListAdapter
 import com.blooburn.owere.user.item.ReservationListItem
 import com.blooburn.owere.util.CustomDividerDecoration
-import com.blooburn.owere.util.ZONE_ID
 import com.blooburn.owere.util.databaseInstance
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import org.threeten.bp.LocalDate
-import org.threeten.bp.LocalDateTime
-import org.threeten.bp.LocalTime
-import org.threeten.bp.temporal.ChronoField
-import java.sql.Timestamp
 
 //예정된 예약
     //확정된 예약 프래그먼트
@@ -103,7 +96,7 @@ class ConfirmedFragment : Fragment(R.layout.confirmed_fragment_layout) {
         recyclerView.apply {
             // custom divider 적용
             addItemDecoration(
-                CustomDividerDecoration(1f, ContextCompat.getColor(this.context, R.color.gray_cc))
+                CustomDividerDecoration(1f, ContextCompat.getColor(this.context, R.color.gray_939393))
             )
 
             layoutManager = LinearLayoutManager(context)

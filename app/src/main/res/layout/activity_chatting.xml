@@ -41,7 +41,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@color/gray_cc"
+        android:background="@color/gray_939393"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/chatting_room_bar" />
 
@@ -60,7 +60,7 @@
         android:id="@+id/message_send_container"
         android:layout_width="0dp"
         android:layout_height="64dp"
-        android:background="@color/gray_cc"
+        android:background="@color/gray_939393"
         android:orientation="horizontal"
         android:weightSum="10"
         app:layout_constraintBottom_toBottomOf="parent"

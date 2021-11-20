@@ -42,7 +42,7 @@
         android:layout_width="1.5dp"
         android:layout_height="12dp"
         android:layout_marginStart="8dp"
-        android:background="@color/gray_cc"
+        android:background="@color/gray_939393"
         app:layout_constraintBottom_toBottomOf="@id/reserve_salon_designer_review"
         app:layout_constraintStart_toEndOf="@id/reserve_salon_designer_review"
         app:layout_constraintTop_toTopOf="@id/reserve_salon_designer_review" />
@@ -80,7 +80,7 @@
         android:layout_width="1.5dp"
         android:layout_height="12dp"
         android:layout_marginStart="8dp"
-        android:background="@color/gray_cc"
+        android:background="@color/gray_939393"
         app:layout_constraintBottom_toBottomOf="@id/favoriteSalonCutTextView"
         app:layout_constraintStart_toEndOf="@id/favoriteSalonCutTextView"
         app:layout_constraintTop_toTopOf="@id/favoriteSalonCutTextView" />
@@ -99,7 +99,7 @@
         android:layout_width="1.5dp"
         android:layout_height="12dp"
         android:layout_marginStart="8dp"
-        android:background="@color/gray_cc"
+        android:background="@color/gray_939393"
         app:layout_constraintBottom_toBottomOf="@id/favoriteSalonPermTextView"
         app:layout_constraintStart_toEndOf="@id/favoriteSalonPermTextView"
         app:layout_constraintTop_toTopOf="@id/favoriteSalonPermTextView" />

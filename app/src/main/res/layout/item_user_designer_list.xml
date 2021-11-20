@@ -42,7 +42,7 @@
         android:layout_width="1.5dp"
         android:layout_height="12dp"
         android:layout_marginStart="8dp"
-        android:background="@color/gray_cc"
+        android:background="@color/gray_939393"
         app:layout_constraintBottom_toBottomOf="@id/text_user_designer_review_count"
         app:layout_constraintStart_toEndOf="@id/text_user_designer_review_count"
         app:layout_constraintTop_toTopOf="@id/text_user_designer_review_count" />

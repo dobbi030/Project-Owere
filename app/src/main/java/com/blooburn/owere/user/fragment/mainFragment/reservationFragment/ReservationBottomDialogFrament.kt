@@ -18,6 +18,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import com.blooburn.owere.R
+import com.blooburn.owere.designer.activity.reservation.RefuseReservation
 import com.blooburn.owere.user.activity.main.userReservation.ReservationCanceled
 import com.blooburn.owere.user.item.ReservationListItem
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -193,7 +194,7 @@ class InputMyselfCustomDialog(context: Context, reservation: ReservationListItem
         //거절하기 버튼 리스너
         buttonCancel.setOnClickListener {
 
-            val intent = Intent(context,ReservationCanceled::class.java)
+            val intent = Intent(context,RefuseReservation::class.java)
             intent.putExtra("reservation",reservation)//취소하려는 예약 객체 넘겨줌
             intent.putExtra("editTextReason",editTextReason.text) //취소 사유 넘겨줌
             startActivity(context,intent,null)

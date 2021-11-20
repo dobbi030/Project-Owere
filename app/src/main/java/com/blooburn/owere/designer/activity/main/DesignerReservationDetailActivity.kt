@@ -1,5 +1,6 @@
 package com.blooburn.owere.designer.activity.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -7,7 +8,10 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.blooburn.owere.R
+import com.blooburn.owere.designer.activity.reservation.AcceptReservation
+import com.blooburn.owere.designer.fragment.RefuseCustomDialog
 import com.blooburn.owere.designer.item.DesignerReservation
 import com.blooburn.owere.designer.item.DesignerReservationDetail
 import com.blooburn.owere.user.fragment.mainFragment.homeFragment.AllPricesFragment
@@ -31,6 +35,7 @@ class DesignerReservationDetailActivity : AppCompatActivity(), MenuChangedListen
     private var userId = ""
     private var dateStamp = 0L  // 송신 인텐트에서 건네 받을 값
     private val milliSecondsPerDay = 86400000 // 24시간에 해당하는 밀리세컨드
+    private var referencePath = ""
 
     private val priceTxtView: TextView by lazy {
         findViewById(R.id.text_designer_reservation_detail_price)
@@ -49,6 +54,7 @@ class DesignerReservationDetailActivity : AppCompatActivity(), MenuChangedListen
      * AllPricesFragment - 추가 시술에서 사용:
      */
     override var reservation: DesignerReservationDetail? = null // DB에서 받아옴
+
     override fun onMenuChanged(changedList: MutableList<MenuItem>) {
         val menuList = mutableListOf<String>()
         val priceList = mutableListOf<Int>()
@@ -60,7 +66,7 @@ class DesignerReservationDetailActivity : AppCompatActivity(), MenuChangedListen
 
         reservation?.menuList = menuList
         reservation?.priceList = priceList
-        initMenuAndPriceTextView(menuList, priceList)
+       // initMenuAndPriceTextView(menuList, priceList)
 
         supportFragmentManager.popBackStack()
     }
@@ -85,13 +91,15 @@ class DesignerReservationDetailActivity : AppCompatActivity(), MenuChangedListen
 
         userId = extras?.getString(UID_KEY) ?: ""
         dateStamp = extras?.getLong(DATE_STAMP_KEY) ?: 0
+        Log.d("check", "userid = ${userId}, datestamp = ${dateStamp}")
         if (userId == "" || dateStamp == 0L) {
             finish()
         }
     }
 
     private fun getReservationFromDBAndInitViews() {
-        val referencePath = "designerReservations/$tempDesignerId/$dateStamp/$userId"
+
+        referencePath = "designerReservations/$tempDesignerId/$dateStamp/$userId"
         databaseInstance.reference.child(referencePath).addListenerForSingleValueEvent(object :
             ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -140,9 +148,44 @@ class DesignerReservationDetailActivity : AppCompatActivity(), MenuChangedListen
      * 2. click listener
      */
     private fun initBottomButtons() {
+        if(reservation!!.type == TypeOfReservation.ACCEPTED.value)
+        {
+            setYesOrNoButton()
+        }
         if (reservation!!.type == TypeOfReservation.TREATED.value) {
             setBottomButtonsVisible()
             setAdditionalTreatmentClickListener()
+        }
+    }
+
+    /**
+     * 수락 대기중인 예약인 경우 수락 거절 버튼 보여주기
+     */
+    private fun setYesOrNoButton(){
+        findViewById<ConstraintLayout>(R.id.layout_designer_reservation_detail_yes_no_container).visibility =
+            View.VISIBLE
+        //수락버튼
+        findViewById<TextView>(R.id.layout_designer_reservation_detail_Button_yes).setOnClickListener {
+            //수락여부 변경
+            databaseInstance.reference.child(referencePath).apply {
+                child("type").setValue(1)
+                child("accepted").setValue(1)
+            }
+            databaseInstance.reference.child("UserReservation")
+                .child(userId).child("${reservation!!.startTime+dateStamp*milliSecondsPerDay}").child("accepted").setValue(1)
+            //예약 수락 결과 액티비티로 이동
+            var intent = Intent(this,AcceptReservation::class.java)
+            startActivity(intent)
+        }
+
+        //거절버튼
+        findViewById<TextView>(R.id.layout_designer_reservation_detail_Button_no).setOnClickListener {
+
+            val dialog = RefuseCustomDialog(this,reservation!!,dateStamp,tempDesignerId)
+            dialog.myDiag(this)
+
+
+
         }
     }
 
@@ -218,6 +261,9 @@ class DesignerReservationDetailActivity : AppCompatActivity(), MenuChangedListen
      * 메뉴 리스트 -> 메뉴 종류 텍스트로 변환
      */
     private fun getStringOfMenuFrom(menuList: List<String?>): String {
+        if(menuList.isEmpty()){
+            return ""
+        }
         return menuList.filterNotNull().reduce { acc, menu -> "$acc + $menu" }
     }
 
@@ -225,6 +271,9 @@ class DesignerReservationDetailActivity : AppCompatActivity(), MenuChangedListen
      * 가격 리스트 -> 1. 메뉴 가격 텍스트, 2. 상품 합계 텍스트
      */
     private fun getStringsOfPriceFrom(priceList: List<Int?>): Pair<String, String> {
+        if(priceList.isEmpty()){
+            return Pair("","")
+        }
         Log.d("로그", "$priceList")
         val decimalFormat = DecimalFormat("#,###원")
         var totalPrice = 0

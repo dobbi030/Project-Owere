@@ -1,6 +1,7 @@
 package com.blooburn.owere.designer.fragment.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -69,16 +70,23 @@ class DesignerWaitingReservationFragment : Fragment(R.layout.waiting_fragment_la
 
                     snapshot.children.forEach { DateSnapshot ->
 
+                        waitingReservation.clear()
+
+                        epochDay = Integer.parseInt(DateSnapshot.key).toLong() //18951
+
+                        Log.d("epochDay", "$epochDay")
                         DateSnapshot.children.forEach { reservationSnapshot ->
+
                             var reservation: DesignerReservation? =
                                 reservationSnapshot.getValue(DesignerReservation::class.java)
+                            reservation?.userId = reservationSnapshot.key!!
 
                             val currentTime = System.currentTimeMillis()
                             val reservationStart = reservation!!.startTime
                             val reservationEnd = reservation!!.endTime
 
                             //날짜
-                            epochDay = reservationStart / 86400
+
 
                             // 끝나는 시간이 현재 시간을 지나지 않았을 때 && 디자이너의 수락 기다림
                             //currentTime > reservationEnd &&
@@ -92,7 +100,14 @@ class DesignerWaitingReservationFragment : Fragment(R.layout.waiting_fragment_la
 
 
                         }
-                        waitingAdapter.addData(epochDay, waitingReservation)
+                        if(waitingReservation.isNotEmpty()){
+                            waitingAdapter.addData(epochDay, waitingReservation)
+
+                        }
+
+
+
+
                     }
 
                 }

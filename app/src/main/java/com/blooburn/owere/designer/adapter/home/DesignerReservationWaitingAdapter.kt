@@ -1,6 +1,7 @@
 package com.blooburn.owere.designer.adapter.home
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,8 +22,8 @@ class DesignerReservationWaitingAdapter :
     RecyclerView.Adapter<DesignerReservationWaitingAdapter.ViewHolder>(), DesignerProfileHandler {
 
     private var reservationList = mutableListOf<DesignerReservation>()
-    private var selectedDateStamp = mutableMapOf<Long,Int>()
-    private var selectedDate : Long = 0
+    private var selectedDateMap = mutableMapOf<Long, Int>()
+    private var selectedDate: Long = 0
 
     inner class ViewHolder(private val binding: ItemReservedUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -61,24 +62,31 @@ class DesignerReservationWaitingAdapter :
     ) {
         holder.bind(position)
 
-        holder.itemView.setOnClickListener{
+        holder.itemView.setOnClickListener {
 
-            selectedDateStamp.forEach {
-                if(position<=it.value){
+            selectedDateMap.forEach {
+                if (position <= it.value - 1) {
                     selectedDate = it.key
+                    Log.d("selectedDate", "$selectedDate")
                     return@forEach
                 }
 
             }
 
-                // userId 전달 -> 수신 액티비티에서 userId로 DB의 예약정보에 접근
-                val intent =
-                    Intent(holder.itemView.context, DesignerReservationDetailActivity::class.java).apply{
+            // userId 전달 -> 수신 액티비티에서 userId로 DB의 예약정보에 접근
+            val intent =
+                Intent(
+                    holder.itemView.context,
+                    DesignerReservationDetailActivity::class.java
+                )
+                    .apply {
                         putExtra(UID_KEY, reservationList[position].userId)
                         putExtra(DATE_STAMP_KEY, selectedDate)
-                    }
 
-                holder.itemView.context.startActivity(intent)
+
+                    }
+            holder.itemView.context.startActivity(intent)
+
 
         }
     }
@@ -90,11 +98,14 @@ class DesignerReservationWaitingAdapter :
     fun addData(newDateStamp: Long, list: MutableList<DesignerReservation>) {
 
         //해당 날짜 스탬프와 해당날짜인 예약 수
-        selectedDateStamp.put(newDateStamp,reservationList.size + list.size)     // 프래그먼트에서 지금 보여주고 있는 날짜의
-        if(reservationList.isEmpty()){
+        selectedDateMap.put(
+            newDateStamp,
+            reservationList.size + list.size
+        )     // 프래그먼트에서 지금 보여주고 있는 날짜의
+        if (reservationList.isEmpty()) {
             reservationList = list
-        }else{
-            for(i in 0..list.size-1){
+        } else {
+            for (i in 0..list.size - 1) {
                 reservationList.add(list[i])
             }
         }
@@ -117,7 +128,7 @@ class DesignerReservationWaitingAdapter :
     /**
      * 예약된 시술 시간 "시작 ~ 끝" 문자열로 변환
      */
-    private fun getTreatmentTime(itemView: View, reservation: DesignerReservation): String{
+    private fun getTreatmentTime(itemView: View, reservation: DesignerReservation): String {
         return itemView.context.getString(
             R.string.reservation_time,
             convertMilliSecondsToTimeString(reservation.startTime),
@@ -128,7 +139,7 @@ class DesignerReservationWaitingAdapter :
     /**
      * 예약 타입(예정, 시술완료, 정산완료)에 따라 뷰 UI를 다르게 보여준다
      */
-    private fun initUIDependingOnType(binding: ItemReservedUserBinding, type: Int){
+    private fun initUIDependingOnType(binding: ItemReservedUserBinding, type: Int) {
         val arrowImageView = binding.imageReservedUserArrow
         val settlementTextView = binding.textReservedUserSettle
         val context = binding.root.context
@@ -146,12 +157,12 @@ class DesignerReservationWaitingAdapter :
                 settlementTextView.visibility = View.GONE
             }
 
-            TypeOfReservation.TREATED.value ->{
+            TypeOfReservation.TREATED.value -> {
                 settlementTextView.text = context.getString(R.string.settling_fee)
                 settlementTextView.setTextColor(context.getColor(R.color.red))
             }
 
-            TypeOfReservation.SETTLED.value ->{
+            TypeOfReservation.SETTLED.value -> {
                 settlementTextView.text = context.getString(R.string.settlement_completed_blue)
                 settlementTextView.setTextColor(context.getColor(R.color.blue_00CCFF))
             }

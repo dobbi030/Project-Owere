@@ -41,8 +41,6 @@ class ReserveSalonActivity : AppCompatActivity() {
         findViewById(R.id.salon_choice_complete_button)
     }
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reserve_salon)

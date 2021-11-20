@@ -157,10 +157,10 @@
                 android:textColor="@color/gray_cc"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/text_designer_reservation_detail_menu" />
+                app:layout_constraintTop_toTopOf="@id/text_user_reservation_detail_menu" />
 
             <TextView
-                android:id="@+id/text_designer_reservation_detail_menu"
+                android:id="@+id/text_user_reservation_detail_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -188,7 +188,7 @@
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="@id/text_designer_reservation_detail_dates"
-                app:layout_constraintTop_toBottomOf="@id/text_designer_reservation_detail_menu" />
+                app:layout_constraintTop_toBottomOf="@id/text_user_reservation_detail_menu" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <include layout="@layout/view_divider_1dp" />

@@ -153,6 +153,7 @@ class UserWaitingReservation : AppCompatActivity() {
 
                         if(auth!!.currentUser!!.uid == model.userId){
                             designerUpdate["userName"] = model!!.myName
+                            designerUpdate["designerName"] = designerData.name
 
 
                             designerUpdate["profileImagePath"] = ""
@@ -168,9 +169,14 @@ class UserWaitingReservation : AppCompatActivity() {
 
                             designerUpdate["accepted"] = 0
 
+                            var menulist = mutableListOf<String>()
+                            menulist.add(menu.menuName)
+                            var pricelist = mutableListOf<Int>()
+                            //"원" 제거하고 추가
+                            pricelist.add(Integer.parseInt(menu.menuPrice.replace("[^A-Za-z0-9 ]", "")))
                             designerUpdate["type"] = TypeOfReservation.ACCEPTED.value
-                            designerUpdate["menuList"] = listOf(menu.menuName)
-                            designerUpdate["priceList"] = listOf(Integer.parseInt(menu.menuPrice.replace("[^\\\\d]","")))
+                            designerUpdate["menuList"] = menulist
+                            designerUpdate["priceList"] = pricelist
 
 
 

@@ -173,7 +173,7 @@ class UserWaitingReservation : AppCompatActivity() {
                             menulist.add(menu.menuName)
                             var pricelist = mutableListOf<Int>()
                             //"원" 제거하고 추가
-                            pricelist.add(Integer.parseInt(menu.menuPrice.replace("[^A-Za-z0-9 ]", "")))
+                            pricelist.add(Integer.parseInt(menu.menuPrice.substring(0,menu.menuPrice.length-1)))
                             designerUpdate["type"] = TypeOfReservation.ACCEPTED.value
                             designerUpdate["menuList"] = menulist
                             designerUpdate["priceList"] = pricelist

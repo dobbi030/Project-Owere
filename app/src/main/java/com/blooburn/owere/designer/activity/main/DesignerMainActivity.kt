@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.blooburn.owere.R
 import com.blooburn.owere.designer.fragment.chatting.ChattingForDesignerFragment
 import com.blooburn.owere.designer.fragment.home.DesignerHomeFragment
+import com.blooburn.owere.designer.fragment.mypage.MypageDesignerFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 
@@ -19,6 +20,9 @@ class DesignerMainActivity : AppCompatActivity() {
     //채팅 프래그먼트
     private val chattingFragment: ChattingForDesignerFragment by lazy{
         ChattingForDesignerFragment()
+    }
+    private val mypageFragment : MypageDesignerFragment by lazy{
+        MypageDesignerFragment()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,7 +54,7 @@ class DesignerMainActivity : AppCompatActivity() {
                 R.id.designer_browse -> {}
                 R.id.designer_chatting -> replaceFragment(chattingFragment)
                 R.id.designer_recruit -> {}
-                else -> {}
+                else -> replaceFragment(mypageFragment)
             }
 
             true

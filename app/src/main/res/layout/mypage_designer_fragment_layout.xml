@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/header_mypage_designer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="19dp"
+                android:text="마이페이지"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                />
+
+            <ImageView
+                android:id="@+id/mypage_designer_profile_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="26dp"
+                android:src="@drawable/button_background_purple"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/header_mypage_designer" />
+
+            <TextView
+
+                android:id="@+id/mypage_designer_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="이희원"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/mypage_designer_profile_image"
+                app:layout_constraintStart_toEndOf="@id/mypage_designer_profile_image"
+                app:layout_constraintTop_toTopOf="@id/mypage_designer_profile_image" />
+
+            <ImageView
+                android:id="@+id/mypage_designer_myinfo_button"
+                android:layout_width="24dp"
+                android:layout_height="22.74dp"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/ic_chevron_right"
+                app:layout_constraintBottom_toBottomOf="@id/mypage_designer_profile_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/mypage_designer_profile_image" />
+
+            <TextView
+                android:id="@+id/mypage_designer_profile_setting_button"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/rounded_black_square_background"
+                android:gravity="bottom|center_horizontal"
+                android:text="소개 페이지"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/mypage_designer_accountbook_button"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mypage_designer_profile_image"
+
+                />
+
+            <TextView
+                android:id="@+id/mypage_designer_accountbook_button"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/rounded_black_square_background"
+                android:gravity="bottom|center_horizontal"
+                android:text="관심"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/mypage_designer_profile_setting_button"
+                app:layout_constraintEnd_toStartOf="@id/mypage_designer_customer_button"
+                app:layout_constraintStart_toEndOf="@id/mypage_designer_profile_setting_button"
+                app:layout_constraintTop_toTopOf="@id/mypage_designer_profile_setting_button" />
+
+            <TextView
+                android:id="@+id/mypage_designer_customer_button"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/rounded_black_square_background"
+                android:gravity="bottom|center_horizontal"
+                android:text="내 등급"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/mypage_designer_accountbook_button"
+                app:layout_constraintEnd_toStartOf="@id/mypage_designer_reservaion_list_button"
+                app:layout_constraintStart_toEndOf="@+id/mypage_designer_accountbook_button"
+                app:layout_constraintTop_toTopOf="@id/mypage_designer_accountbook_button" />
+
+            <TextView
+                android:id="@+id/mypage_designer_reservaion_list_button"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/rounded_black_square_background"
+                android:gravity="bottom|center_horizontal"
+                android:text="쿠폰"
+                android:textColor="@color/black"
+
+                android:textSize="12sp"
+
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/mypage_designer_customer_button"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                app:layout_constraintStart_toEndOf="@+id/mypage_designer_customer_button"
+
+                app:layout_constraintTop_toTopOf="@id/mypage_designer_customer_button" />
+
+            <TextView
+                android:id="@+id/mypage_designer_review_button"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/rounded_black_square_background"
+                android:gravity="bottom|center_horizontal"
+                android:text="리뷰 관리"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="@id/mypage_designer_profile_setting_button"
+                app:layout_constraintTop_toBottomOf="@id/mypage_designer_profile_setting_button"
+
+
+
+                />
+
+            <TextView
+                android:id="@+id/mypage_designer_interest_button"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/rounded_black_square_background"
+                android:gravity="bottom|center_horizontal"
+                android:text="관심"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/mypage_designer_review_button"
+                app:layout_constraintTop_toTopOf="@id/mypage_designer_review_button"
+                app:layout_constraintEnd_toStartOf="@id/mypage_designer_coupon_button"
+                />
+
+            <TextView
+                android:id="@+id/mypage_designer_coupon_button"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/rounded_black_square_background"
+                android:gravity="bottom|center_horizontal"
+                android:text="쿠폰함"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="@id/mypage_designer_interest_button"
+                app:layout_constraintEnd_toStartOf="@id/mypage_designer_grade_button"
+                app:layout_constraintStart_toEndOf="@id/mypage_designer_interest_button"/>
+
+            <TextView
+                android:id="@+id/mypage_designer_grade_button"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/rounded_black_square_background"
+                android:gravity="bottom|center_horizontal"
+                android:text="등급"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="@id/mypage_designer_coupon_button"
+                app:layout_constraintStart_toEndOf="@id/mypage_designer_coupon_button"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <View
+                android:id="@+id/mypage_line1"
+                android:layout_width="0dp"
+                android:layout_height="7dp"
+                android:layout_marginTop="112dp"
+                android:background="#EDEDED"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mypage_designer_profile_setting_button"
+
+                />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/mypage_designer_notice_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mypage_line1">
+
+                <TextView
+                    android:id="@+id/mypage_designer_header_notice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="20dp"
+                    android:text="공지사항"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/mypage_designer_notice_button"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/ic_chevron_right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_marginTop="20dp"
+                android:id="@+id/mypage_line2"
+                android:layout_width="0dp"
+                android:background="#EDEDED"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mypage_designer_notice_container"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+
+                android:id="@+id/mypage_designer_event_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mypage_line2">
+
+                <TextView
+                    android:id="@+id/mypage_designer_event_notice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="20dp"
+                    android:text="이벤트/프로모션"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/mypage_designer_event_button"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/ic_chevron_right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_marginTop="20dp"
+                android:id="@+id/mypage_line3"
+                android:layout_width="0dp"
+                android:background="#EDEDED"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mypage_designer_event_container"/>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+
+                android:id="@+id/mypage_designer_qna_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mypage_line3">
+
+                <TextView
+                    android:id="@+id/mypage_designer_qna_notice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="20dp"
+                    android:text="문의하기"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/mypage_designer_qna_button"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/ic_chevron_right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_marginTop="20dp"
+                android:id="@+id/mypage_line4"
+                android:layout_width="0dp"
+                android:background="#EDEDED"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mypage_designer_qna_container"/>
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+
+                android:id="@+id/mypage_designer_alarmsetting_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mypage_line4">
+
+                <TextView
+                    android:id="@+id/mypage_designer_alarmsetting_notice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="20dp"
+                    android:text="알림설정"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/mypage_designer_alarmsetting_button"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/ic_chevron_right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <View
+                android:layout_marginTop="20dp"
+                android:id="@+id/mypage_line5"
+                android:layout_width="0dp"
+                android:background="#EDEDED"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mypage_designer_alarmsetting_container"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+
+                android:id="@+id/mypage_designer_setting_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mypage_line5">
+
+                <TextView
+                    android:id="@+id/mypage_designer_setting_notice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="20dp"
+                    android:text="환경설정"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/mypage_designer_setting_button"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/ic_chevron_right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_marginTop="20dp"
+                android:id="@+id/mypage_line6"
+                android:layout_width="0dp"
+                android:background="#EDEDED"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mypage_designer_setting_container"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+
+                android:id="@+id/mypage_designer_introduce_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mypage_line6">
+
+                <TextView
+                    android:id="@+id/mypage_designer_introduce_notice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="20dp"
+                    android:text="O’were(오월) 소개"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/mypage_designer_introduce_button"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/ic_chevron_right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_marginTop="20dp"
+                android:id="@+id/mypage_line7"
+                android:layout_width="0dp"
+                android:background="#EDEDED"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mypage_designer_introduce_container"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

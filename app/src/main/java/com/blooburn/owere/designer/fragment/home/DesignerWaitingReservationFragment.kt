@@ -102,6 +102,10 @@ class DesignerWaitingReservationFragment : Fragment(R.layout.waiting_fragment_la
                         }
                         if(waitingReservation.isNotEmpty()){
                             waitingAdapter.addData(epochDay, waitingReservation)
+                            //19479
+                            //예약1, 예약2,예약3
+                            //91823
+                            //예약1,예약2,예약3
 
                         }
 

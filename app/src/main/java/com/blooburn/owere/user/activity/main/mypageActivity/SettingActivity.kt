@@ -8,7 +8,7 @@ import android.view.WindowManager
 import android.widget.TextView
 import com.blooburn.owere.R
 import com.google.firebase.auth.FirebaseAuth
-
+//환경설정
 class SettingActivity : AppCompatActivity() {
 
     val auth = FirebaseAuth.getInstance()
@@ -75,6 +75,8 @@ class MemeberQuitDialog(context: Context,auth : FirebaseAuth) {
         yesButton.setOnClickListener {
 
             auth.signOut()
+
+
             //프래그먼트 삭제
             dialog.dismiss()
 

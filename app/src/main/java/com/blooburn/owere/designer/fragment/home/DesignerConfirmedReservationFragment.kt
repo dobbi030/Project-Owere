@@ -69,7 +69,7 @@ class DesignerConfirmedReservationFragment :
         recyclerView.apply {
             // custom divider 적용
             addItemDecoration(
-                CustomDividerDecoration(1f, ContextCompat.getColor(this.context, R.color.gray_cc))
+                CustomDividerDecoration(1f, ContextCompat.getColor(this.context, R.color.gray_939393))
             )
 
             layoutManager = LinearLayoutManager(context)

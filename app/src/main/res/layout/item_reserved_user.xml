@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:text="매칭률 98%"
-        android:textColor="@color/gray_cc"
+        android:textColor="@color/gray_939393"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@id/image_reserved_user"
         app:layout_constraintStart_toStartOf="@id/text_reserved_user_name"

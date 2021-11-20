@@ -28,7 +28,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="8dp"
-        android:background="@color/gray_cc" />
+        android:background="@color/gray_939393" />
 
     <TextView
         android:layout_width="wrap_content"

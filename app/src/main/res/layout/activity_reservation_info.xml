@@ -63,7 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="19dp"
-        android:background="@color/gray_cc"
+        android:background="@color/gray_939393"
         app:layout_constraintTop_toBottomOf="@+id/reservation_username" />
 
     <ScrollView
@@ -247,7 +247,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:layout_marginTop="22dp"
-                android:background="@color/gray_cc"
+                android:background="@color/gray_939393"
                 app:layout_constraintTop_toBottomOf="@+id/reservation_price_head"
                 android:layout_marginHorizontal="16dp"/>
 
@@ -285,7 +285,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:layout_marginTop="21dp"
-                android:background="@color/gray_cc"
+                android:background="@color/gray_939393"
                 app:layout_constraintTop_toBottomOf="@+id/reservation_productsum_head"
                 android:layout_marginHorizontal="16dp"/>
 
@@ -364,7 +364,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:layout_marginTop="21dp"
-                android:background="@color/gray_cc"
+                android:background="@color/gray_939393"
                 app:layout_constraintTop_toBottomOf="@+id/reservation_point_head"
                 android:layout_marginHorizontal="16dp"/>
 
@@ -402,7 +402,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:layout_marginTop="21dp"
-                android:background="@color/gray_cc"
+                android:background="@color/gray_939393"
                 app:layout_constraintTop_toBottomOf="@+id/reservation_totalpay_head"
                 android:layout_marginHorizontal="16dp"/>
 
@@ -440,7 +440,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:layout_marginTop="21dp"
-                android:background="@color/gray_cc"
+                android:background="@color/gray_939393"
                 app:layout_constraintTop_toBottomOf="@+id/reservation_payment_head"
                 android:layout_marginHorizontal="16dp"/>
 

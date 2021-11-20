@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:text="★★★★☆"
-        android:textColor="@color/gray_cc"
+        android:textColor="@color/gray_939393"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@id/image_item_review"
         app:layout_constraintStart_toStartOf="@id/text_item_review_nickname"
@@ -49,7 +49,7 @@
         android:layout_marginTop="2dp"
         android:padding="2dp"
         android:text="이번주"
-        android:textColor="@color/gray_cc"
+        android:textColor="@color/gray_939393"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@id/text_item_review_rating"
         app:layout_constraintStart_toEndOf="@id/text_item_review_rating"
@@ -96,7 +96,7 @@
         app:layout_constraintTop_toTopOf="@id/chip_item_review_temp1"
         app:layout_constraintBottom_toBottomOf="@id/chip_item_review_temp1"
         android:textSize="10sp"
-        android:textColor="@color/gray_cc"/>
+        android:textColor="@color/gray_939393"/>
 
     <View
         android:layout_marginTop="14dp"

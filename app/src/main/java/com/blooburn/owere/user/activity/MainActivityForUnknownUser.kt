@@ -119,18 +119,23 @@ class MainActivityForUnknownUser : AppCompatActivity() {
 
 
     private fun updateUI(account: FirebaseUser?) {
+        Log.w(TAG, "updateUI (1)")
         if (account != null) {
             // Uids 참조, 자식 노드의 키 값과 현재 유저의 uid 비교
+            Log.w(TAG, "updateUI (2)")
             uids.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     var agreement: Boolean = false
                     snapshot.children.forEach {
+                        Log.w(TAG, "updateUI (3)")
                         // 로그인이 되어있다면 다음 액티비티 실행 (= uid와 키 값 일치)
                         if (it.key == account.uid) {
+                            Log.w(TAG, "updateUI (4)")
                             agreement = true
                             val mode = it.value
                             // 고객 로그인
                             if (mode == "User") {
+                                Log.w(TAG, "updateUI (5)")
                                 val intent: Intent = Intent(
                                     this@MainActivityForUnknownUser,
                                     UserMainActivity::class.java
@@ -138,6 +143,7 @@ class MainActivityForUnknownUser : AppCompatActivity() {
                                 startActivity(intent)
                                 // 디자이너 로그인
                             } else if (mode == "Designer") {
+                                Log.w(TAG, "updateUI (6)")
                                 val intent: Intent = Intent(
                                     this@MainActivityForUnknownUser,
                                     DesignerMainActivity::class.java
@@ -147,6 +153,7 @@ class MainActivityForUnknownUser : AppCompatActivity() {
                         }
                     }
                     if (!agreement) {
+                        Log.w(TAG, "updateUI (7)")
                         // uid와 일치하는 키 값 없음 (= 처음 로그인 하는 유저)
                         val currentUserUid: DatabaseReference = uids.child(account.uid)
                         currentUserUid.setValue("None")

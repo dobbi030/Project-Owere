@@ -79,7 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dates"
-                    android:textColor="@color/gray_cc"
+                    android:textColor="@color/gray_939393"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -101,7 +101,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/time"
-                    android:textColor="@color/gray_cc"
+                    android:textColor="@color/gray_939393"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/text_designer_reservation_detail_time" />
@@ -121,7 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/designer"
-                    android:textColor="@color/gray_cc"
+                    android:textColor="@color/gray_939393"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/text_designer_reservation_detail_designer" />
@@ -141,7 +141,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/shop"
-                    android:textColor="@color/gray_cc"
+                    android:textColor="@color/gray_939393"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/text_designer_reservation_detail_shop" />
@@ -161,7 +161,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/menu_type"
-                    android:textColor="@color/gray_cc"
+                    android:textColor="@color/gray_939393"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/text_designer_reservation_detail_menu" />
@@ -183,7 +183,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/menu_price"
-                    android:textColor="@color/gray_cc"
+                    android:textColor="@color/gray_939393"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/text_designer_reservation_detail_price" />
@@ -262,7 +262,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/coupon_discount"
-                    android:textColor="@color/gray_cc"
+                    android:textColor="@color/gray_939393"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -272,7 +272,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/zero_won"
-                    android:textColor="@color/gray_cc"
+                    android:textColor="@color/gray_939393"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -281,7 +281,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/using_point"
-                    android:textColor="@color/gray_cc"
+                    android:textColor="@color/gray_939393"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/text_designer_reservation_detail_point" />
@@ -292,7 +292,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="@string/zero_won"
-                    android:textColor="@color/gray_cc"
+                    android:textColor="@color/gray_939393"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_designer_reservation_detail_coupon" />
@@ -397,7 +397,7 @@
                 android:paddingHorizontal="14dp"
                 android:paddingVertical="10dp"
                 android:text="안녕하세요. 김철수 디자이너님! 이번에 C컬펌을 예약한 사람인데 다름이 아니라 제가 추가로 염색도 하고 싶은데 가능할까요? 직접 미용실에서 시술 받을 때 추가로 결제할게요~"
-                android:textColor="@color/gray_cc"
+                android:textColor="@color/gray_939393"
                 android:textSize="12sp" />
 
 

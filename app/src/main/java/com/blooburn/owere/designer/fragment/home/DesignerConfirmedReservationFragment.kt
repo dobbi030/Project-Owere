@@ -1,8 +1,17 @@
 package com.blooburn.owere.designer.fragment.home
 
+import android.app.Activity
+import android.content.Context.LOCATION_SERVICE
+import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.location.LocationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -10,6 +19,8 @@ import com.blooburn.owere.R
 import com.blooburn.owere.databinding.DesignerConfirmedReservationFragmentBinding
 import com.blooburn.owere.designer.adapter.home.DesignerReservationListAdapter
 import com.blooburn.owere.designer.item.DesignerReservation
+import com.blooburn.owere.user.activity.signUpActivity.SetPositionActivity
+import com.blooburn.owere.user.item.ShopListItem
 import com.blooburn.owere.util.CustomDividerDecoration
 import com.blooburn.owere.util.TypeOfReservation
 import com.blooburn.owere.util.databaseInstance
@@ -18,17 +29,32 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener
+import net.daum.mf.map.api.MapPOIItem
+import net.daum.mf.map.api.MapPoint
+import net.daum.mf.map.api.MapView
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalTime
 import org.threeten.bp.temporal.ChronoField
 
 class DesignerConfirmedReservationFragment :
-    Fragment(R.layout.designer_confirmed_reservation_fragment) {
+    Fragment(R.layout.designer_confirmed_reservation_fragment) ,MapView.CurrentLocationEventListener {
 
 
     private val tempDesignerId = "designer0"
     private val reservationsReferencePath = "designerReservations/$tempDesignerId/"
     private var binding: DesignerConfirmedReservationFragmentBinding? = null
+
+    //net.daum.mf.map.api.MapView 객체를 생성
+    private var mapView : MapView?  = null
+    var latitude: Double = 0.0   //위도
+    var longitude: Double = 0.0  //경도
+
+    /**
+     * 미용실 리스트
+     */
+    private var salonList = mutableListOf<ShopListItem>()
+    private var markerList = mutableMapOf<String, ShopListItem>()
+
 
     private lateinit var scheduledAdapter: DesignerReservationListAdapter
     private var scheduledList = mutableListOf<DesignerReservation>()
@@ -37,6 +63,7 @@ class DesignerConfirmedReservationFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         binding = DesignerConfirmedReservationFragmentBinding.bind(view)
 
@@ -57,6 +84,11 @@ class DesignerConfirmedReservationFragment :
         // 달력
         binding?.calendarDesignerConfirmedReservation?.currentDate = CalendarDay.today()
         binding?.calendarDesignerConfirmedReservation?.setOnDateChangedListener(dateSelectedListener)
+
+
+        //맵뷰 사용
+        initMapView()
+
     }
 
     /**
@@ -177,4 +209,110 @@ class DesignerConfirmedReservationFragment :
         }
         */
     }
+
+    //맵뷰 설정
+    private fun initMapView() {
+
+        //view는 하나의 부모 뷰에만 추가될 수 있음. 이미 존재한다면 부모뷰 제거(스피너로 프래그먼트 변경시 발생하는 에러)
+        if (mapView?.parent != null){
+            (mapView?.parent as ViewGroup).removeAllViews()
+        }
+        mapView = MapView(requireContext())
+
+
+        //Activity 의 content-view 에 삽입하면 지도화면을 손쉽게 구현
+        val mapViewContainer = binding?.mapViewDesignerHome
+            //findViewById(R.id.map_view_designer_home)
+
+        //맵 사용
+//        mapView = MapView(Activity()) //net.daum.mf.map.api.MapView 객체를 생성
+        mapView!!.setCurrentLocationEventListener(this)
+        mapView!!.setDaumMapApiKey("API_KEY");
+
+        if (mapViewContainer != null) {
+            mapViewContainer.addView(mapView)
+        }
+        //위치값을 가져올 수 있음
+        mapView?.currentLocationTrackingMode =
+            MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading
+
+        //권한체크는 첫화면에서
+//        if (!checkLocationServicesStatus()) {
+//            showDialogForLocationServiceSetting()
+//
+//        } else {
+//            checkRunTimePermission()
+//        }
+
+        mapView!!.apply {
+            setMapCenterPoint(MapPoint.mapPointWithGeoCoord(latitude, longitude), true)
+            setZoomLevel(2, true)    //작을수록 가까움
+            zoomIn(true)
+            zoomOut(true)
+        }
+
+
+    }
+
+
+    override fun onCurrentLocationUpdate(p0: MapView?, p1: MapPoint?, p2: Float) {
+        var mapPointGeo: MapPoint.GeoCoordinate? = p1?.mapPointGeoCoord
+        Log.d(
+            SetPositionActivity.LOG_TAG, String.format(
+                "MapView onCurrentLocationUpdate (%f,%f) accuracy (%f)",
+                mapPointGeo?.latitude,
+                mapPointGeo?.longitude,
+                p2
+
+            )
+        )
+
+        latitude = mapPointGeo!!.latitude //위도 값 업데이트
+        longitude = mapPointGeo!!.longitude  //경도 값 업데이트
+    }
+
+    override fun onCurrentLocationDeviceHeadingUpdate(p0: MapView?, p1: Float) {
+
+    }
+
+    override fun onCurrentLocationUpdateFailed(p0: MapView?) {
+
+    }
+
+    override fun onCurrentLocationUpdateCancelled(p0: MapView?) {
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        //추적 모드 중지
+        mapView?.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOff
+        mapView?.setShowCurrentLocationMarker(false)
+        //MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading
+
+    }
+
+    private fun updateMarker(shop: ShopListItem) {
+
+
+        val marker = MapPOIItem()
+        markerList.put(shop.name, shop)
+
+        marker.apply {
+            itemName = shop.name   // 마커 이름
+            mapPoint = MapPoint.mapPointWithGeoCoord(shop.latitude, shop.longitude)   //  미용실좌표
+            tag = 0
+            markerType = MapPOIItem.MarkerType.CustomImage          // 마커 모양 (커스텀)
+            customImageResourceId = R.drawable.place_marker            // 커스텀 마커 이미지
+            selectedMarkerType = MapPOIItem.MarkerType.CustomImage  // 클릭 시 마커 모양 (커스텀)
+            customSelectedImageResourceId = R.drawable.clicked_marker       // 클릭 시 커스텀 마커 이미지
+            isCustomImageAutoscale = false     // 커스텀 마커 이미지 크기 자동 조정
+            setCustomImageAnchor(0.5f, 1.0f)    // 마커 이미지 기준점
+
+            Log.d("markerOn", "marking")
+            mapView?.addPOIItem(marker)
+        }
+    }
+
+
 }

@@ -20,4 +20,6 @@
     <color name="purple_button2">#A512EF</color>
     <color name="select_time_button">#00BEEE</color>
     <color name="blue_main_background">#00CCFF</color>
+    <color name= "gray_cc">#939393</color>
+    <color name="dark_gray">#939393</color>
 </resources>

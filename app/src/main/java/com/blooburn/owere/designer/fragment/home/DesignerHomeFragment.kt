@@ -16,10 +16,10 @@ class DesignerHomeFragment : Fragment(R.layout.designer_home_fragment) {
 
     private var binding: DesignerHomeFragmentBinding? = null
 
-
     private val confirmedReservationFragment: DesignerConfirmedReservationFragment? by lazy{
         DesignerConfirmedReservationFragment()
     }
+
     //대기중인 고객 예약 리스트
     private val waitingReservationFragment : DesignerWaitingReservationFragment? by lazy {
         DesignerWaitingReservationFragment()

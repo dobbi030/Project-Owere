@@ -35,6 +35,7 @@ import net.daum.mf.map.api.MapView
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalTime
 import org.threeten.bp.temporal.ChronoField
+import java.util.*
 
 class DesignerConfirmedReservationFragment :
     Fragment(R.layout.designer_confirmed_reservation_fragment) ,MapView.CurrentLocationEventListener {
@@ -44,16 +45,21 @@ class DesignerConfirmedReservationFragment :
     private val reservationsReferencePath = "designerReservations/$tempDesignerId/"
     private var binding: DesignerConfirmedReservationFragmentBinding? = null
 
+
     //net.daum.mf.map.api.MapView 객체를 생성
     private var mapView : MapView?  = null
     var latitude: Double = 0.0   //위도
     var longitude: Double = 0.0  //경도
 
-    /**
-     * 미용실 리스트
-     */
-    private var salonList = mutableListOf<ShopListItem>()
-    private var markerList = mutableMapOf<String, ShopListItem>()
+
+    //디자이너에게 예약된 미용실 이름 리스트(마커찍기에 사용)
+    private var salonList = mutableListOf<String>()
+    //해당 미용실 이름, DB에서 주소를 가지고있는 미용실 객체들 배열
+    private var salonMap = mutableMapOf<String,ShopListItem>()
+
+    //추가되는 마커들을 배열에 저장. 마커 삭제할 때 용이
+    private var markerList = mutableListOf<MapPOIItem>()
+    private val shopReferencePath = "DesignerShops/$tempDesignerId/" //디자이너가 근무가능한 미용실 목록
 
 
     private lateinit var scheduledAdapter: DesignerReservationListAdapter
@@ -86,8 +92,11 @@ class DesignerConfirmedReservationFragment :
         binding?.calendarDesignerConfirmedReservation?.setOnDateChangedListener(dateSelectedListener)
 
 
+
         //맵뷰 사용
         initMapView()
+        getMySalonInfo()
+
 
     }
 
@@ -112,8 +121,11 @@ class DesignerConfirmedReservationFragment :
     /**
      * 달력 클릭 리스너
      */
+
     private val dateSelectedListener =
         OnDateSelectedListener { widget, date, isSelected ->
+
+
             if (isSelected) {
                 updateTodayText(date.date)  // 오늘 날짜 UI 업데이트
 
@@ -121,11 +133,21 @@ class DesignerConfirmedReservationFragment :
                 val referencePathOfSelectedDay =
                     reservationsReferencePath + selectedDateStamp   // 해당 날짜의 DB 주소
 
+
+                //날짜를 바꿀 때 남아있는 미용실 리스트 초기화
+                salonList.clear()
+                mapView!!.removeAllPOIItems()
+                markerList.clear()
+
+
+
                 // 선택 날짜의 예약 목록들을 DB에서 불러와서 업데이트한다
                 loadAndSetReservationsFromDB(referencePathOfSelectedDay, selectedDateStamp)
                 // 예약 개수 나타내는 UI 업데이트
                 updateCountOfReservations(scheduledList.size, completedList.size)
             }
+
+
         }
 
     /**
@@ -135,22 +157,35 @@ class DesignerConfirmedReservationFragment :
         databaseInstance.reference.child(path)
             .addListenerForSingleValueEvent(object : ValueEventListener {
 
+
                 override fun onDataChange(snapshot: DataSnapshot) {
 
                     scheduledList = mutableListOf()
                     completedList = mutableListOf()
                     val currentTime = LocalTime.now().toSecondOfDay() * 1000
 
+
+
+
+
                     snapshot.children.forEach { reservationSnapshot ->
                         val reservation =
                             reservationSnapshot.getValue(DesignerReservation::class.java)
                         reservation?.userId = reservationSnapshot.key ?: "" // key = userId
 
+
+
+
                         // 예정된, 정산할, 정산된 예약 분류
                         if (reservation != null) {
                             sortReservation(reservation, selectedDayStamp, currentTime)
+
+                            //지도에 미용실을 띄워주기위해서 예약된 미용실 이름을 배열에 추가
+                            salonList.add(reservation.shop)
                         }
                     }
+
+
 
                     scheduledAdapter.setData(selectedDayStamp, scheduledList)
                     completedAdapter.setData(selectedDayStamp, completedList)
@@ -170,6 +205,11 @@ class DesignerConfirmedReservationFragment :
             getString(R.string.total_reservation_count, scheduledCount) else ""
         binding?.textDesignerConfirmedReservationCompletedCount?.text = if (completedCount > 0)
             getString(R.string.total_reservation_count, completedCount) else ""
+
+
+        //날짜를 클릭 할 때마다 미용실 리스트 갱신
+
+        addSalonOnMap()
     }
 
     /**
@@ -291,22 +331,74 @@ class DesignerConfirmedReservationFragment :
         //MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading
 
     }
+    /**
+     * 예약된 미용실 정보들 조회
+     */
+    private fun addSalonOnMap(){
 
+
+        //디자이너에게 예약된 미용실 이름 리스트(마커찍기에 사용)
+//        private var salonList = mutableListOf<String>()
+//        //해당 미용실 이름을 사용하여 DB에서 주소를 가지고있는 미용실 객체들 배열
+//        private var markerList = mutableMapOf<String, ShopListItem>()
+
+        //예약된 미용실 이름 목록중 중복되는 이름들 제거 distinct()
+        salonList.distinct()
+
+
+        //예약된 미용실 이름들을 이용하여 맵 컬렉션에 저장된 미용실들을 조회
+        salonList.forEach { salon ->
+            var salonItem = salonMap.get(salon)
+            //해당 미용실의 좌표로 마커 추가
+            if(salonItem != null)
+            updateMarker(salonItem!!)
+        }
+
+
+
+    }
+
+    private fun getMySalonInfo(){
+        //디자이너가 속한 미용실 정보들을 DB에서 가져옴
+        databaseInstance.reference.child(shopReferencePath).addListenerForSingleValueEvent(object :ValueEventListener{
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.children.forEach{snapshotChildren ->
+                    var model = snapshotChildren.getValue(ShopListItem::class.java)
+                    salonMap.put(model!!.name,model) //미용사가 속한 미용실을 맵컬렉션에 추가(위치정보를 조회하기 위함)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
+    }
+
+
+    /**
+     * 지도에 마커 추가
+     */
+    //날짜 갱신할 때마다 지도위의 마커 초기화 필요
     private fun updateMarker(shop: ShopListItem) {
 
 
         val marker = MapPOIItem()
-        markerList.put(shop.name, shop)
+        markerList.add(marker)
+
 
         marker.apply {
             itemName = shop.name   // 마커 이름
             mapPoint = MapPoint.mapPointWithGeoCoord(shop.latitude, shop.longitude)   //  미용실좌표
             tag = 0
             markerType = MapPOIItem.MarkerType.CustomImage          // 마커 모양 (커스텀)
-            customImageResourceId = R.drawable.place_marker            // 커스텀 마커 이미지
+            customImageResourceId = R.drawable.reserved_place_marker            // 커스텀 마커 이미지
             selectedMarkerType = MapPOIItem.MarkerType.CustomImage  // 클릭 시 마커 모양 (커스텀)
             customSelectedImageResourceId = R.drawable.clicked_marker       // 클릭 시 커스텀 마커 이미지
+
             isCustomImageAutoscale = false     // 커스텀 마커 이미지 크기 자동 조정
+
             setCustomImageAnchor(0.5f, 1.0f)    // 마커 이미지 기준점
 
             Log.d("markerOn", "marking")

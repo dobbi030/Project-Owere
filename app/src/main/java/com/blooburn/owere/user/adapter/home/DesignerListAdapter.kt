@@ -1,6 +1,7 @@
 package com.blooburn.owere.user.adapter.home
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -65,6 +66,7 @@ class DesignerListAdapter :
                 Intent(holder.itemView.context, UserDesignerProfileActivity::class.java).apply {
                     putExtra(DESIGNER_DATA_KEY, designerList[position])
                 }
+            Log.d("designerIntent","designer's Profilepath is ${designerList[position].profileImagePath}")
 
             holder.itemView.context.startActivity(intent)
         }

@@ -35,7 +35,7 @@ import com.google.firebase.storage.StorageReference
 
 class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler {
 
-    private var designerData: UserDesignerItem? = null
+    private lateinit var designerData: UserDesignerItem
     private val reviewImagePathList = mutableListOf<String>()
     private val pricePath = "커트"
 
@@ -52,11 +52,15 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
     private lateinit var portfolioReference: StorageReference
     private lateinit var priceChartReference: DatabaseReference
 
+
     private lateinit var sliderAdapter: DesignerPortfolioSliderAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_designer_profile)
+
+        //디자이너 객체 정보 받아오기
+        getDesignerDataFromIntent()
 
         userId = auth.currentUser!!.uid
         val toolbar = findViewById<Toolbar>(R.id.toolbar_user_designer_profile)
@@ -87,7 +91,7 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
 
     private fun initDataAndView() {
         // 수신 인텐트로 전달받은 디자이너 정보 저장
-        getDesignerDataFromIntent()
+
         setDataReferences() // 디자이너 아이디로 DB에서 데이터들 Reference 설정
 
         // 포트폴리오 이미지 레퍼런스들을 스토리지에서 가져온다
@@ -108,7 +112,9 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
             finish()
         }
 
-        designerData = extras!!.getParcelable(DESIGNER_DATA_KEY)   // DesignerData 객체 읽기
+        designerData = extras!!.getParcelable(DESIGNER_DATA_KEY)!!  // DesignerData 객체 읽기
+        Log.d("designerIntent","1 get Profilepath is ${designerData?.profileImagePath}")
+        Log.d("designerIntent","2 get introduction is ${designerData?.introduction}")
         if (designerData == null) {
             finish()
         }
@@ -166,8 +172,10 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
                 getString(R.string.matching_rate, designerData?.matchingRate)
             this.findViewById<TextView>(R.id.text_user_designer_star).text = reviewStar
         }
+        findViewById<TextView>(R.id.text_user_designer_profile_introduction).text = designerData!!.introduction
 
         getAndSetIntroduction() // 디자이너 소개글
+
 
         // 리뷰 별점, 평점, 개수
         findViewById<TextView>(R.id.text_user_designer_profile_review_star).text = reviewStar
@@ -181,15 +189,22 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
      * 디자이너 소개글 불러와서 적용
      */
     private fun getAndSetIntroduction() {
+        val designerIntroduce = findViewById<TextView>(R.id.text_user_designer_profile_introduction)
         designerReference.addListenerForSingleValueEvent(object : ValueEventListener {
+
             override fun onDataChange(snapshot: DataSnapshot) {
                 // 디자이너 소개글
-                findViewById<TextView>(R.id.text_user_designer_profile_introduction).text =
+
+                designerIntroduce.text =
                     snapshot.child("introduction").value.toString()
+                Log.d("designerIntent", "3 $designerData")
+                Log.d("designerIntent","3 get introduction is ${snapshot.child("introduction").value.toString()}")
             }
 
             override fun onCancelled(error: DatabaseError) {}
         })
+        //위의 snapshot.child("introduction").value가 작동 안 하는 경우 발생
+        designerIntroduce.text = designerData!!.introduction
     }
 
     /**

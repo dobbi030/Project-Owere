@@ -23,6 +23,7 @@
             android:name=".user.activity.MainActivityForUnknownUser"
             android:exported="true" />
         <activity android:name=".user.activity.main.userReservation.UserWaitingReservation" />
+        <activity android:name=".user.activity.main.userReservation.UserReservationDetailActivity"/>
         <activity android:name=".designer.activity.main.DesignerReservationDetailActivity" />
         <activity
             android:name=".user.activity.signUpActivity.SignUpActivityMethods"

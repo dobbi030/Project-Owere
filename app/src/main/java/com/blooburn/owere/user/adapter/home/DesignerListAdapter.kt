@@ -19,19 +19,28 @@ class DesignerListAdapter :
     inner class ViewHolder(private val binding: ItemUserDesignerListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+
         fun bind(position: Int) {
             val designer = designerList[position]
 
             binding.textUserDesignerName.text = designer.name
+
             binding.textUserDesignerArea.text = designer.area
+
             binding.textUserDesignerReviewCount.text = buildReviewCountString(designer.reviewCount)
+
             binding.textUserDesignerMatching.text =
                 this.itemView.context.getString(R.string.matching_rate, designer.matchingRate)
+
             binding.textUserDesignerStar.text = convertRatingToStar(designer.rating)
+
             bindProfileImage(
                 this.itemView,
+
                 binding.imageUserDesigner,
+
                 designer.profileImagePath,
+
                 true
             )
         }

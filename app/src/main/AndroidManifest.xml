@@ -59,17 +59,17 @@
         <activity android:name= ".user.activity.loginActivity.LoginActivityChoice" />
         <activity android:name= ".user.activity.signUpActivity.SignUpActivity1_choice" />
         <activity android:name= ".user.activity.MainActivity" >
-
-        </activity>
-        <activity android:name= ".user.activity.main.homeActivity.UserDesignerProfileActivity" />
-        <activity android:name= ".user.activity.main.userReservation.ShopsOfDesignerActivity" />
-        <activity android:name= ".user.activity.main.userReservation.ReserveMenuActivity" />
-        <activity android:name= ".designer.activity.main.DesignerMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name= ".user.activity.main.homeActivity.UserDesignerProfileActivity" />
+        <activity android:name= ".user.activity.main.userReservation.ShopsOfDesignerActivity" />
+        <activity android:name= ".user.activity.main.userReservation.ReserveMenuActivity" />
+        <activity android:name= ".designer.activity.main.DesignerMainActivity">
+
         </activity>
 
         <meta-data

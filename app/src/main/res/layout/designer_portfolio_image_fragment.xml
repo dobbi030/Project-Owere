@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/image_view_designer_profile"
+        android:id="@+id/img_view_designer_profile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray_939393"

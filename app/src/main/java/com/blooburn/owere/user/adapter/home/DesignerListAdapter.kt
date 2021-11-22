@@ -7,14 +7,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.blooburn.owere.R
 import com.blooburn.owere.databinding.ItemUserDesignerListBinding
 import com.blooburn.owere.user.activity.main.homeActivity.UserDesignerProfileActivity
-import com.blooburn.owere.user.item.UserDesignerItem
+import com.blooburn.owere.user.item.DesignerItem
 import com.blooburn.owere.util.DESIGNER_DATA_KEY
 import com.blooburn.owere.util.DesignerProfileHandler
 
 class DesignerListAdapter :
     RecyclerView.Adapter<DesignerListAdapter.ViewHolder>(), DesignerProfileHandler {
 
-    private val designerList = mutableListOf<UserDesignerItem>()
+    private val designerList = mutableListOf<DesignerItem>()
 
     inner class ViewHolder(private val binding: ItemUserDesignerListBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -69,7 +69,7 @@ class DesignerListAdapter :
     fun clearList() = designerList.clear()
 
     // 다자이너 아이템 추가
-    fun addData(designerInfo: UserDesignerItem) {
+    fun addData(designerInfo: DesignerItem) {
         designerList.add(designerInfo)
     }
 }

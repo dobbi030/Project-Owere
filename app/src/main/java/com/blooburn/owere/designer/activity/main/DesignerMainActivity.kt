@@ -1,14 +1,12 @@
 package com.blooburn.owere.designer.activity.main
 
 import android.os.Bundle
-import android.view.MenuItem
-import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.blooburn.owere.R
 import com.blooburn.owere.designer.fragment.chatting.ChattingForDesignerFragment
 import com.blooburn.owere.designer.fragment.home.DesignerHomeFragment
-import com.blooburn.owere.designer.fragment.mypage.MypageDesignerFragment
+import com.blooburn.owere.designer.fragment.myPage.MypageDesignerFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 

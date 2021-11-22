@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.blooburn.owere.R
 import com.blooburn.owere.user.adapter.home.DesignerListAdapter
 import com.blooburn.owere.databinding.UserHomeDesignerFragmentBinding
-import com.blooburn.owere.user.item.UserDesignerItem
+import com.blooburn.owere.user.item.DesignerItem
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -54,7 +54,7 @@ class UserHomeDesignerFragment : Fragment(R.layout.user_home_designer_fragment) 
                 favoriteDesignerListAdapter.clearList()
 
                 for(dataSnapshot in snapshot.children){
-                    val designerData = dataSnapshot.getValue(UserDesignerItem::class.java)?.apply{
+                    val designerData = dataSnapshot.getValue(DesignerItem::class.java)?.apply{
                         if (dataSnapshot.key != null){
                             designerId = dataSnapshot.key!! // 각 data의 key 값을 디자이너 아이디로 설정해두었습니다
                         }

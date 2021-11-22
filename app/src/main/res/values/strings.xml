@@ -98,4 +98,10 @@
 
     <string name="firebase_web_client_id">"260202805759-p5ff8qashfb05ab9p13ui7f329326h6b.apps.googleusercontent.com"</string>
     <string name="logo_of_owere">Logo of Owere</string>
+    <string name="title_activity_designer_profile">DesignerProfileActivity</string>
+
+
+    <string name="edit_profile">프로필 수정</string>
+    <string name="edit_price_chart">가격표 수정</string>
+
 </resources>

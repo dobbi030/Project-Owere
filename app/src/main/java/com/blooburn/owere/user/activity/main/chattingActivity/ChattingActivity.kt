@@ -10,7 +10,7 @@ import com.blooburn.owere.R
 import com.blooburn.owere.user.adapter.chatting.ChatItemAdapter
 import com.blooburn.owere.user.item.ChatItem
 import com.blooburn.owere.user.item.DatabaseChild.Companion.DB_CHAT
-import com.blooburn.owere.user.item.UserDesignerItem
+import com.blooburn.owere.user.item.DesignerItem
 import com.blooburn.owere.user.item.UserEntity
 import com.blooburn.owere.util.DESIGNER_DATA_KEY
 import com.blooburn.owere.util.databaseInstance
@@ -31,7 +31,7 @@ class ChattingActivity : AppCompatActivity() {
 
 
     //디자이너 프로필에서 전달받을 디자이너 객체
-    private var designerData: UserDesignerItem? = null
+    private var designerData: DesignerItem? = null
 
     private var chatList = mutableListOf<ChatItem>()
 

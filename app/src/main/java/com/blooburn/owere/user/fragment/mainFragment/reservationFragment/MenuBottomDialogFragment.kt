@@ -11,17 +11,16 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.RadioGroup
 import android.widget.TextView
-import androidx.core.os.bundleOf
 import com.blooburn.owere.R
 import com.blooburn.owere.user.activity.main.userReservation.ShopsOfDesignerActivity
 import com.blooburn.owere.user.item.StyleMenuItem
-import com.blooburn.owere.user.item.UserDesignerItem
+import com.blooburn.owere.user.item.DesignerItem
 import com.blooburn.owere.util.DESIGNER_DATA_KEY
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 //메뉴 선택 후 길이추가 커스텀 다이얼로그
 class MenuBottomDialogFragment : BottomSheetDialogFragment() {
-    private var designerData: UserDesignerItem? = null//프로필에서 전달받을 디자이너 객체
+    private var designerData: DesignerItem? = null//프로필에서 전달받을 디자이너 객체
     private var menu :StyleMenuItem? = null
 
 
@@ -35,7 +34,7 @@ class MenuBottomDialogFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //디자이너 객체 받기
-        designerData = arguments?.getParcelable<Parcelable>(DESIGNER_DATA_KEY) as UserDesignerItem?
+        designerData = arguments?.getParcelable<Parcelable>(DESIGNER_DATA_KEY) as DesignerItem?
         //번들로 하는 거 아님 실수 주의
         //designerData = bundle.getParcelable<Parcelable>(DESIGNER_DATA_KEY) as UserDesignerItem?
         //menu = bundle.getParcelable<Parcelable>("SESLECTED_MENU_DATA_KEY") as StyleMenuItem?

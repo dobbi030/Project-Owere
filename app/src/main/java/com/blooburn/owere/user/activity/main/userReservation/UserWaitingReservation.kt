@@ -7,7 +7,7 @@ import com.blooburn.owere.databinding.ActivityUserWaitingReservationBinding
 import com.blooburn.owere.user.activity.main.UserMainActivity
 import com.blooburn.owere.user.item.ShopListItem
 import com.blooburn.owere.user.item.StyleMenuItem
-import com.blooburn.owere.user.item.UserDesignerItem
+import com.blooburn.owere.user.item.DesignerItem
 import com.blooburn.owere.user.item.UserEntity
 import com.blooburn.owere.util.DESIGNER_DATA_KEY
 import com.blooburn.owere.util.TypeOfReservation
@@ -28,7 +28,7 @@ class UserWaitingReservation : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth    //파이어베이스 인증 사용
 
     //프로필에서 전달받을 디자이너 객체
-    private lateinit var designerData: UserDesignerItem
+    private lateinit var designerData: DesignerItem
 
     //전달받을 선택한 메뉴
     private lateinit var menu: StyleMenuItem

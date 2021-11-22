@@ -2,15 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_designer_profile_share"
+        android:id="@+id/action_user_designer_profile_share"
         android:title="share"
         android:icon="@drawable/ic_share"
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/action_designer_profile_favorite"
+        android:id="@+id/action_user_designer_profile_favorite"
         android:title="favorite"
         android:icon="@drawable/ic_favorite"
-        android:actionLayout="@layout/item_designer_profile_favorite"
         app:showAsAction="always" />
 </menu>

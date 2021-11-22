@@ -2,7 +2,6 @@ package com.blooburn.owere.user.activity.main.homeActivity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +20,7 @@ import com.blooburn.owere.user.activity.main.userReservation.ReserveMenuActivity
 import com.blooburn.owere.user.adapter.home.DesignerPortfolioSliderAdapter
 import com.blooburn.owere.user.fragment.mainFragment.homeFragment.AllPricesFragment
 import com.blooburn.owere.user.item.StyleMenuItem
-import com.blooburn.owere.user.item.UserDesignerItem
+import com.blooburn.owere.user.item.DesignerItem
 import com.blooburn.owere.user.item.UserReview
 import com.blooburn.owere.util.*
 import com.google.firebase.auth.FirebaseAuth
@@ -35,7 +34,7 @@ import com.google.firebase.storage.StorageReference
 
 class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler {
 
-    private var designerData: UserDesignerItem? = null
+    private var designerData: DesignerItem? = null
     private val reviewImagePathList = mutableListOf<String>()
     private val pricePath = "커트"
 
@@ -92,7 +91,7 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
 
         // 포트폴리오 이미지 레퍼런스들을 스토리지에서 가져온다
         // path = "portfolio/[디자이너 id]"
-        getPortfolioImagesPath()
+        getPortfolioImages()
         setDesignerInformation()
         getAndSetFirstPrice()
         getAndSetReviewImages()
@@ -130,7 +129,7 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
     /**
      * 포트폴리오 이미지 레퍼런스들을 스토리지에서 불러와서 어댑터에 전달한다.
      */
-    private fun getPortfolioImagesPath() {
+    private fun getPortfolioImages() {
         portfolioReference.listAll()
             .addOnSuccessListener {
                 sliderAdapter.setList(it.items)
@@ -146,8 +145,6 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
             return
         }
 
-
-        Log.d("로그", "$designerData")
         val reviewStar = convertRatingToStar(designerData!!.rating)
 
         // 디자이너 프로필 보여주는 view
@@ -213,7 +210,7 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
                         )
 
                         menuViewBinding.textPriceMenuTitle.text = menuItem.menuName
-                        menuViewBinding.textPriceMenuPrice.text = "${menuItem.menuPrice}"
+                        menuViewBinding.textPriceMenuPrice.text = menuItem.menuPrice
                         menuViewBinding.textPriceMenuTime.text = menuItem.menuTime
                         //todo: 옵션은 지금 생략했음
                     }
@@ -316,11 +313,11 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
 
     // 커스텀 툴바 메뉴 적용
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar_designer_profile, menu)
+        menuInflater.inflate(R.menu.toolbar_user_designer_profile, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
-    /* 툴바 오른쪽 아이콘 클릭 리스너 -> 나중에 구현
+    /* TODO 툴바 아이콘 클릭 리스너 구현
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return super.onOptionsItemSelected(item)
     }

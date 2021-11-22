@@ -157,24 +157,5 @@ class DesignerConfirmedReservationFragment :
             TypeOfReservation.SCHEDULED.value -> scheduledList.add(reservation)
             else -> completedList.add(reservation)
         }
-        /*
-        // 선택된 날이 과거일 때
-        if (selectedDayStamp < currentDayStamp) {
-            reservation.type = TypeOfDesignerReservation.COMPLETED
-            completedList.add(reservation)
-        }
-        // 미래일 때
-        else if (currentDayStamp < selectedDayStamp) {
-            scheduledList.add(reservation)
-        } else {
-            // 시술 끝나는 시간이 현재 시간을 지났을 때
-            if (currentTime < reservation.endTime) {
-                reservation.type = TypeOfDesignerReservation.COMPLETED
-                completedList.add(reservation)
-            } else {
-                scheduledList.add(reservation)
-            }
-        }
-        */
     }
 }

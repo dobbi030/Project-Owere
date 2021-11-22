@@ -23,7 +23,7 @@ import com.blooburn.owere.user.activity.signUpActivity.SetPositionActivity
 import com.blooburn.owere.user.adapter.userReservation.ShopListOfDesignerAdapter
 import com.blooburn.owere.user.item.ShopListItem
 import com.blooburn.owere.user.item.StyleMenuItem
-import com.blooburn.owere.user.item.UserDesignerItem
+import com.blooburn.owere.user.item.DesignerItem
 import com.blooburn.owere.util.DESIGNER_DATA_KEY
 import com.blooburn.owere.util.databaseInstance
 import com.google.firebase.database.DataSnapshot
@@ -40,7 +40,7 @@ class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEven
 
     private val eventListener = MarkerEventListener(this) // 마커 클릭 이벤트 리스너 등록
 
-    private lateinit var designerData: UserDesignerItem//프로필에서 전달받을 디자이너 객체
+    private lateinit var designerData: DesignerItem//프로필에서 전달받을 디자이너 객체
     private lateinit var menu: StyleMenuItem //선택한 메뉴
 
     //기장 옵션

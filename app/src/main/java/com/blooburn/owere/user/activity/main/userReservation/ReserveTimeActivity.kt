@@ -16,7 +16,7 @@ import com.blooburn.owere.designer.item.DesignerReservation
 import com.blooburn.owere.user.adapter.userReservation.ReserveTimeAdapter
 import com.blooburn.owere.user.item.ShopListItem
 import com.blooburn.owere.user.item.StyleMenuItem
-import com.blooburn.owere.user.item.UserDesignerItem
+import com.blooburn.owere.user.item.DesignerItem
 import com.blooburn.owere.util.*
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -31,7 +31,7 @@ import org.threeten.bp.LocalTime
 class  ReserveTimeActivity : AppCompatActivity(), DesignerProfileHandler{
 
     //프로필에서 전달받을 디자이너 객체
-    private lateinit var designerData: UserDesignerItem
+    private lateinit var designerData: DesignerItem
 
     //전달받을 선택한 메뉴
     private lateinit var menu: StyleMenuItem

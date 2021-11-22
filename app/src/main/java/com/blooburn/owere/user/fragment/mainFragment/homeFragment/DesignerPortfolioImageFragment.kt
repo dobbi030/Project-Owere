@@ -20,6 +20,6 @@ class DesignerPortfolioImageFragment(private val imagePath: StorageReference): F
             .load(imagePath)
             .centerCrop()
             .error(R.drawable.icon_person_24)
-            .into(binding?.imageViewDesignerProfile!!)
+            .into(binding?.imgViewDesignerProfile!!)
     }
 }

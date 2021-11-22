@@ -31,7 +31,7 @@
                 android:background="@android:color/transparent"
                 android:minHeight="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:menu="@menu/toolbar_designer_profile"
+                app:menu="@menu/toolbar_user_designer_profile"
                 app:navigationIcon="@drawable/ic_close"/>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -79,6 +79,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/txt_user_designer_profile_price_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
@@ -218,8 +219,7 @@
                     android:id="@+id/image_button_user_designer_profile_review0"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="centerCrop"
+                    android:background="@android:color/transparent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintDimensionRatio="h, 1:1"
                     app:layout_constraintHorizontal_chainStyle="spread"
@@ -233,6 +233,7 @@
                     android:layout_height="0dp"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
+                    android:background="@android:color/transparent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintDimensionRatio="h, 1:1"
                     app:layout_constraintStart_toEndOf="@id/image_button_user_designer_profile_review0"
@@ -245,6 +246,7 @@
                     android:layout_height="0dp"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
+                    android:background="@android:color/transparent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintDimensionRatio="h, 1:1"
                     app:layout_constraintStart_toEndOf="@id/image_button_user_designer_profile_review1"
@@ -257,6 +259,7 @@
                     android:layout_height="0dp"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
+                    android:background="@android:color/transparent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintDimensionRatio="h, 1:1"
                     app:layout_constraintEnd_toEndOf="parent"

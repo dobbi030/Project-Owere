@@ -7,14 +7,14 @@ import android.widget.TextView
 import com.blooburn.owere.R
 import com.blooburn.owere.user.item.ShopListItem
 import com.blooburn.owere.user.item.StyleMenuItem
-import com.blooburn.owere.user.item.UserDesignerItem
+import com.blooburn.owere.user.item.DesignerItem
 import com.blooburn.owere.util.DESIGNER_DATA_KEY
 
 //지도에서 미용실 클릭하여 선택 후 미용실 결정 액티비티
 class ReserveSalonActivity : AppCompatActivity() {
 
     //프로필에서 전달받을 디자이너 객체
-    private lateinit var designerData: UserDesignerItem
+    private lateinit var designerData: DesignerItem
     //전달받을 선택한 메뉴
     private lateinit var menu: StyleMenuItem
 

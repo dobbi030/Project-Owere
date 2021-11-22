@@ -6,14 +6,13 @@ import android.os.Bundle
 import android.widget.CheckBox
 import android.widget.Toast
 import androidx.core.os.bundleOf
-import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blooburn.owere.databinding.ActivityReserveMenuBinding
 
 import com.blooburn.owere.user.adapter.userReservation.MenuSelectAdapter
 import com.blooburn.owere.user.fragment.mainFragment.reservationFragment.MenuBottomDialogFragment
 import com.blooburn.owere.user.item.StyleMenuItem
-import com.blooburn.owere.user.item.UserDesignerItem
+import com.blooburn.owere.user.item.DesignerItem
 import com.blooburn.owere.util.DESIGNER_DATA_KEY
 import com.blooburn.owere.util.databaseInstance
 import com.google.firebase.database.DataSnapshot
@@ -23,7 +22,7 @@ import com.google.firebase.database.ValueEventListener
 
 class ReserveMenuActivity : AppCompatActivity() {
 
-    private var designerData: UserDesignerItem? = null//프로필에서 전달받을 디자이너 객체
+    private var designerData: DesignerItem? = null//프로필에서 전달받을 디자이너 객체
 
     //길이추가 커스텀 다이얼로그
     val menuBottomDialogFragment: MenuBottomDialogFragment? = MenuBottomDialogFragment()

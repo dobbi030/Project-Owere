@@ -42,7 +42,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_margin="10dp"
-            android:src="@drawable/ic_baseline_alarm_48"
+            android:src="@drawable/ic_notification_filled"
             app:tint="@color/black" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

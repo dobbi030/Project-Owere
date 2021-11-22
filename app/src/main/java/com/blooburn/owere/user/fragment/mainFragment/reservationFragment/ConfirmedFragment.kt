@@ -74,7 +74,9 @@ class ConfirmedFragment : Fragment(R.layout.confirmed_fragment_layout) {
                                 }
                             }
 
-                            confirmededAdapter.setData(confirmedReservation)
+                    binding?.confirmedReservationTotalNumberText?.text = "전체 ${confirmedReservation.size} 건"
+                    confirmededAdapter.setData(confirmedReservation)
+
                     }
 
                 override fun onCancelled(error: DatabaseError) {

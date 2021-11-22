@@ -1,17 +1,13 @@
 package com.blooburn.owere.designer.fragment.home
 
-import android.app.Activity
-import android.content.Context.LOCATION_SERVICE
-import android.location.Location
-import android.location.LocationManager
+
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.location.LocationManagerCompat
+
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -162,7 +158,7 @@ class DesignerConfirmedReservationFragment :
 
                     scheduledList = mutableListOf()
                     completedList = mutableListOf()
-                    val currentTime = LocalTime.now().toSecondOfDay() * 1000
+                    val currentTime = LocalTime.now().toSecondOfDay()
 
 
 
@@ -227,6 +223,7 @@ class DesignerConfirmedReservationFragment :
     ) {
         when(reservation.type){
             TypeOfReservation.SCHEDULED.value -> scheduledList.add(reservation)
+            TypeOfReservation.ACCEPTED.value -> return
             else -> completedList.add(reservation)
         }
         /*
@@ -247,7 +244,11 @@ class DesignerConfirmedReservationFragment :
                 scheduledList.add(reservation)
             }
         }
-        */
+
+         */
+
+
+
     }
 
     //맵뷰 설정

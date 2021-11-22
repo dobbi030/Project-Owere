@@ -74,8 +74,9 @@ class WaitingFragment : Fragment(R.layout.waiting_fragment_layout) {
                             confirmedReservation.add(reservation)
                         }
                     }
-
+                    binding?.waitingReservationTotalNumberText?.text = "전체 ${confirmedReservation.size} 건"
                     waitingAdapter.setData(confirmedReservation)
+
                 }
 
                 override fun onCancelled(error: DatabaseError) {

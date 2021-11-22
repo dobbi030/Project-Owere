@@ -30,7 +30,7 @@ RecyclerView.Adapter<UserReservationListAdapter.ViewHolder>(), DesignerProfileHa
             bindProfileImage(
                 itemView,
                 binding.imageReservedUser,
-                reservation.profile,
+                reservation.profileImagePath,
                 true
             )
 

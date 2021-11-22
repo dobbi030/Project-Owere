@@ -165,7 +165,7 @@ class UserWaitingReservation : AppCompatActivity() {
                             designerUpdate["startTime"] = hourMinuteToSecondOfDay(selectedTime)
 
                             //임시로 시작 시간 + 20분으로 해둠
-                            designerUpdate["endTime"] = hourMinuteToSecondOfDay(selectedTime) + 60 * 60 * 1000 / 3
+                            designerUpdate["endTime"] = hourMinuteToSecondOfDay(selectedTime) + (60 * 60) / 3
 
                             designerUpdate["accepted"] = 0
 

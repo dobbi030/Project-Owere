@@ -1,6 +1,7 @@
 package com.blooburn.owere.user.adapter.home
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -19,19 +20,28 @@ class DesignerListAdapter :
     inner class ViewHolder(private val binding: ItemUserDesignerListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+
         fun bind(position: Int) {
             val designer = designerList[position]
 
             binding.textUserDesignerName.text = designer.name
+
             binding.textUserDesignerArea.text = designer.area
+
             binding.textUserDesignerReviewCount.text = buildReviewCountString(designer.reviewCount)
+
             binding.textUserDesignerMatching.text =
                 this.itemView.context.getString(R.string.matching_rate, designer.matchingRate)
+
             binding.textUserDesignerStar.text = convertRatingToStar(designer.rating)
+
             bindProfileImage(
                 this.itemView,
+
                 binding.imageUserDesigner,
+
                 designer.profileImagePath,
+
                 true
             )
         }
@@ -56,6 +66,7 @@ class DesignerListAdapter :
                 Intent(holder.itemView.context, UserDesignerProfileActivity::class.java).apply {
                     putExtra(DESIGNER_DATA_KEY, designerList[position])
                 }
+            Log.d("designerIntent","designer's Profilepath is ${designerList[position].profileImagePath}")
 
             holder.itemView.context.startActivity(intent)
         }

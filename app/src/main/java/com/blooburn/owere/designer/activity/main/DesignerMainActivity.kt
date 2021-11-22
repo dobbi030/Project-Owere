@@ -6,9 +6,18 @@ import androidx.fragment.app.Fragment
 import com.blooburn.owere.R
 import com.blooburn.owere.designer.fragment.chatting.ChattingForDesignerFragment
 import com.blooburn.owere.designer.fragment.home.DesignerHomeFragment
-import com.blooburn.owere.designer.fragment.myPage.MypageDesignerFragment
+import com.blooburn.owere.designer.fragment.mypage.MypageDesignerFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
+import android.provider.Settings
+import android.util.Log
+import android.view.MenuItem
+import android.widget.AdapterView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import com.blooburn.owere.designer.fragment.mypage.MypageDesignerFragment
+import com.blooburn.owere.user.activity.main.userReservation.ShopsOfDesignerActivity
+import com.blooburn.owere.user.activity.signUpActivity.SetPositionActivity
 
 class DesignerMainActivity : AppCompatActivity() {
 

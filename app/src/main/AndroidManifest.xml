@@ -24,6 +24,7 @@
             android:name=".user.activity.MainActivityForUnknownUser"
             android:exported="true" />
         <activity android:name=".user.activity.main.userReservation.UserWaitingReservation" />
+        <activity android:name=".user.activity.main.userReservation.UserReservationDetailActivity"/>
         <activity android:name=".designer.activity.main.DesignerReservationDetailActivity" />
         <activity
             android:name=".user.activity.signUpActivity.SignUpActivityMethods"
@@ -54,16 +55,18 @@
         <activity
             android:name=".user.activity.loginActivity.LoginActivityEmail"
             android:exported="true" />
-        <activity android:name=".user.activity.signUpActivity.SetPositionActivity" />
-        <activity android:name=".user.activity.main.UserMainActivity" />
-        <activity android:name=".user.activity.loginActivity.LoginActivityTemp" />
-        <activity android:name=".user.activity.loginActivity.LoginActivityChoice" />
-        <activity android:name=".user.activity.signUpActivity.SignUpActivity1_choice" />
-        <activity android:name=".user.activity.MainActivity"></activity>
-        <activity android:name=".user.activity.main.homeActivity.UserDesignerProfileActivity" />
-        <activity android:name=".user.activity.main.userReservation.ShopsOfDesignerActivity" />
-        <activity android:name=".user.activity.main.userReservation.ReserveMenuActivity" />
-        <activity android:name=".designer.activity.main.DesignerMainActivity">
+        <activity android:name= ".user.activity.signUpActivity.SetPositionActivity" />
+        <activity android:name= ".user.activity.main.UserMainActivity" />
+        <activity android:name= ".user.activity.loginActivity.LoginActivityTemp" />
+        <activity android:name= ".user.activity.loginActivity.LoginActivityChoice" />
+        <activity android:name= ".user.activity.signUpActivity.SignUpActivity1_choice" />
+        <activity android:name= ".user.activity.MainActivity" >
+
+        </activity>
+        <activity android:name= ".user.activity.main.homeActivity.UserDesignerProfileActivity" />
+        <activity android:name= ".user.activity.main.userReservation.ShopsOfDesignerActivity" />
+        <activity android:name= ".user.activity.main.userReservation.ReserveMenuActivity" />
+        <activity android:name= ".designer.activity.main.DesignerMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -74,7 +77,7 @@
             android:name=".designer.activity.myPage.DesignerProfileActivity"
             android:label="@string/title_activity_designer_profile"
             android:theme="@style/Theme.Owere.NoActionBar" />
-        
+
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="1c731ef6b27d4335e6ebc47fa74f09b9" />

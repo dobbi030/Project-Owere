@@ -2,6 +2,7 @@ package com.blooburn.owere.user.activity.main.homeActivity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
@@ -91,7 +92,7 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
 
         // 포트폴리오 이미지 레퍼런스들을 스토리지에서 가져온다
         // path = "portfolio/[디자이너 id]"
-        getPortfolioImages()
+        getPortfolioImagesPath()
         setDesignerInformation()
         getAndSetFirstPrice()
         getAndSetReviewImages()
@@ -129,7 +130,7 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
     /**
      * 포트폴리오 이미지 레퍼런스들을 스토리지에서 불러와서 어댑터에 전달한다.
      */
-    private fun getPortfolioImages() {
+    private fun getPortfolioImagesPath() {
         portfolioReference.listAll()
             .addOnSuccessListener {
                 sliderAdapter.setList(it.items)
@@ -178,15 +179,22 @@ class UserDesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler 
      * 디자이너 소개글 불러와서 적용
      */
     private fun getAndSetIntroduction() {
+        val designerIntroduce = findViewById<TextView>(R.id.text_user_designer_profile_introduction)
         designerReference.addListenerForSingleValueEvent(object : ValueEventListener {
+
             override fun onDataChange(snapshot: DataSnapshot) {
                 // 디자이너 소개글
-                findViewById<TextView>(R.id.text_user_designer_profile_introduction).text =
+
+                designerIntroduce.text =
                     snapshot.child("introduction").value.toString()
+                Log.d("designerIntent", "3 $designerData")
+                Log.d("designerIntent","3 get introduction is ${snapshot.child("introduction").value.toString()}")
             }
 
             override fun onCancelled(error: DatabaseError) {}
         })
+        //위의 snapshot.child("introduction").value가 작동 안 하는 경우 발생
+        designerIntroduce.text = designerData!!.introduction
     }
 
     /**

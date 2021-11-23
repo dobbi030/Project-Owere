@@ -37,7 +37,7 @@
         android:layout_marginTop="135dp"
         android:text="@string/announce_register_phone_number"
         android:textAlignment="center"
-        android:textColor="@color/gray_cc"
+        android:textColor="@color/gray_939393"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -30,7 +30,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="47dp"
         android:layout_marginTop="208dp"
-        android:src="@drawable/main_linear_gradient_background"
+        android:src="@drawable/logo_owere"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

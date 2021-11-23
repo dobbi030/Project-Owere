@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class ReservationListItem(
 
-    val profile : String, //디자이너 프로필
+    val profileImagePath : String, //디자이너 프로필
     val designerName : String, //디자이너 이름
     val designerId : String,//디자이너 아이디
     val shop : String, // 미용실

@@ -97,8 +97,8 @@ class DesignerReservationListAdapter :
     private fun getTreatmentTime(itemView: View, reservation: DesignerReservation): String{
         return itemView.context.getString(
             R.string.reservation_time,
-            convertMilliSecondsToTimeString(reservation.startTime),
-            convertMilliSecondsToTimeString(reservation.endTime)
+            convertMilliSecondsToTimeString(reservation.startTime*1000),
+            convertMilliSecondsToTimeString(reservation.endTime*1000)
         )
     }
 

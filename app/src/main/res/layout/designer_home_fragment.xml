@@ -13,7 +13,7 @@
 
         <Spinner
             android:id="@+id/spinner_designer_home"
-            android:layout_width="100dp"
+            android:layout_width="136dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp" />
     </androidx.appcompat.widget.Toolbar>

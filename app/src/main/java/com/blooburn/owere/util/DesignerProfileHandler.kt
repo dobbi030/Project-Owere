@@ -1,5 +1,6 @@
 package com.blooburn.owere.util
 
+import android.content.Context
 import android.view.View
 import android.widget.ImageView
 import com.blooburn.owere.R
@@ -56,6 +57,9 @@ interface DesignerProfileHandler {
         }
 
     }
+
+
+
 
     /**
      * 리뷰 개수 텍스트 반환

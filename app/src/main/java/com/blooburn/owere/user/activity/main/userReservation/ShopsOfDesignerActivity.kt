@@ -7,6 +7,7 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
+import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
@@ -25,6 +26,7 @@ import com.blooburn.owere.user.item.ShopListItem
 import com.blooburn.owere.user.item.StyleMenuItem
 import com.blooburn.owere.user.item.DesignerItem
 import com.blooburn.owere.util.DESIGNER_DATA_KEY
+import com.blooburn.owere.util.DesignerProfileHandler
 import com.blooburn.owere.util.databaseInstance
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -36,7 +38,7 @@ import net.daum.mf.map.api.MapView
 
 //지도에서 디자이너가 근무가능한 미용실 선택하는 액티비티
 // 카카오 지도 api사용
-class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEventListener{
+class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEventListener, DesignerProfileHandler{
 
     private val eventListener = MarkerEventListener(this) // 마커 클릭 이벤트 리스너 등록
 
@@ -124,6 +126,19 @@ class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEven
 
         getDataFromIntent()
         setDataReferences()
+
+        findViewById<TextView>(R.id.shopof_designer_name).text = "디자이너 ${designerData.name}"
+
+
+        findViewById<View>(R.id.shop_of_designer_activity_parent_view).apply{
+            bindProfileImage(
+                this,
+                this.findViewById(R.id.shopof_designer_profile_image),
+                designerData.profileImagePath,
+                true
+            )
+        }
+
 
         /**
          * 리사이클러뷰 어답터 설정
@@ -445,6 +460,7 @@ class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEven
         menuReference: DatabaseReference?,
         Adapter: ShopListOfDesignerAdapter
     ) {
+        salonList.clear()
         menuReference!!.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.forEach {
@@ -462,6 +478,7 @@ class ShopsOfDesignerActivity : AppCompatActivity(), MapView.CurrentLocationEven
                      */
                     updateMarker(model) //마커 추가해주기
                 }
+                bottomsheetTitleTextView.text = "${salonList.size}개의 미용실"
                 shopListOfDesignerAdapter.notifyDataSetChanged()// 뷰목록 업데이트
             }
 

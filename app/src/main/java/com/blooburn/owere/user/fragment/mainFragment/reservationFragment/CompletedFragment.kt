@@ -74,6 +74,7 @@ class CompletedFragment : Fragment(R.layout.confirmed_fragment_layout) {
                         }
                     }
 
+                    binding?.confirmedReservationTotalNumberText?.text = "전체 ${confirmedReservation.size} 건"
                     completedAdapter.setData(confirmedReservation)
                 }
 

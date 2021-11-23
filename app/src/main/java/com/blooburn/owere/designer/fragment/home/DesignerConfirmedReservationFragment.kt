@@ -1,17 +1,13 @@
 package com.blooburn.owere.designer.fragment.home
 
-import android.app.Activity
-import android.content.Context.LOCATION_SERVICE
-import android.location.Location
-import android.location.LocationManager
+
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.location.LocationManagerCompat
+
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -229,6 +225,25 @@ class DesignerConfirmedReservationFragment :
             TypeOfReservation.SCHEDULED.value -> scheduledList.add(reservation)
             else -> completedList.add(reservation)
         }
+        /*
+        // 선택된 날이 과거일 때
+        if (selectedDayStamp < currentDayStamp) {
+            reservation.type = TypeOfDesignerReservation.COMPLETED
+            completedList.add(reservation)
+        }
+        // 미래일 때
+        else if (currentDayStamp < selectedDayStamp) {
+            scheduledList.add(reservation)
+        } else {
+            // 시술 끝나는 시간이 현재 시간을 지났을 때
+            if (currentTime < reservation.endTime) {
+                reservation.type = TypeOfDesignerReservation.COMPLETED
+                completedList.add(reservation)
+            } else {
+                scheduledList.add(reservation)
+            }
+        }
+        */
     }
 
     //맵뷰 설정

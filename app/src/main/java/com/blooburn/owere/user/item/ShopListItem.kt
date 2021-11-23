@@ -8,6 +8,8 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class ShopListItem(
 
+    val openTime : Long,
+    val closeTime : Long,
     val shopId : String,
     val area: String,//주소
     val name: String,
@@ -19,6 +21,6 @@ data class ShopListItem(
 
 ) : Parcelable {
     //인자가 없는 경우 추가 필요 (에러)
-    constructor() : this("","", "", "", 0.0, 0,0.0,0.0)
+    constructor() : this(0,0,"","", "", "", 0.0, 0,0.0,0.0)
 }
 

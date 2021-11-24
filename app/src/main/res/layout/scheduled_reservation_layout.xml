@@ -5,6 +5,7 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.tabs.TabLayout
+
         android:id="@+id/tab_layout_scheduled_reservation"
         android:layout_width="0dp"
         android:layout_height="64dp"
@@ -12,6 +13,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:tabTextColor="#939393"
+        app:tabSelectedTextColor="#BD39FF"
+        app:tabTextAppearance="@style/tabTextSizeBold"
+        app:tabIndicatorColor="#BD39FF"
         app:tabGravity="start"
         app:tabIndicator="@null"
         app:tabMode="fixed" />

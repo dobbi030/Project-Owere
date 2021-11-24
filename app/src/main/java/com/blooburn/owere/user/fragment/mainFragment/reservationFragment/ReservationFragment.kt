@@ -31,7 +31,7 @@ class   ReservationFragment : Fragment(R.layout.reservation_layout) {
         ArrayAdapter.createFromResource(
             requireContext(),
             R.array.reservation_array,
-            android.R.layout.simple_spinner_item
+            R.layout.spinner_layout
         ).also {
             it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinner?.adapter = it

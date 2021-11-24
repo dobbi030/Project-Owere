@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-
 import androidx.core.content.ContextCompat
-
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,7 +29,6 @@ import net.daum.mf.map.api.MapView
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalTime
 import org.threeten.bp.temporal.ChronoField
-import java.util.*
 
 class DesignerConfirmedReservationFragment :
     Fragment(R.layout.designer_confirmed_reservation_fragment) ,MapView.CurrentLocationEventListener {
@@ -158,9 +155,6 @@ class DesignerConfirmedReservationFragment :
 
                     scheduledList = mutableListOf()
                     completedList = mutableListOf()
-                    val currentTime = LocalTime.now().toSecondOfDay() * 1000
-
-
 
 
 
@@ -171,10 +165,9 @@ class DesignerConfirmedReservationFragment :
 
 
 
-
                         // 예정된, 정산할, 정산된 예약 분류
                         if (reservation != null) {
-                            sortReservation(reservation, selectedDayStamp, currentTime)
+                            sortReservation(reservation)
 
                             //지도에 미용실을 띄워주기위해서 예약된 미용실 이름을 배열에 추가
                             salonList.add(reservation.shop)
@@ -216,34 +209,12 @@ class DesignerConfirmedReservationFragment :
             getString(R.string.text_today, date.monthValue, date.dayOfMonth)
     }
 
-    private fun sortReservation(
-        reservation: DesignerReservation,
-        selectedDayStamp: Long,
-        currentTime: Int
-    ) {
+    private fun sortReservation(reservation: DesignerReservation) {
         when(reservation.type){
             TypeOfReservation.SCHEDULED.value -> scheduledList.add(reservation)
+            TypeOfReservation.ACCEPTED.value -> return
             else -> completedList.add(reservation)
         }
-        /*
-        // 선택된 날이 과거일 때
-        if (selectedDayStamp < currentDayStamp) {
-            reservation.type = TypeOfDesignerReservation.COMPLETED
-            completedList.add(reservation)
-        }
-        // 미래일 때
-        else if (currentDayStamp < selectedDayStamp) {
-            scheduledList.add(reservation)
-        } else {
-            // 시술 끝나는 시간이 현재 시간을 지났을 때
-            if (currentTime < reservation.endTime) {
-                reservation.type = TypeOfDesignerReservation.COMPLETED
-                completedList.add(reservation)
-            } else {
-                scheduledList.add(reservation)
-            }
-        }
-        */
     }
 
     //맵뷰 설정

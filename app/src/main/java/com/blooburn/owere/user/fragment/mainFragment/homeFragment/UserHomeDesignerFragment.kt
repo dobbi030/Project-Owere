@@ -11,7 +11,6 @@ import com.blooburn.owere.user.adapter.home.DesignerListAdapter
 import com.blooburn.owere.databinding.UserHomeDesignerFragmentBinding
 import com.blooburn.owere.user.item.DesignerItem
 import com.blooburn.owere.user.item.LocationClass
-import com.blooburn.owere.user.item.UserDesignerItem
 import com.blooburn.owere.user.item.UserEntity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -144,7 +143,7 @@ class UserHomeDesignerFragment : Fragment(R.layout.user_home_designer_fragment) 
      */
    // 이용가능 디자이너 리스트
     private var availableDesignerList = mutableListOf<String>()
-    private var allDesignerList = mutableMapOf<String,UserDesignerItem>()
+    private var allDesignerList = mutableMapOf<String,DesignerItem>()
 
     private fun initAvailableDesignerList(){
 
@@ -181,7 +180,7 @@ class UserHomeDesignerFragment : Fragment(R.layout.user_home_designer_fragment) 
         designerInfoReference.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                snapshot.children.forEach {dataSnapshot ->
-                   val model = dataSnapshot.getValue(UserDesignerItem::class.java)
+                   val model = dataSnapshot.getValue(DesignerItem::class.java)
                    val designerId = dataSnapshot.key!!
                    if(model!=null){
                        //전체 디자이너 리스트에 추가

@@ -1,9 +1,11 @@
 package com.blooburn.owere.designer.activity.myPage
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -44,6 +46,11 @@ class DesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler {
 
         fetchPortfolioImages()
         getAndSetDesignerProfileFromDB()
+
+        findViewById<Button>(R.id.btn_designer_profile_edit_profile).setOnClickListener{
+            val intent = Intent(this, EditDesignerProfileActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun getAndSetDesignerProfileFromDB() {

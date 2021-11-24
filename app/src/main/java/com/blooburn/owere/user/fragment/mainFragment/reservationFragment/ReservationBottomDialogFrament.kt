@@ -44,7 +44,7 @@ class ReservationBottomDialogFrament : BottomSheetDialogFragment() {
         //디자이너 객체 받기
         reservation = arguments?.getParcelable<Parcelable>("reservation") as ReservationListItem?
         //번들로 하는 거 아님 실수 주의
-        //designerData = bundle.getParcelable<Parcelable>(DESIGNER_DATA_KEY) as UserDesignerItem?
+        //designerData = bundle.getParcelable<Parcelable>(DESIGNER_DATA_KEY) as DesignerItem?
         //menu = bundle.getParcelable<Parcelable>("SESLECTED_MENU_DATA_KEY") as StyleMenuItem?
 
         Log.d("reservation",reservation!!.designerName)

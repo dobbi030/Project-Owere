@@ -22,4 +22,6 @@
     <color name="blue_main_background">#00CCFF</color>
     <color name= "gray_cc">#939393</color>
     <color name="dark_gray">#939393</color>
+    <color name="gray_C4C4C4">#C4C4C4</color>
+    <color name="gray_020202">#020202</color>
 </resources>

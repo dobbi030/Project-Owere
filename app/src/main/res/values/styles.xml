@@ -12,4 +12,15 @@
             @color/white
         </item>
     </style>
+
+
+    <!-- 탭레이아웃 스타일 -->
+    <style name="tabTextSizeBold" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
+
+
 </resources>

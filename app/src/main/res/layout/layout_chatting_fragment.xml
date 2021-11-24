@@ -49,10 +49,14 @@
 
 
     <com.google.android.material.tabs.TabLayout
+
         android:id="@+id/chattingTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabIndicator="@null"
+        app:tabTextColor="#939393"
+        app:tabSelectedTextColor="#BD39FF"
+        app:tabTextAppearance="@style/tabTextSizeBold"
+        app:tabIndicatorColor="#BD39FF"
         app:tabGravity="start"
         app:tabMode="fixed" />
 

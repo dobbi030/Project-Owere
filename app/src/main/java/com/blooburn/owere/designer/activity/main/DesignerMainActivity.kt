@@ -28,7 +28,7 @@ class DesignerMainActivity : AppCompatActivity() {
         val PERMISSION_REQUEST_CODE = 100
         val GPS_ENABLE_REQUEST_CODE = 2001
 
-        val LOG_TAG = "MainActivity"
+
     }
     var REQUIRED_PERMISSIONS = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION)
 

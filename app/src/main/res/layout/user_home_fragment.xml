@@ -7,13 +7,18 @@
     android:orientation="vertical">
 
     <com.google.android.material.tabs.TabLayout
+        app:tabTextAppearance="@style/tabTextSizeBold"
+        app:tabTextColor="#939393"
+        app:tabSelectedTextColor="#BD39FF"
+        app:tabIndicatorColor="#BD39FF"
         android:id="@+id/tab_layout_user_home"
-        android:layout_width="match_parent"
+        android:layout_width="164dp"
         android:layout_height="wrap_content"
         app:tabGravity="start"
-        app:tabIndicator="@null"
+
         app:tabMode="fixed"
-        app:layout_collapseMode="pin"/>
+        app:layout_collapseMode="pin"
+    />
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chip_group_user_home"

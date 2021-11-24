@@ -384,10 +384,11 @@ class ReserveTimeActivity : AppCompatActivity(), DesignerProfileHandler {
 
                                      */
                                     timeTabAdapter.addData(String.format("%02d", i / 2) + ":30")
+
                                 }
 
-
                             }
+
                             timeTabAdapter.notifyDataSetChanged()
 
 

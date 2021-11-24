@@ -197,7 +197,6 @@ class DesignerConfirmedReservationFragment :
 
 
         //날짜를 클릭 할 때마다 미용실 리스트 갱신
-
         addSalonOnMap()
     }
 

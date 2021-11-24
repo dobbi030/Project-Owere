@@ -25,7 +25,13 @@
             android:exported="true" />
         <activity
             android:name=".user.activity.MainActivityForUnknownUser"
-            android:exported="true" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".user.activity.main.userReservation.UserWaitingReservation" />
         <activity android:name=".user.activity.main.userReservation.UserReservationDetailActivity" />
         <activity android:name=".designer.activity.main.DesignerReservationDetailActivity" />
@@ -68,11 +74,7 @@
         <activity android:name=".user.activity.main.userReservation.ShopsOfDesignerActivity" />
         <activity android:name=".user.activity.main.userReservation.ReserveMenuActivity" />
         <activity android:name=".designer.activity.main.DesignerMainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".designer.activity.myPage.DesignerProfileActivity"/>
         <activity android:name=".designer.activity.myPage.EditDesignerProfileActivity"/>

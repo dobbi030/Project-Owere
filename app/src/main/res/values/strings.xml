@@ -110,4 +110,7 @@
     <string name="name">이름</string>
     <string name="area">위치</string>
     <string name="introduce_myself">자기소개</string>
+
+    <!-- activity_edit_designer_portfolio -->
+    <string name="edit_style">스타일 수정</string>
 </resources>

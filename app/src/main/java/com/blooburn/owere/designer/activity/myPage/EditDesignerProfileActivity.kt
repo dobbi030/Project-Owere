@@ -12,8 +12,15 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 
+/* TODO 1. 처음에 EditText의 backspace 버튼이 눌리지 않는다
+*       2. 처음에 EditText의 키보드 인식이 느리다
+*/
 class EditDesignerProfileActivity : AppCompatActivity() {
     private val tempReferencePath = "Designers/designer0"
+    private val profileReference = databaseInstance.reference.child(tempReferencePath)
+    private val KEY_NAME = "name"
+    private val KEY_AREA = "area"
+    private val KEY_INTRODUCTION = "introduction"
 
     private val nameEditTxtView: EditText by lazy{
         findViewById(R.id.edit_txt_edit_designer_profile_name)
@@ -43,11 +50,11 @@ class EditDesignerProfileActivity : AppCompatActivity() {
     }
 
     private fun getProfileFromDBAndInitViews(){
-        databaseInstance.reference.child(tempReferencePath).addListenerForSingleValueEvent(object: ValueEventListener{
+        profileReference.addListenerForSingleValueEvent(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                val name = snapshot.child("name").getValue(String::class.java).toString()
-                val area = snapshot.child("area").getValue(String::class.java).toString()
-                val introduction = snapshot.child("introduction").getValue(String::class.java).toString()
+                val name = snapshot.child(KEY_NAME).getValue(String::class.java).toString()
+                val area = snapshot.child(KEY_AREA).getValue(String::class.java).toString()
+                val introduction = snapshot.child(KEY_INTRODUCTION).getValue(String::class.java).toString()
                 val imagePath = snapshot.child("profileImagePath").getValue(String::class.java).toString()
 
                 initViews(name, area, introduction, imagePath)
@@ -69,13 +76,21 @@ class EditDesignerProfileActivity : AppCompatActivity() {
             .into(addPhotoBtn)
     }
 
+    // TODO: setResult 사용해서 이전 액티비티로 되돌아갔을 때 새로고침
     private fun initActionButtons(){
-        cancelBtn.setOnClickListener {
+        cancelBtn.setOnClickListener { finish() }
+        completeBtn.setOnClickListener {
+            updateDB()
             finish()
         }
+    }
 
-        completeBtn.setOnClickListener {
-
+    // TODO: 위치 변경
+    private fun updateDB(){
+        profileReference.apply{
+            child(KEY_NAME).setValue(nameEditTxtView.text.toString())
+            // child(KEY_AREA).setValue()
+            child(KEY_INTRODUCTION).setValue(introEditTxtView.text.toString())
         }
     }
 }

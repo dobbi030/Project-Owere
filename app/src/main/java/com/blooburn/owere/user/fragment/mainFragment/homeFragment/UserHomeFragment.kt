@@ -7,7 +7,7 @@ import com.blooburn.owere.R
 import com.blooburn.owere.user.adapter.home.UserHomeTabAdapter
 import com.blooburn.owere.databinding.UserHomeFragmentBinding
 import com.google.android.material.tabs.TabLayoutMediator
-
+//유저 홈 화면
 class UserHomeFragment: Fragment(R.layout.user_home_fragment) {
 
     private var binding: UserHomeFragmentBinding? = null

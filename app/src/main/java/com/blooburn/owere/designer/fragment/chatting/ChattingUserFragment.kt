@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blooburn.owere.R
 import com.blooburn.owere.databinding.LayoutChattingDesignerFragmentBinding
+import com.blooburn.owere.designer.activity.chattingActivity.DesignerChattingActivity
 import com.blooburn.owere.user.activity.main.chattingActivity.ChattingActivity
 import com.blooburn.owere.user.adapter.chatting.ChatListAdapter
 import com.blooburn.owere.user.item.ChatListItem
@@ -47,9 +48,12 @@ class ChattingUserFragment : Fragment(R.layout.layout_chatting_designer_fragment
         //리스트에서 채팅방 클릭시 해당 채팅방으로 이동
         chatListAdapter = ChatListAdapter { chatListItem ->
             //채팅방으로 이동하는 코드
-            val intent = Intent(requireContext(), ChattingActivity::class.java)
+            val intent = Intent(requireContext(), DesignerChattingActivity::class.java)
             intent.putExtra("chatRoomId", chatListItem.chatRoomId)
-            intent.putExtra("userName", chatListItem.myName)
+            intent.putExtra("designerName", chatListItem.myName)
+            intent.putExtra("userName",chatListItem.opponentName)
+            intent.putExtra("userId",chatListItem.opponentId)
+            intent.putExtra("profileImg",chatListItem.profileImg)
             startActivity(intent)
 
 
@@ -69,7 +73,7 @@ class ChattingUserFragment : Fragment(R.layout.layout_chatting_designer_fragment
 
 
         //DB 사용할 레퍼런스 초기화 (UserRooms -> 유저Id -> 채팅방ID)
-        val chatDB = Firebase.database.reference.child("UserRooms").child(tempDesignerId)
+        val chatDB = Firebase.database.reference.child("UserRooms").child(auth.currentUser!!.uid)
 
         //UserId 밑에 데이터 하나라도 변화하면(채팅방 생성, 삭제)
         //DB 변화 리스너 ->한 번만 불러옴

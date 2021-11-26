@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.blooburn.owere">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -26,6 +27,12 @@
         <activity
             android:name=".user.activity.MainActivityForUnknownUser"
             android:exported="true" >
+
+
+
+        </activity>
+
+        <activity android:name=".user.activity.MainActivityForUnknownUserSignUpOrLogIn">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -57,6 +64,7 @@
             android:name=".user.activity.loginActivity.LoginActivityCheckEmail"
             android:exported="true" />
         <activity android:name=".user.activity.main.chattingActivity.ChattingActivity" />
+        <activity android:name=".designer.activity.chattingActivity.DesignerChattingActivity"/>
         <activity
             android:name=".user.activity.loginActivity.LoginActivityRestore"
             android:exported="true"
@@ -74,6 +82,7 @@
         <activity android:name=".user.activity.main.userReservation.ShopsOfDesignerActivity" />
         <activity android:name=".user.activity.main.userReservation.ReserveMenuActivity" />
         <activity android:name=".designer.activity.main.DesignerMainActivity">
+
 
         </activity>
         <activity android:name=".designer.activity.myPage.DesignerProfileActivity"/>

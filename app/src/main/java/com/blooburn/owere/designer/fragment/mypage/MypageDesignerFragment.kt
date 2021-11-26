@@ -40,6 +40,10 @@ class MypageDesignerFragment  : Fragment(R.layout.mypage_designer_fragment_layou
             val intent = Intent(requireContext(), DesignerProfileActivity::class.java)
             startActivity(intent)
         }
+        binding?.mypageDesignerSettingContainer?.setOnClickListener {
+            var intent = Intent(requireContext(), SettingActivity::class.java)
+            startActivity(intent)
+        }
 
 
     }

@@ -64,6 +64,7 @@
             android:name=".user.activity.loginActivity.LoginActivityCheckEmail"
             android:exported="true" />
         <activity android:name=".user.activity.main.chattingActivity.ChattingActivity" />
+        <activity android:name=".designer.activity.chattingActivity.DesignerChattingActivity"/>
         <activity
             android:name=".user.activity.loginActivity.LoginActivityRestore"
             android:exported="true"

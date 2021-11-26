@@ -1,4 +1,4 @@
-package com.blooburn.owere.user.activity.main.chattingActivity
+package com.blooburn.owere.designer.activity.chattingActivity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -20,10 +20,10 @@ import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
+
 //채팅리스트가 실시간으로 올라감. 원래는 웹소켓을 사용하거나 retrofit에서 항상 http를 가져오는 방식으로 풀링방식으로 10초에 한 번씩 확인하거나...까다로움
 //firebase Realtime DB를 활용해서 구현
-
-class ChattingActivity : AppCompatActivity() {
+class DesignerChattingActivity  : AppCompatActivity() {
 
     private val auth : FirebaseAuth by lazy {
         Firebase.auth
@@ -54,31 +54,36 @@ class ChattingActivity : AppCompatActivity() {
 
         getDataFromIntent()
 
+//        intent.putExtra("chatRoomId", chatListItem.chatRoomId)
+//        intent.putExtra("designerName", chatListItem.myName)
+//        intent.putExtra("userName",chatListItem.opponentName)
+//        intent.putExtra("userId",chatListItem.opponentId)
+//        intent.putExtra("profileImg",chatListItem.profileImg)
         //채팅방 목록 프래그먼트로부터 받아온 정보
         //채팅방 아이디 @User@${userId}@UserId@$디자이너ID
         val chatRoomId = intent.getStringExtra("chatRoomId")
-
-
         var userName : String? = intent.getStringExtra("userName")
+        var userId = intent.getStringExtra("userId")
+        var userProfile = intent.getStringExtra("profileImg")
+
 
         if (userName == null){
             var userEntity : UserEntity?
             //유저 네임을 DB에서 가져옴
-        currentUserDB.child(auth.currentUser!!.uid).addListenerForSingleValueEvent(object :
-            ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                userEntity = snapshot.getValue(UserEntity::class.java)
-                userName = userEntity!!.myName
+            currentUserDB.child(auth.currentUser!!.uid).addListenerForSingleValueEvent(object :
+                ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    userEntity = snapshot.getValue(UserEntity::class.java)
+                    userName = userEntity!!.myName
 
 
+                }
 
-            }
+                override fun onCancelled(error: DatabaseError) {
 
-            override fun onCancelled(error: DatabaseError) {
+                }
 
-            }
-
-        })
+            })
 
         }
 
@@ -115,44 +120,45 @@ class ChattingActivity : AppCompatActivity() {
         findViewById<RecyclerView>(R.id.chatRecyclerView).adapter = adapter
         findViewById<RecyclerView>(R.id.chatRecyclerView).layoutManager = LinearLayoutManager(this)
 
-       /* data class ChatItem(
-            val profileImg: String,
-            val message: String,
-            val timestamp: String,
-            val uid: String,
-            val userName: String
-        )
-        */
+        /* data class ChatItem(
+             val profileImg: String,
+             val message: String,
+             val timestamp: String,
+             val uid: String,
+             val userName: String
+         )
+         */
 
         findViewById<Button>(R.id.sendButton).setOnClickListener {
             val chatItem =
                 ChatItem(profileImg = "userprofile",
-                message = findViewById<EditText>(R.id.messageEditText).text.toString(),
-                timestamp = System.currentTimeMillis().toString(),
-                uid = auth.currentUser?.uid.toString(),
-                //유저 이름 인텐트로 받아오기 필요
-                userName = userName!!
-            )
+                    message = findViewById<EditText>(R.id.messageEditText).text.toString(),
+                    timestamp = System.currentTimeMillis().toString(),
+                    uid = auth.currentUser?.uid.toString(),
+                    //유저 이름 인텐트로 받아오기 필요
+                    userName = userName!!
+                )
             //UserRooms 업데이트
+            //본인(디자이너)
             val userRoomsStatus = mutableMapOf<String, Any>()
             userRoomsStatus["chatRoomId"] = chatRoomId!!
             userRoomsStatus["lastMessage"] = findViewById<EditText>(R.id.messageEditText).text.toString()
-            userRoomsStatus["myName"] = userName!!
-            userRoomsStatus["opponentId"] = designerData?.designerId.toString()
-            userRoomsStatus["opponentName"] = designerData?.name.toString()
-            userRoomsStatus["profileImg"] = designerData?.profileImagePath.toString()
+            userRoomsStatus["myName"] = auth.currentUser?.displayName!!
+            userRoomsStatus["opponentId"] = userId!!
+            userRoomsStatus["opponentName"] = userName.orEmpty()
+            userRoomsStatus["profileImg"] = userProfile.toString()
             UserRoomsDB.child(auth.currentUser!!.uid).child(chatRoomId!!).updateChildren(userRoomsStatus)
 
+            //상대(유저)
+            val opponentRoomsStatus = mutableMapOf<String, Any>()
+            opponentRoomsStatus["chatRoomId"] = chatRoomId!!
+            opponentRoomsStatus["lastMessage"] = findViewById<EditText>(R.id.messageEditText).text.toString()
+            opponentRoomsStatus["myName"] = userName.toString()
+            opponentRoomsStatus["opponentId"] = auth.currentUser!!.uid
+            opponentRoomsStatus["opponentName"] = auth.currentUser!!.displayName.toString()
+            opponentRoomsStatus["profileImg"] = ""
 
-            val designerRoomsStatus = mutableMapOf<String, Any>()
-            designerRoomsStatus["chatRoomId"] = chatRoomId!!
-            designerRoomsStatus["lastMessage"] = findViewById<EditText>(R.id.messageEditText).text.toString()
-            designerRoomsStatus["myName"] = designerData?.name.toString()
-            designerRoomsStatus["opponentId"] = auth.currentUser!!.uid
-            designerRoomsStatus["opponentName"] = userName.toString()
-            designerRoomsStatus["profileImg"] = ""
-
-            UserRoomsDB.child(designerData!!.designerId).child(chatRoomId!!).updateChildren(designerRoomsStatus)
+            UserRoomsDB.child(userId).child(chatRoomId!!).updateChildren(opponentRoomsStatus)
 
             chatRecyclerview.scrollToPosition(chatList.size)
 
@@ -163,6 +169,7 @@ class ChattingActivity : AppCompatActivity() {
 
 
             val messageID = "${chatItem.timestamp}+${chatItem.uid}"
+
             //DB 갱신
             chatDB?.push()?.setValue(chatItem)
         }

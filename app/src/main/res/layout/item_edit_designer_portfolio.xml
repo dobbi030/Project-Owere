@@ -17,7 +17,7 @@
         tools:src="@tools:sample/avatars" />
 
     <ImageButton
-        android:id="@+id/btn_item_edit_portfolio"
+        android:id="@+id/btn_item_edit_portfolio_remove"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@android:color/transparent"

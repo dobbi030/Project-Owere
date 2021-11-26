@@ -50,10 +50,11 @@
         android:id="@+id/recycler_view_edit_designer_portfolio"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_edit_designer_portfolio_complete"
+        android:paddingHorizontal="16dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:listitem="@layout/item_edit_designer_portfolio"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_edit_designer_portfolio_complete"
+        tools:listitem="@layout/item_edit_designer_portfolio" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,7 +8,7 @@ import com.blooburn.owere.databinding.DesignerPortfolioImageFragmentBinding
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.StorageReference
 
-class DesignerPortfolioImageFragment(private val imagePath: StorageReference): Fragment(R.layout.designer_portfolio_image_fragment) {
+open class DesignerPortfolioImageFragment(private val imagePath: StorageReference): Fragment(R.layout.designer_portfolio_image_fragment) {
 
     private var binding: DesignerPortfolioImageFragmentBinding? = null
 

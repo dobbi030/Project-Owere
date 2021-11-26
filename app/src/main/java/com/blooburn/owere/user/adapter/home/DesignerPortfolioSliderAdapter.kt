@@ -6,10 +6,10 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.blooburn.owere.user.fragment.mainFragment.homeFragment.DesignerPortfolioImageFragment
 import com.google.firebase.storage.StorageReference
 
-class DesignerPortfolioSliderAdapter(fragmentActivity: FragmentActivity) :
+open class DesignerPortfolioSliderAdapter(fragmentActivity: FragmentActivity) :
     FragmentStateAdapter(fragmentActivity) {
 
-    private var imageReferenceList = mutableListOf<StorageReference>()
+    var imageReferenceList = mutableListOf<StorageReference>()
 
     override fun getItemCount(): Int {
         return imageReferenceList.size

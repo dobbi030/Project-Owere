@@ -2,6 +2,7 @@ package com.blooburn.owere.designer.activity.myPage
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +15,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.viewpager2.widget.ViewPager2
 import com.blooburn.owere.R
 import com.blooburn.owere.databinding.ItemPriceMenuBinding
-import com.blooburn.owere.user.adapter.home.DesignerPortfolioSliderAdapter
+import com.blooburn.owere.designer.adapter.myPage.EditPortfolioSliderAdapter
 import com.blooburn.owere.user.item.DesignerItem
 import com.blooburn.owere.user.item.StyleMenuItem
 import com.blooburn.owere.user.item.UserReview
@@ -36,21 +37,23 @@ class DesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler {
     private val reviewImagePathList = mutableListOf<String>()
     private val reviewList = mutableListOf<UserReview>()
 
-    private var portfolioSliderAdapter: DesignerPortfolioSliderAdapter? = null
+    private val portfolioSliderAdapter: EditPortfolioSliderAdapter by lazy{
+        EditPortfolioSliderAdapter(this)
+    }
+    private val viewPager: ViewPager2 by lazy{
+        findViewById(R.id.view_pager2_designer_profile)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_designer_profile)
+
         initToolbar(findViewById(R.id.toolbar_designer_profile))
-        initPortfolioViewPager()
+        viewPager.adapter = portfolioSliderAdapter
 
         fetchPortfolioImages()
         getAndSetDesignerProfileFromDB()
-
-        findViewById<Button>(R.id.btn_designer_profile_edit_profile).setOnClickListener{
-            val intent = Intent(this, EditDesignerProfileActivity::class.java)
-            startActivity(intent)
-        }
+        addEditBtnsClickListener()
     }
 
     private fun getAndSetDesignerProfileFromDB() {
@@ -122,23 +125,15 @@ class DesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler {
     }
     */
 
-    private fun initPortfolioViewPager() {
-        portfolioSliderAdapter = DesignerPortfolioSliderAdapter(this)
-        findViewById<ViewPager2>(R.id.view_pager2_designer_profile).apply {
-            adapter = portfolioSliderAdapter
-        }
-    }
-
     /**
      * 포트폴리오 이미지 레퍼런스(path)를 모두 가져온다
      */
     private fun fetchPortfolioImages() {
-        if (portfolioSliderAdapter == null) return
 
         storageInstance.reference.child("portfolio/$tempDesignerId")
             .listAll().addOnSuccessListener {
-                portfolioSliderAdapter!!.setList(it.items)
-                portfolioSliderAdapter!!.notifyDataSetChanged()
+                portfolioSliderAdapter.setList(it.items)
+                portfolioSliderAdapter.notifyDataSetChanged()
             }
     }
 
@@ -265,6 +260,19 @@ class DesignerProfileActivity : AppCompatActivity(), DesignerProfileHandler {
             this.findViewById<TextView>(R.id.text_item_review_dates).text = userReview.dates // 날짜
             this.findViewById<TextView>(R.id.text_item_review_rating).text =
                 convertRatingToStar(userReview.rating) // 별점
+        }
+    }
+
+    private fun addEditBtnsClickListener(){
+        viewPager.setOnClickListener {
+            Log.d("로그", "view page clicked")
+            val intent = Intent(this, EditDesignerPortfolioActivity::class.java)
+            startActivity(intent)
+        }
+
+        findViewById<Button>(R.id.btn_designer_profile_edit_profile).setOnClickListener{
+            val intent = Intent(this, EditDesignerProfileActivity::class.java)
+            startActivity(intent)
         }
     }
 }

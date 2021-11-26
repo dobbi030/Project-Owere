@@ -36,7 +36,7 @@ class MainActivityForUnknownUserSignUpOrLogIn : AppCompatActivity() {
         //로그인 버튼 리스너
         logInButton.setOnClickListener {
             //로그인 액티비티로 이동하는 인텐트
-            var intent = Intent(this, LoginActivityTemp::class.java)
+            var intent = Intent(this, MainActivityForUnknownUser::class.java)
             // var intent = Intent(this, LoginActivity_choice::class.java)
 //                getAppKeyHash()
             startActivity(intent)

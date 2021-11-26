@@ -3,6 +3,8 @@ package com.blooburn.owere.user.activity.signUpActivity
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
 import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,16 +16,25 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.blooburn.owere.R
+import com.blooburn.owere.util.DESIGNER_DATA_KEY
+import com.blooburn.owere.util.databaseInstance
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
+import java.io.IOException
+import java.util.*
 
+//내 위치 좌표를 불러오고 설정함.
 class SetPositionActivity : AppCompatActivity(), MapView.CurrentLocationEventListener {
 
+    //주소를 받아오기 위한 지오코더 객체
+    private val geoCoder  = Geocoder(this, Locale.KOREAN)
+    private var addresses = mutableListOf<Address>()
 
     private val auth : FirebaseAuth = FirebaseAuth.getInstance()
+    //내위치를 보여줄 지도 (카카오 맵 api사용)
     private lateinit var mapView : MapView
 
     private val myposition_keepButton : TextView by lazy {
@@ -40,6 +51,7 @@ class SetPositionActivity : AppCompatActivity(), MapView.CurrentLocationEventLis
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_position)
+
 
 
         //맵뷰 호출
@@ -67,21 +79,82 @@ class SetPositionActivity : AppCompatActivity(), MapView.CurrentLocationEventLis
 
     }
 
+
     private fun initPositionSetButton(){
         val userId = auth.currentUser?.uid.orEmpty()
         myposition_keepButton.setOnClickListener {
             var userLatitude = latitude
             var userLongitue = longitude
+            var area = ""
+//                geoCoder.getFromLocation(userLatitude, userLongitue, 1).first()
+//                    .getAddressLine(0)
 
-            val currentUserDB1 = Firebase.database.reference.child("Users").child(userId).child("위도")
-            val currentUserDB2 = Firebase.database.reference.child("Users").child(userId).child("경도")
+            try {
+                addresses = geoCoder.getFromLocation(latitude,longitude,1);
 
-            currentUserDB1.setValue(userLatitude)
-            currentUserDB2.setValue(userLongitue)
+
+                var stringBuilder = StringBuilder();
+                    if (addresses.size>0) {
+                        var returnAddress = addresses[0];
+
+                        var localityString = returnAddress.locality;
+                        var name = returnAddress.featureName;
+                        var subLocality = returnAddress.subLocality;
+                        var country = returnAddress.countryName;
+                        var region_code = returnAddress.countryCode;
+                        var zipcode = returnAddress.postalCode;
+                        var state = returnAddress.adminArea;
+
+                        area = localityString
+
+                    } else {
+
+                }
+            } catch ( e : IOException) {
+                e.printStackTrace();
+            }
+
+
+
+
+
+
+
+
+
+//            if(userOrDesigner == "User"){
+//                val currentUserDB1 = Firebase.database.reference.child("Users").child(userId).child("위도")
+//                val currentUserDB2 = Firebase.database.reference.child("Users").child(userId).child("경도")
+//
+//                currentUserDB1.setValue(userLatitude)
+//                currentUserDB2.setValue(userLongitue)
+//
+//            }else if(userOrDesigner == "Designer"){
+//                val currentUserDB1 = Firebase.database.reference.child("LocationDesigner").child(userId)
+////
+//
+//                var designerUpdate = mutableMapOf<String,Any>()
+//                designerUpdate["latitude"] = userLatitude
+//                designerUpdate["longitude"] = userLongitue
+//                currentUserDB1.updateChildren(designerUpdate)
+//                databaseInstance.reference.child("Designers").child(userId).child("area").setValue(area)
+//
+//
+////                currentUserDB1.setValue(userLatitude)
+////                currentUserDB2.setValue(userLongitue)
+//
+//            }
+
             // 내 위치 정하기 프래그먼트로 콜백전송 -> 주소를 정했어! 하는 신호
-            setResult(100)
+
+            intent.putExtra("latitude",userLatitude)
+            intent.putExtra("longitude",userLongitue)
+            intent.putExtra("area", area)
+            setResult(100,intent)
             //액티비티 종료
             finish()
+
+
         }
     }
 

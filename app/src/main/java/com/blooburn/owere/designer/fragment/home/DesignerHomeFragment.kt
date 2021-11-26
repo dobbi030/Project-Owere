@@ -12,6 +12,8 @@ import com.blooburn.owere.databinding.DesignerHomeFragmentBinding
 import com.blooburn.owere.databinding.WaitingFragmentLayoutBinding
 import com.blooburn.owere.user.fragment.mainFragment.reservationFragment.WaitingFragment
 
+
+//디자이너 홈 화면
 class DesignerHomeFragment : Fragment(R.layout.designer_home_fragment) {
 
     private var binding: DesignerHomeFragmentBinding? = null

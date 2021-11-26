@@ -72,6 +72,7 @@ class ChooseFragment : Fragment(R.layout.choose_fragment) {
                     replace(R.id.signUpFragmentContainer, nextFragment)
                     commit()
                 }
+
             /**
              * 이메일 로그인 활성화 시 이메일 입력 프레그먼트 코드
             var nextFragment = EmailInputFragment()

@@ -119,7 +119,6 @@ class MainActivityForUnknownUser : AppCompatActivity() {
 
 
     private fun updateUI(account: FirebaseUser?) {
-        Log.w(TAG, "updateUI (1)")
         if (account != null) {
             // Uids 참조, 자식 노드의 키 값과 현재 유저의 uid 비교
             uids.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -143,6 +142,14 @@ class MainActivityForUnknownUser : AppCompatActivity() {
                                     this@MainActivityForUnknownUser,
                                     DesignerMainActivity::class.java
                                 )
+                                startActivity(intent)
+                                // 미 가입자 로그인
+                            } else if (mode == "None") {
+                                val intent: Intent =
+                                    Intent(
+                                        this@MainActivityForUnknownUser,
+                                        SignUpActivity1_choice::class.java
+                                    )
                                 startActivity(intent)
                             }
                         }

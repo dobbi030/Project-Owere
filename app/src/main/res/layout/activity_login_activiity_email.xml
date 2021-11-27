@@ -54,7 +54,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/round_white_background"
         android:gravity="center"
-        android:text="@string/login_continue"
+        android:text="@string/continue_process"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/cannot_login_button"

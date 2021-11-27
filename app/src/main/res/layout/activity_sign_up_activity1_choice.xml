@@ -7,13 +7,12 @@
     tools:context=".user.activity.signUpActivity.SignUpActivity1_choice">
 
     <ImageView
-
         android:id="@+id/signUp1_back_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:src="@drawable/ic_baseline_arrow_back_24"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_margin="17dp"
+        android:foregroundGravity="fill"
+        android:src="@drawable/ic_baseline_clear_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/black" />
@@ -21,12 +20,12 @@
     <TextView
         android:id="@+id/textSignUp1"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center_horizontal"
-        android:text="회원가입"
+        android:layout_height="57dp"
+        android:fontFamily="@font/roboto_thin"
+        android:gravity="center"
+        android:text="@string/sign_up"
         android:textColor="@color/black"
-        android:textSize="25sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +39,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textSignUp1" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

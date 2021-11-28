@@ -68,6 +68,7 @@ class DesignerWaitingReservationFragment : Fragment(R.layout.waiting_fragment_la
 
                     var waitingReservation = mutableListOf<DesignerReservation>()
 
+                    var numbering = 0
                     snapshot.children.forEach { DateSnapshot ->
 
                         waitingReservation.clear()
@@ -92,7 +93,7 @@ class DesignerWaitingReservationFragment : Fragment(R.layout.waiting_fragment_la
                             //currentTime > reservationEnd &&
                             if (reservation.type == TypeOfReservation.ACCEPTED.value) {
                                 waitingReservation.add(reservation)
-
+                                numbering++
                                 //해당 날짜의 예약 내역 넘겨주기
 
                             }
@@ -113,6 +114,7 @@ class DesignerWaitingReservationFragment : Fragment(R.layout.waiting_fragment_la
 
 
                     }
+                    binding?.waitingReservationTotalNumberText?.text = "전체 $numbering 건"
 
                 }
 

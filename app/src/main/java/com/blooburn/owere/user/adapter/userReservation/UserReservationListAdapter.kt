@@ -37,7 +37,7 @@ RecyclerView.Adapter<UserReservationListAdapter.ViewHolder>(), DesignerProfileHa
             binding.textReservedUserName.text = reservation.designerName
             binding.textReservedUserShop.text = reservation.shop
             binding.textReservedUserTime.text = getTreatmentTime(itemView, reservation)
-
+            initDependingOnAccepted(binding,reservation.accepted)
 
         }
     }
@@ -101,22 +101,16 @@ RecyclerView.Adapter<UserReservationListAdapter.ViewHolder>(), DesignerProfileHa
         )
     }
 
-    private fun initDependingOnType(binding: ItemReservedUserBinding, type: TypeOfReservation){
+    private fun initDependingOnAccepted(binding: ItemReservedUserBinding, type: Int){
         val arrowImageView = binding.imageReservedUserArrow
         val settlementTextView = binding.textReservedUserSettle
-        val context = binding.root.context
+
 
         when (type) {
-            TypeOfReservation.SCHEDULED -> {
+            0,1-> {
                 arrowImageView.visibility = View.VISIBLE
                 settlementTextView.visibility = View.GONE
             }
-
-            TypeOfReservation.TREATED ->
-                settlementTextView.text = context.getString(R.string.settling_fee)
-
-            TypeOfReservation.SETTLED ->
-                settlementTextView.text = context.getString(R.string.settlement_completed_blue)
 
         }
     }

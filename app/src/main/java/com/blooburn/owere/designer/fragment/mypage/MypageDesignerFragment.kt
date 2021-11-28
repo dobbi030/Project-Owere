@@ -11,6 +11,7 @@ import com.blooburn.owere.user.activity.main.mypageActivity.*
 
 //디자이너 마이페이지 프래그먼트
 class MypageDesignerFragment  : Fragment(R.layout.mypage_designer_fragment_layout) {
+
     private var binding: MypageDesignerFragmentLayoutBinding? = null
 
 

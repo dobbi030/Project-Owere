@@ -23,14 +23,16 @@ class ChattingDesignerFragment : Fragment(R.layout.layout_chatting_designer_frag
 
     //고객 전용
     //채팅목록 레이아웃 바인딩
-    private var binding : LayoutChattingDesignerFragmentBinding? = null
+    private var binding: LayoutChattingDesignerFragmentBinding? = null
+
     //채팅리스트 리사이클러뷰를 위한 어답터
     private lateinit var chatListAdapter: ChatListAdapter
+
     //채팅방 목록
     private val chatRoomList = mutableListOf<ChatListItem>()
 
 
-    private val auth : FirebaseAuth by lazy{
+    private val auth: FirebaseAuth by lazy {
         Firebase.auth
     }
 
@@ -45,10 +47,13 @@ class ChattingDesignerFragment : Fragment(R.layout.layout_chatting_designer_frag
         //리스트에서 채팅방 클릭시 해당 채팅방으로 이동
         chatListAdapter = ChatListAdapter { chatListItem ->
             //채팅방으로 이동하는 코드
-                val intent = Intent(requireContext(), ChattingActivity::class.java)
-                intent.putExtra("chatRoomId", chatListItem.chatRoomId)
-                intent.putExtra("userName", chatListItem.myName)
-                startActivity(intent)
+            val intent = Intent(requireContext(), ChattingActivity::class.java)
+            intent.putExtra("chatRoomId", chatListItem.chatRoomId)
+            intent.putExtra("userName", chatListItem.myName)
+            intent.putExtra("designerName", chatListItem.opponentName)
+            intent.putExtra("designerId", chatListItem.opponentId)
+            intent.putExtra("designerProfile",chatListItem.profileImg)
+            startActivity(intent)
 
 
         }
@@ -61,11 +66,11 @@ class ChattingDesignerFragment : Fragment(R.layout.layout_chatting_designer_frag
         chatRoomList.clear()    //뷰가 생성될 때마다 클리어 해줌
 
         //로그인이 안 되어있다면 불러올 데이터 없음
-        if(auth.currentUser == null){
+        if (auth.currentUser == null) {
             return
         }
 
-       // chatRoomId = "@make@${auth.currentUser?.uid}@time@${System.currentTimeMillis()}"
+        // chatRoomId = "@make@${auth.currentUser?.uid}@time@${System.currentTimeMillis()}"
 
 
         //DB 사용할 레퍼런스 초기화 (UserRooms -> 유저Id -> 채팅방ID)
@@ -75,7 +80,7 @@ class ChattingDesignerFragment : Fragment(R.layout.layout_chatting_designer_frag
         //DB 변화 리스너 ->한 번만 불러옴
         chatDB.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                snapshot.children.forEach{
+                snapshot.children.forEach {
                     val model = it.getValue(ChatListItem::class.java)
                     model ?: return
                     //DB에 변화가 생긴다면

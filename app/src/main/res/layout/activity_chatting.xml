@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/user_chatting_activity_go_back_button"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"

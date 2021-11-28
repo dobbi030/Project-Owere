@@ -75,6 +75,7 @@ class UserWaitingReservation : AppCompatActivity() {
 
             val intent = Intent(this,UserMainActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             //FLAG_ACTIVITY_CLEAR_TOP 사용하여 홈 액티비티가 호출 될 시 그 위에 있던 액티비티 모두 삭제
             startActivity(intent)
         }

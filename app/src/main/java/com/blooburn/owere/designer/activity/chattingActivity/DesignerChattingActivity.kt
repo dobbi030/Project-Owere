@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blooburn.owere.R
@@ -53,18 +54,15 @@ class DesignerChattingActivity  : AppCompatActivity() {
         setContentView(R.layout.activity_chatting)
 
         getDataFromIntent()
+        initGoBackButton()
 
-//        intent.putExtra("chatRoomId", chatListItem.chatRoomId)
-//        intent.putExtra("designerName", chatListItem.myName)
-//        intent.putExtra("userName",chatListItem.opponentName)
-//        intent.putExtra("userId",chatListItem.opponentId)
-//        intent.putExtra("profileImg",chatListItem.profileImg)
         //채팅방 목록 프래그먼트로부터 받아온 정보
         //채팅방 아이디 @User@${userId}@UserId@$디자이너ID
         val chatRoomId = intent.getStringExtra("chatRoomId")
         var userName : String? = intent.getStringExtra("userName")
         var userId = intent.getStringExtra("userId")
         var userProfile = intent.getStringExtra("profileImg")
+        var designerName = intent.getStringExtra("designerName")
 
 
         if (userName == null){
@@ -138,12 +136,12 @@ class DesignerChattingActivity  : AppCompatActivity() {
                     //유저 이름 인텐트로 받아오기 필요
                     userName = userName!!
                 )
-            //UserRooms 업데이트
+            //Designer 업데이트
             //본인(디자이너)
             val userRoomsStatus = mutableMapOf<String, Any>()
             userRoomsStatus["chatRoomId"] = chatRoomId!!
             userRoomsStatus["lastMessage"] = findViewById<EditText>(R.id.messageEditText).text.toString()
-            userRoomsStatus["myName"] = auth.currentUser?.displayName!!
+            userRoomsStatus["myName"] = designerName!!
             userRoomsStatus["opponentId"] = userId!!
             userRoomsStatus["opponentName"] = userName.orEmpty()
             userRoomsStatus["profileImg"] = userProfile.toString()
@@ -193,5 +191,14 @@ class DesignerChattingActivity  : AppCompatActivity() {
 
 
 
+    }
+    /**
+     * 뒤로가기
+     */
+    private fun initGoBackButton() {
+        var goBackButton = findViewById<ImageView>(R.id.user_chatting_activity_go_back_button)
+        goBackButton.setOnClickListener {
+            finish()
+        }
     }
 }

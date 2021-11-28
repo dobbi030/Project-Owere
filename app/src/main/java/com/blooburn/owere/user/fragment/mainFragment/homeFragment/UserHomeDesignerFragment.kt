@@ -1,6 +1,5 @@
 package com.blooburn.owere.user.fragment.mainFragment.homeFragment
 
-import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,6 +11,7 @@ import com.blooburn.owere.databinding.UserHomeDesignerFragmentBinding
 import com.blooburn.owere.user.item.DesignerItem
 import com.blooburn.owere.user.item.LocationClass
 import com.blooburn.owere.user.item.UserEntity
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -23,13 +23,15 @@ import kotlin.math.pow
 //유저 홈 화면 (근처의 예약 가능한 디자이너, 즐겨찾는 디자이너)
 class UserHomeDesignerFragment : Fragment(R.layout.user_home_designer_fragment) {
 
-    private val tempUserId = "Pz0XMXih1iXhVMaiUVG6NNTkq2C2"
+
 
     private var binding: UserHomeDesignerFragmentBinding? = null
     private val database = FirebaseDatabase.getInstance()
+    private val auth = FirebaseAuth.getInstance()
+    private val userId = auth?.currentUser!!.uid
 
     private val favoriteDesignersReference =
-        database.getReference("favoriteDesigners").child(tempUserId)
+        database.getReference("favoriteDesigners").child(userId)
 
     //모든 디자이너 목록 조회를 위한 DB레퍼런스 , 디자이너가 많아지면 수정
     private val locationDesignerReference =
@@ -113,7 +115,7 @@ class UserHomeDesignerFragment : Fragment(R.layout.user_home_designer_fragment) 
 
     //유저DB 레퍼런스
     private val myLocationReference =
-        database.getReference("Users").child(tempUserId)
+        database.getReference("Users").child(userId)
     /**
      * 현재 유저의 좌표 조회
      */

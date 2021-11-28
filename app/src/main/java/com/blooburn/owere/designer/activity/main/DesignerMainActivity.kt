@@ -1,5 +1,6 @@
 package com.blooburn.owere.designer.activity.main
 
+import android.content.ActivityNotFoundException
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -49,6 +50,7 @@ class DesignerMainActivity : AppCompatActivity() {
 
         val bottomNavigationView =
             findViewById<BottomNavigationView>(R.id.bottom_navigation_view_designer_main)
+
         replaceFragment(homeFragment)
 
         bottomNavigationView.setOnItemSelectedListener(bottomNavigationViewItemClickListener)
@@ -79,10 +81,14 @@ class DesignerMainActivity : AppCompatActivity() {
     private val bottomNavigationViewItemClickListener =
         NavigationBarView.OnItemSelectedListener { item ->
             when(item.itemId){
-                R.id.designer_home -> replaceFragment(homeFragment)
-                R.id.designer_browse -> {}
+                R.id.designer_home -> {
+                    replaceFragment(homeFragment)
+                }
+                R.id.designer_browse -> {
+                }
                 R.id.designer_chatting -> replaceFragment(chattingFragment)
-                R.id.designer_recruit -> {}
+                R.id.designer_recruit -> {
+                }
                 else -> replaceFragment(mypageFragment)
             }
 
@@ -136,16 +142,40 @@ class DesignerMainActivity : AppCompatActivity() {
     //GPS 활성화를 위한 메소드
     private fun showDialogForLocationServiceSetting() {
 
+
         var intent = Intent(this, Settings.ACTION_LOCATION_SOURCE_SETTINGS::class.java)
+
 
         var builder = AlertDialog.Builder(this)
         builder.setTitle("위치서비스 비활성화")
             .setMessage(
                 "앱을 사용하기 위해서는 위치 서비스가 필요합니다. \n" +
-                        "위치 설정을 수정하실래요?"
+                        "위치 설정을 수정해주세요"
             )
+//            .setCancelable(true)
+//            .setPositiveButton("설정") { dialog, which ->
+//                try {
+//                    startActivity(intent);
+//                } catch (e: ActivityNotFoundException) {
+//                    //handle activity not found
+//                    Log.d("안됨 허용", "왜 안 되냐")
+//                    //종료하기
+//                }
+//
+//                startActivityForResult(intent, SetPositionActivity.GPS_ENABLE_REQUEST_CODE)
+//
+//
+//
+//            }
+//            .setNegativeButton("취소") { dialog, which ->
+//                dialog.cancel()
+//
+//            }
+//            .create()
+//            .show()
+
             .setCancelable(true)
-            .setPositiveButton("설정", DialogInterface.OnClickListener { dialog, which ->
+            .setPositiveButton("종료", DialogInterface.OnClickListener { dialog, which ->
                 startActivityForResult(intent, SetPositionActivity.GPS_ENABLE_REQUEST_CODE)
 
             })

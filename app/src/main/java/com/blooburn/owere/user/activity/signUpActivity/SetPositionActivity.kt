@@ -30,6 +30,7 @@ import java.util.*
 class SetPositionActivity : AppCompatActivity(), MapView.CurrentLocationEventListener {
 
     //주소를 받아오기 위한 지오코더 객체
+    //주소 -> 좌표, 좌표 -> 주소( 역지오코딩)
     private val geoCoder = Geocoder(this, Locale.KOREA)
     private var addresses = mutableListOf<Address>()
 
@@ -134,7 +135,6 @@ class SetPositionActivity : AppCompatActivity(), MapView.CurrentLocationEventLis
 //            }
 
             // 내 위치 정하기 프래그먼트로 콜백전송 -> 주소를 정했어! 하는 신호
-
             intent.putExtra("latitude", userLatitude)
             intent.putExtra("longitude", userLongitue)
             intent.putExtra("area", area)

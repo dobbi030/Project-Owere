@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-
+//역지오코딩, 유저 디자이너 여부
 class MyPositionSetFragment : Fragment(R.layout.myposition_set_fragment) {
 
 
@@ -47,10 +47,10 @@ class MyPositionSetFragment : Fragment(R.layout.myposition_set_fragment) {
 
 
 
-        val currentUserDB1 = Firebase.database.reference.child("Users").child(userId).child("Latitude")
-        val currentUserDB2 = Firebase.database.reference.child("Users").child(userId).child("longitude")
-
-
+//        val currentUserDB1 = Firebase.database.reference.child("Users").child(userId).child("Latitude")
+//        val currentUserDB2 = Firebase.database.reference.child("Users").child(userId).child("longitude")
+//
+//
 
     }
     /**
@@ -84,6 +84,7 @@ class MyPositionSetFragment : Fragment(R.layout.myposition_set_fragment) {
             }
             startActivityForResult(intent, requestcode)
         }
+        // 프래그먼트(유저or 디자이너 정보) -> 지도액티비티 (좌표,주소) -> 프래그먼트()
 
 
 

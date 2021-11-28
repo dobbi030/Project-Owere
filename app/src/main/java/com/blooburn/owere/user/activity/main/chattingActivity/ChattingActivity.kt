@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blooburn.owere.R
@@ -12,6 +14,7 @@ import com.blooburn.owere.user.item.ChatItem
 import com.blooburn.owere.user.item.DatabaseChild.Companion.DB_CHAT
 import com.blooburn.owere.user.item.DesignerItem
 import com.blooburn.owere.user.item.UserEntity
+import com.blooburn.owere.user.item.UserReview
 import com.blooburn.owere.util.DESIGNER_DATA_KEY
 import com.blooburn.owere.util.databaseInstance
 import com.google.firebase.auth.FirebaseAuth
@@ -54,12 +57,15 @@ class ChattingActivity : AppCompatActivity() {
 
         getDataFromIntent()
 
+
         //채팅방 목록 프래그먼트로부터 받아온 정보
         //채팅방 아이디 @User@${userId}@UserId@$디자이너ID
         val chatRoomId = intent.getStringExtra("chatRoomId")
-
-
+        val designerName =  intent.getStringExtra("designerName")
+        var designerId =intent.getStringExtra("designerId")
+        var designerProfile = intent.getStringExtra("designerProfile")
         var userName : String? = intent.getStringExtra("userName")
+
 
         if (userName == null){
             var userEntity : UserEntity?
@@ -154,7 +160,7 @@ class ChattingActivity : AppCompatActivity() {
 
             UserRoomsDB.child(designerData!!.designerId).child(chatRoomId!!).updateChildren(designerRoomsStatus)
 
-            chatRecyclerview.scrollToPosition(chatList.size)
+            chatRecyclerview.scrollToPosition(chatList.size-1)
 
 
 
@@ -165,11 +171,22 @@ class ChattingActivity : AppCompatActivity() {
             val messageID = "${chatItem.timestamp}+${chatItem.uid}"
             //DB 갱신
             chatDB?.push()?.setValue(chatItem)
+
+            //보낸 후 텍스트 초기화
+            findViewById<EditText>(R.id.messageEditText).text.clear()
         }
+        initGoBackButton()
 
 
 
 
+    }
+
+    private fun initGoBackButton() {
+        var goBackButton = findViewById<ImageView>(R.id.user_chatting_activity_go_back_button)
+        goBackButton.setOnClickListener {
+            finish()
+        }
     }
 
     /**
@@ -182,7 +199,18 @@ class ChattingActivity : AppCompatActivity() {
             finish()
         }
 
+
         designerData = extras?.getParcelable(DESIGNER_DATA_KEY) // DesignerData 객체 읽기
+        if(designerData?.name==null){
+            val designerName =  intent.getStringExtra("designerName")
+            var designerId =intent.getStringExtra("designerId")
+            var designerProfile = intent.getStringExtra("designerProfile")
+
+            designerData = DesignerItem(designerId!!,"", "", 0, designerName!!,
+                designerProfile!!, 0.0, 0,"","",
+                mutableListOf<String>(), ArrayList<UserReview>()
+            )
+        }
 
 
 

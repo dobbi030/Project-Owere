@@ -49,6 +49,7 @@ class ChattingUserFragment : Fragment(R.layout.layout_chatting_designer_fragment
         chatListAdapter = ChatListAdapter { chatListItem ->
             //채팅방으로 이동하는 코드
             val intent = Intent(requireContext(), DesignerChattingActivity::class.java)
+
             intent.putExtra("chatRoomId", chatListItem.chatRoomId)
             intent.putExtra("designerName", chatListItem.myName)
             intent.putExtra("userName",chatListItem.opponentName)

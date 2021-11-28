@@ -55,6 +55,7 @@ class ChooseFragment : Fragment(R.layout.choose_fragment) {
             val bundle = bundleOf("userOrDesigner" to "${userOrDesigner}") //어떤 키에 어떤 값으로 번들을 담겠다
             setFragmentResult("userOrDesigner", bundle) //request값을 가진 리스너에게 전송
 
+
             // 사용자 가입 모드(고객 또는 디자이너) 적용
             val user = auth.currentUser
             if (user != null) {

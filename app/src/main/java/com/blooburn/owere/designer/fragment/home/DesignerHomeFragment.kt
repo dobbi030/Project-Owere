@@ -1,7 +1,9 @@
 package com.blooburn.owere.designer.fragment.home
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
@@ -27,18 +29,38 @@ class DesignerHomeFragment : Fragment(R.layout.designer_home_fragment) {
         DesignerWaitingReservationFragment()
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = DesignerHomeFragmentBinding.bind(view)
 
+
+
         val toolbar = activity?.findViewById<Toolbar>(R.id.toolbar_designer_home)
         initToolbar(toolbar)
 
         initSpinner()
+
+
     }
 
-    private fun initSpinner() {
+    override fun onPause() {
+        super.onPause()
+        if(binding?.spinnerDesignerHome?.selectedItemPosition==1){
+            binding?.spinnerDesignerHome?.setSelection(0)
+        }else{
+            binding?.spinnerDesignerHome?.setSelection(1)
+        }
+
+    }
+
+
+
+
+
+     private fun initSpinner() {
         ArrayAdapter.createFromResource(
             requireContext(),
             R.array.array_designer_reservation,
@@ -48,10 +70,14 @@ class DesignerHomeFragment : Fragment(R.layout.designer_home_fragment) {
             binding?.spinnerDesignerHome?.adapter = it
         }
 
-        binding?.spinnerDesignerHome?.onItemSelectedListener = spinnerItemSelectedListener
+         binding?.spinnerDesignerHome?.onItemSelectedListener = spinnerItemSelectedListener
+
+
     }
 
     private val spinnerItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+
+
         override fun onItemSelected(
             parent: AdapterView<*>?,
             view: View?,
@@ -68,16 +94,20 @@ class DesignerHomeFragment : Fragment(R.layout.designer_home_fragment) {
                     .commit()
 
                 //예약 수락 대기중 프래그먼트 by 정민 추가
-                1 ->requireActivity().supportFragmentManager.beginTransaction()
+                else ->requireActivity().supportFragmentManager.beginTransaction()
                     .replace(
                         R.id.fragment_container_designer_home, waitingReservationFragment ?: return
                     )
                     .commit()
+
             }
         }
 
-        override fun onNothingSelected(p0: AdapterView<*>?) {}
+        override fun onNothingSelected(p0: AdapterView<*>?) {
+
+        }
     }
+
 
     private fun initToolbar(toolbar: Toolbar?) {
         if (toolbar == null) return
@@ -87,6 +117,11 @@ class DesignerHomeFragment : Fragment(R.layout.designer_home_fragment) {
             it.supportActionBar?.setDisplayShowTitleEnabled(false)  // 앱 타이틀 제거
         }
     }
+
+
+
+
+
 
 /*
     private fun initViewPager(){

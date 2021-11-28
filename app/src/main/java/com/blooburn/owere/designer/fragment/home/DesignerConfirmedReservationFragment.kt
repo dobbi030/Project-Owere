@@ -3,6 +3,7 @@ package com.blooburn.owere.designer.fragment.home
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -60,12 +61,39 @@ class DesignerConfirmedReservationFragment :
     private var completedList = mutableListOf<DesignerReservation>()
     private lateinit var completedAdapter: DesignerReservationListAdapter
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+    binding = DesignerConfirmedReservationFragmentBinding.bind(view)
 
-        binding = DesignerConfirmedReservationFragmentBinding.bind(view)
 
+
+    //리사이클러뷰 사용
+    initRecyclerAdapter()
+
+    // 달력
+    binding?.calendarDesignerConfirmedReservation?.currentDate = CalendarDay.today()
+    binding?.calendarDesignerConfirmedReservation?.setOnDateChangedListener(dateSelectedListener)
+
+
+
+    //맵뷰 사용
+    initMapView()
+    getMySalonInfo()
+//
+
+
+
+    }
+
+
+
+    /**
+     * 모든 리사이클러뷰와 어답터 초기화
+     */
+    private fun initRecyclerAdapter(){
         // 예정된 예약 리사이클러뷰 초기화
         scheduledAdapter = DesignerReservationListAdapter()
         initReservationsRecyclerView(
@@ -79,18 +107,6 @@ class DesignerConfirmedReservationFragment :
             binding?.recyclerDesignerConfirmedReservationCompleted!!,
             completedAdapter
         )
-
-        // 달력
-        binding?.calendarDesignerConfirmedReservation?.currentDate = CalendarDay.today()
-        binding?.calendarDesignerConfirmedReservation?.setOnDateChangedListener(dateSelectedListener)
-
-
-
-        //맵뷰 사용
-        initMapView()
-        getMySalonInfo()
-
-
     }
 
     /**

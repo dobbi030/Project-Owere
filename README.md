@@ -1,5 +1,7 @@
 # Owere
 ## 헤어디자이너들의 프리랜서활동, 비상주 미용공간 제공을 위한 플랫폼 
+![image](https://user-images.githubusercontent.com/68258365/144906642-ae771665-12ed-43c3-9af7-dbcc7ab1e2ff.png)
+
 ![image](https://user-images.githubusercontent.com/68258365/144905364-f284a8e4-b7e2-4291-b374-209eac363f77.png)
 
 ## 1.기술스택         

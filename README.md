@@ -1,9 +1,14 @@
 # Owere
-헤어디자이너들의 프리랜서활동, 비상주 미용공간 제공을 위한 플랫폼         
+헤어디자이너들의 프리랜서활동, 비상주 미용공간 제공을 위한 플랫폼 
+![image](https://user-images.githubusercontent.com/68258365/144905364-f284a8e4-b7e2-4291-b374-209eac363f77.png)
+
 ## 1. 지원 기능         
 ### - 회원가입, 로그인         
 ###   구글계정으로 회원가입,로그인 가능         
-###   유저,디자이너 선택하여 회원가입(디자이너 가입조건 추가예정)         
+###   유저,디자이너 선택하여 회원가입(디자이너 가입조건 추가예정)    
+![image](https://user-images.githubusercontent.com/68258365/144905400-64f40bf6-57c0-427b-950b-523eb8799207.png)
+![image](https://user-images.githubusercontent.com/68258365/144905416-d0365be0-c7af-41ab-b9d0-2ba896ab06a0.png)
+
 
 ### - 홈 화면(유저)         
 ####  지금 이용가능한 주변 (5km이내) 디자이너 목록         

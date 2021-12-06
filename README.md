@@ -2,7 +2,12 @@
 ## 헤어디자이너들의 프리랜서활동, 비상주 미용공간 제공을 위한 플랫폼 
 ![image](https://user-images.githubusercontent.com/68258365/144905364-f284a8e4-b7e2-4291-b374-209eac363f77.png)
 
-## 1. 지원 기능         
+## 1.기술스택         
+프레임워크 : 안드로이드 스튜디오(코틀린) 4.1.2버전        
+서버와 DB : Firebase, Firebase Realtime Database, Storage        
+라이브러리 : glide, jetpack, 카카오 맵 api, material-calendarview,firebase-auth       
+
+## 2. 지원 기능         
 ### - 회원가입, 로그인         
 ###   구글계정으로 회원가입,로그인 가능         
 ###   유저,디자이너 선택하여 회원가입(디자이너 가입조건 추가예정)    

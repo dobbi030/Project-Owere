@@ -66,7 +66,11 @@
 ![image](https://user-images.githubusercontent.com/68258365/144905956-66fa8bf8-16cc-4644-899b-a4d87a2ed50e.png)
 
 ### - 마이페이지(디자이너)         
-####  내 정보, 디자이너 포트폴리오,정보 수정, 공지사항, 프로모션, 알림설정, 환경설정, 오월소개, (서비스 준비중) -> 리뷰 관리,단골고객,쿠폰함, 등급         
+![image](https://user-images.githubusercontent.com/68258365/147375037-dacfb688-f099-4f7c-801d-087971acd7ad.png)
+![image](https://user-images.githubusercontent.com/68258365/147375038-d10b8f6e-385b-4d97-9143-3ac28e322fda.png)
+![image](https://user-images.githubusercontent.com/68258365/147375040-337f1966-7b8b-477a-b548-f0b43f3cac0e.png)
+
+####  공지사항, 프로모션, 알림설정, 환경설정, 오월소개, (서비스 준비중) -> 리뷰 관리,단골고객,쿠폰함, 등급         
 
 
 ### - 둘러보기 (디자이너) (서비스 준비중)         

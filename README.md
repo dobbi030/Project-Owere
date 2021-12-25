@@ -1,8 +1,11 @@
 # Owere
 ## 헤어디자이너들의 프리랜서활동, 비상주 미용공간 제공을 위한 플랫폼 
-<img src="https://user-images.githubusercontent.com/68258365/144906642-ae771665-12ed-43c3-9af7-dbcc7ab1e2ff.png" width="200" height="400"/>
-
+![image](https://user-images.githubusercontent.com/68258365/147375072-e7c62a50-babe-4af7-bbf2-f04b9c96c575.png)
 <img src="https://user-images.githubusercontent.com/68258365/144905364-f284a8e4-b7e2-4291-b374-209eac363f77.png" width="200" height="400"/>
+### Flow diagram
+![image](https://user-images.githubusercontent.com/68258365/147375084-7e63fbb0-7437-4ae1-8b70-80e6e05c02c5.png)
+
+![image](https://user-images.githubusercontent.com/68258365/147375086-b6247633-fd51-481c-a15e-419bec597998.png)
 
 
 ## 1.기술스택         

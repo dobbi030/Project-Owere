@@ -1,5 +1,5 @@
 # Owere
-## 헤어디자이너들의 프리랜서활동, 비상주 미용공간 제공을 위한 플랫폼 
+## 헤어디자이너들의 프리랜서활동, 비상주 미용공간 제공을 위한 플랫폼 (쓱싹 -> 오월, 상표등록문제로 이름변경)
 ![image](https://user-images.githubusercontent.com/68258365/147375072-e7c62a50-babe-4af7-bbf2-f04b9c96c575.png)
 <img src="https://user-images.githubusercontent.com/68258365/144905364-f284a8e4-b7e2-4291-b374-209eac363f77.png" width="200" height="400"/>
 ### Flow diagram

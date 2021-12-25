@@ -65,7 +65,12 @@
 
 
 ### - 홈 화면(디자이너)         
-####  예정된 예약 목록, 예정된 예약 미용실 위치 정보 표시(지도), 대기중 예약 목록         
+####  예정된 예약 목록, 예정된 예약 미용실 위치 정보 표시(지도), 대기중 예약 목록   
+![image](https://user-images.githubusercontent.com/68258365/147375120-fc482b21-421f-401b-ba4b-8400e87ef346.png)
+![image](https://user-images.githubusercontent.com/68258365/147375122-24d0c7f9-4afd-4160-9c63-8ffc9268d67f.png)
+![image](https://user-images.githubusercontent.com/68258365/147375123-c60137c5-27d4-489b-95fa-ae2885235dd8.png)
+![image](https://user-images.githubusercontent.com/68258365/147375126-1701e159-d8ec-4262-8f90-36544b9c42ac.png)
+
 ####  예약 상세 정보 확인 기능, 예약 거절 기능   
 
 ![image](https://user-images.githubusercontent.com/68258365/144905956-66fa8bf8-16cc-4644-899b-a4d87a2ed50e.png)
